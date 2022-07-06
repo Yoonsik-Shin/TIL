@@ -1,0 +1,7 @@
+x = input()
+lists = list(map(int,x.split(sep=' ')))
+print(lists[0] + lists[1])
+print(lists[0] - lists[1])
+print(lists[0] * lists[1])
+print(int(lists[0] / lists[1]))
+print(lists[0] % lists[1])
