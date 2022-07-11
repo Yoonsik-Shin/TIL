@@ -9,3 +9,9 @@ def reverse(x):
 
 lst = [reverse(A),reverse(B)]
 print(max(map(int,lst)))
+
+
+'''
+#문자열 순서 뒤집기
+A[::-1]
+'''

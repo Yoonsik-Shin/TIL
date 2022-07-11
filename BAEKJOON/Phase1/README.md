@@ -20,7 +20,7 @@
 ```python
 x = input() #input은 문자열로 반환됨
 
-lists = x.spilt(sep=' ') #split함수는 list형태로 반환됨
+lists = x.spilt(sep=' ') #split함수는 list형태로 반환됨 (✔️ 빈칸으로 나눌때는 sep=' '는 생략가능)
 
 list(map(int,lists)) #map함수는 (형 변환,반복가능한 자료형)
 
