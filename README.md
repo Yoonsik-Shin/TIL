@@ -1,11 +1,12 @@
 # 📖 매일 배운내용 정리
 
-| Day             | Contents                                                     | EX                           |
+| Day             | Contents                                                     | Ex                           |
 | --------------- | ------------------------------------------------------------ | ---------------------------- |
 | 2022.07.05 (화) | [markdown](./TIL/markdown.md) / [GIT](./TIL/TIL_220705.md)   | 마크다운, Git Commit         |
 | 2022.07.06 (수) | [GIT Push](./TIL/TIL_220706.md)                              | Git Push                     |
 | 2022.07.07 (목) | [Branch, Pull Request](./TIL/TIL_220707.md)                  | Git Branch, Git Pull Request |
 | 2022.07.08 (금) | [취업특강](https://github.com/Yoonsik-Shin/job-research) / [job_research](https://github.com/Yoonsik-Shin/job-research/blob/b507647070412b8fc03ca814b30f3f09837012f2/research.md) | 취업특강                     |
+| 2022.07.11(월)  | [파이썬 기초](./TIL/TIL_220711.md)                           | 파이썬 기초문법              |
 
 
 
@@ -54,13 +55,14 @@
 
 > 🔴: 오답 or 못품, 🟡 : 풀이중, 🟢: 모두 해결
 
-|       Day       | Phase |                            Title                             | Solve |                       My_code                       |
-| :-------------: | :---: | :----------------------------------------------------------: | :---: | :-------------------------------------------------: |
-| 2022.07.06 (수) |   1   |     [입출력과 사칙연산](https://www.acmicpc.net/step/1)      |   🟢   |              [1~14](./BAEKJOON/Phase1)              |
-| 2022.07.07 (목) |   2   |          [ 조건문](https://www.acmicpc.net/step/4)           |   🟢   |              [1~7](./BAEKJOON/Phase2)               |
-| 2022.07.08 (금) |   3   |           [반복문](https://www.acmicpc.net/step/3)           |   🔴   |              [1~14](./BAEKJOON/Phase3)              |
-| 2022.07.09 (토) | 4 / 5 | [1차원 배열](https://www.acmicpc.net/step/6) / [함수](https://www.acmicpc.net/step/5) |   🟢   | [1~7](./BAEKJOON/Phase4) / [1~4](./BAEKJOON/Phase5) |
-| 2022.07.10 (일) |   6   |           [문자열](https://www.acmicpc.net/step/7)           |   🔴   |              [1~10](./BAEKJOON/Phase6)              |
+|       Day       | Phase |                            Title                             | Solve |                          My_code                          |
+| :-------------: | :---: | :----------------------------------------------------------: | :---: | :-------------------------------------------------------: |
+| 2022.07.06 (수) |   1   |     [입출력과 사칙연산](https://www.acmicpc.net/step/1)      |   🟢   |                [Phase1](./BAEKJOON/Phase1)                |
+| 2022.07.07 (목) |   2   |          [ 조건문](https://www.acmicpc.net/step/4)           |   🟢   |                [Phase2](./BAEKJOON/Phase2)                |
+| 2022.07.08 (금) |   3   |           [반복문](https://www.acmicpc.net/step/3)           |   🔴   |                [Phase3](./BAEKJOON/Phase3)                |
+| 2022.07.09 (토) | 4 / 5 | [1차원 배열](https://www.acmicpc.net/step/6) / [함수](https://www.acmicpc.net/step/5) |   🟢   | [Phase4](./BAEKJOON/Phase4) / [Phase5](./BAEKJOON/Phase5) |
+| 2022.07.10 (일) |   6   |           [문자열](https://www.acmicpc.net/step/7)           |   🔴   |                [Phase6](./BAEKJOON/Phase6)                |
+| 2022.07.11 (월) |   7   |        [ 기본 수학 1](https://www.acmicpc.net/step/8)        |  🔴/🟡  |                [Phase7](./BAEKJOON/Phase7)                |
 
 ---
 
@@ -78,6 +80,7 @@
 | 2022.07.07 (목) | 팔, 유산소 |   🟡    |
 | 2022.07.08 (금) | 하체       |   🔴    |
 | 2022.07.10 (일) | 가슴, 어깨 |   🟡    |
+| 2022.07.11(월)  | 등         |   🟢    |
 
 
 
