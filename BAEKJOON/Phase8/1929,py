@@ -1,0 +1,16 @@
+import time
+
+start = time.time()
+M, N = map(int,input().split())
+lst=[]
+
+for i in range(M,N+1):
+    e = 0
+    for j in range(2,i+1):
+        if i%j == 0:
+            e+=1
+    if e == 1:
+       print(i)
+end = time.time()
+
+print(f'{end-start}')
