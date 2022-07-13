@@ -4,7 +4,7 @@ for i in range(20):
     d.append([])
     for j in range(20):
         d[i].append(0)
-# print(d)
+print(d)
 # print(d[0])
 print(d[1])
 

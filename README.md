@@ -93,7 +93,7 @@
 
 ### #️⃣ 도움될만한 것들
 
-- [VS code 단축키 정리](./⌨️ VS Code 단축키 정리.md)
+- [VS code 단축키 정리](./VS Code 단축키 정리.md)
 - [파이썬 튜터 (한줄씩 진행과정 알아보는 사이트)](https://pythontutor.com/visualize.html#mode=edit)
 
 - [GitHub README 관련글](https://hphk-edu.notion.site/GitHub-Profile-README-b447c5bcfd5043d787c7d6bb21817c63)
