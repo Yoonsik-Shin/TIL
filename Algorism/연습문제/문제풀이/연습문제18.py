@@ -33,3 +33,25 @@ for key in Dict:
 # for key in Dict:
 #     print(key, Dict[key])]
 
+
+# 풀이1
+
+word = 'banana'
+
+result = {}
+for char in word:
+    if not char in result:
+        result[char] = 1
+    else:
+        result[char] += 1
+print(result)
+
+
+# 풀이2
+
+word = 'banana'
+
+result = {}
+for char in word:
+    result[char] = result.get(char, 0) + 1
+print(result)
