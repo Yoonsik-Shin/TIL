@@ -6,6 +6,10 @@
 
 
 
+----
+
+
+
 ## ✅ 학습 결과
 
 
@@ -51,7 +55,7 @@
 
 ## 🔞 알고리즘 문제풀이
 
-​	🔴: 못품, 🟡 : 풀이중, 🟢: 모두 해결
+​	🔴: 못품, 🟡 : 풀이중, 🟢: 모두 해결, 😭: 구글링
 
 - [BAEKJOON (단계별로 풀어보기 기준)](./Algorism/BAEKJOON/README.md)
 
@@ -69,6 +73,7 @@
 
 - [VS_Code_단축키](./VS_Code_단축키.md)
 - [파이썬 튜터 (한줄씩 진행과정 알아보는 사이트)](https://pythontutor.com/visualize.html#mode=edit)
+- [파이썬 자습서](https://docs.python.org/ko/3/tutorial/index.html#the-python-tutorial)
 - [GitHub README 관련글](https://hphk-edu.notion.site/GitHub-Profile-README-b447c5bcfd5043d787c7d6bb21817c63)
 - [데이터엔지니어 관련글](https://github.com/Team-Neighborhood/I-want-to-study-Data-Science/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4)
 
@@ -94,4 +99,4 @@
 | 2022.07.11(월)  | 등         |   🟢    |
 | 2022.07.12 (화) | 하체       |   🟢😁   |
 | 2022.07.13 (수) | 팔, 유산소 |   🟢😁   |
-| 2022.07.14 (목) | 가슴, 어깨 |        |
+| 2022.07.14 (목) | 가슴, 어깨 |   🟡    |
