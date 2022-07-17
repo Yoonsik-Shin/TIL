@@ -59,9 +59,9 @@
 
 - [BAEKJOON (단계별로 풀어보기 기준)](./Algorism/BAEKJOON/README.md)
 
-- [CodeUp](./Algorism/Codeup/README.md)
+- [CodeUp](./Algorism/Codeup)
 
-- [강의 연습문제](./Algorism/연습문제/README.md)
+- [강의 연습문제](./Algorism/연습문제)
 
 
 
@@ -100,3 +100,4 @@
 | 2022.07.12 (화) | 하체       |   🟢😁   |
 | 2022.07.13 (수) | 팔, 유산소 |   🟢😁   |
 | 2022.07.14 (목) | 가슴, 어깨 |   🟡    |
+| 2022.07.15 (금) | 등         |   🟡    |

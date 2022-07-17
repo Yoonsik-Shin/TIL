@@ -1,13 +1,41 @@
 # 다시 볼만한 개념
 
 ```python
-# [6059] 조건표현식 (Conditional Expression)
+# [6046][6047] 시프트연산자
+n << 1 : 2 배
+n << 2 : 2*2 배
+n << 3 : 2*2*2 배
+
+n >> 1 : 1/2 배
+n >> 2 : 1/2*2 배
+n >> 3 : 1/2*2*2 배
+
+a << b : a의b승
+```
+
+```python
+# [6059][6060][6061][6062] 비트연산자
+~(bitwise not)  >> ~n = -n-1
+&(bitwise and 연산)
+|(bitwise or 연산)
+^(bitwise xor 연산)
+<<(bitwise left shift 연산)
+>>(bitwise right shift 연산)
+
+# -1은 11111111 11111111 111111111 11111111
+```
+
+```python
+# [6063] 조건표현식 (Conditional Expression)
 <true인 경우 값> if <조건> else <false인 경우 값>
 ```
 
 ```python
 # [6081] 16진수 다루기
+var = input()
 
+for i in range(1,16):
+    print(f'{var}*{hex(i)[2:].upper()}={hex(int(var,16)*i)[2:].upper()}')
 ```
 
 ```python
@@ -37,3 +65,4 @@ for i in range(n):
         #  [0,0, ... , 0]]
 ```
 
+```py
