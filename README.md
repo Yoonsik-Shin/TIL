@@ -4,6 +4,10 @@
 
 ## 🙄 [수업내용정리](./TIL/README.md)
 
+## [프로젝트 실습](./Project_practice)
+
+
+
 
 
 ----

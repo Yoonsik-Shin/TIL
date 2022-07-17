@@ -15,4 +15,6 @@
 | 2022.07.12 (화) |   8   |        [기본 수학 2](https://www.acmicpc.net/step/10)        |  🔴/🟡  |           [Phase8](./Phase8)            |
 | 2022.07.13 (수) |   9   |           [재귀](https://www.acmicpc.net/step/19)            |  🔴/🟡  |           [Phase9](./Phase9)            |
 | 2022.07.14 (목) |       |                      해결 못한 문제풀이                      |       |                                         |
+| 2022.07.16 (토) |  10   |        [브루트 포스](https://www.acmicpc.net/step/22)        |   🟡   |          [Phase10](./Phase10)           |
+| 2022.07.17(일)  |  11   |            [정렬](https://www.acmicpc.net/step/9)            |   🟡   |          [Phase11](./Phase11)           |
 
