@@ -63,7 +63,7 @@ https://solved.ac/profile/pocket0994
 
 - [강의 연습문제](./Algorism/연습문제)
 
-
+- [SWEA](./Algorism/SWEA)
 
 ---
 
