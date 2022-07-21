@@ -2,25 +2,22 @@ N = int(input())
 count = 0
 
 for i in range(N):
-    x = input()
+
+    word = input()
+    dict = {}
     lst = []
-    lst2 = []
-    for i in x:
-        if i not in lst:
-            lst.append(i)
-    for j in range(len(lst)-1):
-        if len(lst) == 1:
-            continue
-        elif lst[j] == lst[j+1]:
-            continue
-        elif lst[j] != lst[j+1]:
-            if lst[j+1] in lst and len(lst) != len(x):
-                count-=1
-                break
-            else:
-                continue
-    count+=1
+
+    for j in word:
+        if j not in dict:
+            dict[j] = word.count(j)
     
+    for key,value in dict.items():
+        lst.append(key*value)
+
+    for k in lst:
+        if k not in word:
+            break
+    else:
+        count+=1
+
 print(count)
-
-
