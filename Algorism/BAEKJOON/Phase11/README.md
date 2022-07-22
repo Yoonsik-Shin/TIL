@@ -14,7 +14,7 @@
 | 2022.07.19 (화) | 11650 | [좌표 정렬하기](https://www.acmicpc.net/problem/11650) | 🟢 / 2022.07.19 (화) | [11650.py](./11650.py) |
 | 2022.07.19 (화) | 11651 | [좌표 정렬하기 2](https://www.acmicpc.net/problem/11651) | 🟢 / 2022.07.19 (화) | [11651.py](./11651.py) |
 | 2022.07.19 (화) | 1181 | [단어 정렬](https://www.acmicpc.net/problem/1181) | 🟢 / 2022.07.19 (화) | [1181.py](./1181.py) |
-| 2022.07.19 (화) | 10814 | [나이순 정렬](https://www.acmicpc.net/problem/10814) | 🔴 | |
+| 2022.07.19 (화) | 10814 | [나이순 정렬](https://www.acmicpc.net/problem/10814) | 🟢 / 2022.07.22 (금) | [10814.py](./10814.py) |
 | 2022.07.19 (화) | 18870 | [좌표 압축](https://www.acmicpc.net/problem/18870) | 🔴 | |
 
 
@@ -33,7 +33,7 @@
 | ------ | ------------------------------------------------------ | ----- |
 | 10989  | [수 정렬하기 3](https://www.acmicpc.net/problem/10989) | 🔴     |
 | 2108   | [통계학](https://www.acmicpc.net/problem/2108)         | 🔴     |
-| 10814  | [나이순 정렬](https://www.acmicpc.net/problem/10814)   | 🔴     |
+| 10814  | [나이순 정렬](https://www.acmicpc.net/problem/10814)   | 🟢     |
 | 18870  | [좌표 압축](https://www.acmicpc.net/problem/18870)     | 🔴     |
 
 
@@ -69,5 +69,9 @@ lst.sort([key = lambda x:x[0],x[1]] , [reverse = False])
 # map함수
 map(함수, 반복가능한것)
 반복 가능한 것들의 모든 요소에 함수를 적용시킨 결과를 map object로 반환한다.
+```
+
+```python
+❗❗정렬하기 전에 원하는 정렬기준이 문자열인지 숫자인지 꼭 확인❗❗
 ```
 
