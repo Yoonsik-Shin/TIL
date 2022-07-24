@@ -8,7 +8,7 @@ serviceKey = os.environ.get('serviceKey')
 
 base_url = 'http://apis.data.go.kr/1051000/MoefOpenAPI/T_OPD_DTLBZ_CSTS'
 params = {
-    'serviceKey':'nuuu5kzIck8oAbOVyPHu/KFuSkfR32MFJWgByDRn1RA9/fiKsKljk90laL4Uxq9n56q3q/+eWGjD/5EX2wHdNg==',
+    'serviceKey':serviceKey,
     'pageNo':1,
     'numOfRows':10,
     'resultType':'json',
