@@ -12,7 +12,7 @@
 |             2022.07.09 (토)              | 4 / 5  | [1차원 배열](https://www.acmicpc.net/step/6) / [함수](https://www.acmicpc.net/step/5) |   🟢   | [Phase4](./Phase4) / [Phase5](./Phase5) |
 |             2022.07.10 (일)              |   6    |           [문자열](https://www.acmicpc.net/step/7)           |   🟢   |           [Phase6](./Phase6)            |
 |             2022.07.11 (월)              |   7    |        [ 기본 수학 1](https://www.acmicpc.net/step/8)        |  🔴/🟡  |           [Phase7](./Phase7)            |
-|             2022.07.12 (화)              |   8    |        [기본 수학 2](https://www.acmicpc.net/step/10)        |  🔴/🟡  |           [Phase8](./Phase8)            |
+|             2022.07.12 (화)              |   8    |        [기본 수학 2](https://www.acmicpc.net/step/10)        |   🟢   |           [Phase8](./Phase8)            |
 |             2022.07.13 (수)              |   9    |           [재귀](https://www.acmicpc.net/step/19)            |  🔴/🟡  |           [Phase9](./Phase9)            |
 |             2022.07.14 (목)              |        |                      해결 못한 문제풀이                      |       |                                         |
 |             2022.07.16 (토)              |   10   |        [브루트 포스](https://www.acmicpc.net/step/22)        |   🟡   |          [Phase10](./Phase10)           |
