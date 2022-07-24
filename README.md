@@ -70,12 +70,12 @@
 
 ### #️⃣ 도움될만한 것들
 
-- [VS_Code_단축키](./VS_Code_단축키.md)
+- [VS_Code_단축키](./TIPs/VS_Code_단축키.md)
 - [파이썬 튜터 (한줄씩 진행과정 알아보는 사이트)](https://pythontutor.com/visualize.html#mode=edit)
 - [파이썬 자습서](https://docs.python.org/ko/3/tutorial/index.html#the-python-tutorial)
 - [GitHub README 관련글](https://hphk-edu.notion.site/GitHub-Profile-README-b447c5bcfd5043d787c7d6bb21817c63)
 - [데이터엔지니어 관련글](https://github.com/Team-Neighborhood/I-want-to-study-Data-Science/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4)
-- [.env 사용법](https://github.com/theskumar/python-dotenv)
+- [.env document](https://github.com/theskumar/python-dotenv) / [.env 사용법 정리](./TIPs/env활용.md)
 
 
 
