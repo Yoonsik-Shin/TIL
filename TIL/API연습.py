@@ -1,5 +1,10 @@
 import requests
+import os
+from dotenv import load_dotenv
 from pprint import pprint
+
+load_dotenv()
+serviceKey = os.environ.get('serviceKey')
 
 base_url = 'http://apis.data.go.kr/1051000/MoefOpenAPI/T_OPD_DTLBZ_CSTS'
 params = {
