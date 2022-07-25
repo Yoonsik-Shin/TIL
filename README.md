@@ -55,14 +55,18 @@
 
 
 
-## 🔞 알고리즘 문제풀이
+## 🔞 알고리즘 문제풀이 
 
-​	🔴: 못품, 🟡 : 풀이중, 🟢: 모두 해결, 😭: 구글링
+#### ✍️ [문제풀이로 얻은 개념 총정리](./Algorism/README.md)
 
 - [BAEKJOON (단계별로 풀어보기 기준)](./Algorism/BAEKJOON/README.md)
 - [CodeUp](./Algorism/Codeup)
 - [강의 연습문제](./Algorism/연습문제)
 - [SWEA](./Algorism/SWEA)
+
+> 🔴: 못품, 🟡 : 풀이중, 🟢: 모두 해결, 😭: 구글링
+
+
 
 ---
 
