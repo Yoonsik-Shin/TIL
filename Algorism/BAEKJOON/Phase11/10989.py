@@ -1,11 +1,13 @@
+import sys
+
 N = int(input())
-lst = []
+count = [0] * 10000
 
 for i in range(N):
-    x = int(input())
-    lst.append(x)
+    x = int(sys.stdin.readline())
+    count[x-1] += 1
 
-lst.sort(reverse=False)
-
-for j in lst:
-    print(j)
+for i in range(10000):
+    if count[i] != 0:
+          for j in range(count[i]):
+            print(i+1)
