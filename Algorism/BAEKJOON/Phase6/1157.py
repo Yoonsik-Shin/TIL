@@ -1,27 +1,18 @@
 x = input().upper()
 lst = []
-lst2 = []
+ans_dict = {}
 
 for i in x:
-    lst.append(i)
+    if i not in lst:
+        lst.append(i)
 
-# print(lst)
+for i in lst:
+    ans_dict[i] = x.count(i)
 
-sets = list(set(lst))
+a = list(ans_dict.values())
+b = sorted(ans_dict.items(), key = lambda x:x[1])
 
-# print(sets)
-
-for j in sets:
-    lst2.append(x.count(j))
-
-# print(lst2)
-
-lst3 = "".join(list(map(str,lst2)))
-
-# print(lst3)
-# print(lst3.find(str(max(lst2))))
-# print(lst3.rfind(str(max(lst2))))
-if lst3.find(str(max(lst2))) != lst3.rfind(str(max(lst2))):
+if a.count(max(a)) != 1:
     print('?')
 else:
-    print(sets[lst2.index(max(lst2))])
+    print(b[-1][0])
