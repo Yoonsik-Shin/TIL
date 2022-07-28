@@ -1,3 +1,7 @@
+'''
+힙 자료구조를 이용하면 시간 복잡도 O(ElogV)
+'''
+
 import heapq
 import sys
 input = sys.stdin.readline()

@@ -2,20 +2,13 @@ import sys
 
 N = int(sys.stdin.readline())
 lst = list(map(int,sys.stdin.readline().split()))
+dict_ = {}
 
-count_lst = [0] * N
+a = set(lst)
+sorted_lst = sorted(list(a))
 
-for i in range(N-1):
-    for j in range(i+1, N):
-        if lst[i] < lst[j]:
-            count_lst[j] += 1
-        elif lst[i] > lst[j]:
-            count_lst[i] += 1
-        elif lst[i] == lst[j]:
-            continue
+for i in range(len(sorted_lst)): ## 생각해내지 못한 부분
+    dict_[sorted_lst[i]] = i     ## 생각해내지 못한 부분
 
-lst2 = []
-a = int(N/len(set(lst)))
-for k in count_lst:
-    ans = k//a
-    print(ans, end=' ')
+for j in lst:
+    print(dict_.get(j), end=' ')

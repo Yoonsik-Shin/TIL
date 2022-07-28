@@ -9,13 +9,13 @@
 | 2022.07.17 (일) | 2750   | [수 정렬하기](https://www.acmicpc.net/problem/2750) | 🟢 / 2022.07.17 (일) | [2750.py](./2750.py) |
 | 2022.07.18 (월) | 2751 | [수 정렬하기 2](https://www.acmicpc.net/problem/2751) | 🟢 / 2022.07.18 (월) | [2751.py](./2751.py) |
 | 2022.07.18 (월) | 10989 | [수 정렬하기 3](https://www.acmicpc.net/problem/10989) | 😭 | [10989.py](./10989.py) |
-| 2022.07.18 (월) | 2108 | [통계학](https://www.acmicpc.net/problem/2108) | 🔴 |  |
+| 2022.07.18 (월) | 2108 | [통계학](https://www.acmicpc.net/problem/2108) | 🔴 | [2108.py](./2108.py) |
 | 2022.07.19 (화) | 1427 | [소트인사이드](https://www.acmicpc.net/problem/1427) | 🟢 / 2022.07.19 (화) | [1427.py](./1427.py) |
 | 2022.07.19 (화) | 11650 | [좌표 정렬하기](https://www.acmicpc.net/problem/11650) | 🟢 / 2022.07.19 (화) | [11650.py](./11650.py) |
 | 2022.07.19 (화) | 11651 | [좌표 정렬하기 2](https://www.acmicpc.net/problem/11651) | 🟢 / 2022.07.19 (화) | [11651.py](./11651.py) |
 | 2022.07.19 (화) | 1181 | [단어 정렬](https://www.acmicpc.net/problem/1181) | 🟢 / 2022.07.19 (화) | [1181.py](./1181.py) |
 | 2022.07.19 (화) | 10814 | [나이순 정렬](https://www.acmicpc.net/problem/10814) | 🟢 / 2022.07.22 (금) | [10814.py](./10814.py) |
-| 2022.07.19 (화) | 18870 | [좌표 압축](https://www.acmicpc.net/problem/18870) | 🔴 | |
+| 2022.07.19 (화) | 18870 | [좌표 압축](https://www.acmicpc.net/problem/18870) | 😭 / 2022.07.29 (금) | [18870.py](./18870.py) |
 
 
 
@@ -34,7 +34,7 @@
 | 10989  | [수 정렬하기 3](https://www.acmicpc.net/problem/10989) | 😭     |
 | 2108   | [통계학](https://www.acmicpc.net/problem/2108)         | 🔴     |
 | 10814  | [나이순 정렬](https://www.acmicpc.net/problem/10814)   | 🟢     |
-| 18870  | [좌표 압축](https://www.acmicpc.net/problem/18870)     | 🔴     |
+| 18870  | [좌표 압축](https://www.acmicpc.net/problem/18870)     | 😭     |
 
 
 
