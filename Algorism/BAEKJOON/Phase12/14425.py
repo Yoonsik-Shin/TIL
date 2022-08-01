@@ -1,3 +1,5 @@
+# https://www.acmicpc.net/problem/14425 (12, 35 Phase)
+
 N, M = map(int,input().split())
 
 dict_ = {}
