@@ -1,3 +1,5 @@
+# https://www.acmicpc.net/problem/2512
+
 # my
 N = int(input())
 lst = list(map(int,input().split()))
@@ -44,4 +46,6 @@ while low <= high:
 
 answer = -1
 for j in lst:
-    
+    given = min(j, good_upper_bound)
+    answer = max(answer, given)
+print(answer)
