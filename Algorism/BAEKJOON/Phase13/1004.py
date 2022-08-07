@@ -1,6 +1,3 @@
-from re import A
-
-
 T = int(input())
 
 for i in range(T):

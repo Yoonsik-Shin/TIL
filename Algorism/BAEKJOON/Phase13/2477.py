@@ -1,5 +1,3 @@
-from collections import Counter
-
 K = int(input())
 lst = []
 lst2 = []

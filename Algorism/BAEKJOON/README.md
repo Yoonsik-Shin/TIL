@@ -20,4 +20,5 @@
 | 2022.07.18 (월) <br /> ~ 2022.07.29 (금) | 6 ~ 11 |           해결 못한 문제풀이<br /> + 알고리즘 공부           |       |                                         |                                                              |
 |             2022.07.28 (목)              |   12   |         [집합과 맵](https://www.acmicpc.net/step/49)         |   🟢   |          [Phase12](./Phase12)           |            [Phase12/README](./Phase12/README.md)             |
 |             2022.07.30 (토)              |   13   |          [기하 1](https://www.acmicpc.net/step/50)           |   🟢   |          [Phase13](./Phase13)           |            [Phase13/README](./Phase13/README.md)             |
+|             2022.08.05 (토)              |   19   |           [스택](https://www.acmicpc.net/step/11)            |   🔴   |          [Phase19](./Phase19)           |            [Phase19/README](./Phase19/README.md)             |
 
