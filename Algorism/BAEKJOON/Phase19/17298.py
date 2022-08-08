@@ -25,7 +25,7 @@ for i in range(len(lst)):
         stack.append(i)
     elif stack[-1] < lst[i]:
         a = stack.pop()
-        lst[a] = lst[i]
+        lst[a] = lst
 
 if len(stack) == 0:
     lst[-1] == -1
