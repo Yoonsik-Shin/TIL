@@ -1,3 +1,5 @@
+# https://www.acmicpc.net/problem/10101
+
 lst = []
 
 x = int(input())
