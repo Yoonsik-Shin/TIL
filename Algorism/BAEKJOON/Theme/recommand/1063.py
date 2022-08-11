@@ -1,0 +1,1 @@
+king, stone, N = input().split()
