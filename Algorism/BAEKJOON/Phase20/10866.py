@@ -1,4 +1,6 @@
+import sys
 from collections import deque
+input = sys.stdin.readline
 
 queue = deque()
 N = int(input())
@@ -41,5 +43,3 @@ for _ in range(N):
             b = queue.pop()
             print(b)
             queue.append(b)
-            
-

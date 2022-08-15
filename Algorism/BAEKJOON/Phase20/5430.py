@@ -1,5 +1,6 @@
 import sys
 from collections import deque
+
 input = sys.stdin.readline
 
 T = int(input())
@@ -23,6 +24,7 @@ for _ in range(T):
             lst = list(lst)
             lst = lst[::-1]
             lst = deque(lst)
+            
         elif i == 'D':
             if a == False:
                 print('error')
