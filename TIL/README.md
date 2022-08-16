@@ -1,11 +1,20 @@
-## 🙄 수업내용정리
+# 🙄 수업내용정리
+
+## 1. Git / Markdown
+
+| Day             | Contents                                                     | Ex                           |
+| --------------- | ------------------------------------------------------------ | ---------------------------- |
+| 2022.07.05 (화) | [markdown](./TIL_date/markdown.md) / [GIT](./TIL_date/TIL_220705.md) | 마크다운, Git Commit         |
+| 2022.07.06 (수) | [GIT Push](./TIL_date/TIL_220706.md)                         | Git Push                     |
+| 2022.07.07 (목) | [Branch, Pull Request](./TIL_date/TIL_220707.md)             | Git Branch, Git Pull Request |
+| 2022.07.08 (금) | [취업특강](https://github.com/Yoonsik-Shin/job-research) / [job_research](https://github.com/Yoonsik-Shin/job-research/blob/b507647070412b8fc03ca814b30f3f09837012f2/research.md) | 취업특강                     |
+
+---
+
+## 2. Python (파이썬)
 
 | Day                                    | Contents                                                     | Ex                                                |
 | -------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------- |
-| 2022.07.05 (화)                        | [markdown](./TIL_date/markdown.md) / [GIT](./TIL_date/TIL_220705.md) | 마크다운, Git Commit                              |
-| 2022.07.06 (수)                        | [GIT Push](./TIL_date/TIL_220706.md)                         | Git Push                                          |
-| 2022.07.07 (목)                        | [Branch, Pull Request](./TIL_date/TIL_220707.md)             | Git Branch, Git Pull Request                      |
-| 2022.07.08 (금)                        | [취업특강](https://github.com/Yoonsik-Shin/job-research) / [job_research](https://github.com/Yoonsik-Shin/job-research/blob/b507647070412b8fc03ca814b30f3f09837012f2/research.md) | 취업특강                                          |
 | 2022.07.11 (월)                        | [파이썬 기초](./TIL_date/TIL_220711.md)                      | 파이썬 기초문법                                   |
 | 2022.07.12 (화)                        | [파이썬 제어문](./TIL_date/TIL_220712.md)                    | 파이썬 제어문                                     |
 | 2022.07.13 (수)                        | [파이썬 함수](./TIL_date/TIL_220713.md)                      | 파이썬 함수                                       |
@@ -23,4 +32,16 @@
 | 2022.08.08 (월)                        | [완전탐색1](./TIL_date/TIL_220808.md)                        | 브루트포스, 델타탐색                              |
 | 2022.08.09 (화)                        | [그래프](./TIL_date/TIL_220809.md)                           | 그래프 활용법                                     |
 | 2022.08.10 (수)                        | [DFS](./TIL_date/TIL_220810.md)                              | DFS 개념 및 구현법                                |
+
+
+
+---
+
+
+
+## 3. 데이터베이스 (DB)
+
+| Day             | Contents                                | Ex                           |
+| --------------- | --------------------------------------- | ---------------------------- |
+| 2022.08.16 (화) | [DB 기초개념](./TIL_date/TIL_220816.md) | DB, RDB, RDBMS, SQL 개념정리 |
 
