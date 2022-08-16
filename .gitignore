@@ -1,3 +1,4 @@
 .env
 .vscode
 Toy_project
+*.sqlite3
