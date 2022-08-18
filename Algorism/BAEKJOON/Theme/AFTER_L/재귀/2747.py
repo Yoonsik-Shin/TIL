@@ -1,3 +1,7 @@
+# https://www.acmicpc.net/problem/2747
+
+# 동적계획법, 메모이제이션
+
 n = int(input())
 dict_ = {}
 
