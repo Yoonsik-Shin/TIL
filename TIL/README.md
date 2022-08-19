@@ -46,4 +46,5 @@
 | 2022.08.16 (화) | [DB 기초개념](./TIL_date/TIL_220816.md)                      | DB, RDB, RDBMS, SQL 개념정리                  |
 | 2022.08.17 (수) | [SELECT문 활용](./TIL_date/TIL_220817.md) / [실습2](./TIL_date/02실습.md) | WHERE, 집계함수, LIKE, ORDER BY               |
 | 2022.08.18 (목) | [SELECT문 활용2 / ALTER문](./TIL_date/TIL_220818.md)  / [실습3](./TIL_date/03실습.md) | 문자열함수, 숫자함수, GROUP BY, HAVING, ALTER |
+| 2022.08.19 (금) | [서브쿼리 / 기타구문](./TIL_date/TIL_220819.md) / [실습4](./TIL_date/04실습.md) | CASE, 서브쿼리                                |
 
