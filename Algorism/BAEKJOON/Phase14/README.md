@@ -11,7 +11,7 @@
 | 2022.08.17 (수) | 2609   | [최대공약수와 최소공배수](https://www.acmicpc.net/problem/2609) | 🟢 / 2022.08.17 (수) | [2609.py](2609.py) |
 | 2022.08.19 (금) | 1934   | [최소공배수](https://www.acmicpc.net/problem/1934)           | 🟢 / 2022.08.19 (금) | [1934.py](1934.py) |
 |                 | 2981   | [검문](https://www.acmicpc.net/problem/2981)                 |                     |                    |
-|                 | 3036   | [링](https://www.acmicpc.net/problem/3036)                   |                     |                    |
+| 2022.08.20 (토) | 3036   | [링](https://www.acmicpc.net/problem/3036)                   | 🟢 / 2022.08.20 (토) | [3036.py](3036.py) |
 |                 | 11050  | [이항 계수 1](https://www.acmicpc.net/problem/11050)         |                     |                    |
 |                 | 11051  | [이항 계수 2](https://www.acmicpc.net/problem/11051)         |                     |                    |
 |                 | 1010   | [다리 놓기](https://www.acmicpc.net/problem/1010)            |                     |                    |
