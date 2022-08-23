@@ -13,4 +13,3 @@ for i in range(T):
             dict_clothes[b] = 1
         else:
             dict_clothes[b] += 1
-    
