@@ -4,9 +4,10 @@ lst = []
 visited = [0] * (N+1)
 
 def recur(num):
+    k = 0
     if num == M:
         print(' '.join(map(str,lst)))
-    for i in range(1, N+1):
+    for i in range(k, N+1):
         if visited[i] == 0:
             visited[i] = 1
             lst.append(i)

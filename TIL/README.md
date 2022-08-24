@@ -47,4 +47,7 @@
 | 2022.08.17 (수) | [SELECT문 활용](./TIL_date/TIL_220817.md) / [실습2](./TIL_date/02실습.md) | WHERE, 집계함수, LIKE, ORDER BY               |
 | 2022.08.18 (목) | [SELECT문 활용2 / ALTER문](./TIL_date/TIL_220818.md)  / [실습3](./TIL_date/03실습.md) | 문자열함수, 숫자함수, GROUP BY, HAVING, ALTER |
 | 2022.08.19 (금) | [서브쿼리 / 기타구문](./TIL_date/TIL_220819.md) / [실습4](./TIL_date/04실습.md) | CASE, 서브쿼리                                |
+| 2022.08.22 (월) | [조인](./TIL_date/TIL_220822.md) / [실습5](./TIL_date/05실습.md) | 조인                                          |
+| 2022.08.23 (화) |                                                              | 데이터 모델링                                 |
+| 2022.08.24 (수) | [ORM](./TIL_date/TIL_220824.md) / [실습7](./TIL_date/07실습.md) | ORM 개념, 조작                                |
 
