@@ -25,3 +25,17 @@ string.startswith(tuple_string)
 # endswith 메소드
 ```
 
+```python
+# zip함수
+a_lst = [1,2,3]
+b_lst = ['a','b','c']
+c_lst = ['A','B','C']
+
+for i, j, k in zip(a_lst, b_lst, c_lst):
+    print(i, j, k)
+    
+>> 1, 'a', 'A'
+>> 2, 'b', 'B'
+>> 3, 'c', 'C'
+```
+
