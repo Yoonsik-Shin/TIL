@@ -32,7 +32,7 @@
 | Number | Title                                                 | Solve |
 | ------ | ----------------------------------------------------- | ----- |
 | 2981   | [검문](https://www.acmicpc.net/problem/2981)          | 🔴     |
-| 9375   | [패션왕 신해빈](https://www.acmicpc.net/problem/9375) | 🔴     |
+| 9375   | [패션왕 신해빈](https://www.acmicpc.net/problem/9375) | 🟢     |
 | 2004   | [조합 0의 개수](https://www.acmicpc.net/problem/2004) | 🔴     |
 
 

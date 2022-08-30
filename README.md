@@ -74,7 +74,7 @@
 
 
 
-### #️⃣ 도움될만한 것들
+### #️⃣ 도움될만한 사이트
 
 - [VS_Code_단축키](./TIPs/VS_Code_단축키.md)
 - [파이썬 튜터 (한줄씩 진행과정 알아보는 사이트)](https://pythontutor.com/visualize.html#mode=edit)
@@ -83,6 +83,8 @@
 - [데이터엔지니어 관련글](https://github.com/Team-Neighborhood/I-want-to-study-Data-Science/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4)
 - [.env document](https://github.com/theskumar/python-dotenv) / [.env 사용법 정리](./TIPs/env활용.md)
 - [github stat](https://github.com/anuraghazra/github-readme-stats)
+- [wikiDocs](https://wikidocs.net/) : 온라인 책 제작 / 공유
+- [아스키아트 생성기](https://wepplication.github.io/tools/asciiArtGen/?fontSelector=Coinstak&userInput=%EC%95%84%EC%8A%A4%ED%82%A4) : 그림파일을 아스키코드로 표현해줌
 
 ---
 
@@ -135,3 +137,7 @@
 | 2022.08.22 (월) | 가슴, 어깨        |   🟢    |
 | 2022.08.23 (화) | 하체              |   🟡    |
 | 2022.08.25 (목) | 등                |   🟡    |
+| 2022.08.26 (금) | 상체, 가슴        |   🟡    |
+| 2022.08.27 (토) | 하체              |   🟡    |
+| 2022.08.29 (월) | 상체, 가슴        |   🟡    |
+| 2022.08.30 (화) | 등                |        |

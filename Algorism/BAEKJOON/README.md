@@ -20,6 +20,10 @@
 | 2022.07.28 (목) |  12   |    [집합과 맵](https://www.acmicpc.net/step/49)     |   🟢   | [Phase12](./Phase12) | [Phase12/README](./Phase12/README.md) |
 | 2022.07.30 (토) |  13   |      [기하 1](https://www.acmicpc.net/step/50)      |   🟢   | [Phase13](./Phase13) | [Phase13/README](./Phase13/README.md) |
 | 2022.08.15 (월) |  14   | [정수론 및 조합론](https://www.acmicpc.net/step/18) | 🔴 / 🟡 | [Phase14](./Phase14) | [Phase14/README](./Phase14/README.md) |
+|                 |  15   |     [백트래킹](https://www.acmicpc.net/step/34)     |   🔴   | [Phase15](./Phase15) | [Phase15/README](./Phase15/README.md) |
+|                 |  16   |  [동적 계획법 1](https://www.acmicpc.net/step/16)   |   🟡   | [Phase16](./Phase16) | [Phase16/README](./Phase16/README.md) |
+|                 |  17   |     [누적 합](https://www.acmicpc.net/step/48)      |       | [Phase17](./Phase17) | [Phase17/README](./Phase17/README.md) |
+|                 |  18   | [그리디 알고리즘](https://www.acmicpc.net/step/33)  |   🟡   | [Phase18](./Phase18) | [Phase18/README](./Phase18/README.md) |
 | 2022.08.05 (토) |  19   |       [스택](https://www.acmicpc.net/step/11)       |   🔴   | [Phase19](./Phase19) | [Phase19/README](./Phase19/README.md) |
 | 2022.08.13 (토) |  20   |      [큐, 덱](https://www.acmicpc.net/step/12)      |   🔴   | [Phase20](./Phase20) | [Phase20/README](./Phase20/README.md) |
 | 2022.08.18 (목) |  23   |   [우선순위 큐](https://www.acmicpc.net/step/13)    |   🔴   | [Phase23](./Phase23) | [Phase23/README](./Phase23/README.md) |

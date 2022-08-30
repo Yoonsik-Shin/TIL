@@ -1,0 +1,48 @@
+/* 아래에 CSS를 작성해주세요. */
+.img {
+    border-radius: 20px;
+    width: 300px;
+}
+
+.h2_header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.header_font_size {
+    font-size: 12px;
+}
+
+.card_area {
+    display: flex;
+    width: 900px;
+}
+
+.INSTALLATION {
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size: small;
+    color: grey;
+    margin-bottom: 5px;
+}
+
+.BESPOKE {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.para {
+    line-height: 160%;
+    word-spacing: -2px;
+    margin-left: 10px;
+    font-size: 10px;
+    color: grey;
+}
+
+.display {
+    width: 300px;
+    margin-left: 10px;
+    margin-right: 5px;
+}

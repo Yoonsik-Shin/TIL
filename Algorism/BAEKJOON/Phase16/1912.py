@@ -1,3 +1,6 @@
+# 유튜브 참조
+# https://www.youtube.com/watch?v=GtqHli8HIqk&list=PLcXyemr8ZeoQGXwikaiVxhdYRpQU4ojCu
+
 def maxSubArray(nums):
     total_max = nums[0]
     cur_max = nums[0]
