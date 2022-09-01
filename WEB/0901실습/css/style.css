@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  min-width: 1280px;
+  color: #333333;
+  margin: 5rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+h2 {
+  font-size: 18pt;
+  text-align: center;
+  margin: 1.3rem;
+}
+
+.nav-flex {
+  width: 100%;
+  display: flex;
+  margin: 1.5rem 1.5rem;
+  flex-direction: row;
+  justify-content: space-between;
+  ;
+}
+
+.nav-h1 {
+  text-decoration: none;
+}
+
+.nav-right-a a {
+  padding: 0.5rem;
+}
+
+.nav-right-a a:hover {
+  padding: 0.5rem;
+}
+
+.nav-flex>div>a {
+  text-decoration: none;
+}
+
+.banner {
+  height: 700px;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.banner-img {
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.main-page {
+  width: 1280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-page-img {
+  width: 500px;
+  border-radius: 1rem;
+}
+
+.about-div {
+  display: flex;
+  width: 500px;
+  flex-direction: column;
+}
+
+.about-p {
+  margin: 1.3rem;
+  margin-top: 0;
+  line-height: 1.5rem;
+}
+
+.section-flex-about {
+  display: flex;
+  margin: 2rem;
+}
+
+.more-img {
+  width: 64px;
+  height: 64px;
+  margin: 0.5rem;
+}
+
+.section-flex-more {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-div-flex {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1rem 1rem;
+}
+
+.section-div-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem;
+  margin-top: 1rem;
+}
+
+.section-div-div>p {
+  margin: 0.5rem;
+}
+
+.footer {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+}
+
+/* products */
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 1280px;
+}
+
+.img-box {
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+  padding: 0.5rem;
+  border: 0.01rem solid black;
+  margin: 0.5rem;
+}
+
+.item-name {
+  margin: 1rem;
+  text-align: center;
+}
