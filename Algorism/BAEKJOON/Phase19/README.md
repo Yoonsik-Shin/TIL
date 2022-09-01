@@ -1,4 +1,4 @@
-# Phase19 : [ 스택](https://www.acmicpc.net/step/11)
+# Phase19 : [스택](https://www.acmicpc.net/step/11)
 
 
 

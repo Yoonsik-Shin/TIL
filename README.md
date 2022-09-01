@@ -1,14 +1,14 @@
 # 📖 매일 배운내용 정리
 
+  
 
-
-## 🙄 [수업내용정리](./TIL/README.md)
+## 🙄 [수업내용정리](./TIL/README.md)  
 
 
 
 ----
 
-
+  
 
 ## ✅ 학습 결과
 
@@ -16,11 +16,11 @@
 
 [![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=pocket0994)](https://solved.ac/pocket0994/)
 
-
+  
 
 ---
 
-
+  
 
 ## 🎢 목표
 
@@ -40,6 +40,7 @@
 
    - 21:00 ~ 24:00 : 저녁자습 (복습, 알고리즘 문제풀이, TIL 작성)
 
+
      
 
 2. 주말에도 코딩공부하기
@@ -51,15 +52,15 @@
      - 자산관리사(FP)
      
 
-
+  
 
 ---
 
-
+  
 
 ## 🔞 알고리즘 문제풀이 
 
-#### ✍️ [문제풀이로 얻은 개념 총정리](./Algorism/README.md)
+#### ✍️ [문제풀이로 얻은 개념 총정리](./Algorism/README.md)  
 
 - [BAEKJOON (단계별로 풀어보기 기준)](./Algorism/BAEKJOON/README.md)
 - [CodeUp](./Algorism/Codeup)
@@ -86,9 +87,11 @@
 - [wikiDocs](https://wikidocs.net/) : 온라인 책 제작 / 공유
 - [아스키아트 생성기](https://wepplication.github.io/tools/asciiArtGen/?fontSelector=Coinstak&userInput=%EC%95%84%EC%8A%A4%ED%82%A4) : 그림파일을 아스키코드로 표현해줌
 
+  
+
 ---
 
-
+  
 
 ## 💪운동일지
 
@@ -140,4 +143,5 @@
 | 2022.08.26 (금) | 상체, 가슴        |   🟡    |
 | 2022.08.27 (토) | 하체              |   🟡    |
 | 2022.08.29 (월) | 상체, 가슴        |   🟡    |
-| 2022.08.30 (화) | 등                |        |
+| 2022.08.30 (화) | 등                |   🟡    |
+| 2022.08.31 (수) | 하체              |   🟢    |
