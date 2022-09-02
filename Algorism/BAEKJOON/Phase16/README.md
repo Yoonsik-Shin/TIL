@@ -11,8 +11,8 @@
 | 2022.08.27 (토) | 1904   | [01타일](https://www.acmicpc.net/problem/1904)               | 🟢 / 2022.08.27 (토) | [1904.py](./1904.py)   |
 | 2022.08.27 (토) | 9461   | [파도반 수열](https://www.acmicpc.net/problem/9461)          | 🟢 / 2022.08.27 (토) | [9461.py](./9461.py)   |
 | 2022.08.29 (월) | 1912   | [연속합](https://www.acmicpc.net/problem/1912)               | 😭 / 동영상강의      | [1912.py](./1912.py)   |
-|                 | 1149   | [RGB거리](https://www.acmicpc.net/problem/1149)              |                     |                        |
-|                 | 1932   | [정수 삼각형](https://www.acmicpc.net/problem/1932)          |                     |                        |
+| 2022.09.01 (목) | 1149   | [RGB거리](https://www.acmicpc.net/problem/1149)              | 🔴 | [1149.py](./1149.py) |
+| 2022.09.01 (목) | 1932   | [정수 삼각형](https://www.acmicpc.net/problem/1932)          | 🟢 / 2022.09.01 (목) | [1932.py](./1932.py) |
 |                 | 2579   | [계단 오르기](https://www.acmicpc.net/problem/2579)          |                     |                        |
 |                 | 1463   | [1로 만들기](https://www.acmicpc.net/problem/1463)           |                     |                        |
 |                 | 10844  | [쉬운 계단 수](https://www.acmicpc.net/problem/10844)        |                     |                        |
