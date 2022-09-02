@@ -1,0 +1,123 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  height: 80px;
+  padding: 0 40px;
+  align-items: center;
+  background-color: white;
+}
+
+.logo {
+  height: 60px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  margin-bottom: 0;
+}
+
+.nav-list-item {
+  margin: 0 10px;
+  color: gray;
+}
+
+.title {
+  height: 320px;
+  background-image: url(./images/background.jpg);
+  /* margin-top: 80px; */
+  /* 배경 이미지는 적절하게 삽입하고, 이미지에 맞게 사이즈와 위치를 조절 합니다. */
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.service {
+  font-size: 40px;
+}
+
+.aside-ul {
+  list-style: none;
+  padding: 0;
+}
+
+.main-aside {
+  padding: 1rem;
+  flex-grow: 2;
+}
+
+.main-flex {
+  display: flex;
+}
+
+.section-div-img {
+  width: 300px;
+  height: 430px;
+  border-radius: 1rem;
+}
+
+.section-movie-box {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.section-div-div {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.movie {
+  background-color: rgb(228, 228, 228);
+  flex-grow: 8;
+}
+
+.section-h2 {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.movie-name {
+  text-align: center;
+  font-weight: 700;
+}
+
+/* 
+aside
+좌측에 위치하며, 상위 div 요소(#content)의 상단에 고정 시킵니다.
+*/
+
+#contents {
+  position: fixed;
+  top: 4rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+}
+
+.footer {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  bottom: 0;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 220, 131);
+}
+
+.name {
+  text-align: center;
+}
