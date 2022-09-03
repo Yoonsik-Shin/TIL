@@ -9,7 +9,43 @@
 
 
 
-## 2️⃣
+## 2️⃣ CSS Position
+
+- 문서상에서 요소의 위치를 지정
+
+1. static
+   - 모든 태그의 기본 값 (기준 위치)
+   - 좌측상단의 일반적인 요소의 배치 순서 따름 
+   - 부모 요소내에 배치시 부모 요소의 위치를 기준으로 배치
+
+---
+
+⬇️ 좌표 프로퍼티 (top, bottom, left, right) 사용하여 이동
+
+2. relative (상대위치)
+   - normal flow 유지
+   - static 위치를 기준으로 이동
+
+3. absolute (절대 위치) 
+   - normal flow에서 벗어남 ❗
+   - static이 아닌 부모 요소를 기준으로 이동
+   - static이 아닌 부모요소가 없을 경우 브라우저 화면 기준으로 이동
+   - 특정 영역 위에 존재할 때 사용 ❔
+
+4. fixed (고정 위치)
+   - normal flow에서 벗어남 ❗
+   - 부모 요소와 관계없이 __viewport__를 기준으로 이동 ❗
+   - 스크롤 시에도 항상 같은 곳에 위치
+
+5. sticky
+
+   - 스크롤에 따라 static에서 fixed로 변경
+
+   - 평소에는 `position: static`과 같은 흐름, 스크롤로 인한 페이지 이동시 `position: fixed`와 같이 화면에 고정\
+
+     
+
+---
 
 
 
@@ -26,6 +62,10 @@
 
 
 
+---
+
+
+
 ## 4️⃣ CSS Flexbox
 
 - 페이지의 콘텐츠 상자안에 아이템을 배치하는데 사용
@@ -34,7 +74,7 @@
 
 ```css
 display: flex;  /* 부모 요소 */
-display: inline-flex;
+display: inline-flex; /* flex 컨테이너 주변요소와의 관계 설정 */
 ```
 
 | 배치 설정      | 공간 나누기           | 정렬                             |
@@ -76,8 +116,6 @@ flex-wrap: wrap-reverse;
 ```css
 flex-flow: flex-direction flex-wrap;
 ```
-
-
 
 
 
@@ -197,6 +235,8 @@ flex: flex-grow flex-shrink flex-basis;
 ```
 
 
+
+---
 
 
 
