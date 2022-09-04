@@ -242,8 +242,10 @@ flex: flex-grow flex-shrink flex-basis;
 
 ## 5️⃣ Media Query
 
+- viewport 기준
+
 ```css
-/*  */
+/* 800px이상에만 적용 */
 @media (min-width: 800px){
   h1{
     
