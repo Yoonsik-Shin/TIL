@@ -337,6 +337,10 @@ ex) <p class = "para"> contents </p>
 
 
 
+---
+
+
+
 ## 7️⃣ form 컨테이너
 
 - 입력내용을 그룹화한 뒤 작은 배송 라벨을 붙여 어떤 지정된 목적지로 함께 제출
@@ -347,53 +351,57 @@ ex) <p class = "para"> contents </p>
 
 ​	
 
-input 입력란
+### 7-1. input
 
-`<input type="text" placeholder="">`
+- 닫는 태그 없음
+- input type 종류는 엄청 많음, 문서 참조 필수
+- `placeholder` : 입력란의 임시 텍스트를 지정하는 속성 (default값)
 
-`<input type="password">`
-
-`<input type="color">`
-
-닫는 태그 x 
-
-type 종류는 엄청많음 > 문서참조
-
-placeholder : 입력란의 임시 텍스트를 지정하는 속성 (default값)
+```html
+<input type="text" placeholder="">
+<input type="password">
+<input type="color">
+```
 
 
 
-`<label></label>`
+### 7-2. label
 
-연결방법
+- `input`태그의 설명
+- `Label`과 `input` 연결방법
 
-1.<label for = 'id값'> [더많이씀]
+```html
+<!-- 방법1 -->
+<label for="name">Name</label>
+<input type="text" id="name">
 
-<input id='id값'>
-
-2. <label>
-
-   ​	<input type=" ">
-
-   </label>
-
-
-
-`<button></button>`
-
-- `<form>` 태그 안에 있으면 버튼을 눌렀을 때 해당 폼으로 제출, 기본 type값이 submit임 (<button type="submit">)
-
-name 속성 : 폼데이터랑 사용, 데이터를 보낼때 name속성 값 추가되서 보내짐
+<!-- 방법2 -->
+<label>
+	<input type=" ">
+</label>
+```
 
 
 
-`<form action = "/taco">
+### 7-3. button
+
+- `<form>` 태그 안에 있으면 버튼을 눌렀을 때 해당 폼으로 제출, 기본 type값이 submit임
+- `name` 속성 : `form`데이터랑 사용, 데이터를 보낼때 name속성 값 추가되서 보내짐
+
+```html
+<!-- 기본형 -->
+<button></button>
+
+<!-- 자주 사용되는 속성 -->
+<button type="submit" name="">
+ 
+<!-- 응용 -->
+<form action = "/taco">
   <input id = "username" type = "text" placeholder = "username" name="user"
-</form>`
+</form>
 
-file:///taco?username=<적은내용>
-
-보안관련 내용 나중에 배움
+>> file:///taco?username=<적은내용>
+```
 
 > reddit 검색창 만들기
 
@@ -413,11 +421,11 @@ file:///taco?username=<적은내용>
 </form>
 ```
 
-버튼 없이도 제출가능 > Enter사용
 
 
+### 7-4. 체크박스
 
-체크박스
+- 여러개 선택 가능
 
 ```html
 <form action="">
@@ -429,7 +437,9 @@ file:///taco?username=<적은내용>
 
 
 
-라디오버튼 : 하나만 선택가능
+### 7-5. 라디오버튼 
+
+- 하나만 선택가능
 
 ```html
 <form action="">
@@ -442,9 +452,7 @@ file:///taco?username=<적은내용>
 
 
 
-드롭다운
-
-`<select></select>`, `<option></option>`
+### 7-6. 드롭다운
 
 ```html
 <label for = "a">  </label>
@@ -459,7 +467,9 @@ file:///taco?username=<적은내용>
 
 
 
-`<input type = "range">` : 볼륨조절같은 기능
+### 7-7. range
+
+- 볼륨조절같은 기능
 
 ```html
 <input type="range" id="" min="" max="" step="" name="" value="초기값">
@@ -467,11 +477,20 @@ file:///taco?username=<적은내용>
 
 
 
-내장 유효성 검사
+>  내장 유효성 검사
 
-required 속성 추가 : 빈값 제출 x
+- `required` : 빈값 제출 x
 
-minlength, maxlength
+```html
+<input type="text" required=>
+```
+
+- `minlength` : 최소 단어수
+- `maxlength` : 최대 단어수
+
+```html
+<input type="password" minlength="6" maxlength="12">
+```
 
 
 
