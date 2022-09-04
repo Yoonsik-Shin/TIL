@@ -1,14 +1,14 @@
 # 📖 매일 배운내용 정리
 
-  
+​      
 
 ## 🙄 [수업내용정리](./TIL/README.md)  
 
-
+​    
 
 ----
 
-  
+​      
 
 ## ✅ 학습 결과
 
@@ -16,7 +16,7 @@
 
 [![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=pocket0994)](https://solved.ac/pocket0994/)
 
-  
+​      
 
 ---
 
@@ -52,11 +52,11 @@
      - 자산관리사(FP)
      
 
-  
+​    
 
 ---
 
-  
+​      
 
 ## 🔞 알고리즘 문제풀이 
 
@@ -69,11 +69,11 @@
 
 > 🔴: 못품, 🟡 : 풀이중, 🟢: 모두 해결, 😭: 구글링
 
-
+​    
 
 ---
 
-
+​    
 
 ### #️⃣ 도움될만한 사이트
 
@@ -87,11 +87,11 @@
 - [wikiDocs](https://wikidocs.net/) : 온라인 책 제작 / 공유
 - [아스키아트 생성기](https://wepplication.github.io/tools/asciiArtGen/?fontSelector=Coinstak&userInput=%EC%95%84%EC%8A%A4%ED%82%A4) : 그림파일을 아스키코드로 표현해줌
 
-  
+  ​    
 
 ---
 
-  
+​      
 
 ## 💪운동일지
 
