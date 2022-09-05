@@ -482,10 +482,11 @@ ex) <p class = "para"> contents </p>
 - `required` : 빈값 제출 x
 
 ```html
-<input type="text" required=>
+<input type="text" required>
 ```
 
 - `minlength` : 최소 단어수
+
 - `maxlength` : 최대 단어수
 
 ```html
@@ -494,3 +495,16 @@ ex) <p class = "para"> contents </p>
 
 
 
+> 기타 속성
+
+- `disabled` : 제출불가
+
+```html
+<input type="text" disabled>
+```
+
+- `autofocus` : 자동으로 포커스
+
+```html
+<input type="text" autofocus>
+```

@@ -8,8 +8,6 @@
 
 ----
 
-​      
-
 ## ✅ 학습 결과
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Yoonsik-Shin&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
@@ -19,8 +17,6 @@
 ​      
 
 ---
-
-  
 
 ## 🎢 목표
 
@@ -48,7 +44,8 @@
    - CS 공부
    - 자격증 공부
    
-     - Adsp, SQLD, 정보보안(산업)기사, 전자계산기조직응용기사. 사회조사분석사 2급
+     - SQLD, 정보보안(산업)기사, 전자계산기조직응용기사
+     - AWS CLOUD, AWS DEVELOPER
      - 자산관리사(FP)
      
 
@@ -56,9 +53,7 @@
 
 ---
 
-​      
-
-## 🔞 알고리즘 문제풀이 
+## 🔞 알고리즘 문제풀이
 
 #### ✍️ [문제풀이로 얻은 개념 총정리](./Algorism/README.md)  
 
@@ -72,8 +67,6 @@
 ​    
 
 ---
-
-​    
 
 ### #️⃣ 도움될만한 사이트
 
@@ -90,8 +83,6 @@
   ​    
 
 ---
-
-​      
 
 ## 💪운동일지
 
@@ -147,3 +138,4 @@
 | 2022.08.31 (수) | 하체              |   🟢    |
 | 2022.09.01 (목) | 가슴, 어깨        |   🟡    |
 | 2022.09.02 (금) | 등                |   🟢    |
+| 2022.09.05 (월) | 하체              |   🟢😁   |

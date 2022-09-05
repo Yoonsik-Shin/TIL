@@ -4,13 +4,13 @@
 
 > ❗CSS는 `;` 세미콜론이 무조건 필요❗
 
-> CSS 주석처리 : 
+> CSS 주석처리 
 
 ```css
 /* 주석처리할 내용 */
 ```
 
-
+​    
 
 ## 1️⃣ CSS 적용방법
 
@@ -47,11 +47,11 @@
 ❗href링크 형식이 파이썬과 다름
 ```
 
-
+​    
 
 ---
 
-
+​    
 
 ## 2️⃣ 텍스트 설정
 
@@ -84,11 +84,11 @@ font-family: 1순위폰트, 백업폰트1, ..;    /* 글 폰트변경 */
 
 > [운영체제별 폰트 점유율](cssfontstack.com)
 
-
+​    
 
 ---
 
-
+​    
 
 ## 3️⃣ 선택자
 
@@ -150,13 +150,22 @@ h1, h2 {
 ### 6. 인접선택자 (Adjacent Selector)  = 결합자 (combinator) [`+`]
 
 ```css
-/* h2태그 안에 있는 button들 */
+/* h2태그 바로뒤에 있는 button */
 h2 + button {
   ;
 }
 ```
 
-### 7. 직계자손선택자 (Direct Child Selector) [`>`]
+### 7. 일반 형제 결합자 (General Sibling selector) [`~`]
+
+```css
+/* 서로 형제인 문단 중 이미지 뒤쪽인 경우에만 선택 */
+img ~ p {
+  color: red;
+}
+```
+
+### 8.  직계자손선택자 (Direct Child Selector) [`>`]
 
 - 자주 안씀
 - 필요할때가 있긴함
@@ -168,7 +177,7 @@ div > li {
 }
 ```
 
-### 8. 속성선택자 (Attribute Selector)
+### 9. 속성선택자 (Attribute Selector)
 
 - 자주 안쓰임
 
@@ -196,11 +205,11 @@ a[href$=".org"]{
 }
 ```
 
-
+​    
 
 ---
 
-
+​    
 
 ## 가상클래스 (Pseudo Class)
 
@@ -220,11 +229,14 @@ a[href$=".org"]{
 
 3. nth-of-type(선택할 요소번호 [3, 4n])
 
+4. first-child
+5. 
 
+- 
 
 ---
 
-
+​    
 
 ## 가상요소 (Pseudo Elements)
 
@@ -249,16 +261,18 @@ p::selection {
 }
 ```
 
-
+​     
 
 ---
+
+​    
 
 > CASCADE
 
 - 적용된 스타일의 우선순위
 - 같은 선택자일때 : 가장 나중에 정의된 스타일 반영
 
-
+​    
 
 ## 4️⃣ Specificity (특이도)
 

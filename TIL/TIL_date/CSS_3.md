@@ -1,13 +1,13 @@
 # CSS정리_3
 
-
+​    
 
 ## 1️⃣ CSS 원칙 (Normal Flow)
 
 - 모든 요소는 박스모델(네모)
 - 위에서부터 아래로, 왼쪽에서 오른쪽으로 쌓임 (좌측상단)
 
-
+​    
 
 ## 2️⃣ CSS Position
 
@@ -43,11 +43,11 @@
 
    - 평소에는 `position: static`과 같은 흐름, 스크롤로 인한 페이지 이동시 `position: fixed`와 같이 화면에 고정\
 
-     
+     ​    
 
 ---
 
-
+​    
 
 ## 3️⃣ Float
 
@@ -60,11 +60,11 @@
 }
 ```
 
-
+​    
 
 ---
 
-
+​    
 
 ## 4️⃣ CSS Flexbox
 
@@ -83,7 +83,7 @@ display: inline-flex; /* flex 컨테이너 주변요소와의 관계 설정 */
 | flex-wrap      | align-content (cross) | align-self (개별 아이템, cross)  |
 | flex-flow      |                       |                                  |
 
-
+​    
 
 ### ◾배치 설정
 
@@ -117,7 +117,7 @@ flex-wrap: wrap-reverse;
 flex-flow: flex-direction flex-wrap;
 ```
 
-
+​    
 
 ### ◾공간 나누기
 
@@ -148,7 +148,7 @@ align-content: space-around;    /* 영역에 대한 간격 균일 분배 */
 align-content: space-evenly;    /* 전체영역에 간격 균일 분배 */
 ```
 
-
+​    
 
 ### ◾정렬
 
@@ -169,7 +169,7 @@ align-items: baseline;     /* 텍스트의 기준선에 맞춰 정렬 */
 align-self: ;
 ```
 
-
+​    
 
 ### ◾속성
 
@@ -213,7 +213,7 @@ flex-shrink: 1;
 flex: flex-grow flex-shrink flex-basis;
 ```
 
-
+​    
 
 > 수평 수직 가운데 정렬
 
@@ -234,11 +234,11 @@ flex: flex-grow flex-shrink flex-basis;
 }
 ```
 
-
+​    
 
 ---
 
-
+​    
 
 ## 5️⃣ Media Query
 
