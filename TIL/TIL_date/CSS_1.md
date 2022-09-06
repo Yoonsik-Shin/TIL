@@ -2,7 +2,18 @@
 
 # CSS정리_1
 
-> ❗CSS는 `;` 세미콜론이 무조건 필요❗
+
+
+## 0️⃣ CSS란?
+
+- 스타일을 지정하기 위한 언어
+- ❗CSS는 `;` 세미콜론이 무조건 필요❗
+
+``` css
+Selector(선택자) {
+  property(속성): Value(값);  /* Declaration (선언) */ 
+}
+```
 
 > CSS 주석처리 
 
@@ -61,11 +72,12 @@
   - color : 텍스트색상
   - background-color: 배경색상
 - 색상 지정
-  1. 색상이름
-  2. rgb(,,)
+  1. 색상 키워드 [`color: red;`]
+  2. RGB 색상 [`color: rgb(0, 255, 0);`]
   3. 헥스 컬러 코드
      - 16진법 사용
      - `#ffff00`  #(red,red)(green,green)(blue,blue)
+  4. HSL 색상 [`color: hsl(120, 100%, 0);`]
 
 > [COOLORS](https://coolors.co/palettes/trending) : 트렌디한 색 조합 알려주는 사이트
 
@@ -204,6 +216,8 @@ a[href$=".org"]{
   ;
 }
 ```
+
+> ⛔!importance⛔ : CSS 최우선 적용, 다른 모든 규칙 무시, 사용시 주의해야함
 
 ​    
 

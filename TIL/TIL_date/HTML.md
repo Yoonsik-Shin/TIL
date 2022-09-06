@@ -4,15 +4,15 @@
 
 > [모질라 웹기술 공식문서](https://developer.mozilla.org/ko/docs/Web)
 
+##     
 
-
-## 1️⃣ HTML이란?
+## 0️⃣ HTML이란?
 
 - 프로그래밍 언어 x, 컨텐츠 구조를 정의하는 마크업 언어
 
+​    
 
-
-## 2️⃣ HTML 문서 구조
+## 1️⃣ HTML 문서 구조
 
 ```html
 <!DOCTYPE html> 
@@ -22,6 +22,7 @@
     <title>웹페이지 제목</title>
     <scripts></scripts>
     <link rel="stylesheet" href=" ">  <!-- css파일 -->
+    <style></style>
   </head>
   <body>
     
@@ -35,9 +36,11 @@
 - `<body></body>`: 페이지에서 보여주고 싶은 모든것을 담음
 - `<meta charset="utf-8">` : 문자집합 선언
 - `<title></title>` : 웹페이지 제목 설정
-- `<scripts></scripts>`: css추가
+- `<link>` : 외부 리소스 연결 요소 (css파일, favicon)
+- `<scripts></scripts>`: 스크립트 요소 (JavaScript 파일 / 코드)
+- `<style></style>` : CSS 직접작성
 
-
+​    
 
 > 웹사이트 폴더 관리
 
@@ -47,9 +50,27 @@
 
 
 
+## 2️⃣ 요소 (element)
+
+```html
+<여는태그/시작태그 속성> 내용(contents) </닫는태그/종료태그>
+```
+
+- 닫는 태그가 없는 태그도 존재 (`br, hr, img, input, link, meta`)
+- 중첩 가능
+
+> 속성 (attribute)
+
+```html
+<태그 속성명="속성값"></태그>
+```
+
+- 공백 중요, 형식에 맞게 써야함
+- 쌍따옴표 (`""`) 사용해야함
+
+​    
+
 ---
-
-
 
 ## 3️⃣ 태그 기본 속성
 
@@ -92,11 +113,9 @@ ex) <p class = "para"> contents </p>
 | `&lt;`             | <        | ~보다 작음 |
 | `&gt;`             | >        | ~보다 큼   |
 
-
+​    
 
 ---
-
-
 
 ## 4️⃣ 기본 태그 정리
 
@@ -218,22 +237,25 @@ ex) <p class = "para"> contents </p>
 
 ### 6. 서식 태그
 
-| 여닫는 태그         | 서식                         |
-| ------------------- | ---------------------------- |
-| `<b></b>`           | 굵게                         |
-| `<strong></strong>` | 강조효과 (소리내기에서 차이) |
-| `<mark></mark>`     | 하이라이팅                   |
-| `<del></del>`       | 삭제효과                     |
-| `<ins></ins>`       | 삽입효과                     |
-| `<i></i>`           | 기울림꼴                     |
+| 여닫는 태그                 | 서식                         |
+| --------------------------- | ---------------------------- |
+| `<b></b>`                   | 굵게                         |
+| `<strong></strong>`         | 강조효과 (소리내기에서 차이) |
+| `<mark></mark>`             | 하이라이팅                   |
+| `<del></del>`               | 삭제효과                     |
+| `<ins></ins>`               | 삽입효과                     |
+| `<i></i>`                   | 기울림꼴                     |
+| `<em></em>`                 | 강조효과 (기울림 글씨 요소)  |
+| `<blockquote></blockquote>` | 인용 블록 요소               |
 
-| 여닫지않는 태그 | 서식     |
-| --------------- | -------- |
-| `<hr>`          | 가로줄   |
-| `<sup>`         | 위첨자   |
-| `<sub>`         | 아래첨자 |
+| 여닫지않는 태그 | 서식                     |
+| --------------- | ------------------------ |
+| `<hr>`          | 가로줄                   |
+| `<sup>`         | 위첨자                   |
+| `<sub>`         | 아래첨자                 |
+| `<br>`          | 텍스트 내에 줄 바꿈 생성 |
 
-
+​    
 
 > 제너릭 컨테이너 (인라인 vs 블록)
 
@@ -265,9 +287,9 @@ ex) <p class = "para"> contents </p>
 <p class="block">이 문단은 블록 레벨 요소입니다. 부모 요소와 구분할 수 있도록 배경 색을 입혔습니다.</p>
 ```
 
+​    
 
-
-
+----
 
 ## 5️⃣ 시맨틱 마크업
 
@@ -289,7 +311,9 @@ ex) <p class = "para"> contents </p>
 | `<time datetime=""></time>`                                  | [인라인 요소] 시간표시                                       |
 | `<figure>`<br />   `<figcaption>`설명글 `</figcaption>` <br />`</figure>` | `<figure>`는 조그마한 독립적인 컨텐츠<br />` <figcaption>`은 그 컨텐츠의 설명글 |
 
+​    
 
+---
 
 ## 6️⃣ 테이블
 
@@ -335,11 +359,9 @@ ex) <p class = "para"> contents </p>
 | `<td rowspan="2"></td>` | 세로 합침 🟡 |            |
 |                         | 세로 합침 🟡 |            |
 
-
+​    
 
 ---
-
-
 
 ## 7️⃣ form 컨테이너
 
@@ -475,7 +497,7 @@ ex) <p class = "para"> contents </p>
 <input type="range" id="" min="" max="" step="" name="" value="초기값">
 ```
 
-
+​    
 
 >  내장 유효성 검사
 
@@ -493,7 +515,7 @@ ex) <p class = "para"> contents </p>
 <input type="password" minlength="6" maxlength="12">
 ```
 
-
+​    
 
 > 기타 속성
 
