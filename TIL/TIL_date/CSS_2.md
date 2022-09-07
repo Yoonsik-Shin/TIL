@@ -6,8 +6,9 @@
 
 - width : 너비
 - height : 높이
+- box-shaow : 그림자
 
-
+<img src="CSS_2.assets/SmartSelect_20220907_010405_Samsung Notes.jpg" alt="SmartSelect_20220907_010405_Samsung Notes" style="zoom:50%;" />
 
 ### 1. Border  (테두리) 
 
@@ -16,14 +17,15 @@
 1. border-width : 테두리 굵기
 2. border-color : 테두리 색상
 3. border-style : 테두리 종류 (점선, 실선)
-4. __box-sizing : border-box__ : 좌우 테두리를 기준으로 요소의 크기를 결정하게 만들어줌❗❗
-5. border-radius : 모서리 곡률
 
 >  한번에 width / style / color 특성 사용
 
 ```css
 border: witdh style color;
 ```
+
+4. __box-sizing : border-box__ : 좌우 테두리를 기준으로 요소의 크기를 결정하게 만들어줌❗❗![SmartSelect_20220907_010434_Samsung Notes](CSS_2.assets/SmartSelect_20220907_010434_Samsung Notes.jpg)
+5. border-radius : 모서리 곡률
 
 
 
@@ -52,11 +54,9 @@ margin: top horizontal bottom;     /* 상 좌우 하 */
 margin: top right bottom left;     /* 상 우 하 좌 (시계방향) */
 ```
 
-
+​    
 
 ---
-
-
 
 ## 2️⃣ Display
 
@@ -91,8 +91,6 @@ display: none;
 
 ---
 
-
-
 ## 3️⃣ CSS 단위
 
 상대적 단위 (Relavtive)
@@ -116,11 +114,9 @@ display: none;
 | vw   | vh   | vmin | vmax |
 | ---- | ---- | ---- | ---- |
 
-
+​    
 
 ---
-
-
 
 ## 4️⃣ 기타 유용한 속성들
 
@@ -136,9 +132,11 @@ rgba(red, green, blue, alpha)      /* alpha 0 ~ 1 */
 opacity: 0.3;           /* opacity 0 ~ 1 */
 ```
 
+​    
 
+---
 
-## 5️⃣ 전환
+## 5️⃣ 전환 (transition)
 
 - 전환효과시 적용할 수 있는 속성
 
@@ -154,5 +152,82 @@ transition-property: all;  /* 적용될 css속성 */
 transition-duration: 1s;   /* 전환 애니메이션이 완료되는데 걸리는 시간 설정 */
 transition-timing-function: ease-in;  /* 전환 애니메이션의 진행속도 조절  */
 transition-delay: 3s;      /* 전환효과가 일어나기 시작하기까지의 시간 지정 */
+```
+
+​    
+
+---
+
+## 6️⃣ 변형 (transform)
+
+- 사물 회전, 원근 왜곡, 확대, 축소, 늘리기. 기울이기, 페이지를 가로질러 위아래로 이동
+
+### 6-1. 회전
+
+- 단위 : `deg`, `grad`, `rad`, `turn` 
+
+```css
+transform: rotate(45deg);
+transform: rotateX(0);       /* x축 기준으로 회전 */
+transform-origin: top left;  /* 회전 기준점 변경 */
+```
+
+### 6-2. 크기변형
+
+```css
+transform: scale(0.5);    /* 절반크기 */	
+transform: scale(2);      /* 2배 */
+transform: scale(2, 1);   /* 너비2배 높이 그대로 */
+transform: scaleY(2);     /* y축 2배 */
+```
+
+### 6-3. Translate
+
+- 요소를 움직이는 기능
+
+```css
+transform: translateX(2rem);   /* X축으로 2rem 움직임 */
+transform: translateX(-100px, 100px);
+```
+
+### 6-4.  skew
+
+- 요소를 2차원 평면상에서 기울이는 기능
+- 단위 : `deg`, `grad`, `rad`, `turn` 
+
+```css
+transform: skew(30deg);
+transform: skew(10deg, 5deg);
+```
+
+​    
+
+> 여러 속성 한번에 사용하기
+
+```css
+transform: translateX(10px) rotate(10deg) translateY(5px);
+```
+
+
+
+## 7️⃣ background-img
+
+```scss
+background-image: url(" ");
+
+background-size: contain;     /* 비율을 유지하며 이미지 잘림없이 최대한 꽉 차게 표시*/
+background-size: cover;       /* 비율을 유지하지만 이미지 잘림있음*/
+background-size: auto;
+
+background-repeat: no-repeat;
+
+background-position: top;     /* 이미지의 상단을 기준으로 화면표현 */
+```
+
+```css
+/* 속기법 (선언순서 상관없음) */
+background: url(" ") no-repeat top/cover;
+
+/*❗size속성은 position/size 형식으로 사용해야함❗*/
 ```
 

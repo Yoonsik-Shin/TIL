@@ -62,7 +62,7 @@ Selector(선택자) {
 
 ---
 
-​    
+
 
 ## 2️⃣ 텍스트 설정
 
@@ -92,6 +92,7 @@ letter-spacing: ;                       /* 자간 */
 word-spacing :                          /* 단어간 */
 font-size: ;                            /* 글 크기 */
 font-family: 1순위폰트, 백업폰트1, ..;    /* 글 폰트변경 */
+text-transform: uppercase;              /* 모든 글자 대문자로 변경 */
 ```
 
 > [운영체제별 폰트 점유율](cssfontstack.com)
@@ -100,9 +101,13 @@ font-family: 1순위폰트, 백업폰트1, ..;    /* 글 폰트변경 */
 
 ---
 
-​    
+
 
 ## 3️⃣ 선택자
+
+> [CSS 선택자 게임](https://flukeout.github.io/)
+>
+> ![image-20220907015540922](CSS_1.assets/image-20220907015540922.png)
 
 ### 1. 전체 선택자 (Universal Selector)
 
@@ -215,6 +220,11 @@ a[href*="example"]{
 a[href$=".org"]{
   ;
 }
+
+/* O를 포함하는 속성 */
+태그[for*="o"]{
+  ;
+}
 ```
 
 > ⛔!importance⛔ : CSS 최우선 적용, 다른 모든 규칙 무시, 사용시 주의해야함
@@ -223,36 +233,70 @@ a[href$=".org"]{
 
 ---
 
-​    
 
-## 가상클래스 (Pseudo Class)
 
-1. hover
+## 4️⃣ 가상클래스 (Pseudo Class)
 
-- 마우스를 위로 가져갔을 때 동작
+1. `hover`
+   - 마우스를 위로 가져갔을 때 동작
 
 ```css
-.post button:hover {
+button:hover{
   ;
 }
 ```
 
-2. active
+2. `active`
+   - 클릭한 순간부터 떼는 시점까지
 
-- 클릭했을때
+```css
+button:active{
+	;  
+}
+```
 
-3. nth-of-type(선택할 요소번호 [3, 4n])
+3. `link` / `visitied`
 
-4. first-child
-5. 
+```css
+a:link{
+  color:blue;
+}
+a:visited{
+  color:red;
+}
+```
 
-- 
+3. `nth-of-type(n)`
+   - 부모 요소의 __특정 자식__ 요소중 n번쨰
+   - n은 `An + B`값 가질 수 있음
 
----
+```css
+p:nth-of-type(3){    /* p태그중에서 3번째 */
+    color:blue;
+}
+```
 
-​    
+4. `nth-of-child(n)`
+   - 부모 요소의 __모든 자식__ 요소중 n번째
 
-## 가상요소 (Pseudo Elements)
+```css
+p:nth-child(5){   /* p태그의 부모요소의 모든 자식 요소중 5번째 */
+    color:red;
+}
+```
+
+3. first-child
+4. only-child
+5. last-child
+6. nth-last-child()
+7. first-of-type
+8. only-of-type
+9. last-of-type
+10. empty
+
+
+
+## 5️⃣ 가상요소 (Pseudo Elements)
 
 ```css
 /* 첫 글자 지정 */
@@ -288,7 +332,7 @@ p::selection {
 
 ​    
 
-## 4️⃣ Specificity (특이도)
+## 6️⃣ Specificity (특이도)
 
 - 충돌이 생길 경우 브라우저에서 규칙을 적용하는 방법 
 

@@ -35,3 +35,25 @@
 | 4    | 폰트     | font, color, letter-spacing, text-align, text-decoration, text-indent, vertical-align, white-space |
 | 5    | 기타     |                                                              |
 
+​    
+
+---
+
+## 3️⃣ 구글 폰트
+
+> [Google Font](https://fonts.google.com/)
+
+![image-20220906164252358](CSS 작성 요령.assets/image-20220906164252358.png)
+
+```html
+<!-- HTML -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+```
+
+```css
+/* CSS */
+font-family: 'Noto Sans KR', sans-serif;
+```
+

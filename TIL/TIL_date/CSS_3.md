@@ -85,8 +85,6 @@ right: 100px;
 
 ---
 
-​    
-
 ## 3️⃣ Float
 
 - 박스를 왼쪽 or 오른쪽으로 이동시켜 텍스트를 포함 인라인 요소들이 주변을 wrapping하도록 함
@@ -98,13 +96,15 @@ right: 100px;
 }
 ```
 
-​    
+<img src="CSS_3.assets/image-20220907010155242.png" alt="image-20220907010155242" style="zoom:50%;" />
+
+​     
 
 ---
 
-​    
-
 ## 4️⃣ CSS Flexbox
+
+<img src="CSS_3.assets/SmartSelect_20220907_011303_Samsung Notes.jpg" alt="SmartSelect_20220907_011303_Samsung Notes" style="zoom:50%;" />
 
 - 페이지의 콘텐츠 상자안에 아이템을 배치하는데 사용
 - `main axis` (메인 축)과 `cross axis` (교차 축) 존재
@@ -114,6 +114,10 @@ right: 100px;
 display: flex;  /* 부모 요소 */
 display: inline-flex; /* flex 컨테이너 주변요소와의 관계 설정 */
 ```
+
+![SmartSelect_20220907_011245_Samsung Notes](CSS_3.assets/SmartSelect_20220907_011245_Samsung Notes.jpg)
+
+![SmartSelect_20220907_011225_Samsung Notes](CSS_3.assets/SmartSelect_20220907_011225_Samsung Notes.jpg)
 
 | 배치 설정      | 공간 나누기           | 정렬                             |
 | -------------- | --------------------- | -------------------------------- |
@@ -185,6 +189,10 @@ align-content: space-between;   /* 아이템 사이 간격 균일 분배 */
 align-content: space-around;    /* 영역에 대한 간격 균일 분배 */
 align-content: space-evenly;    /* 전체영역에 간격 균일 분배 */
 ```
+
+<img src="CSS_3.assets/SmartSelect_20220907_010522_Samsung Notes.jpg" alt="SmartSelect_20220907_010522_Samsung Notes" style="zoom: 50%;" />
+
+<img src="CSS_3.assets/SmartSelect_20220907_010540_Samsung Notes.jpg" alt="SmartSelect_20220907_010540_Samsung Notes" style="zoom:50%;" />
 
 ​    
 
@@ -281,8 +289,6 @@ flex: flex-grow flex-shrink flex-basis;
 ​    
 
 ---
-
-​    
 
 ## 5️⃣ Media Query
 

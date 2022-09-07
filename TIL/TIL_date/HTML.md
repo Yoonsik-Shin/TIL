@@ -419,7 +419,7 @@ ex) <p class = "para"> contents </p>
  
 <!-- 응용 -->
 <form action = "/taco">
-  <input id = "username" type = "text" placeholder = "username" name="user"
+  <input id = "username" type = "text" placeholder = "username" name="user">
 </form>
 
 >> file:///taco?username=<적은내용>
