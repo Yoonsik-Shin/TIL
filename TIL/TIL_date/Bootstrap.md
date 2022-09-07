@@ -97,3 +97,71 @@ class="btn"
 }
 ```
 
+
+
+## 유틸리티 (Utility)
+
+### borders
+
+### Colors
+
+### Shadow
+
+### Spacing
+
+```html
+<태그 class="{property}{sides}-[{breakpoint}]-{size}"></태그>
+<div class="mx-lg-5"> 예시 </div>
+```
+
+- property
+  - margin - `m`
+  - padding - `p`
+- sides
+  - top - `t`
+  - bottom - `b`
+  - left - `l`
+  - right - `r`
+  - left + right - `x`
+  - top + bottom - `y`
+- size
+  - 0 ~ 5
+  - auto
+
+### Flex
+
+- flexbox 속성 모두 사용가능
+
+### Sizing
+
+```html
+<!-- 너비(width) -->
+<div class="w-100">Width 100%</div>
+<div class="w-auto"></div>
+
+<!-- 높이(height) -->
+<div class="h-100">Width 100%</div>
+<div class="h-auto"></div>
+```
+
+
+
+
+
+## 컴포넌트 (Component)
+
+### 카드 (Card)
+
+### 캐러셀 (Carosel)
+
+### 드롭다운 (Dropdowns)
+
+### 스피너 (Spinners)
+
+### 모달 (Modal)
+
+- 대화창을 띄우는 도구
+
+
+
+> [부트스트랩 아이콘](https://icons.getbootstrap.kr/)
