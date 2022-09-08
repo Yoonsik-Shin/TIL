@@ -4,27 +4,36 @@
 
 >  [Getbootstrap](https://getbootstrap.com/)
 
+​    
 
+## 1️⃣ 적용법
 
-컨테이너
+1. CDN 활용
+
+- Content Delivery(Distribution) Network
+- 컨텐츠(CSS, JS, Image, Text 등)을 효율적으로 전달하기 위해 여러 노드에 가진 네트워크에 데이터를 제공하는 시스템
 
 ```css
-<div class="container">
+/* CSS */
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 ```
 
+```html
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+<!-- 추가 -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+```
 
-### 버튼
+    2. 파일 다운로드 후 활용
 
-class="btn"
+​    
 
+----
 
-
-
-
-
-
-## 그리드 (Grid)
+## 2️⃣ 그리드 (Grid)
 
 - 공간 분배를 화면 크기에 따라 달라지게 하는 반응형 레이아웃
 - `flexbox`로 제작되어 모든 속성 사용가능 (justify, align)
@@ -33,7 +42,7 @@ class="btn"
 - 부트스트랩의 모든 행에는 분배될 공간이 12유닛씩 존재❗
 - 기본요소
   - `Column` : 실제 컨텐츠를 포함하는 부분
-  - `Gutter` : 컬럼들 사이의 공간
+  - `Gutter` : 컬럼들 사이의 공간 [`q`]
   - `Container` : 컬럼들을 담고 있는 공간
 
 ```html
@@ -49,14 +58,16 @@ class="btn"
 </div>
 ```
 
+![image-20220908000027361](Bootstrap.assets/image-20220908000027361.png)
+
 > Offset
 
 - 열을 오른쪽으로 이동
 - 열의 왼쪽 여백을  늘림
 
+​    
 
-
-### 중단점 (Breakpoints)
+### ✔️ 중단점 (Breakpoints)
 
 - 6개의 `grid breakpoints`를 가짐
 
@@ -97,42 +108,58 @@ class="btn"
 }
 ```
 
+​    
 
+----
 
-## 유틸리티 (Utility)
+## 3️⃣ 유틸리티 (Utility)
 
-### borders
-
-### Colors
-
-### Shadow
-
-### Spacing
+### 3-1. 텍스트 (Text)
 
 ```html
-<태그 class="{property}{sides}-[{breakpoint}]-{size}"></태그>
-<div class="mx-lg-5"> 예시 </div>
+<!-- 정렬 -->
+<p class="text-start">왼쪽정렬</p>
+<p class="text-center">가운데 정렬</p>
+<p class="text-end">오른쪽 정렬</p>
+
+<!-- 텍스트 자동 줄바꿈 -->
+<div class="text-break"></div>
+
+<!-- 링크 태그에 밑줄 제거 -->
+<a href="#" class="text-decoration-none">Non-underlined link</a>
+
+<!-- 폰트 굵기 -->
+<p class="fw-bold">Bold text.</p>
+<p class="fw-normal">Normal weight text.</p>
+<p class="fw-light">Light weight text.</p>
+
+<!-- 폰트 스타일 -->
+<p class="fst-italic">Italic text.</p>
+
+<!-- 글꼴 크기 -->
+<p class="fs-1">.fs-1 text</p>   <!-- bigger -->
+<p class="fs-6">.fs-6 text</p>   <!-- smaller -->
+
+<!-- 행간 -->
+<p class="lh-1"></p>
+<p class="lh-sm"></p>
+<p class="lh-base"></p>
+<p class="lh-lg"></p>
 ```
 
-- property
-  - margin - `m`
-  - padding - `p`
-- sides
-  - top - `t`
-  - bottom - `b`
-  - left - `l`
-  - right - `r`
-  - left + right - `x`
-  - top + bottom - `y`
-- size
-  - 0 ~ 5
-  - auto
+​    
 
-### Flex
+### 3- 2. 색상 (Colors) 
 
-- flexbox 속성 모두 사용가능
+- `bg-값`
 
-### Sizing
+```html
+<div class="bg-primary"></div>
+```
+
+​    
+
+### 3-3. 크기 조절 (Sizing)
 
 ```html
 <!-- 너비(width) -->
@@ -144,24 +171,216 @@ class="btn"
 <div class="h-auto"></div>
 ```
 
+​    
 
+### 3-4. 간격 (Spacing) - 마진, 패딩
 
+```html
+<태그 class="{property}{sides}-[{breakpoint}]-{size}"></태그>
+<div class="mx-lg-5"> 예시 </div>
+```
 
+| property      | sides              | size | rem  | px   |
+| ------------- | ------------------ | ---- | ---- | ---- |
+| margin - `m`  | top - `t`          | 0    | 0    | 0    |
+| padding - `p` | bottom - `b`       | 1    | 0.25 | 4    |
+|               | left - `l`         | 2    | 0.5  | 8    |
+|               | right - `r`        | 3    | 1    | 16   |
+|               | left + right - `x` | 4    | 1.5  | 24   |
+|               | top + bottom - `y` | 5    | 3    | 48   |
+|               |                    | auto |      |      |
 
-## 컴포넌트 (Component)
+> ✔️ mx-auto : 블록 요소, 수평 중앙 정렬, 가운데 정렬 ✔️
 
-### 카드 (Card)
+​    
 
-### 캐러셀 (Carosel)
+### 3-5. borders  (테두리)
 
-### 드롭다운 (Dropdowns)
+- 방향
 
-### 스피너 (Spinners)
+```html
+<span class="border"></span>
+<span class="border-top"></span>
+<span class="border-end"></span>
+<span class="border-bottom"></span>
+<span class="border-start"></span>
+```
 
-### 모달 (Modal)
+- 색상
+
+```html
+<span class="border border-primary"></span>
+<span class="border border-secondary"></span>
+<span class="border border-success"></span>
+<span class="border border-danger"></span>
+<span class="border border-warning"></span>
+<span class="border border-info"></span>
+<span class="border border-light"></span>
+<span class="border border-dark"></span>
+<span class="border border-white"></span>
+```
+
+- 두께
+
+```html
+<span class="border border-1"></span>
+<span class="border border-2"></span>
+<span class="border border-3"></span>
+<span class="border border-4"></span>
+<span class="border border-5"></span>
+```
+
+- 모서리 (모서리 크기)
+
+```html
+<img src="..." class="rounded" alt="...">
+<img src="..." class="rounded-top" alt="...">
+<img src="..." class="rounded-end" alt="...">
+<img src="..." class="rounded-bottom" alt="...">
+<img src="..." class="rounded-start" alt="...">
+<img src="..." class="rounded-circle" alt="...">
+<img src="..." class="rounded-pill" alt="...">
+
+<img src="..." class="rounded-0" alt="...">
+<img src="..." class="rounded-1" alt="...">
+<img src="..." class="rounded-2" alt="...">
+<img src="..." class="rounded-3" alt="...">
+```
+
+​    
+
+### 3-6. Shadow
+
+```html
+<div class="shadow-none p-3 mb-5 bg-light rounded">No shadow</div>
+<div class="shadow-sm p-3 mb-5 bg-body rounded">Small shadow</div>
+<div class="shadow p-3 mb-5 bg-body rounded">Regular shadow</div>
+<div class="shadow-lg p-3 mb-5 bg-body rounded">Larger shadow</div>
+```
+
+​    
+
+### 3-7. Display
+
+```html
+<div class="d-inline"></div>
+<div class="d-block"></div>
+<div class="d-none"></div>
+```
+
+​    
+
+### 3-8. Position (위치)
+
+- 앱위에 메시지수 등을 나타낼 때 사용
+
+```html
+<div class="position-static top-0">...</div>
+<div class="position-relative">...</div>
+<div class="position-absolute">...</div>
+<div class="position-fixed">...</div>
+<div class="position-sticky">...</div>
+```
+
+<img src="Bootstrap.assets/image-20220908000732610.png" alt="image-20220908000732610" style="zoom: 50%;" />
+
+```html
+<button type="button" class="btn btn-primary position-relative">
+  Mails <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99 <span class="visually-hidden">unread messages</span></span>
+</button>
+```
+
+​     
+
+### 3-9. Flex
+
+- flexbox 속성 모두 사용가능
+
+​    
+
+---
+
+## 4️⃣ 컴포넌트 (Component)
+
+### 4-1. 버튼 (Button)
+
+```html
+<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-danger">Danger</button>
+<button type="button" class="btn btn-warning">Warning</button>
+<button type="button" class="btn btn-info">Info</button>
+<button type="button" class="btn btn-light">Light</button>
+<button type="button" class="btn btn-dark">Dark</button>
+<button type="button" class="btn btn-link">Link</button>
+```
+
+![image-20220907234731931](Bootstrap.assets/image-20220907234731931.png)
+
+​    
+
+### 4-2. 드롭다운 (Dropdowns)
+
+```html
+<!-- 단일버튼 -->
+<div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown link
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
+```
+
+- `<a>` 태그의 button 속성을 이용해도 가능
+
+​    
+
+### 4-3. 캐러셀 (Carosel)
+
+- 콘텐츠를 순환시키기 위한 슬라이드쇼
+
+​    
+
+### 4-4. 모달 (Modal)
 
 - 대화창을 띄우는 도구
+- 사용자와 상호작용을 하기 위해 사용
+- 긴급 상황을 알리는 데 주로 사용
+- 현재 열려 있는 페이지 위에 또 다른 레이어 띄움
+- 페이지를 이동하면 자연스럽게 사라짐
+- JS 활용, target속성과 id 속성이 일치하여야함
 
+<img src="Bootstrap.assets/image-20220907235326469.png" alt="image-20220907235326469" style="zoom: 33%;" />
 
+​    
 
-> [부트스트랩 아이콘](https://icons.getbootstrap.kr/)
+### 4-5. 네비게이션 바 (Navbar)
+
+![image-20220908001104313](Bootstrap.assets/image-20220908001104313.png)
+
+​    
+
+### 4-6. 카드 (Card)
+
+![image-20220908000945473](Bootstrap.assets/image-20220908000945473.png)
+
+<img src="Bootstrap.assets/image-20220908000959841.png" alt="image-20220908000959841" style="zoom:33%;" /><img src="Bootstrap.assets/image-20220908001021587.png" alt="image-20220908001021587" style="zoom:33%;" />
+
+​    
+
+### 4-7. 스피너 (Spinners)  : <img src="Bootstrap.assets/image-20220908000859518.png" alt="image-20220908000859518" style="zoom:33%;" />
+
+​    
+
+----
+
+## 5️⃣ 폼 (Forms)
+
+- 문서의 자료를 보고 필요한 것들 활용
+
+>  [문서 : 폼](https://getbootstrap.kr/docs/5.1/forms/overview/)

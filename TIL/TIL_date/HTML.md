@@ -366,28 +366,20 @@ ex) <p class = "para"> contents </p>
 ## 7️⃣ form 컨테이너
 
 - 입력내용을 그룹화한 뒤 작은 배송 라벨을 붙여 어떤 지정된 목적지로 함께 제출
+- `enctype` 
+  - method 특성이 post인 경우 사용
+  - `application/x-www-form-urlencoded`: 기본값
+  - `multipart/form-data`: 파일 전송시 사용 (input type이 file인 경우)
+- `method` : form을 제출할 때 사용할 .HTTP 메서드 (GET, POST)
+- `action` : form을 처리할 서버의 URL (데이터를 보낼 곳)
 
 ```html
-<form action="" method="HTTP메서드">
-```
-
-​	
-
-### 7-1. input
-
-- 닫는 태그 없음
-- input type 종류는 엄청 많음, 문서 참조 필수
-- `placeholder` : 입력란의 임시 텍스트를 지정하는 속성 (default값)
-
-```html
-<input type="text" placeholder="">
-<input type="password">
-<input type="color">
+<form action="" method="HTTP메서드" enctype=>
 ```
 
 
 
-### 7-2. label
+### 7-1. label
 
 - `input`태그의 설명
 - `Label`과 `input` 연결방법
@@ -405,24 +397,18 @@ ex) <p class = "para"> contents </p>
 
 
 
-### 7-3. button
+### 7-2. input
 
-- `<form>` 태그 안에 있으면 버튼을 눌렀을 때 해당 폼으로 제출, 기본 type값이 submit임
-- `name` 속성 : `form`데이터랑 사용, 데이터를 보낼때 name속성 값 추가되서 보내짐
+- 닫는 태그 없음
+- input type 종류는 엄청 많음, 문서 참조 필수
+- `placeholder` : 입력란의 임시 텍스트를 지정하는 속성 (default값)
+- `name` :  form에 적용되는 이름
+- `value` : form에 적용되는 값
 
 ```html
-<!-- 기본형 -->
-<button></button>
-
-<!-- 자주 사용되는 속성 -->
-<button type="submit" name="">
- 
-<!-- 응용 -->
-<form action = "/taco">
-  <input id = "username" type = "text" placeholder = "username" name="user">
-</form>
-
->> file:///taco?username=<적은내용>
+<input type="text" placeholder="" name="q">
+<input type="password">
+<input type="color">
 ```
 
 > reddit 검색창 만들기
@@ -445,7 +431,7 @@ ex) <p class = "para"> contents </p>
 
 
 
-### 7-4. 체크박스
+#### 체크박스
 
 - 여러개 선택 가능
 
@@ -459,7 +445,7 @@ ex) <p class = "para"> contents </p>
 
 
 
-### 7-5. 라디오버튼 
+#### 라디오버튼 
 
 - 하나만 선택가능
 
@@ -474,7 +460,47 @@ ex) <p class = "para"> contents </p>
 
 
 
-### 7-6. 드롭다운
+####  range
+
+- 볼륨조절같은 기능
+
+```html
+<input type="range" id="" min="" max="" step="" name="" value="초기값">
+```
+
+
+
+#### 기타 타입
+
+- `password`, `email`, `number`, `file`, `button`, `color`, `date`
+
+- `hidden` : 보이지 않지만 값은 서버로 전송하는 컨트롤
+
+​    
+
+### 7-3. button
+
+- `<form>` 태그 안에 있으면 버튼을 눌렀을 때 해당 폼으로 제출, 기본 type값이 submit임
+- `name` 속성 : `form`데이터랑 사용, 데이터를 보낼때 name속성 값 추가되서 보내짐
+
+```html
+<!-- 기본형 -->
+<button></button>
+
+<!-- 자주 사용되는 속성 -->
+<button type="submit" name="">
+ 
+<!-- 응용 -->
+<form action = "/taco">
+  <input id = "username" type = "text" placeholder = "username" name="user">
+</form>
+
+>> file:///taco?username=<적은내용>
+```
+
+
+
+### 7-4. 드롭다운
 
 ```html
 <label for = "a">  </label>
@@ -488,16 +514,6 @@ ex) <p class = "para"> contents </p>
 ```
 
 
-
-### 7-7. range
-
-- 볼륨조절같은 기능
-
-```html
-<input type="range" id="" min="" max="" step="" name="" value="초기값">
-```
-
-​    
 
 >  내장 유효성 검사
 
