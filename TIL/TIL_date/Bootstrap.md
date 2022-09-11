@@ -27,9 +27,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 ```
 
-    2. 파일 다운로드 후 활용
+2. 파일 다운로드 후 활용
 
-​    
+​        
 
 ----
 
@@ -42,7 +42,7 @@
 - 부트스트랩의 모든 행에는 분배될 공간이 12유닛씩 존재❗
 - 기본요소
   - `Column` : 실제 컨텐츠를 포함하는 부분
-  - `Gutter` : 컬럼들 사이의 공간 [`q`]
+  - `Gutter` : 컬럼들 사이의 공간 [`g`]
   - `Container` : 컬럼들을 담고 있는 공간
 
 ```html
@@ -60,10 +60,22 @@
 
 ![image-20220908000027361](Bootstrap.assets/image-20220908000027361.png)
 
+> container-fluid
+
+- 전체 너비 컨테이너가 되어 뷰포트 전체 너비를 차지
+
+```html
+<div class="container-fluid"></div>
+```
+
+
+
 > Offset
 
 - 열을 오른쪽으로 이동
 - 열의 왼쪽 여백을  늘림
+
+
 
 ​    
 
@@ -320,7 +332,39 @@
 
 ​    
 
-### 4-2. 드롭다운 (Dropdowns)
+### 4-2.버튼 그룹 (Button group) : ![image-20220911212913737](Bootstrap.assets/image-20220911212913737.png)
+
+```html
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-primary">Left</button>
+  <button type="button" class="btn btn-primary">Middle</button>
+  <button type="button" class="btn btn-primary">Right</button>
+</div>
+```
+
+​    
+
+### 4-3. 네비게이션 바 (Navbar)
+
+![image-20220908001104313](Bootstrap.assets/image-20220908001104313.png)
+
+​    
+
+### 4-4. 카드 (Card)
+
+![image-20220908000945473](Bootstrap.assets/image-20220908000945473.png)
+
+<img src="Bootstrap.assets/image-20220908000959841.png" alt="image-20220908000959841" style="zoom:33%;" /><img src="Bootstrap.assets/image-20220908001021587.png" alt="image-20220908001021587" style="zoom:33%;" />
+
+​    
+
+### 4-5. 캐러셀 (Carosel)
+
+- 콘텐츠를 순환시키기 위한 슬라이드쇼
+
+​    
+
+### 4-6. 드롭다운 (Dropdowns)
 
 ```html
 <!-- 단일버튼 -->
@@ -340,13 +384,67 @@
 
 ​    
 
-### 4-3. 캐러셀 (Carosel)
+### 4-7. 경고창 (Alerts)
 
-- 콘텐츠를 순환시키기 위한 슬라이드쇼
+![image-20220911213510377](Bootstrap.assets/image-20220911213510377.png)
+
+```html
+<div class="alert alert-danger" role="alert">
+  A simple danger alert—check it out!
+</div>
+```
+
+- 아이콘 사용
+
+![image-20220911213747094](Bootstrap.assets/image-20220911213747094.png)
+
+```html
+<div class="alert alert-primary d-flex align-items-center" role="alert">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </svg>
+  <div>
+    An example alert with an icon
+  </div>
+</div>
+```
+
+- 무시 (`X`)
+
+  ![image-20220911213656965](Bootstrap.assets/image-20220911213656965.png)
+
+```html
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+```
+
+> 접두사 aria
+>
+> - 접근성이나 스크린 리더와 관련
 
 ​    
 
-### 4-4. 모달 (Modal)
+### 4-8. 배지 (Badges)
+
+![image-20220911212404081](Bootstrap.assets/image-20220911212404081.png)
+
+```html
+<button type="button" class="btn btn-primary position-relative"> Inbox
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">99+</span>
+</button>
+```
+
+- 둥근 배지 : ![image-20220911212648735](Bootstrap.assets/image-20220911212648735.png)
+
+```html
+<span class="badge rounded-pill bg-primary">Primary</span>
+```
+
+​    
+
+### 4-9. 모달 (Modal)
 
 - 대화창을 띄우는 도구
 - 사용자와 상호작용을 하기 위해 사용
@@ -359,27 +457,74 @@
 
 ​    
 
-### 4-5. 네비게이션 바 (Navbar)
-
-![image-20220908001104313](Bootstrap.assets/image-20220908001104313.png)
-
-​    
-
-### 4-6. 카드 (Card)
-
-![image-20220908000945473](Bootstrap.assets/image-20220908000945473.png)
-
-<img src="Bootstrap.assets/image-20220908000959841.png" alt="image-20220908000959841" style="zoom:33%;" /><img src="Bootstrap.assets/image-20220908001021587.png" alt="image-20220908001021587" style="zoom:33%;" />
-
-​    
-
-### 4-7. 스피너 (Spinners)  : <img src="Bootstrap.assets/image-20220908000859518.png" alt="image-20220908000859518" style="zoom:33%;" />
+### 4-10. 스피너 (Spinners)   <img src="Bootstrap.assets/image-20220908000859518.png" alt="image-20220908000859518" style="zoom:33%;" />
 
 ​    
 
 ----
 
-## 5️⃣ 폼 (Forms)
+## 5️⃣ 컨텐츠 (Content)
+
+### 5-1. 타이포그래피 (Typography)
+
+- 문서 전체에 걸친 변경 사항을 알려줌
+
+#### 5-1-1. display
+
+- 매우 큰 헤더를 만드는데 사용
+- 크기만 다르고 heading 속성의 차이는 없음
+
+```html
+<h1 class="display-1">Display 1</h1>
+<h1 class="display-2">Display 2</h1>
+<h1 class="display-3">Display 3</h1>
+<h1 class="display-4">Display 4</h1>
+```
+
+#### 5-1-2. Lead
+
+- 단락 강조
+
+```html
+<p class="lead"></p>
+```
+
+#### 5-1-3. Blockquotes
+
+- 블록 형태의 인용문
+- 출처 추가 : `blockqoute-footer`
+
+```html
+<figure>
+  <blockquote class="blockquote">
+    <p>A well-known quote, contained in a blockquote element.</p>
+  </blockquote>
+  <figcaption class="blockquote-footer">
+    Someone famous in <cite title="Source Title">Source Title</cite>
+  </figcaption>
+</figure>
+```
+
+#### 5-1-4. 목록
+
+```html
+<!-- 스타일 제거 -->
+<ul class="list-unstyled">
+  <li>This is a list.</li>
+</ul>
+
+<!-- 인라인 만들기 -->
+<ul class="list-inline">
+  <li class="list-inline-item">This is a list item.</li>
+  <li class="list-inline-item">And another one.</li>
+</ul>
+```
+
+​    
+
+---
+
+## 6️⃣ 폼 (Forms)
 
 - 문서의 자료를 보고 필요한 것들 활용
 
