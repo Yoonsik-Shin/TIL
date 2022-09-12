@@ -68,6 +68,16 @@
 <div class="container-fluid"></div>
 ```
 
+> Gutter
+
+- 가로 padding에 의해 생성되는 열 콘텐츠 사이의 간격
+- 각 열에 좌우 패딩을 설정하고 음수 마진을 사용
+
+```html
+<!-- Gutter 없애기 -->
+<div class="row no-gutters"></div>
+```
+
 
 
 > Offset
@@ -308,6 +318,8 @@
 
 - flexbox 속성 모두 사용가능
 
+> [Flexbox 내용](./CSS_3.md)
+
 ​    
 
 ---
@@ -347,6 +359,16 @@
 ### 4-3. 네비게이션 바 (Navbar)
 
 ![image-20220908001104313](Bootstrap.assets/image-20220908001104313.png)
+
+- 상단에 고정
+
+```html
+<nav class="navbar sticky-top navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Sticky top</a>
+  </div>
+</nav>
+```
 
 ​    
 
@@ -522,6 +544,18 @@
 
 ​    
 
+### 5-2. 이미지 (Images)
+
+#### 5-2-1. 반응형 이미지
+
+- `max-width: 100% / height: auto` 가 적용되어 부모 너비와 함께 크기 조정
+
+```html
+<img src="..." class="img-fluid" alt="...">
+```
+
+​    
+
 ---
 
 ## 6️⃣ 폼 (Forms)
@@ -529,3 +563,33 @@
 - 문서의 자료를 보고 필요한 것들 활용
 
 >  [문서 : 폼](https://getbootstrap.kr/docs/5.1/forms/overview/)
+
+### 6-1. Form Control
+
+![image-20220911233055413](Bootstrap.assets/image-20220911233055413.png)
+
+```html
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>
+```
+
+​    
+
+---
+
+## 7️⃣ 아이콘
+
+- [부트스트랩 아이콘](https://icons.getbootstrap.kr/)
+
+```html
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+  <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+</svg>
+```
