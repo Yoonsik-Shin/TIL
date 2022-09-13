@@ -292,7 +292,78 @@ flex: flex-grow flex-shrink flex-basis;
 
 ## 5️⃣ Grid
 
+## <img src="CSS_3.assets/grid.jpg" alt="grid" style="zoom: 33%;" />
 
+```css
+.container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);  /* 1fr은 한 공간을 차지한다는 의미 */ 
+  grid-template-rows: ;
+  
+  /* 몇 줄인지 상관 없이 각 줄당 값을 배정 
+  컨텐츠가 없어도 최소높이만큼 유지, 컨텐츠가 많으면 자동으로 조절*/ 
+  grid-auto=rows: minmax(최소높이, auto);  
+  
+  /* 그리드 사이사이에만 공간을 줌 */
+  grid-gap: ;
+  grid-column-gap: ;
+  grid-row-gap: ;
+}
+
+.item {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  
+  grid-column: 2 / span 2;  /* 2열에서부터 2칸 차지 */
+  grid-column: 2 / -1;       /* 2열에서부터 끝까지 차지 */
+  grid-row: 1 / 3;          /* 1행에서부터 3행까지 차지 */
+}
+```
+
+
+
+- grid-area 사용법
+
+```css
+/* grid-area */
+.container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);\
+  grid-auto-rows: 150px;
+  grid-gap: 1rem;
+  grid-template-areas:
+    'a a a'
+    'b c c'
+    'b d g'
+    'e f g'
+}
+
+.img1 {
+  grid-area: a; 
+}
+.img2 {
+  grid-area: b;
+}
+.img3 {
+  grid-area: c;
+}
+.img4 {
+  grid-area: d;
+}
+.img5 {
+  grid-area: e;
+}
+.img6 {
+	grid-area: f;
+}
+.img7 {
+  grid-area: g;
+}
+```
+
+![grid-area](CSS_3.assets/grid-area.jpg)
 
 ​    
 
