@@ -78,8 +78,6 @@
 <div class="row no-gutters"></div>
 ```
 
-
-
 > Offset
 
 - 열을 오른쪽으로 이동
@@ -129,6 +127,55 @@
 	}
 }
 ```
+
+​    
+
+### ✔️ 행열 (row-cols)
+
+- row에 column 갯수를 지정 
+
+![image-20220913093830599](Bootstrap.assets/image-20220913093830599.png)
+
+```html
+<div class="container">
+  <div class="row row-cols-3">
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+  </div>
+</div>
+```
+
+- 반응형
+
+```html
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+  </div>
+</div>
+```
+
+- `.row-cols-auto`를 사용하면 열에 자연스러운 너비를 지정
+
+![image-20220913094245785](Bootstrap.assets/image-20220913094245785.png)
+
+```html
+<div class="container">
+  <div class="row row-cols-auto">
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+  </div>
+</div>
+```
+
+
 
 ​    
 
@@ -304,7 +351,15 @@
 <div class="position-sticky">...</div>
 ```
 
-<img src="Bootstrap.assets/image-20220908000732610.png" alt="image-20220908000732610" style="zoom: 50%;" />
+- 상하단 고정
+
+```html
+<div class="fixed-top">...</div>       <!-- 최상단 고정 -->
+<div class="fixed-bottom">...</div>    <!-- 최하단 고정 -->
+<div class="sticky-top">...</div>      <!-- 상단 고정 -->
+```
+
+- 요소위 요소 <img src="Bootstrap.assets/image-20220908000732610.png" alt="image-20220908000732610" style="zoom: 50%;" />
 
 ```html
 <button type="button" class="btn btn-primary position-relative">

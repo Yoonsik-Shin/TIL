@@ -1,0 +1,17 @@
+@media (max-width: 992px) {
+    table {
+        display: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .dis {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    #pag {
+        display: none;
+    }
+}

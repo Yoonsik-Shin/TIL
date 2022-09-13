@@ -249,7 +249,7 @@ flex-grow: 1;
 #### 3. Flex-shrink
 
 - 컨테이너에 충분한 공간이 없을 때 요소들이 줄어드는 비율 통제
-- `flex-glow`의 반대개념
+- `flex-grow`의 반대개념
 - 단위없음
 
 ``` css
@@ -290,12 +290,20 @@ flex: flex-grow flex-shrink flex-basis;
 
 ---
 
-## 5️⃣ Media Query
+## 5️⃣ Grid
+
+
+
+​    
+
+----
+
+## 6️⃣ Media Query
 
 - viewport 기준
 
 ```css
-/* 800px이상에만 적용 */
+/* 800px이상에만 대괄호 내용 적용 */
 @media (min-width: 800px){
   h1{
     
