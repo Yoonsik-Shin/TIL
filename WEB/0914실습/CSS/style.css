@@ -1,0 +1,34 @@
+@media (max-width: 992px) {
+  table {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .dis {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  #pag {
+    display: none;
+  }
+}
+* {
+  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
+}
+.dl {
+  margin: 0;
+  margin-right: 3rem;
+}
+
+#photo {
+  width: 200px;
+  height: 300px;
+}
+.carousel-caption h1 {
+  font-weight: bold;
+  margin-bottom: 4rem;
+}

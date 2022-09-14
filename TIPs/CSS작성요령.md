@@ -43,7 +43,7 @@
 
 > [Google Font](https://fonts.google.com/)
 
-![image-20220906164252358](CSS 작성 요령.assets/image-20220906164252358.png)
+![image-20220906164252358](CSS작성요령.assets/image-20220906164252358.png)
 
 ```html
 <!-- HTML -->
