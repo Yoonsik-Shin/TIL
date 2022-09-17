@@ -1,0 +1,207 @@
+# JavaScript 정리 5
+
+## DOM Event
+
+- 사용자들이 하는 행동에 반응
+
+### 마우스 이벤트
+
+#### 1. onclick
+
+- 인라인 스타일 : html 태그에 넣기
+
+```html
+<button onclick="alert('버튼이 눌림')";></button>
+```
+
+- 자바스크립트 활용 ✔️
+
+```javascript
+const btn = document.querySelector('#id값');
+
+btn.onclick = function () {
+  alert('버튼이 눌림');
+}
+```
+
+​    
+
+#### 2. onmouseenter
+
+- 마우스가 특정 영역 위에 놓였을 때
+
+```javascript
+function scream() {
+  alert('범위에 들어 왔습니다.')
+}
+
+btn.onmouseenter = scream;
+```
+
+​    
+
+### addEventListener  ✔️✔️
+
+- 모든 이벤트를 전달 가능 (click, double click, mouseenter...)
+- 이벤트 종류는 mdn문서 참조
+
+> https://developer.mozilla.org/ko/docs/Web/Events
+
+```javascript
+.addEventListener(이벤트종류, 실행될 객체 or 함수 [, 옵션]);
+
+const btn3 = document.querySelector('#v3');
+btn3.addEventListener('dbclick', fuction () {
+	alert('더블클릭 되었습니다.');
+})
+
+btn3.addEventListener('dbclick', fuction () {
+	alert('더블클릭 되었습니다.');
+}, { once: true})   //  addEventListener가 한번만 실행되고 삭제됨
+```
+
+### removeEventListener
+
+​    
+
+> 이벤트와 this
+
+- `this`가 이벤트 핸들러에 의해 발동된 콜백함수 안에서 사용될 때 이벤트를 발동시키는 무언가와 상호작용하거나 그것을 기반으로 작동
+
+```javascript
+const makeRandColor = () => {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b}`;
+}
+
+// 기본
+const buttons = document.querySelectorAll('button');
+for (let button of buttons) {
+  button.addEventListener('click', function () {
+    button.style.backgroundColor = makeRandColor();
+    button.style.color = makeRandColor();
+  })
+}
+
+const h1s = document.querySelectorAll('h1');
+for (let h1 of h1s) {
+  button.addEventListener('click', function () {
+    h1.style.backgroundColor = makeRandColor();
+    h1.style.color = makeRandColor();
+  })
+}
+
+// this 키워드 사용
+function colorize(){
+  this.style.backgroundColor = makeRandColor();
+  this.style.color = makeRandColor();
+}
+
+const buttons = document.querySelectorAll('button');
+for (let button of buttons) {
+  button.addEventListener('click', colorize)
+}
+
+const h1s = document.querySelectorAll('h1');
+for (let h1 of h1s) {
+  button.addEventListener('click', colorize) 
+  })
+}
+```
+
+​    
+
+### 키보드 이벤트
+
+> 이벤트 객체 (Event Object) : 이벤트에 대한 정보를 담고 있는 객체
+
+```javascript
+const input = document.querySelector('input');
+input.addEventListener('keydown', function (event) {   // 키보드를 눌름
+  console.log(event.key);   // Shift         // a       // 화면에 적용되는 기준
+  console.log(event.code);  // ShiftLeft     // KeyA    // 키보드 기준
+  
+})
+
+input.addEventListener('keyup', function () {   // 키보드 눌림이 해제됨
+  console.log('keyup');
+})
+```
+
+- `key` : 어떤 글자가 생성되었는지 알아내는데 사용
+- `code` : 실제로 키보드에서 키가 눌린 위치를 알아내는데 사용
+
+```javascript
+// 페이지 어느 곳에서든 이벤트 수신하기
+window.addEventListenser('Keydown', function (e) {  ✔️✔️
+  swich(e.code){
+    case 'ArrwUp':
+    	console.log('UP');
+    	break
+    case 'ArrwDown':
+    	console.log('Down');
+    	break
+    case 'ArrwLeft':
+    	console.log('Left');
+    	break
+    case 'ArrwRight':
+    	console.log('Right');
+    	break
+    default:
+    	console.log('X');
+  }
+})
+```
+
+​    
+
+### 폼 이벤트
+
+댓글
+
+```html
+<from action="/" id="tweetForm">
+	<input type="text" name="username" placeholder="username">
+  <input type="text" name="tweet" placeholder="tweet">
+  <button>Post Tweet</button>
+</from>
+
+<h2>Tweets:</h2>
+<ul id="tweets">
+  
+</ul>
+```
+
+```javascript
+const tweetForm = document.querySelector('#tweetForm')
+// 제출
+tweetForm.addEventListener('sumbit', function(e){
+  e.preventDefault();   // 페이지가 바뀌는 것을 방지해줌
+  alert('submit')
+})
+
+// 댓글 작성
+const tweetForm = document.querySelector('#tweetForm');
+const tweetsContainer = document.querySelector('#tweets);
+tweetForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const usernameInput = tweetForm.elements.username;
+  const tweetInput = tweetForm.elements.tweet;
+  addTweet(usernameInput.value, tweetInput.value)
+  usernameInput.value = '';
+  tweetInput.value = '';
+})
+
+const addTweet = (username, tweet) => {
+  const newTweet = document.createElement('li');
+  const bTag = document.createElement('b');
+  bTag.append(username)
+  newTweet.append(bTag);
+  newTweet.append(`- ${tweet}`)
+  tweetsContainer.append(newTweet);
+}
+```
+
+- `preventDefault` : 이벤트 결과로서 일어날 기봉 동작을 방지

@@ -38,3 +38,9 @@
 # drink = [coke, soda]
 
 # print(min(burger)+min(drink)-50)
+
+# N = int(input())
+
+# for i in range(N,0,-1):
+#     print(' '*(N-i), end='')
+#     print('*'*i)
