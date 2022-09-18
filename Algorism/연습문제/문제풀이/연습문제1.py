@@ -44,3 +44,14 @@
 # for i in range(N,0,-1):
 #     print(' '*(N-i), end='')
 #     print('*'*i)
+
+# word = input()
+
+# for i in range(len(word)):
+#     if i == 0:
+#         print(word[i], end='')
+#     elif i % 10 == 0:
+#         print()
+#         print(word[i], end='')
+#     else:
+#         print(word[i], end='')

@@ -4,6 +4,28 @@
 
 - 사용자들이 하는 행동에 반응
 
+## addEventListener  ✔️✔️
+
+- 모든 이벤트를 전달 가능 (click, double click, mouseenter...)
+- 이벤트 종류는 mdn문서 참조
+
+> https://developer.mozilla.org/ko/docs/Web/Events
+
+```javascript
+.addEventListener(이벤트종류, 실행될 객체 or 함수 [, 옵션]);
+
+const btn3 = document.querySelector('#v3');
+btn3.addEventListener('dbclick', fuction () {
+	alert('더블클릭 되었습니다.');
+})
+
+btn3.addEventListener('dbclick', fuction () {
+	alert('더블클릭 되었습니다.');
+}, { once: true})   //  addEventListener가 한번만 실행되고 삭제됨
+```
+
+### removeEventListener
+
 ### 마우스 이벤트
 
 #### 1. onclick
@@ -40,27 +62,7 @@ btn.onmouseenter = scream;
 
 ​    
 
-### addEventListener  ✔️✔️
-
-- 모든 이벤트를 전달 가능 (click, double click, mouseenter...)
-- 이벤트 종류는 mdn문서 참조
-
-> https://developer.mozilla.org/ko/docs/Web/Events
-
-```javascript
-.addEventListener(이벤트종류, 실행될 객체 or 함수 [, 옵션]);
-
-const btn3 = document.querySelector('#v3');
-btn3.addEventListener('dbclick', fuction () {
-	alert('더블클릭 되었습니다.');
-})
-
-btn3.addEventListener('dbclick', fuction () {
-	alert('더블클릭 되었습니다.');
-}, { once: true})   //  addEventListener가 한번만 실행되고 삭제됨
-```
-
-### removeEventListener
+### 
 
 ​    
 
@@ -159,14 +161,14 @@ window.addEventListenser('Keydown', function (e) {  ✔️✔️
 
 ### 폼 이벤트
 
-댓글
+- 페이지 안넘기고 댓글남기기 
 
 ```html
-<from action="/" id="tweetForm">
+<form action="/" id="tweetForm">
 	<input type="text" name="username" placeholder="username">
   <input type="text" name="tweet" placeholder="tweet">
   <button>Post Tweet</button>
-</from>
+</form>
 
 <h2>Tweets:</h2>
 <ul id="tweets">
@@ -184,9 +186,9 @@ tweetForm.addEventListener('sumbit', function(e){
 
 // 댓글 작성
 const tweetForm = document.querySelector('#tweetForm');
-const tweetsContainer = document.querySelector('#tweets);
+const tweetsContainer = document.querySelector('#tweets');
 tweetForm.addEventListener('submit', function (e) {
-  e.preventDefault();
+  e.preventDefault();  
   const usernameInput = tweetForm.elements.username;
   const tweetInput = tweetForm.elements.tweet;
   addTweet(usernameInput.value, tweetInput.value)
@@ -204,4 +206,50 @@ const addTweet = (username, tweet) => {
 }
 ```
 
-- `preventDefault` : 이벤트 결과로서 일어날 기봉 동작을 방지
+- `preventDefault` : 이벤트 결과로서 일어날 기봉 동작을 방지 ✔️✔️
+
+
+
+### 입력(input) / 변경(change) 이벤트
+
+- 입력시 실시간으로 이벤트가 일어남
+- 변경 이벤트 [`change`]
+  - `change`는 입력 했을 때가 아니라, 입력한 후 입력에서 떠날때 마다 이벤트 발동 (blur)
+  - enter 키를 치는 것이 아님
+
+```javascript
+const input = document.querySelector('input');
+
+input.addEventListener('change', (e) => {  
+  console.log('');
+})
+```
+
+- 입력 이벤트 ['input']
+  - 입력 내의 값이 달라질 때마다 발동
+  - 뭔가 타이핑 될때마다 이벤트 발동
+  - 입력값에 영향을 주지 않는 키를 누르면 반응 x
+  - 복사/붙여넣기도 이벤트로 간주
+
+```javascript
+// 입력창 입력/삭제시 h1태그의 글도 동기화됨
+const input = document.querySelector('input');
+const h1 = document.querySelector('h1');
+
+input.addEventListener('input', (e) => {
+  h1.innerText = input.value;
+})
+```
+
+
+
+### 이벤트 버블링
+
+`e.stopPropagation()` : 이벤트가 더 이상 버블링하지 않도록 막아줌
+
+
+
+### 이벤트 위임 (Event Delegation)
+
+- `e.target`
+- 이벤트 수신기가 추가된 시점에 페이지에 없었던 요소를 다루는 상황에서 사용

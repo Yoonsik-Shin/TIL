@@ -72,5 +72,6 @@
 | 2022.09.13 (화) | [0913실습](../WEB/0913실습)                                  | [페어프로그래밍] 웹페이지 실습                               |
 | 2022.09.14 (수) | [0914실습](../WEB/0914실습)                                  | [페어프로그래밍] 웹페이지 실습 및 배포                       |
 | 2022.09.15 (목) | [JavaScript1](./TIL_date/JavaScript1.md)<br />[JavaScript2](./TIL_date/JavaScript2.md) | JS 기초, 변수, 기본 메서드, 템플릿 리터럴<br />배열, 객체, for, while, 함수, 메서드, this, try문 |
-| 2022.09.16 (금) | [JavaScript3](./TIL_date/JavaScript3.md)<br />[JavaScript4](./TIL_date/JavaScript4.md) | 배열 메서드, 최신 기능<br />DOM                              |
+| 2022.09.16 (금) | [JavaScript3](./TIL_date/JavaScript3.md)<br />[JavaScript4](./TIL_date/JavaScript4.md) | 배열 메서드, 최신 기능<br />DOM 기초                         |
+| 2022.09.17 (토) | [JavaScript5](./TIL_date/JavaScript5.md)                     | DOM 이벤트                                                   |
 
