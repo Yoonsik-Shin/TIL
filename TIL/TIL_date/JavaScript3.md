@@ -1,10 +1,10 @@
-# JavaScript 정리3
+# JavaScript 정리 (3)
 
-## 배열 메서드
+​    
 
-- 내장 메서드
+## 1️⃣ 배열 메서드
 
-### 1. forEach
+### 1-1. forEach
 
 - 배열 안의 아이템 각각에 대해 함수와 코드를 한번씩 실행
 - for-of문을 더 자주 사용
@@ -26,7 +26,9 @@ numbers.forEach(function (el) {
 >> 1 ~ 8
 ```
 
-### 2. Map ✔️✔️
+​    
+
+### 1-2. Map ✔️✔️
 
 - 배열 안의 아이템들 각각에 함수를 적용해서 새로운 배열에 저장
 
@@ -47,7 +49,9 @@ const titles = movies.map(function (movie) {
 })
 ```
 
-### 3.  Arrow ❗
+​    
+
+### 1-3.  Arrow ❗
 
 - function이라는 키워드 없이도 함수 입력 가능
 
@@ -96,9 +100,9 @@ const newMovies = movies.map(movie => (
 ))
 ```
 
+​    
 
-
-### 4.  setTimeout
+### 1-4.  setTimeout
 
 ```javascript
 setTimeout(함수, x밀리초후 함수 1회 실행)
@@ -108,7 +112,9 @@ setTimeout(() => {
 }, 3000)
 ```
 
-### 5. setInterval / clearInterval
+​    
+
+### 1-5. setInterval / clearInterval
 
 ```javascript
 setInterval(함수, x밀리초 마다 함수 실행)
@@ -120,7 +126,9 @@ const id = setInterval(() => {
 clearInterval(id);  // 반복 멈춤
 ```
 
-### 6. Filter ✔️✔️
+​    
+
+### 1-6. Filter ✔️✔️
 
 ```javascript
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -132,7 +140,9 @@ numbers.filter(n => {
 >> [1, 2, 3, 4]
 ```
 
-### 7. Every / Some
+​    
+
+### 1-7. Every / Some
 
 - 불리언 메서드 (true / false 반환)
 
@@ -150,7 +160,9 @@ exams.some(score => score >= 75)  // 75점보다 높은 점수가 최소 한 개
 >> true
 ```
 
-### 8. Reduce  ✍️✍️ 
+​    
+
+### 1-8. Reduce  ✍️✍️ 
 
 - 배열을 점차 줄여나가면서 마지막에는 결국 하나의 값만 남김
 
@@ -188,18 +200,20 @@ exams.some(score => score >= 75)  // 75점보다 높은 점수가 최소 한 개
 })
 ```
 
-
+​    
 
 > this와 화살표함수
 
 - `this` 키워드는 화살표 함수에서 다르게 동작
 - 화살표 함수안에 있는 `this` 키워드는 함수가 만든 범위에 상속되는 `this` 키워드와 같음
 
+​    
 
+---
 
-## JS 최신기능
+## 2️⃣ JS 최신기능
 
-### 1. 디폴트 매개변수 (Default Params)
+### 2-1. 디폴트 매개변수 (Default Params)
 
 - 매개변수에 아무 값을 주지않았을 때 자동으로 들어가는 값
 - 디폴트 매개변수는 순서가 중요하기 때문에 첫번째에 넣어서는 안됨
@@ -213,9 +227,9 @@ multiply(4)     //  4
 multiply(4, 5)  //  20
 ```
 
+​    
 
-
-### 2. 전개 (Spread)
+### 2-2. 전개 (Spread)
 
 ```javascript
 // 숫자
@@ -298,9 +312,9 @@ newUser
    }
 ```
 
+​    
 
-
-### 3. 나머지 (Rest)
+### 2-3. 나머지 (Rest)
 
 - 매개변수에 `...` 키워드 사용
 - 매개변수를 배열처럼 묶어줌 
@@ -340,9 +354,9 @@ raceResults('a', 'b', 'c', 'd', 'e', 'h')
 >> ['c', 'd', 'e', 'h']
 ```
 
+​    
 
-
-### 4. 분해 (Destructuring)
+### 2-4. 분해 (Destructuring)
 
 - 배열이나 객체의 값을 해체하고 꺼내고 선정하는 방식
 
@@ -396,6 +410,3 @@ function userId({newUsername, newId = '디폴트값'}) { ✔️✔️
 userId(newUser)
 >> yoonsik 1004
 ```
-
-
-

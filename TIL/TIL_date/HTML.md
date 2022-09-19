@@ -1,16 +1,18 @@
 # HTML5 정리
 
-
+​    
 
 > [모질라 웹기술 공식문서](https://developer.mozilla.org/ko/docs/Web)
 
-##     
+##         
 
 ## 0️⃣ HTML이란?
 
 - 프로그래밍 언어 x, 컨텐츠 구조를 정의하는 마크업 언어
 
 ​    
+
+---
 
 ## 1️⃣ HTML 문서 구조
 
@@ -20,12 +22,11 @@
   <head>
     <meta charset="utf-8">
     <title>웹페이지 제목</title>
-    <scripts></scripts>
     <link rel="stylesheet" href=" ">  <!-- css파일 -->
     <style></style>
   </head>
   <body>
-    
+    <scripts></scripts>
   </body>
 </html>
 ```
@@ -48,7 +49,9 @@
 | ------------------------------- | ----------------------------- | -------------------------- | ---------------------------------- |
 | index.html : 홈페이지 메인 내용 | images 폴더 : 이미지파일 저장 | styles 폴더 : CSS파일 저장 | scripts 폴더 : JavaScript코드 저장 |
 
+​    
 
+---
 
 ## 2️⃣ 요소 (element)
 
@@ -119,7 +122,7 @@ ex) <p class = "para"> contents </p>
 
 ## 4️⃣ 기본 태그 정리
 
-### 1. p 태그  (paragraph)
+### 4-1. p 태그  (paragraph)
 
 - 하나의 문단을 나타냄
 - 블록 레벨 요소
@@ -141,9 +144,9 @@ ex) <p class = "para"> contents </p>
 두 번째 문단입니다. 두 번째 문단입니다. 두 번째 문단입니다.
 ```
 
+​    
 
-
-### 2. 제목 태그 (h1)
+### 4-2. 제목 태그 (h1)
 
 - ❗크기를 구분하려고 제목 태그를 사용해서는 안됨
 - ❗h1 태그는 한 페이지에 무조건 1개 있어야함
@@ -157,9 +160,9 @@ ex) <p class = "para"> contents </p>
 <h6> 엄청 작은 제목 </h6>
 ```
 
+​    
 
-
-### 3. 앵커 태그  (a : Anchor)
+### 4-3. 앵커 태그  (a : Anchor)
 
 - 인라인 태그
 - 문서 <> 문서, 문서 <> URL간에 하이퍼링크
@@ -169,9 +172,9 @@ ex) <p class = "para"> contents </p>
 <a href="URL or 문서">설명</a>
 ```
 
+​    
 
-
-### 4.이미지 태그
+### 4-4.이미지 태그
 
 - 로컬이미지말고 웹에있는 이미지도 삽입
 - 이미지에서 복사한 파일명 넣어주기
@@ -198,11 +201,11 @@ ex) <p class = "para"> contents </p>
 <img src="../subdirectory/another-subdirectory/my-image.png"
 ```
 
+​    
 
+### 4-5. 리스트 태그
 
-### 5. 리스트 태그
-
-#### 5-1. unordered list  `<ul>`
+#### 4-5-1. unordered list  `<ul>`
 
 ```html
 <ul>
@@ -221,7 +224,7 @@ ex) <p class = "para"> contents </p>
 >>   ◾4
 ```
 
-#### 5-2. ordered list  `<ol>`
+#### 4-5-2. ordered list  `<ol>`
 
 ```html
 <ol>
@@ -233,9 +236,9 @@ ex) <p class = "para"> contents </p>
 >> 2.2
 ```
 
+​    
 
-
-### 6. 서식 태그
+### 4-6. 서식 태그
 
 | 여닫는 태그                 | 서식                         |
 | --------------------------- | ---------------------------- |
@@ -377,7 +380,7 @@ ex) <p class = "para"> contents </p>
 <form action="" method="HTTP메서드" enctype=>
 ```
 
-
+​    
 
 ### 7-1. label
 
@@ -395,7 +398,7 @@ ex) <p class = "para"> contents </p>
 </label>
 ```
 
-
+​    
 
 ### 7-2. input
 
@@ -429,7 +432,7 @@ ex) <p class = "para"> contents </p>
 </form>
 ```
 
-
+​    
 
 #### 체크박스
 
@@ -443,7 +446,7 @@ ex) <p class = "para"> contents </p>
 </form>
 ```
 
-
+​    
 
 #### 라디오버튼 
 
@@ -458,7 +461,7 @@ ex) <p class = "para"> contents </p>
 </form>
 ```
 
-
+​    
 
 ####  range
 
@@ -468,7 +471,7 @@ ex) <p class = "para"> contents </p>
 <input type="range" id="" min="" max="" step="" name="" value="초기값">
 ```
 
-
+​    
 
 #### 기타 타입
 
@@ -498,7 +501,7 @@ ex) <p class = "para"> contents </p>
 >> file:///taco?username=<적은내용>
 ```
 
-
+​    
 
 ### 7-4. 드롭다운
 
@@ -513,7 +516,7 @@ ex) <p class = "para"> contents </p>
 </select>
 ```
 
-
+​    
 
 >  내장 유효성 검사
 

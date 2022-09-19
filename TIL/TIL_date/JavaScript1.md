@@ -1,8 +1,10 @@
-# JavaScript 정리
+# JavaScript 정리 (1)
 
    
 
-## Primitive Types (기본 원시 타입)
+## 0️⃣ JS 기본
+
+> Primitive Types (기본 원시 타입)
 
 1. Number
 2. boolean
@@ -10,19 +12,40 @@
 4. Null
 5. undefined
 
+​    
 
+>  Read Evaluate Print Loop (REPL) 
 
-Read Evaluate Print Loop (REPL) 
+- 하나의 입력을 받아서(Read single input), 처리하고(Evaluate), 결과를 반환하는(Print result) 환경으로 구현된 프로그램
+- 커맨드라인 인터페이스를 가지는 프로그램이다. 
+- js, python 같은 스크립트 언어
 
-
+​    
 
 > 주석 
 
 ```javascript
 // 주석
+/** 최신 주석 */ 
 ```
 
+​    
 
+> JavaScript 파일 활용
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS Demo</title>
+  </head>
+  <body>
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+​    
 
 > NaN (Not a Number)
 
@@ -35,7 +58,7 @@ NaN * NaN  // NaN
 200 + 0/0  // NaN
 ```
 
-
+​    
 
 > `typeof` 
 
@@ -46,11 +69,13 @@ typeof NaN
 >> "number"
 ```
 
+​    
 
+---
 
-변수 (Variables) 정의
+## 1️⃣변수 (Variables) 
 
-`let`
+### 1-1. `let`
 
 - 블록 내부에서 선언된 변수까지도 지역변수로 인정하는 블록레벨 스코프
 
@@ -67,20 +92,18 @@ let b = 20;
 let b = 30;  ⛔
 ```
 
-
-
-계산
-
 ```javascript
+// 계산
 let num = 1;
 num--;
 num++;
 ```
 
+​    
 
+### 1-2. `const`
 
-`const` (constant : 상수)
-
+- constant : 상수
 - 항상 일정한 값
 - 값 업데이트 불가
 - 값 재할당 불가능
@@ -92,9 +115,9 @@ num = 10;  // ERROR 발생
 num++;     // ERROR 발생
 ```
 
+​    
 
-
-`var`
+### 1-3. `var`
 
 - `let` 과 유사
 - 현재에는 잘 안씀
@@ -109,20 +132,9 @@ var num = 20;  // 중복선언 가능
 num = 30;      // 재할당 가능
 ```
 
+​    
 
-
-Boolean
-
-- 모두 소문자 (파이썬은 `True / False`)
-
-```javascript
-true    // 1
-false   // 0
-```
-
-
-
-변수명 규칙
+> 변수명 규칙
 
 - 카멜 케이스
   - 첫 단어 소문자
@@ -140,13 +152,24 @@ let currentDate = 1999;
 let isGameOver = true;
 ```
 
+​    
 
+---
 
+## 2️⃣ Primitive Types (기본 원시 타입)
 
+### 2-1. Boolean
 
+- 모두 소문자 (파이썬은 `True / False`)
 
+```javascript
+true    // 1
+false   // 0
+```
 
-String
+​    
+
+### 2-2. String
 
 ```javascript
 let username = 'Yoonsik';
@@ -164,15 +187,15 @@ let username = 'Yoonsik';
 변수.length;
 ```
 
+​    
+
+> 계산 타입
+
+- 문자열 + 숫자 >> 문자열
 
 
-계산 타입
 
-문자열 + 숫자 >> 문자열
-
-
-
-메서드 (Methods)
+> 문자열 메서드 (Methods)
 
 ```javascript
 thing.method()      // arguments x
@@ -182,8 +205,7 @@ thing.method(arg)   // arguments o
 > [메서드 mdn 문서](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 - 메서드 사용시 원본 변화 x, 새 복사본을 만듬 
-
-자주 사용하는 메서드
+- 자주 사용하는 메서드
 
 ```javascript
 // arguments x
@@ -198,9 +220,9 @@ thing.method(arg)   // arguments o
 .replace('바꿔질 값','새로 바뀔값')
 ```
 
+​    
 
-
-❗✔️✔️ 템플릿 리터럴 (Template Literals)
+>  ❗✔️✔️ 템플릿 리터럴 (Template Literals)
 
 - 백틱(back-tick) [``] 사용
 -  `${계산식}`
@@ -214,9 +236,9 @@ thing.method(arg)   // arguments o
 >> "you bought 변수값"
 ```
 
+​    
 
-
-Null
+### 2-3. Null
 
 - 값이 없음을 명시
 - 아무것도 없음
@@ -226,16 +248,16 @@ Null
 let log = null;
 ```
 
+​    
 
-
-undefined
+### 2-4. undefined
 
 - 자주 사용함
 - 정의되지 않은 것
 
+​    
 
-
-Math Object
+> Math Object
 
 ```javascript
 Math               // 관련 메소드 출력
@@ -249,9 +271,11 @@ Math.random()      // 0이상 1미만인 소수 (0 ~ 0.9999999999..) ✔️✔�
 Math.floor(Math.random() * 10) + 1
 ```
 
+​    
 
+---
 
-비교연산자 (Comparisons)
+## 3️⃣ 비교연산자 (Comparisons)
 
 - 알파벳도 비교 연산 가능 (유니코드 기준)
 
@@ -259,6 +283,8 @@ Math.floor(Math.random() * 10) + 1
 'a' < 'b';  // true
 'A' > 'a';  // false
 ```
+
+​    
 
 > 이중등호 vs 삼중등호
 
@@ -283,9 +309,45 @@ Math.floor(Math.random() * 10) + 1
    0 === false  // false
    ```
 
-   
 
-console.log()
+​    
+
+---
+
+##  4️⃣ 논리연산자 (Logical Operators)
+
+- 실행순서 : (1) AND >> (2) OR
+
+1. AND : `&&`
+
+```javascript
+// 비밀번호 조건설정
+const password = prompt("새로운 비밀번호를 입력해주세요.")
+
+// 6자리 이상, 공백 포함 불가
+if (password.length >= 6 && password.indexOf(' ') === -1) {
+  	console.log("비밀번호가 정상적으로 입력되었습니다.")
+} else {
+  console.log("비밀번호가 너무 짧거나 공백이 포함되어있습니다. 6글자 이상으로 공백없이 입력해주세요.")
+}
+```
+
+2. OR : `||`
+3. NOT : `!`
+
+```javascript
+!null      // true
+!(0 === 0) // false
+!(3 <= 4)  // false 
+```
+
+​    
+
+---
+
+##  5️⃣ 출력 / 입력
+
+### 5-1. console.log
 
 - 파이썬의 print와 같은 기능
 
@@ -297,9 +359,9 @@ console.log(1+4, 'hi', true)
 >> 5 "hi" true
 ```
 
+​    
 
-
-Alert
+### 5-2. Alert
 
 - 사용자에게 뭔가를 출력해 주지만 콘솔에는 출력 x
 - 팝업 경고
@@ -308,9 +370,9 @@ Alert
 alert("팝업창 내용")
 ```
 
+​    
 
-
-prompt
+### 5-3. prompt
 
 - 인수를 받음
 - 파이썬의 input
@@ -321,9 +383,9 @@ prompt("팝업창 내용")
 let userNumInput = prompt("이름을 입력해주세요.")
 ```
 
+​    
 
-
-parseInt
+### 5-4. parseInt
 
 - 파이썬의 int와 유사
 
@@ -332,25 +394,11 @@ parseInt("100")
 >> 100
 ```
 
+​    
 
+---
 
-> JavaScript 파일 활용
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>JS Demo</title>
-  </head>
-  <body>
-    <script src="app.js"></script>
-  </body>
-</html>
-```
-
-
-
-조건문 (Conditional Statement)
+## 6️⃣ 조건문 (Conditional Statement)
 
 ```javascript
 if (조건) {
@@ -364,9 +412,7 @@ if (조건) {
 }
 ```
 
-
-
-
+​    
 
 > Truthy / Falsy Value
 
@@ -390,40 +436,11 @@ if (0) {
 >> "FALSY"
 ```
 
+​    
 
+---
 
-논리연산자 (Logical Operators)
-
-- 실행순서 : (1) AND >> (2) OR
-
-1. AND : `&&`
-
-```javascript
-// 비밀번호 조건설정
-const password = prompt("새로운 비밀번호를 입력해주세요.")
-
-// 6자리 이상, 공백 포함 불가
-if (password.length >= 6 && password.indexOf(' ') === -1) {
-  	console.log("비밀번호가 정상적으로 입력되었습니다.")
-} else {
-  console.log("비밀번호가 너무 짧거나 공백이 포함되어있습니다. 6글자 이상으로 공백없이 입력해주세요.")
-}
-```
-
-2. OR : `||`
-3. NOT : `!`
-
-```java
-!null      // true
-!(0 === 0) // false
-!(3 <= 4)  // false 
-```
-
-
-
-
-
-switch문
+## 6️⃣ switch문
 
 - ❗일치하는 case이후 실행문들은 `break`가 없다면 모두 실행됨
 
@@ -442,6 +459,3 @@ switch (값) {
     실행문;
 }
 ```
-
-
-
