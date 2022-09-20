@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.ball {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    text-align: center;
+    margin: 1rem;
+    line-height: 5rem;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.blue {
+    background-color: blue;
+    color: white;
+}
+
+.red {
+    background-color: red;
+    color: white;
+}
+
+.grey {
+    background-color: grey;
+    color: white;
+}
+
+.green {
+    background-color: green;
+    color: white;
+}

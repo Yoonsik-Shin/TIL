@@ -7,7 +7,18 @@
 ### 1-1. forEach
 
 - 배열 안의 아이템 각각에 대해 함수와 코드를 한번씩 실행
+- 반환값 X
 - for-of문을 더 자주 사용
+
+```javascript
+array.forEach((element[, index[, array]]) => {
+  // do something
+})
+```
+
+- element : 배열의 요소
+- index : 배열 요소의 인덱스
+- array : 배열 자체
 
 ```javascript
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -31,6 +42,21 @@ numbers.forEach(function (el) {
 ### 1-2. Map ✔️✔️
 
 - 배열 안의 아이템들 각각에 함수를 적용해서 새로운 배열에 저장
+- 기존 배열 전체를 다른 형태로 바꿀 때 유용
+
+```javascript
+array.map(callback(element[, index[, array]]))
+```
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+
+const doubleNums = numbers.map((num) => {
+  return num * 2
+})
+
+console.log(doubleNums)  //  [2, 4, 6, 8, 10]
+```
 
 ```javascript
 const movies = [
@@ -130,6 +156,13 @@ clearInterval(id);  // 반복 멈춤
 
 ### 1-6. Filter ✔️✔️
 
+- 콜백 함수의 반환 값이 참인 요소들만 모아서 새로운 배열을 반환
+- 기존 배열의 요소들을 필터링할 때 유용
+
+```javascript
+array.filter(callback(element[, index[, array]]))
+```
+
 ```javascript
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -145,6 +178,11 @@ numbers.filter(n => {
 ### 1-7. Every / Some
 
 - 불리언 메서드 (true / false 반환)
+
+```javascript
+array.some(callback(element[, index[, array]]))   // 빈 배열은 항상 거짓 반환
+array.every(callback(element[, index[, array]]))  // 빈 배열은 항상 참 반환
+```
 
 ```javascript
 const exams = [80, 98, 92, 78, 77, 90, 89, 84, 81, 77]
@@ -198,6 +236,31 @@ exams.some(score => score >= 75)  // 75점보다 높은 점수가 최소 한 개
   }
   return ;
 })
+```
+
+​    
+
+### 1-9. find
+
+- 콜백 함수의 반환 값이 참이면, 조건을 만족하는 첫번째 요소를 반환
+- 찾는 값이 배열에 없으면 `undefined` 반환
+
+```javascript
+array.find(callback(element[, index[, array]]))
+```
+
+```javascript
+const fruits = [
+  { name: 'apple', color:'red' },
+  { name: 'banana', color:'yellow' },
+  { name: 'blueberry', color:'violet' },
+]
+
+const result = fruits.find((fruit) => {
+  return fruit.name === 'banana';
+})
+
+console.log(result)  // { name: 'banana', color:'yellow' }
 ```
 
 ​    
@@ -317,7 +380,8 @@ newUser
 ### 2-3. 나머지 (Rest)
 
 - 매개변수에 `...` 키워드 사용
-- 매개변수를 배열처럼 묶어줌 
+- 매개변수를 배열처럼 묶어줌
+- 파이썬의 `*arg`
 
 ```javascript
 function arr(...nums){  // 매개변수가 몇 개가 되던 상관없음

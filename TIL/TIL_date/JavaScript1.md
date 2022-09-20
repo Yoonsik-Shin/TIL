@@ -75,6 +75,29 @@ typeof NaN
 
 ## 1️⃣변수 (Variables) 
 
+> 선언, 할당, 초기화
+
+- 선언 (Declaration) : 변수를 생성하는 행위 or 시점
+- 할당 (Assignment) : 선언된 변수에 값을 저장하는 행위 or 시점
+- 초기화 (Initialization) : 선언된 변수에 처음으로 값을 저장하는 행위 or 시점
+
+```javascript
+let hello     // 선언
+hello = 100   // 할당
+let bye = 0   // 선언 + 할당
+```
+
+​    
+
+> 호이스팅 (hoisting)
+
+- 변수를 선언 이전에 참조할 수 있는 현상
+- 변수 선언 이전의 위치에서 접근시 `undefined`반환
+- JS는 모든 선언을 호이스팅함
+- `var`는 선언과 초기화가 동시에 발생하여, 일시적인 사각지대가 존재하지 않음 (의도치않은 오류 발생 가능성 O)
+
+​    
+
 ### 1-1. `let`
 
 - 블록 내부에서 선언된 변수까지도 지역변수로 인정하는 블록레벨 스코프
@@ -133,6 +156,16 @@ num = 30;      // 재할당 가능
 ```
 
 ​    
+
+> let, const, var 비교
+
+| 키워드 | 재선언 | 재할당 | 스코프      | 비고 |
+| ------ | ------ | ------ | ----------- | ---- |
+| let    | X      | O      | 블록 스코프 | ES6  |
+| const  | X      | X      | 블록 스코프 | ES6  |
+| var    | O      | O      |             |      |
+
+
 
 > 변수명 규칙
 
@@ -212,12 +245,19 @@ thing.method(arg)   // arguments o
 .toUpperCase()     // 대문자 변경
 .toLowerCase()     // 소문자 변경
 .trim()            // 좌우 공백 제거
+.trimStart()
+.trimEnd()
 
 // arguments o
 .indexOf('')    // 문자열에서 인수가 나타나는 인덱스를 반환, ❗문자열에 인수 없는 경우 -1 반환❗
 .slice(시작인덱스[, 끝인덱스])   // 1개 이상의 인수 가능, 시작인덱스만 있으면 시작인덱스부터 끝까지
 .slice(-idx)    // 뒤에서부터 idx 글자
-.replace('바꿔질 값','새로 바뀔값')
+.replace('바꿔질 값','새로 바뀔값')   // 1개만 교체
+.replaceAll('바꿔질 값','새로 바뀔값')  // 모두 교체
+.includes(value) // 문자열에 value가 존재하는지 판별 후 true / false 반환
+.split()         // value인자 없을 경우, 기존 문자열을 배열에 담아 반환
+.split('')       // value인자가 빈 문자열일 경우, 각 문자로 나눈 배열을 반환
+.split(value)    // value값으로 문자열을 나눈 배열을 반환
 ```
 
 ​    
@@ -292,6 +332,7 @@ Math.floor(Math.random() * 10) + 1
 
    - 타입에 관계없이 값이 같다면 같은 것으로 취급
    - 서로다른 타입이면 같아지도록 강제 반환
+   - 두 피연산자가 모두 객체일 경우 메모리의 같은 객체를 바라보는지 판별
    - 원치 않는 결과가 나올수 있음
 
    ```javascript
@@ -345,9 +386,29 @@ if (password.length >= 6 && password.indexOf(' ') === -1) {
 
 ---
 
-##  5️⃣ 출력 / 입력
+## 5️⃣ 삼항연산자 (Ternary Opeators)
 
-### 5-1. console.log
+- 세 개의 피연산자를 사용
+- 변수에 할당 가능
+
+```javascript
+const 변수 = 조건 ? 조건이 true이면 반환되는 값 : 조건이 false이면 반환되는 값
+```
+
+```javascript
+console.log(true ? 1 : 2) // 1
+console.log(false ? 1 : 2) // 2
+const result = Math.PI > 4 ? 'Yes' : 'No'
+console.log(result) // No
+```
+
+​    
+
+---
+
+##  6️⃣ 출력 / 입력
+
+### 6-1. console.log
 
 - 파이썬의 print와 같은 기능
 
@@ -361,7 +422,7 @@ console.log(1+4, 'hi', true)
 
 ​    
 
-### 5-2. Alert
+### 6-2. Alert
 
 - 사용자에게 뭔가를 출력해 주지만 콘솔에는 출력 x
 - 팝업 경고
@@ -372,7 +433,7 @@ alert("팝업창 내용")
 
 ​    
 
-### 5-3. prompt
+### 6-3. prompt
 
 - 인수를 받음
 - 파이썬의 input
@@ -385,7 +446,7 @@ let userNumInput = prompt("이름을 입력해주세요.")
 
 ​    
 
-### 5-4. parseInt
+### 6-4. parseInt
 
 - 파이썬의 int와 유사
 
@@ -398,7 +459,7 @@ parseInt("100")
 
 ---
 
-## 6️⃣ 조건문 (Conditional Statement)
+##  7️⃣ 조건문 (Conditional Statement)
 
 ```javascript
 if (조건) {
@@ -440,7 +501,7 @@ if (0) {
 
 ---
 
-## 6️⃣ switch문
+## 8️⃣ switch문
 
 - ❗일치하는 case이후 실행문들은 `break`가 없다면 모두 실행됨
 

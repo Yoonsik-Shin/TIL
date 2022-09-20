@@ -55,3 +55,14 @@
 #         print(word[i], end='')
 #     else:
 #         print(word[i], end='')
+
+
+# while True:
+#     try:
+#         print(input())
+#     except:
+#         break
+
+# N = int(input())
+# for i in range(N):
+#     print(' '*(N-1-i) + '*'*(2*i+1))

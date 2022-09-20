@@ -4,6 +4,7 @@
 
 ## 1️⃣ 배열 (Arrays)
 
+- 키와 속성들을 담고 있는 참조 타입의 객체(object)
 - 대괄호 `[]`
 - 순서 존재
 - 인덱스 0부터
@@ -12,9 +13,10 @@
 let 배열명 = [];
 let 배열명 = [숫자, 문자열, true, NaN, Null, ...];  // 배열 내에 서로 다른 타입 배열 가능
 
-배열명.length          // 배열의 길이 
-배열명[idx] = 값;      // 배열 수정
-배열명[overIdx] = 값;  // 원래 배열과 새로운 배열 사이에 empty[undefined]가 생기고 overIdx에 값 추가
+배열명.length              // 배열의 길이 
+배열명[idx] = 값;          // 배열 수정
+배열명[overIdx] = 값;      // 원래 배열과 새로운 배열 사이에 empty[undefined]가 생기고 overIdx에 값 추가
+배열명[배열명.length - 1]  // 배열의 마지막 원소 접근
 ```
 
 ​    
@@ -157,6 +159,21 @@ scores.sort()  >>  [-12, 0, 1, 100, 2500, 34, 70, 9] // 첫번째 자리 숫자�
 
 ​    
 
+### 1-10. join
+
+- 배열의 모든 요소 연결
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+
+result = numbers.join()     // 1,2,3,4,5
+result = numbers.join('')   // 12345
+result = numbers.join(' ')  // 1 2 3 4 5
+result = numbers.join('-')  // 1-2-3-4-5
+```
+
+​    
+
 > 배열과 const의 관계
 
 ```javascript
@@ -225,7 +242,19 @@ for (let i = 1; i <= 10; i++) {
 }
 ```
 
+​    
+
 > 배열 루프 ✔️
+
+```javascript
+for (initialization; condition; expression) {
+  // do something;
+}
+```
+
+- initialization : 최초 반복문 진입 시 1회만 실행되는 부분
+- condition : 매 반복 시행 전 평가되는 부분
+- expression : 매 반복 시행 이후 평가되는 부분
 
 ```javascript
 // 기본
@@ -267,6 +296,8 @@ for (let row of AlphabetChart) {
   }
 }
 ```
+
+​    
 
 >객체 반복
 
@@ -328,7 +359,10 @@ function 함수명() {
 
 함수 범위 (Function Scope)
 
-블록 범위
+블록 범위 (Block scope)
+
+- if, for, 함수등의 중괄호 [`{}`] 내부
+- 블록 바깥에서 접근 불가능
 
 렉시컬 범위 
 
@@ -351,6 +385,14 @@ const 변수 = function () {    // 함수명 x
 // 호출
 변수(인수);
 ```
+
+​    
+
+> 함수 선언식, 표현식 비교 정리
+
+|        | 함수 선언식 (declaration) | 함수 표현식 (expression) |
+| ------ | ------------------------- | ------------------------ |
+| 차이점 | 익명함수X, 호이스팅 O     | 익명함수O, 호이스팅 X    |
 
 ​    
 

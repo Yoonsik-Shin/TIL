@@ -69,8 +69,10 @@ for (let h1 of h1s) {
 > https://developer.mozilla.org/ko/docs/Web/Events
 
 ```javascript
-.addEventListener(이벤트종류, 실행될 객체 or 함수 [, 옵션]);
+target.addEventListener(이벤트종류, 실행될 객체 or 함수 [, 옵션]);
+```
 
+```javascript
 const btn3 = document.querySelector('#v3');
 btn3.addEventListener('dbclick', fuction () {
 	alert('더블클릭 되었습니다.');
