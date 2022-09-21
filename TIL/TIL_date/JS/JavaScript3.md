@@ -474,3 +474,12 @@ function userId({newUsername, newId = '디폴트값'}) { ✔️✔️
 userId(newUser)
 >> yoonsik 1004
 ```
+
+​    
+
+---
+
+## 3️⃣ JS 라이브러리
+
+> [lodash](https://lodash.com/)
+
