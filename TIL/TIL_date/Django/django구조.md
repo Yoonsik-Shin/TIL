@@ -226,7 +226,7 @@ render(request, template_name, context)
 - 조건, 반복, 변수치환, 필터등의 기능 제공
 - Python 코드로 실행되는 것이 아님으로 주의
 
-
+​    
 
 ### 5-2. DTL Syntax
 
