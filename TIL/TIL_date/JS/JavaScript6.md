@@ -165,3 +165,36 @@ async function printRainbow() {
   console.log("END OF RAINBOW");  // rainbow 함수 종료후 출력됨
 }
 ```
+
+​    
+
+---
+
+## 7️⃣ Exports / Imports (Modules)
+
+- 코드를 여러 파일로 나누고 가져올 수 있음
+- `default` : 파일에서 어떤 것을 가져오면 항상 내보내진 것의 기본값을 가져옴 
+- named export : 불러올 요소가 무엇인지 중괄호[`{}`]로 정확히 표현
+
+```javascript
+// person.js 파일
+const person = {
+  name: 'yoonsik';
+}
+
+export default person
+
+// utility.js
+// 두개의 상수를 내보냄
+export const clean = () => {} 
+export const baseData = 10;
+
+//app.js
+import person from './person.js'
+import prs from './person.js'  // export를 default로 했기때문에 아무 이름을 사용해도됨
+
+// 특정한 값을 읽기위해 중괄호 사용
+import {baseData} from './utility.js'
+import {clean} from './utility.js'
+```
+
