@@ -74,3 +74,19 @@
 
 # for j in range(N-2, -1, -1):
 #     print(' '*j + '*'*(2*(N-j)-1))
+
+# N = int(input())
+
+# for i in range(1, N):
+#     print('*'*i + ' '*(2*(N-i)) + '*'*i)
+
+# for j in range(N, -1, -1):
+#     print('*'*j + ' '*(2*(N-j)) + '*'*j)
+
+# N = int(input())
+
+# for j in range(N-1, 0, -1):
+#     print(' '*j + '*'*(2*(N-j)-1))
+
+# for i in range(N):
+#     print(' '*i + '*'*(2*(N-i)-1))

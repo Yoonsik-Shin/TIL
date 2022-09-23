@@ -5,7 +5,7 @@
 | Day             | Contents                                                     | Ex                           |
 | --------------- | ------------------------------------------------------------ | ---------------------------- |
 | 2022.07.05 (화) | [markdown](./TIL_date/GIT/markdown.md)<br />[GIT](./TIL_date/GIT/TIL_220705.md) | 마크다운<br />Git Commit     |
-| 2022.07.06 (수) | [GIT Push](./TIL_date/GIT/TIL_220706.md)                     | Git Push                     |
+| 2022.07.06 (수) | [GIT Push](./TIL_date/GIT/TIL_220706.md)                     | Git Push, .gitignore         |
 | 2022.07.07 (목) | [Branch, Pull Request](./TIL_date/GIT/TIL_220707.md)         | Git Branch, Git Pull Request |
 | 2022.07.08 (금) | [취업특강](https://github.com/Yoonsik-Shin/job-research) / [job_research](https://github.com/Yoonsik-Shin/job-research/blob/b507647070412b8fc03ca814b30f3f09837012f2/research.md) | 취업특강                     |
 
