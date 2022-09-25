@@ -1,4 +1,4 @@
-# 😁오늘 배운것 (22.07.07(목))
+# 😁Git 정리 (3)
 
 ​    
 
@@ -376,15 +376,15 @@ $ git config --global core.editor "code --wait"
 
 1. Fork할 저장소에서 Fork버튼 누르기
 
-![fork](TIL_220707.assets/fork.png)
+![fork](Git(3).assets/fork.png)
 
 2.  자신의 원격저장소에 저장될 이름 작성하고 Create fork
 
-<img src="TIL_220707.assets/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F7173f2cb-33f1-489f-9d93-9beb5a33e055%2Fimage-20220707131431617.png" alt="img" style="zoom: 67%;" />
+<img src="Git(3).assets/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F7173f2cb-33f1-489f-9d93-9beb5a33e055%2Fimage-20220707131431617.png" alt="img" style="zoom: 67%;" />
 
 3. 원격저장소 확인
 
-![image-20220707164713351](TIL_220707.assets/image-20220707164713351.png)
+![image-20220707164713351](Git(3).assets/image-20220707164713351.png)
 
 ​    
 
@@ -392,7 +392,7 @@ $ git config --global core.editor "code --wait"
 
 1. Fork 받아온 저장소를 로컬로 clone 생성
 
-![clone](TIL_220707.assets/clone.png)
+![clone](Git(3).assets/clone.png)
 
 ⛔주의사항
 
@@ -402,7 +402,7 @@ $ git config --global core.editor "code --wait"
 $ git clone https://github.com/Yoonsik-Shin/test-01.git
 ```
 
-![image-20220707170137346](TIL_220707.assets/image-20220707170137346.png)
+![image-20220707170137346](Git(3).assets/image-20220707170137346.png)
 
 2. branch 생성 및 이동
 
@@ -424,11 +424,11 @@ $ git checkout -b <브랜치이름>
 
 1.  Github에서 `New pull request` 클릭
 
-![pull request](TIL_220707.assets/pull request.png)
+![pull request](Git(3).assets/pull request.png)
 
 2. `pull request` 내용작성 후 `create pull request`
 
-![create pull request](TIL_220707.assets/create pull request.png)
+![create pull request](Git(3).assets/create pull request.png)
 
 ​    
 

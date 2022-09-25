@@ -90,3 +90,17 @@
 
 # for i in range(N):
 #     print(' '*i + '*'*(2*(N-i)-1))
+
+# S = input()
+
+# dict_alpha = {}
+
+# for i in range(97, 123):
+#     dict_alpha[chr(i)] = 0
+
+# for j in S:
+#     if j in dict_alpha:
+#         dict_alpha[j] += 1
+    
+# for k in dict_alpha.values():
+#     print(k, end=' ')
