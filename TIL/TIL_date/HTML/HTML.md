@@ -377,7 +377,7 @@ ex) <p class = "para"> contents </p>
 - `action` : form을 처리할 서버의 URL (데이터를 보낼 곳)
 
 ```html
-<form action="" method="HTTP메서드" enctype=>
+<form action="" method="HTTP메서드" enctype=""></form>
 ```
 
 ​    
@@ -546,6 +546,6 @@ ex) <p class = "para"> contents </p>
 
 - `autofocus` : 자동으로 포커스
 
-```html
+``` html
 <input type="text" autofocus>
 ```

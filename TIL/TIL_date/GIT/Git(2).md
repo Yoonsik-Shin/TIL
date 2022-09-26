@@ -75,10 +75,17 @@ $ git remote -v
 #### 3. 원격저장소로 Push
 
 ```bash	
-$ git push origin master #git push <원격저장소이름><브랜치이름>
+$ git push <원격저장소이름> <브랜치이름>
+$ git push origin master
 ```
 
->  ⛔ 주의사항 : push시 인증정보 필수
+​    
+
+> 마스터(master) 브랜치명 메인(main)으로 바꾸기
+
+```bash
+$ git branch -M main
+```
 
 ​    
 
@@ -95,6 +102,15 @@ $ git push origin master #git push <원격저장소이름><브랜치이름>
 1. 원격 저장소의 커밋을 로컬 저장소로 가져오기 (pull)
 2. 로컬에서 두 커밋 병합 > Merge된 추가 커밋 생성
 3. 다시 GitHub로 push
+
+​    
+
+> 로컬 브랜치를 다른 이름의 원격 브랜치에 푸시하기
+
+```bash
+$ git push <원격저장소이름> <로컬 브랜치이름>:<원격 브랜치이름>
+$ git push origin hotfix:master
+```
 
 ​    
 

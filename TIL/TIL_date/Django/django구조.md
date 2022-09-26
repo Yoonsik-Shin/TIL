@@ -27,7 +27,7 @@
 
 ​    
 
-#### 4.urls.py ✔️✔️
+#### 4.`urls.py` ✔️✔️
 
 - 사이트의 url과 적절한 views의 연결을 지정
 
@@ -41,7 +41,7 @@
 
 ​    
 
-#### 6. manage.py`
+#### 6. `manage.py`
 
 - Django 프로젝트와 다양한 방법으로 상호작용하는 커맨드라인 유틸리티
 
@@ -113,13 +113,9 @@ $ python manage.py startapp articles
 # settings.py
 
 INSTALLED_APPS = [
-  # Local apps
-	'새로운 앱 이름',
-  
-  # Third party apps
-  
-  # Django apps
-	'...',
+  '새로운 앱',    # Local apps
+  '...',         # Third party apps
+  '...',         # Django apps
 ]
 ```
 
