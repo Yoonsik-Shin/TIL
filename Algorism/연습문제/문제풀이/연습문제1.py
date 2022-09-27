@@ -112,3 +112,13 @@
 
 # for j in range(N,0,-1):
 #     print('*'*j)
+
+# total = 0
+# lst = []
+
+# for _ in range(4):
+#     a, b = map(int,input().split())
+#     total += (b-a)
+#     lst.append(total)
+
+# print(max(lst))

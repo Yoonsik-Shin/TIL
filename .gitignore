@@ -2,6 +2,5 @@
 .vscode
 Toy_project
 *.sqlite3
-DB
 myvenv
 secrets.json
