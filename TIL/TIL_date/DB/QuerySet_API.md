@@ -46,6 +46,8 @@
 
 ​    
 
+---
+
 #### ♾️ Lookup filter
 
 - filter(), exclude() 메소드에서 사용가능한 내장 모듈
@@ -174,7 +176,9 @@ from django.db.models import Q
 <Class_name>.object.filter(Q(<column_name>__gt=6) | Q(<column_name>__lt=5))
 ```
 
+---
 
+​    
 
 5. <Class_name>.objects.count()
 

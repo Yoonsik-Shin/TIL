@@ -148,15 +148,21 @@ sqlite> .table
 
 > SQLite 확장프로그램 다루기
 
-1. SQLite 파일 우클릭 -> Open Database 클릭![Open_database](DB기초개념.assets/Open_database.png)
+1. SQLite 파일 우클릭 -> Open Database 클릭
+
+![Open_database](DB기초개념.assets/Open_database.png)
 
 ​    
 
-2. New Query 클릭 -> SQL명령어를 작성하는 페이지 출력![New_Query](DB기초개념.assets/New_Query.png)![--SQLite](DB기초개념.assets/--SQLite.png)
+2. New Query 클릭 -> SQL명령어를 작성하는 페이지 출력
+
+![New_Query](DB기초개념.assets/New_Query.png)![--SQLite](DB기초개념.assets/--SQLite.png)
 
 ​    
 
-3. 코드 작성후 우클릭 -> Run Query (전체 코드 실행) or Run Selected Query (선택코드만 실행)![Run_Query](DB기초개념.assets/Run_Query.png)
+3. 코드 작성후 우클릭 -> Run Query (전체 코드 실행) or Run Selected Query (선택코드만 실행)
+
+![Run_Query](DB기초개념.assets/Run_Query.png)
 
 ​    
 

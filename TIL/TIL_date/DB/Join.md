@@ -3,6 +3,8 @@
 - RDB의 가장 큰 장점이자 핵심 기능
 - 일반적으로 레코드는 기본키(PK)나 외래키(FK)값의 관계로 결합
 
+​    
+
 >  [JOIN 시각화 사이트](https://sql-joins.leopard.in.ua/)
 
 ​    
@@ -19,7 +21,7 @@ FROM 테이블1 [INNER] JOIN 테이블2
 	ON 테이블1.컬럼 = 테이블2.컬럼;
 ```
 
-![image-20220822174033248](TIL_220822.assets/image-20220822174033248.png)
+![image-20220822174033248](Join.assets/image-20220822174033248.png)
 
 ​    
 
@@ -39,15 +41,15 @@ FROM 테이블1 (LEFT / RIGHT / FULL) [OUTER] JOIN 테이블2
 
 - LEFT OUTER  JOIN
 
-![image-20220822174237731](TIL_220822.assets/image-20220822174237731.png)
+![image-20220822174237731](Join.assets/image-20220822174237731.png)
 
 - RIGHT OUTER JOIN
 
-![image-20220822174430284](TIL_220822.assets/image-20220822174430284.png)
+![image-20220822174430284](Join.assets/image-20220822174430284.png)
 
 - FULL OUTER JOIN
 
-![image-20220822174510500](TIL_220822.assets/image-20220822174510500.png)
+![image-20220822174510500](Join.assets/image-20220822174510500.png)
 
 ​    
 
