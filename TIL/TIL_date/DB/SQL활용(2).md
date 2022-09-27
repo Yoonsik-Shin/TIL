@@ -1,92 +1,39 @@
-# ❓오늘 배운것 (22.08.18(목))
+# SQL문 활용 (2)
+
+​    
 
 ## ✍️ SELECT - SQL 기본함수, 연산
 
 ### 1. 문자열 함수
 
-- 문자열 자르기
-
 ```sql
-SUBSTR(문자열, start, length)
--- 시작 인덱스 = 1, 마지막 인덱스 = -1
+SUBSTR(문자열, start, length) # 문자열 자르기 (시작 인덱스 = 1, 마지막 인덱스 = -1)
+TRIM(문자열)                  # 문자열 공백제거
+LTRIM(문자열)                 # 문자열 왼쪽 공백제거
+RTRIM(문자열)                 # 문자열 오른쪽 공백제거
+LENGTH(문자열)                # 문자열 길이
+REPLACE(문자열, 패턴, 변경값)  # 문자열 변경
+UPPER(문자열)                 # 대문자 변경
+LOWER(문자열)                 # 소문자 변경 
+||                            # 문자열 합치기 (concatenation)
 ```
 
-- 문자열 공백제거
-
-```sql
-TRIM(문자열)
-LTRIM(문자열)
-RTRIM(문자열)
-```
-
-- 문자열 길이
-
-```sql
-LENGTH(문자열)
-```
-
-- 문자열 변경
-
-```sql
-REPLACE(문자열, 패턴, 변경값)
-```
-
-- 대소문자 변경
-
-```sql
-UPPER(문자열)
-LOWER(문자열)
-```
-
-- 문자열 합치기 (concatenation)
-
-```sql
-||
-```
-
-
+​    
 
 ### 2. 숫자 함수
 
-- 절대값
-
 ```sql
-ABS(숫자)
+ABS(숫자)         # 절대값
+SIGN(숫자)        # 부호
+MOD(A, B)         # A를 B로 나눈 나머지
+CEIL(숫자)        # 올림
+FLOOR(숫자)       # 내림
+ROUND(숫자, 반올림할 자리수)  # 반올림
+POWER(a, b)       # 제곱 (a의 b제곱)
+SQRT(숫자)        # 제곱근
 ```
 
-- 부호
-
-```sql
-SIGN(숫자)
-```
-
-- A를 B로 나눈 나머지
-
-```sql
-MOD(A, B)
-```
-
-- 올림, 내림, 반올림
-
-```sql
-CEIL(숫자)
-FLOOR(숫자)
-ROUND(숫자, 반올림할 자리수)
-```
-
-- 제곱 (a의 b제곱)
-
-```sql
-POWER(a, b) 
-```
-
-- 제곱근
-
-```sql
-SQRT(숫자)
-```
-
-
+​    
 
 ### 3. 산술연산자
 
@@ -96,7 +43,7 @@ SQRT(숫자)
 SELECT age+1 FROM users;
 ```
 
-
+​    
 
 > ALIAS
 
@@ -110,7 +57,7 @@ SELECT last_name AS 성 FROM users;
 SELECT last_name AS "이름 성" FROM users WHERE "이름 성" = '김';
 ```
 
-
+​    
 
 ### 4. GROUP BY
 
@@ -123,7 +70,7 @@ SELECT last_name AS "이름 성" FROM users WHERE "이름 성" = '김';
 SELECT * FROM <테이블명> GROUP BY 컬럼1, 컬럼2, ...;
 ```
 
-
+​    
 
 ### 5. HAVING
 
@@ -136,7 +83,7 @@ SELECT * FROM <테이블명> GROUP BY 컬럼1, 컬럼2, ... HAVING 그룹조건;
 
 
 
-### > SELECT 문장 실행 순서
+### ♾️ SELECT 문장 실행 순서
 
 - FROM > WHERE > GROUP BY > HAVING > SELECT > ORDER BY
 
@@ -150,7 +97,7 @@ ORDER BY 컬럼 / 표현식 # 6. 정렬하고
 LIMIT 숫자 OFFSET 숫자; # 7. 특정 위치의 값을 가져온다.
 ```
 
-
+​    
 
 ## ✍️ ALTER (DDL)
 
@@ -161,12 +108,16 @@ ALTER TABLE <변경전 테이블명>
 RENAME TO <변경후 테이블명>;
 ```
 
+​    
+
 2. 새로운 컬럼 추가
 
 ```sql
 ALTER TABLE <테이블명>
 ADD COLUMN <새로 추가할 컬럼명>
 ```
+
+​    
 
 3. 컬럼명 이름 수정
 
@@ -175,6 +126,8 @@ ALTER TABLE <테이블명>
 RENAME COLUMN <변경전 컬럼명> TO <변경후 컬럼명>
 ```
 
+​    
+
 4. 컬럼 삭제
 
 ```sql
@@ -182,7 +135,7 @@ ALTER TABLE <테이블명>
 DROP COLUMN <삭제할 컬럼명>
 ```
 
-
+​    
 
 ## ✍️ 예제
 
@@ -198,6 +151,8 @@ CREATE TABLE articles(
 );
 ```
 
+​    
+
 2. 테이블에 값 추가하기
    - title = '1번제목'
    - content = '1번내용'
@@ -206,12 +161,16 @@ CREATE TABLE articles(
 INSERT INTO articles VALUES ('1번제목', '1번내용');
 ```
 
+​    
+
 3. 테이블 이름 변경하기
    - 새로운 테이블명 : news
 
 ```sql
 ALTER TABLE articles RENAME TO news;
 ```
+
+​    
 
 4. 새로운 컬럼 추가하기
    - 새 컬럼명 : created_at
@@ -225,6 +184,8 @@ ALTER TABLE news ADD COLUMN created_at TEXT NOT NULL;
 ❗테이블에 있던 기존 레코드들에 새로 추가될 필드에 대한 정보가 없다.
 ```
 
+​    
+
 > 오류해결 방법
 
 1. NOT NULL 설정없이 추가하기
@@ -234,7 +195,7 @@ ALTER TABLE news ADD COLUMN created_at TEXT;
 INSERT INTO articles VALUES ('제목', '내용', '값');
 ```
 
-
+​    
 
 2. 기본값 (DEFAULT) 설정하기
 

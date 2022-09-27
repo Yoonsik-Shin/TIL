@@ -79,6 +79,8 @@ $ python manage.py shell_plus
 Genre.objects.create(name='락')
 ```
 
+​    
+
 #### 	1-2. 인스턴스 조작
 
 ```python
@@ -99,12 +101,16 @@ Genre.objects.all()
 # 결과값이 QuerySet 타입으로 나옴
 ```
 
+​     
+
 #### 	1-2. 일부 데이터 조회 (`get`)
 
 ```python
 Genre.objects.get(id=1) # << ()안에는 조회 조건
 >> <Genre: Genre object (1)> # 하나의 결과값만 반환
 ```
+
+​    
 
 #### 	1-3. 일부 데이터 조회 (`filter`)
 

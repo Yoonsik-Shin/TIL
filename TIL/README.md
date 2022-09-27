@@ -50,14 +50,14 @@
 
 | Day             | Contents                                                     | Ex                                            |
 | --------------- | ------------------------------------------------------------ | --------------------------------------------- |
-| 2022.08.16 (화) | [DB 기초개념](./TIL_date/DB/TIL_220816.md)                   | DB, RDB, RDBMS, SQL 개념정리                  |
-| 2022.08.17 (수) | [SELECT문 활용](./TIL_date/DB/TIL_220817.md) / [실습2](./TIL_date/DB/02실습.md) | WHERE, 집계함수, LIKE, ORDER BY               |
-| 2022.08.18 (목) | [SELECT문 활용2 / ALTER문](./TIL_date/DB/TIL_220818.md)  / [실습3](./TIL_date/DB/03실습.md) | 문자열함수, 숫자함수, GROUP BY, HAVING, ALTER |
-| 2022.08.19 (금) | [서브쿼리 / 기타구문](./TIL_date/DB/TIL_220819.md) / [실습4](./TIL_date/DB/04실습.md) | CASE, 서브쿼리                                |
-| 2022.08.22 (월) | [조인](./TIL_date/TIL_220822.md) / [실습5](./TIL_date/DB/05실습.md) | 조인                                          |
-| 2022.08.23 (화) | [데이터 모델링](./TIL_date/DB/TIL_220823.md)                 | 데이터 모델링, ERD                            |
-| 2022.08.24 (수) | [ORM](./TIL_date/DB/TIL_220824.md) / [실습7](./TIL_date/DB/07실습.md) | ORM 개념, 조작                                |
-| 2022.08.25 (목) | [QuerySet API](./TIL_date/DB/TIL_220825.md) / [실습8](./TIL_date/DB/08실습.md) | OuerySet 메소드, 1:N 관계                     |
+| 2022.08.16 (화) | [DB 기초개념](./TIL_date/DB/DB기초개념.md)                   | DB, RDB, RDBMS, SQL 개념정리                  |
+| 2022.08.17 (수) | [SELECT문 활용](./TIL_date/DB/SQL활용(1).md) / [실습2](./TIL_date/DB/02실습.md) | WHERE, 집계함수, LIKE, ORDER BY               |
+| 2022.08.18 (목) | [SELECT문 활용2 / ALTER문](./TIL_date/DB/SQL활용(2).md)  / [실습3](./TIL_date/DB/03실습.md) | 문자열함수, 숫자함수, GROUP BY, HAVING, ALTER |
+| 2022.08.19 (금) | [서브쿼리 / 기타구문](./TIL_date/DB/기타구문.md) / [실습4](./TIL_date/DB/04실습.md) | CASE, 서브쿼리                                |
+| 2022.08.22 (월) | [조인](./TIL_date/DB/Join.md) / [실습5](./TIL_date/DB/05실습.md) | 조인                                          |
+| 2022.08.23 (화) | [데이터 모델링](./TIL_date/DB/데이터모델링.md)               | 데이터 모델링, ERD                            |
+| 2022.08.24 (수) | [ORM](./TIL_date/DB/ORM.md) / [실습7](./TIL_date/DB/07실습.md) | ORM 개념, 조작                                |
+| 2022.08.25 (목) | [QuerySet API](./TIL_date/DB/QuerySet_API.md) / [실습8](./TIL_date/DB/08실습.md) | OuerySet 메소드, 1:N 관계                     |
 
 ​    
 

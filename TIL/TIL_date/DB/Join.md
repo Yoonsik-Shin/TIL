@@ -1,15 +1,13 @@
-# ❓오늘 배운것 (22.08.22(월))
-
-## ✍️ JOIN
+# ✍️ JOIN
 
 - RDB의 가장 큰 장점이자 핵심 기능
 - 일반적으로 레코드는 기본키(PK)나 외래키(FK)값의 관계로 결합
 
 >  [JOIN 시각화 사이트](https://sql-joins.leopard.in.ua/)
 
+​    
 
-
-### 1. INNER JOIN
+## 1. INNER JOIN
 
 - 두 테이블에 모두 일치하는 행만 반환
 - INNER 생략가능
@@ -23,9 +21,9 @@ FROM 테이블1 [INNER] JOIN 테이블2
 
 ![image-20220822174033248](TIL_220822.assets/image-20220822174033248.png)
 
+​    
 
-
-### 2. OUTER JOIN
+## 2. OUTER JOIN
 
 - 동일한 값이 없는 데이터도 반환할 때 사용
 - 기준되는 테이블에 따라 `LEFT`, `RIGHT`, `FULL`로 나뉨
@@ -51,9 +49,9 @@ FROM 테이블1 (LEFT / RIGHT / FULL) [OUTER] JOIN 테이블2
 
 ![image-20220822174510500](TIL_220822.assets/image-20220822174510500.png)
 
+​    
 
-
-### 3. CROSS JOIN
+## 3. CROSS JOIN
 
 - 모든 가능한 경우의 수
 

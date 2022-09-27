@@ -1,51 +1,57 @@
-# ❓오늘 배운것 (22.08.25(목))
-
 # QuerySet API
 
+​    
 
-
-## QuerySet 개념
+## 0️⃣ QuerySet 개념
 
 - Django ORM에서 제공하는 데이터 타입
 - 데이터베이스에서 전달받은 객체 목록
 - 구조는 List형태와 같지만 파이썬 파일에서 읽고 쓰기 위해서는 자료형 변환을 해줘야함
 
+​    
 
-
-## QuerySet 종류
+## 1️⃣ QuerySet 종류
 
 > 출처 : [잘 정리된 블로그](https://devvvyang.tistory.com/37)
 
 ### 1. SELECT
 
-#### 1-1. <Class_name>.object.all()
+1. <Class_name>.object.all()
 
 - 테이블 안에 있는 모든 데이터 조회
 - QuerySet형태로 반환 
 
-#### 1-2. <Class_name>.object.get()
+​    
+
+2. <Class_name>.object.get()
 
 - 하나의 row만 조회
 - 주로 PK컬럼으로 조회 (`.get(id=1)`)
 - ❗결과가 1건 초과일때 에러 발생❗
 - ❗객체 타입으로 반환 (QuerySet 형태 x)❗
 
-#### 1-3. <Class_name>.objects.filter()
+​    
+
+3. <Class_name>.objects.filter()
 
 - 특정 조건에 맞는 row만 조회하고 싶을 때
 - QuerySet형태로 반환
 
-#### 1-4. <Class_name>.objects.exclude()
+​    
+
+4. <Class_name>.objects.exclude()
 
 - 특정 조건을 제외한 데이터만 조회하고 싶을 때 (filter와 반대)
 - QuerySet형태로 반환
 
+​    
 
-
-> ### Lookup filter
+#### ♾️ Lookup filter
 
 - filter(), exclude() 메소드에서 사용가능한 내장 모듈
 - 필드 별 구체적인 값에 대한 비교를 가능하게하는 Django 내장 모듈
+
+​    
 
 1. __contains
 
@@ -144,12 +150,13 @@
     <Class_name>.objects.filter(<column_name>__date=datetime.date(2022, 8, 25))
     ```
 
-
+​    
 
 > AND / OR
 
 - filter() 메소드 사용 시, 두개 이상의 조건을 AND 또는 OR로 표현가능
-- AND : `&` / OR : `|`
+
+1. AND : `&` / OR : `|`
 
 ```django
 # AND 조건
@@ -159,7 +166,7 @@
 <Class_name>.object.filter(<column_name>__gt=6) | <Class_name>.object.filter(<column_name>__lt=5)
 ```
 
-- Q 객체 활용
+2. Q 객체 활용
 
 ```django
 from django.db.models import Q
@@ -169,11 +176,13 @@ from django.db.models import Q
 
 
 
-1-5.  <Class_name>.objects.count()
+5. <Class_name>.objects.count()
 
 - 쿼리 셋에 포함된 데이터 개수 리턴
 
-1-6. <Class_name>.objects.exists()
+​    
+
+6. <Class_name>.objects.exists()
 
 - 해당 테이블에 데이터가 있는지 확인 (True / False)
 
@@ -182,7 +191,9 @@ IN : <Class_name>.objects.filter(<column_name>='').exist()
 OUT : True 
 ```
 
-1-7. <Class_name>.objects.values()
+​    
+
+7. <Class_name>.objects.values()
 
 - QuerySet 내용을 딕셔너리 형태로 반환
 - 인자값 x : 모든 필드를 딕셔너리 형태로 반환
@@ -198,7 +209,9 @@ IN : <Class_name>.objects.values('name')
 OUT : <QuerySet [{'name': '두현'}, {'name': '민영'}]>
 ```
 
-1-8. <Class_name>.objects.values_list()
+​    
+
+8. <Class_name>.objects.values_list()
 
 - QuerySet 내용을 리스트 타입으로 반환
 
@@ -212,7 +225,9 @@ IN : <Class_name>.objects.values('name')
 OUT : <QuerySet [('민수', ), ('민영', )]>
 ```
 
-1-9. <Class_name>.objects.order_by()
+​    
+
+9. <Class_name>.objects.order_by()
 
 ```django
 # 오름차순
@@ -222,7 +237,9 @@ OUT : <QuerySet [('민수', ), ('민영', )]>
 <Class_name>.objects.order_by('-<column_name1>')
 ```
 
-1- 10. <Class_name>.objects.first() / <Class_name>.objects.last()
+​    
+
+10. <Class_name>.objects.first() / <Class_name>.objects.last()
 
 - 쿼리셋 결과 중 가장 첫번째 / 마지막 row만 조회할 때 사용
 - 객체 타입 반환
@@ -241,7 +258,9 @@ In : Drink.objects.last()
 Out: <Drink: 라임패션티>
 ```
 
-1-11. <Class_name>.objects.aggregate()
+​    
+
+11.  <Class_name>.objects.aggregate()
 
 - django의 집계함수 모듈 사용시 사용하는 메소드
 - 집계함수의 파라미터로 받음
@@ -268,7 +287,9 @@ In : Nutrition.objects.aggregate(avg_kcal = Avg('one_serving_kcal'))
 Out: {'avg_kcal': Decimal('97.500000')}
 ```
 
-1-12. <Class_name>.objects.annotate()
+​    
+
+12. <Class_name>.objects.annotate()
 
 - 각 컬럼별 주석을 달고 집계함수를 사용하여 반환
 - SQL의 group by절과 같은 의미
@@ -290,6 +311,8 @@ Out: <QuerySet [{'drink_id__category_id': 1, 'one_serving_kcal__sum': Decimal('8
 In : Drink.objects.filter(category_id=2).count()
 Out: 2
 ```
+
+​    
 
 > Slicing
 
@@ -314,6 +337,8 @@ In : Nutrition.objects.create(one_serving_kcal=120, sodium_mg=70, saturated_fat_
 Out: <Nutrition: 망고 패션 후르츠 블렌디드 nutritions>
 ```
 
+​    
+
 2-2. <Class_name>.objects.**bulk_create()**
 
 - 여러개의 object를 한꺼번에 생성할 때 사용
@@ -335,6 +360,8 @@ Out:
 [<Nutrition: 나이트로 쇼콜라 클라우드 nutritions>,
  <Nutrition: 딸기 요거트 블렌디드 nutritions>]
 ```
+
+​    
 
 2-3. <Class_name>.objects.__get_or_create()__
 

@@ -1,6 +1,8 @@
-# ❓오늘 배운것 (22.08.16(화))
+# DB 기초개념
 
-## 🆕 DB, RDB, SQL 개념
+​    
+
+## 1️⃣ DB, RDB, SQL 개념
 
 ### 1. DB (Database) : 데이터 베이스
 
@@ -17,6 +19,8 @@
   - 데이터 표준화
   
   - 데이터 보안유지
+
+​    
 
 ### 2. 테이블 (table)
 
@@ -35,6 +39,8 @@
   - 각 행의 고유값
   - 반드시 설정해야 하며, DB관리 및 관계설정시 활용
 
+​    
+
 ### 3. 스키마 (Schema)
 
 - DB의 자료구조, 관계, 표현방식등의 명세를 기술한 것
@@ -44,13 +50,19 @@
 | id     | INT      |
 | name   | TEXT     |
 
+​    
+
 ### 4. RDB (Relational Database) : 관계형 데이터베이스
 
 - 키(key), 값(value)들의 관계(relation)를 표(table) 형태로 정리한 데이터베이스
 
+​    
+
 ### 5. RDBMS : 관계형 데이터베이스 관리시스템
 
 - 종류 : MySQL, SQLite, ORACLE-SQL, MS-SQL, PostgreSQL
+
+​    
 
 #### ✍️ SQLite (주로 사용할 RDBMS)
 
@@ -60,6 +72,8 @@
 - 로컬에서 간단한 DB구성가능
 - 오픈소스 프로젝트
 
+​    
+
 > SQLite Data Type
 
 1. `NULL`
@@ -67,6 +81,8 @@
 3. `REAL` : 8byte 부동소수점
 4. `TEXT`
 5. `BLOB` : 입력된 그대로 저장 (별 타입 없이 그대로 저장)
+
+​     
 
 > SQLite Type Affinity (유형 선호도)
 
@@ -79,6 +95,8 @@
 | BLOB                                                                                                                                        | BLOB                        |
 | REAL<br />DOUBLE<br />DOUBLE PRECISION<br />FLOAT                                                                                           | REAL                        |
 | NUMERIC<br />DECIAL(10, 5)<br />BOOLEAN<br />DATE<br />DATETIME                                                                             | NUMERIC                     |
+
+​    
 
 ### 6. SQL (Structured Query Language)
 
@@ -93,9 +111,11 @@
 | DML (Data Manipulation Language) <br />- 데이터 조작어 | 데이터를 저장, 조회, 수정, 삭제등을 하기 위한 명령어  | SELECT<br />INSERT<br />UPDATE<br />DELETE  |
 | DCL (Data Control Language)<br /> - 데이터 제어어      | DB 사용자의 권한 제어를 위해 사용하는 명령어       | GRANT<br />REVOKE<br />COMMIT<br />ROLLBACK |
 
+​    
+
 ---
 
-## 🆙 SQLite 다루기
+## 2️⃣ SQLite 다루기
 
 > 데이터베이스 생성하기
 
@@ -103,6 +123,8 @@
 $ sqlite3 <DB이름>.sqlite3
 sqlite> .database  -- '.'은 sqlite에서 활용되는 명령어
 ```
+
+​    
 
 > csv파일을 table로 만들기
 
@@ -113,6 +135,8 @@ sqlite> .table
 -- 테이블명
 ```
 
+​    
+
 > 터미널 view 변경하기
 
 ```sqlite
@@ -120,23 +144,33 @@ sqlite> .table
 .mode column
 ```
 
+​    
+
 > SQLite 확장프로그램 다루기
 
-1. SQLite 파일 우클릭 -> Open Database 클릭![Open_database](TIL_220816.assets/Open_database.png)
+1. SQLite 파일 우클릭 -> Open Database 클릭![Open_database](DB기초개념.assets/Open_database.png)
 
-2. New Query 클릭 -> SQL명령어를 작성하는 페이지 출력![New_Query](TIL_220816.assets/New_Query.png)![--SQLite](TIL_220816.assets/--SQLite.png)
+​    
 
-3. 코드 작성후 우클릭 -> Run Query (전체 코드 실행) or Run Selected Query (선택코드만 실행)![Run_Query](TIL_220816.assets/Run_Query.png)
+2. New Query 클릭 -> SQL명령어를 작성하는 페이지 출력![New_Query](DB기초개념.assets/New_Query.png)![--SQLite](DB기초개념.assets/--SQLite.png)
+
+​    
+
+3. 코드 작성후 우클릭 -> Run Query (전체 코드 실행) or Run Selected Query (선택코드만 실행)![Run_Query](DB기초개념.assets/Run_Query.png)
+
+​    
 
 4. 새로고침 후 DB변화 확인
 
-![R](TIL_220816.assets/R.png)
+![R](DB기초개념.assets/R.png)
 
-![show_table](TIL_220816.assets/show_table.png)
+![show_table](DB기초개념.assets/show_table.png)
+
+​    
 
 ---
 
-## 🆕 SQL _CRUD
+## 3️⃣ SQL _CRUD
 
 #### 1. 테이블 생성 및 삭제  (CREATE)
 
@@ -160,6 +194,8 @@ sqlite> .schema <테이블명>
 );
 ```
 
+​    
+
 > 필드 제약 조건
 
 - NOT NULL : NULL값 입력금지
@@ -178,11 +214,15 @@ CREATE TABLE students(
 );
 ```
 
+​    
+
 ##### 1-2. DROP
 
 ```sqlite
 sqlite> DROP TABLE <테이블명>;
 ```
+
+
 
 #### 2. 데이터 추가
 
@@ -196,9 +236,13 @@ INSERT INTO <테이블명> (컬럼1, 컬럼2, ...) VALUES (값1, 값2, ...);
 INSERT INTO <테이블명> VALUES (값1, 값2, 값3, ...);
 ```
 
+​    
+
 > rowid : SQLite에서 PRIMARY KEY가 없을 경우 자동으로 증가하는 컬럼
 
-![image-20220816164150395](TIL_220816.assets/image-20220816164150395.png)
+![image-20220816164150395](DB기초개념.assets/image-20220816164150395.png)
+
+​    
 
 > 스키마에 id 직접 작성시 입력할 column을 명시하지 않으면 자동 입력 x
 
@@ -223,11 +267,15 @@ INSERT INTO classmates VALUES (1, '홍길동', 500, '서울');
 INSERT INTO classmates (name, age, address) VALUES ('홍길동', 500, '서울');
 ```
 
+​    
+
 #### 3. 데이터 읽기
 
 ##### 3-1. SELECT
 
 - 테이블에서 데이터를 조회
+
+​    
 
 > SELECT의 다양한 절(Clause)
 
@@ -246,10 +294,12 @@ INSERT INTO classmates (name, age, address) VALUES ('홍길동', 500, '서울');
   3            이동영
   ```
 
+​    
+
 - OFFSET
-  
+
   - 처음부터 주어진 요소나 지점까지의 차이를 나타내는 정수형
-  
+
   ```sql
   SELECT * FROM MY_TABLE LIMIT 10 OFFSET 5;
   -- 해석
@@ -258,154 +308,18 @@ INSERT INTO classmates (name, age, address) VALUES ('홍길동', 500, '서울');
   OFFSET은 인덱스처럼 0부터 시작
   ```
 
+​    
+
 - WHERE
-  
   - 특정 검색 조건 지정
 
+
+
 - SELECT DISTINCT
-  
+
   - 조회 결과에서 중복행 제거
   - DISTINCT절은 SELECT 키워드 바로 뒤에 작성
 
-```sql
-SELECT DISTINCT 컬럼 FROM <테이블명>;
-```
-
-
-
----
-
-
-
-## ✍️ DB 실습
-
-
-
-### 사전 설정
-
-#### - 실행
-
-```bash
-$ sqlite3 healthcare.sqlite3 
-```
-
-#### - Column 출력 설정
-
-```sql
-sqlite3> .headers on 
-sqlite3> .mode column
-```
-
-#### - table 및 스키마 조회
-
-```sql
-sqlite3> .tables
-healthcare
-
-sqlite3> .schema healthcare
-CREATE TABLE healthcare (
-id PRIMARY KEY,        
-sido INTEGER NOT NULL, 
-gender INTEGER NOT NULL,
-age INTEGER NOT NULL,  
-height INTEGER NOT NULL,
-weight INTEGER NOT NULL,
-waist REAL NOT NULL,   
-va_left REAL NOT NULL, 
-va_right REAL NOT NULL,
-
-blood_pressure INTEGER 
-NOT NULL,
-smoking INTEGER NOT NULL,
-is_drinking BOOLEAN NOT NULL
-);
-```
-
-### 문제
-
-#### 1. 추가되어 있는 모든 데이터의 수를 출력하시오.
-
-```sql
-SELECT COUNT(*) FROM healthcare;
-```
-
-```
-COUNT(*)
---------
-1000000
-```
-
-#### 2. 나이 그룹이 10(age)미만인 사람의 수를 출력하시오.
-
-```sql
-SELECT COUNT(*) FROM healthcare WHERE age < 10;
-```
-
-```
-COUNT(*)
---------
-156277
-```
-
-#### 3. 성별이 1인 사람의 수를 출력하시오.
-
-```sql
-SELECT COUNT(*) FROM healthcare WHERE gender = 1;     
-```
-
-```
-COUNT(*)
---------
-510689
-```
-
-#### 4. 흡연 수치(smoking)가 3이면서 음주(is_drinking)가 1인 사람의 수를 출력하시오.
-
-```sql
-SELECT COUNT(*) FROM healthcare WHERE smoking = 3 and is_drinking = 1;
-```
-
-```
-COUNT(*)
---------
-150361
-```
-
-#### 5. 양쪽 시력이(va_left, va_right) 모두 2.0이상인 사람의 수를 출력하시오.
-
-```sql
-sqlite> SELECT COUNT(*) FROM healthcare WHERE va_left >= 2.0 and va_right >= 2.0; 
-```
-
-```
-COUNT(*)
---------
-2614
-```
-
-#### 6. 시도(sido)를 모두 중복 없이 출력하시오.
-
-```sql
-SELECT DISTINCT sido FROM healthcare
-```
-
-```
-36
-27
-11
-31
-41
-44
-48
-30
-42
-43
-46
-28
-26
-47
-45
-29
-49
-```
-
+  ```sql
+  SELECT DISTINCT 컬럼 FROM <테이블명>;
+  ```
