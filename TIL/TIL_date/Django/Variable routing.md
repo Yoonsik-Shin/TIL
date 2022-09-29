@@ -1,3 +1,7 @@
+# Django정리 (1)
+
+​    
+
 ## Variable routing
 
 - URL주소를 변수로 사용하는 것을 의미

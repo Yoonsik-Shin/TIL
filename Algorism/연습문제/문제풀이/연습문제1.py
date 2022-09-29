@@ -122,3 +122,33 @@
 #     lst.append(total)
 
 # print(max(lst))
+
+# A, I = map(int,input().split())
+
+# ans = A * (I-1)
+
+# print(ans+1)
+
+# N = int(input())
+
+# for i in range(1, N+1):
+#     print(' '*(N-i) + '*'*i)
+
+# for j in range(N-1, 0,-1):
+#     print(' '*(N-j) + '*'*j)
+
+# N = int(input())
+# lst = []
+
+# for i in range(N):
+#     x = input()
+#     x_len = len(x)
+#     lst.append(x)
+
+# for k in range(x_len):
+#     for j in range(N-1):
+#         if lst[j][k] != lst[j+1][k]:
+#             print('?', end='')
+#             break
+#     else:
+#         print(lst[-1][k], end='')

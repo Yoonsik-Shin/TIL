@@ -9,12 +9,14 @@
 | 2022.07.07 (목) | [Branch, Pull Request](./TIL_date/GIT/Git(4).md)             | Git Branch, Git Pull Request |
 | 2022.07.08 (금) | [취업특강](https://github.com/Yoonsik-Shin/job-research) / [job_research](https://github.com/Yoonsik-Shin/job-research/blob/b507647070412b8fc03ca814b30f3f09837012f2/research.md) | 취업특강                     |
 
-- Extra Study
+### Git Extra Study
 
-| Day             | Contents                              | Ex                                               |
-| --------------- | ------------------------------------- | ------------------------------------------------ |
-| 2022.09.24 (토) | [GIT Diff](./TIL_date/GIT/Git(4).md)  | git diff                                         |
-| 2022.09.24 (토) | [GIT extra](./TIL_date/GIT/Git(5).md) | git checkout, git restore, git reset, git revert |
+| Day             | Contents                               | Ex                                               |
+| --------------- | -------------------------------------- | ------------------------------------------------ |
+| 2022.09.24 (토) | [GIT Diff](./TIL_date/GIT/Git(4).md)   | git diff                                         |
+| 2022.09.24 (토) | [GIT extra](./TIL_date/GIT/Git(5).md)  | git checkout, git restore, git reset, git revert |
+| 2022.09.27 (월) | [GIT extra2](./TIL_date/GIT/Git(6).md) | Remote Tracking Branch, git fetch, git pull      |
+| 2022.09.28 (화) | [GIT extra3](./TIL_date/GIT/Git(7).md) | 레포 비공개, 공동작업자 추가, gist, github pages |
 
 ​    
 

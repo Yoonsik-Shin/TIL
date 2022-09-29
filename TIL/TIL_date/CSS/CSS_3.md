@@ -96,6 +96,12 @@ right: 100px;
 }
 ```
 
+```css
+.<클래스명> {
+  clear: both;     /* float 다음에 오는 요소의 이상현상 해결 */
+}
+```
+
 <img src="CSS_3.assets/image-20220907010155242.png" alt="image-20220907010155242" style="zoom:50%;" />
 
 ​     

@@ -81,13 +81,14 @@ display 특성
 4. None : 안보이게 설정 (JS에서 활용)
 
 ```css
-display: inline;
-display: block;
-display: inline-block;
+display: inline;   
+display: block;           /* 한 행 전부 차지 */
+display: inline-block;    /* 자신의 크기만큼 차지 */
 display: none;
+vertical-align: top;      /* 상하 정렬 (인라인 or 인라인블록만 적용)*/
 ```
 
-
+​    
 
 ---
 
@@ -213,7 +214,7 @@ transform: translateX(10px) rotate(10deg) translateY(5px);
 ## 7️⃣ background-img
 
 ```scss
-background-image: url(" ");
+background-image: url(" ");   /* ..의 의미: 상위폴더로 이동 */
 
 background-size: contain;     /* 비율을 유지하며 이미지 잘림없이 최대한 꽉 차게 표시*/
 background-size: cover;       /* 비율을 유지하지만 이미지 잘림있음*/

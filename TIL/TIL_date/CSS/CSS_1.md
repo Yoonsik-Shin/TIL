@@ -114,9 +114,7 @@ text-transform: uppercase;              /* 모든 글자 대문자로 변경 */
 - 모든 값에 적용 (활용도 낮음)
 
 ```css
-* {
-  ;
-}
+* { }
 ```
 
 ### 2. 요소 선택자 (Element Selector)
@@ -124,9 +122,7 @@ text-transform: uppercase;              /* 모든 글자 대문자로 변경 */
 - 해당 모든 요소에 적용 (활용도 낮음)
 
 ```css
-h1, h2 {
-  ;
-}
+h1, h2 { }
 ```
 
 ### 3. ID 선택자 
@@ -138,9 +134,7 @@ h1, h2 {
 ```
 
 ```css
-#signup {
-  ;
-}
+#signup { }
 ```
 
 ### 4. 클래스 선택자 
@@ -150,48 +144,41 @@ h1, h2 {
 ```
 
 ```css
-.this {
-  ;
-}
+.this { }
 ```
 
 ### 5. 자손선택자 (Desencdant Selector)
 
+> ❗선택자 문법 중에 공백 == ~안에 있는 모든 자식
+
 ```css
 /* post클래스속에 있는 a태그(자손) */
-.post a {
-  ;
-}
+.post a { }
 ```
 
 ### 6. 인접선택자 (Adjacent Selector)  = 결합자 (combinator) [`+`]
 
 ```css
 /* h2태그 바로뒤에 있는 button */
-h2 + button {
-  ;
-}
+h2 + button { }
 ```
 
 ### 7. 일반 형제 결합자 (General Sibling selector) [`~`]
 
 ```css
 /* 서로 형제인 문단 중 이미지 뒤쪽인 경우에만 선택 */
-img ~ p {
-  color: red;
-}
+img ~ p { }
 ```
 
 ### 8.  직계자손선택자 (Direct Child Selector) [`>`]
 
 - 자주 안씀
+- 직계만
 - 필요할때가 있긴함
 
 ```css
 /* div안에 첫번째 li만 선택 */
-div > li {
-  ;
-}
+div>li { }
 ```
 
 ### 9. 속성선택자 (Attribute Selector)
@@ -199,32 +186,22 @@ div > li {
 - 자주 안쓰임
 
 ```css
-input[type="속성(text, password)"]{
-  ;
-}
+input[type="속성(text, password)"]{ }
 
-section[class="post"] {
-  ;
-}
+section[class="post"]{ }
 ```
 
 - 응용
 
 ```css
 /* href속성에 example이 포함된 모든 앵커 태그 */
-a[href*="example"]{ 
-  ;
-}
+a[href*="example"]{ }
 
 /* .org로 끝나는 href */
-a[href$=".org"]{
-  ;
-}
+a[href$=".org"]{ }
 
 /* O를 포함하는 속성 */
-태그[for*="o"]{
-  ;
-}
+태그[for*="o"]{ }
 ```
 
 > ⛔!importance⛔ : CSS 최우선 적용, 다른 모든 규칙 무시, 사용시 주의해야함
