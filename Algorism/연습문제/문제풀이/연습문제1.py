@@ -152,3 +152,25 @@
 #             break
 #     else:
 #         print(lst[-1][k], end='')
+
+# S = input()
+# lst = []
+
+# for i in range(len(S)):
+#     lst.append(S[i:])
+
+# for _ in sorted(lst):
+#     print(_)
+
+# words = input()
+# nums = []
+# for i in range(10):
+#     nums.append(str(i))
+
+# for word in words:
+#     if word in nums or word == ' ':
+#         print(word, end='')
+#     elif (ord(word) >= 78 and ord(word) <= 90) or (ord(word) >= 110 and ord(word) <= 122):
+#         print(chr(ord(word)-13), end='')
+#     else:
+#         print(chr(ord(word)+13), end='')

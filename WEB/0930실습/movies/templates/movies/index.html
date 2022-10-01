@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+    .idx-btn:hover {
+        background-color: #FEF6FF;
+    }
+</style>
+
+<a class="d-flex justify-content-end" style="text-decoration: none;" href="{% url 'movies:new' %}"><button type="button" class="idx-btn btn btn-outline mt-4 mb-4" style="border-color: #A07EE7; color: #A07EE7;"> <i class="bi bi-vector-pen"></i> 리뷰 작성</button></a>
+<table class="table table-striped mt-2">
+    <thead>
+        <tr style="color: grey;">
+            <th scope="col">리뷰 번호</th>
+            <th scope="col">리뷰 제목</th>
+            <th scope="col">작성 시간</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for movie in movies %}
+        <tr>
+            <td>{{ movie.id }}</td>
+            <td>
+                <a href="{% url 'movies:detail' movie.id %}" style="text-decoration: none; font-weight: bold; color: black;"
+                    >{{ movie.title }}</a
+                >
+            </td>
+            <td>{{ movie.created_at| date:'Y년 m월 d일'}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

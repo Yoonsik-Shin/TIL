@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+
+<form action="{% url 'movies:create' %}">    
+    <div class="mt-4">
+        <label for="title_" class="d-flex justify-content-center mb-1 fw-bold" style="font-size: 1.3rem; color: gray;"> <i class="bi bi-chat-square-heart"></i>　제목</label>
+        <input
+            class="form-control"
+            id="title_"
+            name="title_"
+            type="text"
+            aria-label="default input example"
+            style="border-color: #A07EE7; color: gray;"
+            autocomplete="off"
+            required
+        />
+    </div>
+    <div class="mt-4 mb-3">
+        <label for="content_" class="form-label d-flex justify-content-center mb-1 fw-bold" style="font-size: 1.3rem; color: gray;"> <i class="bi bi-card-text"></i>　내용</label>
+        <textarea
+            class="form-control"
+            id="content_"
+            name="content_"
+            rows="3"
+            autocomplete="off"
+            style="border-color: #A07EE7; color: gray;"
+            required
+        ></textarea>
+    </div>
+    <input class="btn w-100" type="submit" style="background-color: #A07EE7; color: white;" type="submit" value="리뷰 쓰기">
+</form>
+{% endblock content %}

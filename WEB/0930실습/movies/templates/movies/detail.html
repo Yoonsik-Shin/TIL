@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .del-btn:hover {
+    border-color: #A07EE7;
+    background-color: white;
+    color: #A07EE7;
+  }
+</style>
+
+<div class="card mt-5 mb-5" style="border-color: #A07EE7;">
+  <h2 class="d-flex justify-content-center mt-2">{{ title }}</h1>
+  <hr style="color: white">
+  <p class="d-flex justify-content-center mb-3" style="color: gray;">{{ content }}</p>
+</div>
+<div class="d-flex justify-content-center">
+  <a href="{% url 'movies:edit' idx %}"
+      ><button type="button" class="btn" style="margin-right: 5px; background-color: #BFA9E4; color: white;">리뷰 수정</button></a
+  >
+  <a href="{% url 'movies:delete' idx %}"
+      ><button type="button" class="btn del-btn" style="margin-left: 5px; background-color: #A07EE7; border-color:#A07EE7; color: white;">리뷰 삭제</button></a
+  >
+</div>
+{% endblock content %}
