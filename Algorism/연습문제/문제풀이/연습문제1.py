@@ -174,3 +174,22 @@
 #         print(chr(ord(word)-13), end='')
 #     else:
 #         print(chr(ord(word)+13), end='')
+
+# from itertools import combinations
+
+# x = input()
+# y = input()
+# a = False
+
+# for i in range(len(x), 0, -1):
+#     if a == False:
+#         for j in list(combinations(x, i)):
+#             if j in list(combinations(y, i)):
+#                 ans = len(j)
+#                 a = True
+#                 print(ans)
+T = int(input())
+
+for _ in range(T):
+    word = input()
+    print(word[0], word[-1], sep='')

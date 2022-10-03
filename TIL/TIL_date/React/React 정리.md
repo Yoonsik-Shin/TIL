@@ -141,3 +141,30 @@ let c = num[2]
 // Destructuring
 let [a, b, c] = [1, 2, 3]
 ```
+
+​    
+
+### State 수정
+
+- array, object를 다룰 때 원본은 보존하는게 좋음
+- array/object를 담은 변수엔 메모리값만 저장되어있음 (reference data type)
+
+```jsx
+let a = [1, 3, 5];
+let b = a;
+b[0] == 300;
+console.log(a === b) // true
+```
+
+- `기존 state == 신규 state`의 경우 변경 안함
+
+- state가 array나 object이면 독립적인 카피본(shallow copy)을 만들어 수정해야함
+
+```jsx
+<button onClick={ () => {
+    let copy = [...state_1];   // 메모리값을 바꿔줌
+    copy[바꿀 인덱스] = "바꿀값";
+    state_2(copy);
+  }};
+```
+
