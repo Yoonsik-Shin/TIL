@@ -1,33 +1,33 @@
 # JavaScript 정리 (7)
 
+​     
 
-
-## AJAX (Asynchronous JavaScript And XML)
+## 1️⃣ AJAX (Asynchronous JavaScript And XML)
 
 - 비동기식 JS와 XML
 
+​    
 
-
-## API (Application Programming Interface)
+## 2️⃣ API (Application Programming Interface)
 
 - 여러 SW가 상호작용하거나 소통하는 모든 인터페이스를 의미
 
+​    
 
-
-## WebAPI
+## 3️⃣ WebAPI
 
 - 웹, HTTP를 기반으로 하는 인터페이스
 
+​    
 
-
-## XML (eXtensible Markup Langauge)
+## 4️⃣ XML (eXtensible Markup Langauge)
 
 - 확장성이 있는 마크업 언어
 - 요새는 보기힘듬
 
 
 
-## JSON (JavaScript Object Notation)
+## 5️⃣ JSON (JavaScript Object Notation)
 
 - JS 객체 문법
 - 계속해서 데이터를 전송하거나 정보를 전송하는 포맷
@@ -50,7 +50,9 @@ data = {
 }
 ```
 
-### JSON.parse() ✔️✔️
+​    
+
+### 1. JSON.parse() ✔️✔️
 
 - 문자열을 전달하면 파싱되어 JS객체로 변환
 
@@ -64,7 +66,9 @@ parsedData.C.b
 >> 2
 ```
 
-### JSON.stringify()
+​    
+
+### 2. JSON.stringify()
 
 - JS 객체를 JSON으로 변환할 경우 사용
 - JSON형식의 데이터를 받는 API에 정보를 보낼 때
@@ -74,21 +78,21 @@ parsedData.C.b
 JSON.stringify(value[, replacer[, space]])
 ```
 
+​    
 
+## 6️⃣ HTTP 동사 (Verbs)
 
-## HTTP 동사 (Verbs)
-
-### GET
+### 1. GET
 
 - 정보를 가져올 때 사용
 
-### POST
+### 2. POST
 
 - 데이터를 어딘가로 보낼 때 사용
 
+​     
 
-
-## HTTP 상태코드 (State Codes)
+## 7️⃣ HTTP 상태코드 (State Codes)
 
 - 200번대 : 일반적으로 문제가 없을 때의 상태코드 (성공적인 응답)
 - 300번대 : 리디렉션(Redirect)과 연관
@@ -97,9 +101,9 @@ JSON.stringify(value[, replacer[, space]])
   - 405
 - 500번대 : 서버 사이트 오류시 (API쪽 문제)
 
+​    
 
-
-## 쿼리 문자열 (Query Strings)
+## 8️⃣ 쿼리 문자열 (Query Strings)
 
 - url에 추가 정보 넣기
 - 키-값 쌍으로 작성
@@ -112,16 +116,16 @@ JSON.stringify(value[, replacer[, space]])
 
 
 
-## HTTP 헤더 (Headers)
+## 9️⃣ HTTP 헤더 (Headers)
 
 - 요청과 함께 정보를 전달하는 부수적인 방식으로 응답에 포함
 - 메타데이터
 - 개발자 도구로 확인가능 (`Network`)
 - 일부 API는 요청과 함께 특정 헤더나 여러 헤더를 보내야함
 
+​    
 
-
-## XHR (XMLHttpRequest)
+## 🔟 XHR (XMLHttpRequest)
 
 - JS에서 요청을 보내는 기존 방식으로 `promise`를 지원하지 않아 요새는 잘 안쓰임 ❌
 
@@ -143,9 +147,9 @@ req.open("GET", "URL");
 req.send();
 ```
 
+​    
 
-
-## Fetch API
+## 🆙 Fetch API
 
 - `fetch`함수를 호출하면 `Promise`가 반환됨
 - JSON을 따로 구문 분석하여 또 다른 프로미스로 반환해야함
@@ -166,7 +170,7 @@ load();
 
 
 
-## Axios
+## 🆕 Axios
 
 > https://axios-http.com/kr/
 

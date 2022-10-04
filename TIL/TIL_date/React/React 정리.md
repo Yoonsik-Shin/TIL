@@ -59,11 +59,15 @@ package.json
 - 프로젝트 정보
 - 따로 수정 x
 
+​    
 
+---
 
 ## JSX
 
 - 자바스크립트 파일에서 HTML언어와 유사한 기능을 하는 언어
+
+​     
 
 ### HTML과 다른점
 
@@ -108,6 +112,8 @@ return (
 ```
 
 ​    
+
+---
 
 ## State
 
@@ -166,5 +172,149 @@ console.log(a === b) // true
     copy[바꿀 인덱스] = "바꿀값";
     state_2(copy);
   }};
+```
+
+​    
+
+---
+
+## Component (컴포넌트)
+
+```jsx
+// 1번 방법
+function Modal(){    // 대문자 작명
+  return(
+    <>               // 의미없는 `<div>` 대신 `<></>` 사용가능 
+  		<div className="modal">
+      	<h4>제목</h4>
+      	<p>날짜</p>
+      	<p>상세내용</p>
+    	</div>
+    </>
+  )
+}
+
+// 2번 방법
+const Modal = () => {
+  return (
+  	<>
+    </>
+  )
+}
+```
+
+- 다른 함수 밖에 작성해야함
+
+1. function 만들기
+2. return ( ) 안에 html 담기
+3. <함수명></함수명>
+
+```jsx
+<Modal></Modal>
+```
+
+​    
+
+> 컴포넌트로 만들기 좋은 요소들
+
+1. 반복적인 html 축약시
+2. 큰 페이지
+3. 자주 변경되는 요소들
+
+​    
+
+> 컴포넌트 단점
+
+- state 가져다 쓸 때 문제 발생
+- 다른 함수에 있는 변수들을 마음대로 가져다 사용할 수 없음
+
+​    
+
+---
+
+## 동적 UI 만들기
+
+1. html, css로 미리 디자인 완성하기
+2. UI의 현재 상태를 state로 저장
+
+```jsx
+function App (){
+  
+  let [modal, setModal] = useState(false);
+  
+  return (
+    <button onClick={ () => {setModal(!modal)};
+  )
+}
+```
+
+3. state에 따라 UI가 어떻게 보일지 작성
+
+```jsx
+{modal === true ? <Modal /> : null}
+```
+
+​    
+
+> JSX 조건문 활용
+
+```jsx
+// 삼항 연산자
+{
+  조건식 ? 참일 때 실행할 코드 : 거짓일때 실행할 코드
+}
+```
+
+​    
+
+---
+
+## map
+
+1. array의 자료수만큼 내부코드 반복 실행
+
+```javascript
+```
+
+2. 파라미터 사용시 array의 값들 순서대로 받아옴
+
+```javascript
+[1, 2, 3].map( (a) => { 
+  console.log(a)
+})
+
+>> 1
+>> 2
+>> 3
+```
+
+3. return문 내용을 array로 담아줌
+
+```javascript
+[1, 2, 3].map(function (a) {
+  return "123456";
+});
+
+>> (3) ['123456', '123456', '123456']
+```
+
+
+
+> 같은 html 반복 생성
+
+```jsx
+let [a, b] = useState('')
+
+{
+  a.map(function(param, i){    // i : 인덱스
+    return (
+      <div key={i}>
+        <h2>{ param }</h2>
+        <h2>{ a[i] }</h2>
+        <p></p>
+      </div>
+    )
+  })
+}
 ```
 

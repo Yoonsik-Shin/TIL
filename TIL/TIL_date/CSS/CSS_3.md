@@ -9,26 +9,30 @@
 
 ​    
 
+---
+
 ## 2️⃣ CSS Position
 
 - 문서상에서 요소의 위치를 지정
 
-1. static
-   - 모든 태그의 기본 값 (기준 위치)
-   - 좌측상단의 일반적인 요소의 배치 순서 따름 
-   - 부모 요소내에 배치시 부모 요소의 위치를 기준으로 배치
+### 1. static
+
+- 모든 태그의 기본 값 (기준 위치)
+- 좌측상단의 일반적인 요소의 배치 순서 따름 
+- 부모 요소내에 배치시 부모 요소의 위치를 기준으로 배치
 
 ```css
 position: static;
 ```
 
----
-
 ⬇️ 좌표 프로퍼티 (top, bottom, left, right) 사용하여 이동
 
-2. relative (상대위치)
-   - normal flow 유지
-   - static 위치를 기준으로 이동
+​    
+
+### 2. relative (상대위치)
+
+- normal flow 유지
+- static 위치를 기준으로 이동
 
 ```css
 position: relative;
@@ -38,7 +42,9 @@ bottom: 100px;
 right: 100px;
 ```
 
-3. absolute (절대 위치) 
+​    
+
+### 3. absolute (절대 위치) 
 
 - normal flow에서 벗어남 ❗
 - static이 아닌 부모 요소를 기준으로 이동
@@ -53,7 +59,9 @@ bottom: 100px;
 right: 100px;
 ```
 
-4. fixed (고정 위치)
+​     
+
+### 4. fixed (고정 위치)
 
 - normal flow에서 벗어남 ❗
 - 부모 요소와 관계없이 __viewport__를 기준으로 이동 ❗
@@ -67,7 +75,9 @@ bottom: 100px;
 right: 100px;
 ```
 
-5. sticky
+​    
+
+### 5. sticky
 
 - 스크롤에 따라 static에서 fixed로 변경
 
@@ -81,7 +91,7 @@ bottom: 100px;
 right: 100px;
 ```
 
-
+​     
 
 ---
 
@@ -328,7 +338,7 @@ flex: flex-grow flex-shrink flex-basis;
 }
 ```
 
-
+​    
 
 - grid-area 사용법
 

@@ -2,7 +2,7 @@
 
 ​    
 
-## Variable routing
+## 1️⃣ Variable routing
 
 - URL주소를 변수로 사용하는 것을 의미
 - URL의 일부를 변수로 지정하여 view함수의 인자로 넘길 수 있음
@@ -13,7 +13,6 @@
 
 ```python
 # urls.py
-
 urlpatterns = [
 	...,
 	path('index/<str:name>/', views.index),  ⬅️⬅️
@@ -29,9 +28,20 @@ def hello(request, name):  ⬅️⬅️
   return render(request, 'index.html', context)
 ```
 
+ ```html
+ <!-- apps/templates/index.html -->
+ {% extends 'base.html' %}
+ 
+ {% block content %}
+ 	<h1>{{ name }}</h1>
+ {% endblock %}
+ ```
 
+​       
 
-## Template inheritance (템플릿 상속)
+---
+
+## 2️⃣ Template inheritance (템플릿 상속)
 
 ```html
 <!-- base.html [부모] -->
@@ -61,19 +71,45 @@ def hello(request, name):  ⬅️⬅️
 {% endblock content %}
 ```
 
+> 부모 html의 위치를 프로젝트 최상단에 위치시키기❗
 
-
-> 부모 html의 위치를 프로젝트 최상단에 위치시키기❗❗
-
-
+​    
 
 ---
 
-## form 데이터 다루기
+## 3️⃣ 추가 템플릿 경로
 
-### Sending form data (Client)
+- base.html의 위치를 프로젝트 최상단의 templates 디렉토리 안에 위치시키기
 
-#### form
+```python
+# settings.py
+TEMPLATES = [
+  {
+    'DIRS': [BASE_DIR/ 'templates',],
+  }
+]
+```
+
+​    
+
+> BASE_DIR
+
+```python
+# settings.py
+BASE_DIR = Path(__file__).resolve().parent.parent
+```
+
+- settings.py에서 특정 경로를 절대 경로로 편하게 작성할 수 있도록 미리 지정해둔 경로 값
+
+​    
+
+---
+
+## 4️⃣ form 데이터 다루기
+
+### 4-1. Sending form data (Client)
+
+#### 1.form
 
 ```html
 <form action="" method=""></form>
@@ -97,7 +133,7 @@ def hello(request, name):  ⬅️⬅️
 
 ​    
 
-#### input
+#### 2. input
 
 ```html
 <input type="" name="">
@@ -106,9 +142,9 @@ def hello(request, name):  ⬅️⬅️
 - input 태그 속성
   1. name
      - 데이터 `submit`시 `name`속성값을 서버로 전송
-     - 파라미터로 매핑됨
+     - 파라미터로 매핑됨 [`?key=value&key=value`]
 
-
+​    
 
 > GET
 
@@ -122,7 +158,7 @@ def hello(request, name):  ⬅️⬅️
 - 데이터를 서보로 전송시 Query String Parameters를 통해 전송
 - 대소문자 구분 없지만 대부분 대문자 사용
 
-​    
+​     
 
 > Query String Parameters
 
@@ -136,9 +172,9 @@ https://naver.com/search?key=value&key=value
 - `&`로 여러 개 연결
 - 기본 URL과는 `?`로 구분됨
 
+​    
 
-
-### Retrieving the data (Server)
+### 4-2. Retrieving the data (Server)
 
 - 데이터 가져오기, 검색하기
 - 모든 요청 데이터는 `view`함수의 첫번째 인자 `request`에 들어 있음
@@ -150,3 +186,6 @@ request.GET
 request.GET.get('message')
 >> '데이터'
 ```
+
+
+

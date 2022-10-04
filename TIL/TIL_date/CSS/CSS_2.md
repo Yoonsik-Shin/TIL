@@ -1,6 +1,6 @@
 # CSS 정리_2
 
-
+​    
 
 ## 1️⃣ 박스모델
 
@@ -27,7 +27,7 @@ border: witdh style color;
 4. __box-sizing : border-box__ : 좌우 테두리를 기준으로 요소의 크기를 결정하게 만들어줌❗❗![SmartSelect_20220907_010434_Samsung Notes](CSS_2.assets/SmartSelect_20220907_010434_Samsung Notes.jpg)
 5. border-radius : 모서리 곡률
 
-
+​    
 
 ### 2. Padding (패딩)  -  초록색
 
@@ -40,7 +40,7 @@ padding: top horizontal bottom;     /* 상 좌우 하 */
 padding: top right bottom left;     /* 상 우 하 좌 (시계방향) */
 ```
 
-
+​    
 
 ### 3. Margin (여백)  -  주황색
 
@@ -54,7 +54,7 @@ margin: top horizontal bottom;     /* 상 좌우 하 */
 margin: top right bottom left;     /* 상 우 하 좌 (시계방향) */
 ```
 
-​    
+​       
 
 ---
 
@@ -209,7 +209,9 @@ transform: skew(10deg, 5deg);
 transform: translateX(10px) rotate(10deg) translateY(5px);
 ```
 
+​    
 
+---
 
 ## 7️⃣ background-img
 
@@ -231,4 +233,3 @@ background: url(" ") no-repeat top/cover;
 
 /*❗size속성은 position/size 형식으로 사용해야함❗*/
 ```
-

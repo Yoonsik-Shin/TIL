@@ -188,8 +188,11 @@
 #                 ans = len(j)
 #                 a = True
 #                 print(ans)
-T = int(input())
+# T = int(input())
 
-for _ in range(T):
-    word = input()
-    print(word[0], word[-1], sep='')
+# for _ in range(T):
+#     word = input()
+#     print(word[0], word[-1], sep='')
+
+# b = int(input(), 8)
+# print(bin(b)[2:])

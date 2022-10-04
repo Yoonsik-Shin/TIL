@@ -1,4 +1,4 @@
-# ✍️ django 구조
+# ✍️ Django 구조
 
 ​    
 

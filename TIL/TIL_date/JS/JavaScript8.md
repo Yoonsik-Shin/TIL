@@ -1,10 +1,6 @@
-# JavaScript 정리 (8)
+# JavaScript 정리 (8) - OOP (객체지향 프로그래밍)
 
 ​    
-
-# OOP (객체지향 프로그래밍)
-
-
 
 ## 1️⃣ Object prototypes
 
