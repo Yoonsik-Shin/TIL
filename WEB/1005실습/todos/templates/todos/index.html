@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>INDEX</title>
+    </head>
+    <body>
+        <h1>hello</h1>
+        {% load static %}
+        <div><img src="{% static 'todos/img/004.png' %}" alt="" width="500px"></div>
+        <a href="{% url 'todos:create' %}">글 작성</a>
+        {% for Todo_list in Todo_lists %}
+        <a href="{% url 'todos:detail' Todo_list.pk %}"
+            ><p>{{ Todo_list.title }}</p></a
+        >
+        {% endfor %}
+    </body>
+</html>

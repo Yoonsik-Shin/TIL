@@ -196,3 +196,16 @@
 
 # b = int(input(), 8)
 # print(bin(b)[2:])
+
+# import sys
+# input = sys.stdin.readline
+
+# N, M = map(int,sys.stdin.readline().rstrip().split())
+# account = {}
+
+# for i in range(N):
+#     id, password = sys.stdin.readline().rstrip().split()
+#     account[id] = password
+
+# for j in range(M):
+#     print(account[sys.stdin.readline().rstrip()])

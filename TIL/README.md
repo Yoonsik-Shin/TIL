@@ -98,8 +98,9 @@
 | 2022.09.21 (수)                      | [django 환경설정](./TIL_date/Django/Django개발환경.md)<br />[서버 기초지식](./TIL_date/Django/서버기초.md)<br />[기본 터미널 명령어](./TIL_date/Django/Terminal.md) | 가상환경, LTS버전, 프로젝트생성, 서버 실행<br />웹, IP, 도메인, 프레임워크, ...<br />ls, pwd, cd, mkdir, touch, rm, rmdir, |
 | 2022.09.22 (목)                      | [django 구조](./TIL_date/Django/django구조.md)<br />[0922실습](../WEB/0922실습) | 프로젝트, 앱, 실행순서, 템플릿                               |
 | 2022.09.26 (월)                      | [django정리(1)](./TIL_date/Django/Django정리(1).md)          | Variable routing, 템플릿 상속, 추가경로설정, form 다루기     |
-| 2022.09.27 (화)                      | [django정리(2)](./TIL_date/Django/Django정리(2).md)          | URLs, App URL mapping, 템플릿 이름공간                       |
-| 2022.09.28 (수)<br />2022.09.29 (목) | [django정리(3)](./TIL_date/Django/Django정리(3).md)          |                                                              |
-| 2022.09.30 (금)                      | [0930실습](../WEB/0930실습)                                  | [Django 활용] 페어프로그래밍                                 |
-| 2022.10.04 (화)                      | [django정리(4)](./TIL_date/Django/Django정리(4).md)          |                                                              |
+| 2022.09.27 (화)                      | [django정리(2)](./TIL_date/Django/Django정리(2).md)          | URLs, App URL mapping, 템플릿 이름공간,  Naming URL patterns, URL 이름공간 |
+| 2022.09.28 (수)<br />2022.09.29 (목) | [django정리(3)](./TIL_date/Django/Django정리(3).md)          | Framework 특징<br />Django Model                             |
+| 2022.09.30 (금)                      | [0930실습](../WEB/0930실습)                                  | [Django CRUD실습] 페어프로그래밍                             |
+| 2022.10.04 (화)                      | [django정리(4)](./TIL_date/Django/Django정리(4).md)          | ModelForm                                                    |
+| 2022.10.04 (수)                      | [django정리(5)](./TIL_date/Django/Django정리(5).md)          | Admin Site, Static Files, Django - BootStrap                 |
 

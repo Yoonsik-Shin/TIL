@@ -1,12 +1,12 @@
 # Django정리 (2)
 
-
+​    
 
 ## 0️⃣ URLs
 
 - 장고프레임워크는 URL끝에 `/` 자동으로 붙여줌
 
-
+​    
 
 ---
 
@@ -77,3 +77,56 @@ return render(request, 'articles/index.html')
 return render(request, 'pages/index.html')
 ```
 
+​    
+
+---
+
+## 3️⃣ Naming URL patterns
+
+- 문자열 주소 변경시 유지보수 편함
+- path() 함수에 name인자 정의
+
+```python
+urlpatterns = [
+  path('index/', views.index, name='index')
+]
+```
+
+> 내장태그 - [`url`] 
+
+```python
+{% url 'index' %}
+```
+
+- URL 패턴이름와 일치하는 절대 경로 주소로 반환
+
+
+
+> DRY 원칙
+
+- Don't Repeat Yourself
+- 소스코드에서 동이한 코드를 반복하지 말자
+
+​    
+
+---
+
+## 4️⃣ URL namespace
+
+- 서로 다른 앱에서 동일한 URL이름을 사용하는 경우 이름이 지정된 URL을 고유하게 사용가능
+
+```python
+# articles/urls.py
+app_name = 'articles'  ✔️✔️
+urlpatterns = []
+```
+
+- URL 태그 변화
+
+```python
+{% url 'index' %}
+{% url 'articles:index' %}
+```
+
+-  app_name을 지정한 이후에는 반드시 app_name:url_name 형태로만 사용해야 함.
+- 그렇지 않으면 NoReverceMatch 에러가 발생

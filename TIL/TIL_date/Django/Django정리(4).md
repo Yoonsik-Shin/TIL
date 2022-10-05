@@ -1,18 +1,18 @@
-# Django 개념
+# Django 개념 (4)
 
 ​    
 
-## ModelForm
+## 1️⃣ ModelForm
 
-### 생성
+### 1. 생성
 
 ```python
-# 앱/forms.py
+# articles/forms.py 파일 생성
 
 from django import forms
-from .models import 앱
+from .models import Article
 
-class 앱폼(forms.ModelForm):
+class ArticleForm(forms.ModelForm):
   
   class Meta:
     model = 앱
@@ -40,9 +40,9 @@ class 앱폼(forms.ModelForm):
     exclude = (포함하지 않을 값,)   # 모델에서 사용하지 않을 필드 지정
 ```
 
+​    
 
-
-### 활용
+### 2. 활용
 
 1. ModelForm 객체를 context로 전달
 
@@ -85,7 +85,7 @@ def new(request):
 
 ​    
 
- ### 로직
+ ### 3. 로직
 
 1. 요청 방식에 따른 분기
    - GET/POST
@@ -93,9 +93,13 @@ def new(request):
    - 실패시 다시 Form으로 전달
    - 성공시 DB저장
 
+​    
 
+---
 
-### CREATE
+## 2️⃣ CU
+
+### 1. CREATE
 
 ```python
 # 앱/views.py
@@ -103,7 +107,7 @@ def new(request):
 def create(request):
   form = 앱폼(request.POST)
   if form.is_valid():
-    acticle = form.save()
+    article = form.save()
     return redirect('앱:detail', 앱.pk)  # 유효성 검사 통과시 : 데이터 저장 후 상세페이지로 redirect
  	print( {form.error} )    #
   return redirect('앱:new')              # 유효성 검사 통과 실패시 : 작성 페이지로 redirect
@@ -111,7 +115,7 @@ def create(request):
 
 ​    
 
-####  `is_valid()` 
+####  1-1. `is_valid()` 
 
 - 유효성 검사를 실행하고, 데이터가 유효한지 여부를 __boolean__ 형태로 반환
 
@@ -122,7 +126,7 @@ def create(request):
 
 ​     
 
-#### `save()`
+#### 1-2. `save()`
 
 - form 인스턴스에 바인딩된 데이터를 통해 DB객체를 만들고 저장
 - `instance` 여부로 생성/ 수정 여부 결정
@@ -133,13 +137,94 @@ form = 앱폼(request.POST)                # 인스턴스 X
 form.save()
 
 # UPDATE
-form = 앱폼(request.POST, instance=앱)    # 인스턴스 O
+article = Article.objects.get(id=pk)
+form = 앱폼(request.POST, instance=article)    # 인스턴스 O
 form.save()
 ```
 
 ​     
 
-### UPDATE
+### 2. UPDATE
 
+```python
+# articles/views.py
+def edit(request, pk):
+  article = Article.objects.get(id=pk)
+  form = ArticleForm(instance=article)
+  context = {
+    'article': article,
+    'form': form,
+  }
+  return render(request, 'articles/edit.html', context)
 
+def update(request, pk):
+  article = Article.objects.get(id=pk)
+  form = ArticleForm(instance=article)
+  if form.is_valid():
+    form.save()
+    return redirect('articles:detail', article.pk)
+  context = {
+    'form': form,
+    'article': article,
+  }
+  return render(request, 'articles/edit.html', context)
+```
+
+```html
+<!-- articles/edit.html -->
+<form action="{% url 'articles:update' article.pk %}" methode="POST">
+  {% csrf token %}
+  {{ form.as_p }}
+</form>
+```
+
+- `instance` : 수정이 되는 대상
+- `request.POST` : 사용자가 form을 통해 전송한 데이터
+
+​    
+
+---
+
+## 3️⃣ HTTP요청 다루기
+
+- new와 create함수 합치기
+
+```python
+# articles/views.py
+def create(request):
+  if request.method == 'POST':
+    form = ArticleForm(request.POST)
+    if form.is_valid():
+      article = form.save()
+      return redirect('articles:detail', article.pk)
+  else:
+    form = ArticleForm()
+  # context 들여쓰기 위치 주의
+  context = {               
+    'form': form,
+  }  
+  
+  return render(request, 'articles/new.html', context)
+```
+
+- edit과 update함수 합치기
+
+```python
+# articles/views.py
+def update(request, pk):
+  article = Article.objects.get(id=pk)
+  if request.method == 'POST':
+    form = ArticleForm(request.POST, instance=article)
+    if form.is_valid():
+      form.save()
+      return redirect('articles:detail', article.pk)
+  else:
+    form = ArticleForm(instance=article)
+    
+  context = {
+    'form': form,
+    'article': article,
+  }
+  return render(request, 'articles/update.html', context)
+```
 
