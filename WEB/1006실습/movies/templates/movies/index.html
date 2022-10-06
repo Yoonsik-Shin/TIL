@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block navbaricon %}
+  {% load static %}
+  <img src="{% static "img/004.png" %}" alt="" width="30" height="24" class="d-inline-block align-text-top"/>Hypergrowth
+{% endblock navbaricon %}
+
+{% block content %}
+  <div class="list-group">
+    <p href="#" class="list-group-item list-group-item-action active mb-0 text-center" aria-current="true">
+      영화리스트
+    </p>
+    {% for movie_list in movie_lists %}
+      <a href="{% url 'movies:detail' movie_list.pk %} " class="list-group-item list-group-item-action">
+        <p>{{ movie_list.id }}
+          {{ movie_list.title }}</p>
+      </a>
+    {% endfor %}
+  </div>
+{% endblock content %}

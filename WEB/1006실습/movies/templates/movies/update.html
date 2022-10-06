@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block navbaricon %}
+  {% load static %}
+  <img src="{% static "img/004.png" %}" alt="" width="30" height="24" class="d-inline-block align-text-top"/>Hypergrowth
+{% endblock navbaricon %}
+
+{% block content %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ update_movie.as_p }}
+    <input class="btn btn-primary" type="submit" value="수정">
+  </form>
+{% endblock content %}

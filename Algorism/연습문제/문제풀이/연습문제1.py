@@ -209,3 +209,22 @@
 
 # for j in range(M):
 #     print(account[sys.stdin.readline().rstrip()])
+
+
+# from collections import Counter
+
+# game = {
+#     0:'E',
+#     1:'A',
+#     2:'B',
+#     3:'C',
+#     4:'D',
+# }
+
+# while True:
+#     try:
+#         x = map(int,input().split())
+#         bae = Counter(x)[0]
+#         print(game[bae])
+#     except:
+#         break

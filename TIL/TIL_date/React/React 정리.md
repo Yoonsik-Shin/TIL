@@ -176,6 +176,14 @@ console.log(a === b) // true
 
 ​    
 
+> warning 메시지 지우기
+
+```jsx
+/* eslint-disable */
+```
+
+​    
+
 ---
 
 ## Component (컴포넌트)

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block navbaricon %}
+  {% load static %}
+  <img src="{% static "img/004.png" %}" alt="" width="30" height="24" class="d-inline-block align-text-top"/>Hypergrowth
+{% endblock navbaricon %}
+
+{% block content %}
+  {% load django_bootstrap5 %}
+  <form action="/url/to/submit/" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input class="btn btn-primary" type="submit" value="추가">
+  </form>
+{% endblock content %}

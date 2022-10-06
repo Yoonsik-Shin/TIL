@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block navbaricon %}
+  {% load static %}
+  <img src="{% static "img/004.png" %}" alt="" width="30" height="24" class="d-inline-block align-text-top"/>Hypergrowth
+{% endblock navbaricon %}
+
+{% block content %}
+  <h1>디테일페이지</h1>
+  <p>{{ movie_detail.title }}</p>
+  <p>{{ movie_detail.running_time }}</p>
+  <p>{{ movie_detail.summary }}</p>
+  <a href="{% url 'movies:update' movie_detail.pk %}"><input type="submit" class="btn btn-danger" value="수정"></a>
+  <a href="{% url 'movies:delete' movie_detail.pk %}"><input type="submit" class="btn btn-warning" value="삭제"></a>
+{% endblock content %}
