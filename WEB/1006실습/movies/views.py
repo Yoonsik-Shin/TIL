@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.urls import is_valid_path
 from .forms import MovieForm
 from .models import Movie
 
@@ -43,10 +42,9 @@ def update(request, pk):
             update_movie.save()
             return redirect('movies:detail', pk)
     else:
-        update_movie =  MovieForm(instance=update_data)
+        update_movie = MovieForm(instance=update_data)
 
     context = {
         'update_movie':update_movie,
     }
     return render(request, 'movies/update.html', context)
-        

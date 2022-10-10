@@ -440,6 +440,33 @@ $ git checkout -b <브랜치이름>
 
 ​    
 
+#### ❗Pull Request 충돌 해결
+
+1. github내에서 해결
+
+![pullrequest](Git(3).assets/pullrequest.png)
+
+2. 로컬에서 해결
+
+![pullrequest local](Git(3).assets/pullrequest local.png)
+
+```bash
+# step1
+$ git fetch origin
+$ git switch new-heading
+$ git merge master
+>> 충돌 수정
+```
+
+```bash
+# step2
+$ git switch master
+$ git merge --no--ff newheading
+$ git push origin master
+```
+
+​    
+
 ---
 
 ## 💯오늘의 교훈

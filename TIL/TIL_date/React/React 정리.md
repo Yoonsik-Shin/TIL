@@ -326,3 +326,22 @@ let [a, b] = useState('')
 }
 ```
 
+​    
+
+---
+
+## props
+
+- 부모 component에서 자식 component로 state 전송하기
+- 자식에서 부모, 형제끼리는 불가능 ❗
+
+```jsx
+<자식컴포넌트 작명={state이름}/>
+
+function 자식컴포넌트(props){
+  return (
+    <p>props.작명</p>
+  )
+}
+```
+
