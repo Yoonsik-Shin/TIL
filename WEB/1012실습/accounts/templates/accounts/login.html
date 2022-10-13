@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <h1>로그인</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ login_form.as_p }}
+    <input type="submit" value="로그인">
+  </form>
+{% endblock body %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'accounts/css/accounts.css' %}">
+{% endblock css %}
+{% block body %}
+  <div class='d-flex flex-column align-items-center'>
+    <h1 class='mb-3'>회원목록</h1>
+
+    {% if request.user.is_authenticated %}
+      <p>{{ user }}님 안녕하세요!</p>
+    {% else %}
+      <p>로그인 해주세요!</p>
+    {% endif %}
+    <div class='mb-3'>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'accounts:logout' %}">
+          <button>로그아웃</button>
+        </a>
+        <a href="{% url 'accounts:update' user.pk %}">
+          <button>회원정보수정</button>
+        </a>
+      {% else %}
+        <a href="{% url 'accounts:signup' %}">
+          <button>회원가입</button>
+        </a>
+        <a href="{% url 'accounts:login' %}">
+          <button>로그인</button>
+        </a>
+      {% endif %}
+    </div>
+
+    <ol class="list-group list-group-numbered w-100">
+      {% for user_list in users_list %}
+        <a href="{% url 'accounts:detail' user_list.pk %}" class="rounded-3">
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">유저이름:
+                {{ user_list }}</div>
+              이메일:
+              {{user_list.email}}
+            </div>
+            <span class="badge bg-primary rounded-pill">{{ user_list.pk }}번 회원</span>
+          </li>
+        </a>
+      {% endfor %}
+    </ol>
+  </div>
+  <script src="{% static 'accounts/js/accounts.js' %}"/>
+{% endblock body %}

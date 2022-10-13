@@ -17,7 +17,8 @@
 | 2022.09.24 (토) | [GIT extra](./TIL_date/GIT/Git(5).md)  | git checkout, git restore, git reset, git revert |
 | 2022.09.27 (월) | [GIT extra2](./TIL_date/GIT/Git(6).md) | Remote Tracking Branch, git fetch, git pull      |
 | 2022.09.28 (화) | [GIT extra3](./TIL_date/GIT/Git(7).md) | 레포 비공개, 공동작업자 추가, gist, github pages |
-| 2022.10.10 (월) | [GIT extra4](./TIL_date/GIT/Git(8).md) | rebase, interactive rebase                       |
+| 2022.10.10 (월) | [GIT extra4](./TIL_date/GIT/Git(8).md) | rebase, interactive rebase, tag                  |
+| 2022.10.12 (수) | [GIT extra5](./TIL_date/GIT/Git(9).md) | Reflog, Alias                                    |
 
 ​    
 

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+  <div class="row">
+    <h1 class='text-center'>로그인</h1>
+    <form action="" method="post">
+      {% csrf_token %}
+      {% load django_bootstrap5 %}
+      {% bootstrap_form login_form %}
+      <button class='w-100'>제출</button>
+    </form>
+    <a href="{% url 'accounts:signup' %}" class="text-center">
+      <button class='w-100'>회원가입</button>
+    </a>
+  </div>
+  <script src="{% static 'accounts/js/accounts.js' %}"/>
+{% endblock body %}

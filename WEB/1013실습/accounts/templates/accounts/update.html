@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+  <h1 class='text-center'>회원정보수정</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% load django_bootstrap5 %}
+    {% bootstrap_form update_form %}
+    <button class='w-100'>제출</button>
+  </form>
+  <a href="{% url 'accounts:password' %}">
+    <button class='w-100'>
+      비밀번호 변경
+    </button>
+  </a>
+  <script src="{% static 'accounts/js/accounts.js' %}"/>
+{% endblock body %}

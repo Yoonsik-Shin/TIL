@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <h1>index</h1>
+  {% if request.user.is_authenticated %}
+    <span>{{ request.user }}</span>
+    <a href="{% url 'accounts:logout' %}">로그아웃</a>
+  {% else %}
+    <a href="{% url 'accounts:signup' %}">
+      <button>회원가입</button>
+    </a>
+    <a href="{% url 'accounts:login' %}">
+      <button>로그인</button>
+    </a>
+  {% endif %}
+  <p>{{ user }}로그인중</p>
+  {% for user1 in users %}
+    <p>
+      <a href="{% url 'accounts:detail' user1.pk %}">{{ user1 }}</a>
+    </p>
+  {% endfor %}
+
+{% endblock body %}
