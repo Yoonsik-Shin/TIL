@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block body %}
+
+<div class="text-center my-5">
+  <h1>회원가입</h1>
+</div>
+<form action="" method="POST" class="form p-5 m-5">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+
+  {% bootstrap_button button_type="submit" content="등록" %}
+  <a class="btn btn-danger m-1" href="{% url 'reviews:index' %}">취소</a>
+</form>
+
+{% endblock body %}

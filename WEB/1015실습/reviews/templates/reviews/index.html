@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block body %}
+  <div class='container'>
+    <div class='row my-5'>
+      <div class='card'>
+        <div calss='card-body bg-primary'>
+          <h1 class='py-4 text-center'>리뷰 목록</h1>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='card'>
+        <div class='card-body col text-center p-3'>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">리뷰명</th>
+                <th scope="col">영화제목</th>
+                <th scope="col" colspan="2">평점</th>
+                <th scope="col">리뷰생성시간</th>
+                <th scope="col" colspan="2">리뷰수정/삭제</th>
+              </tr>
+            </thead>
+            <tbody style="vertical-align:middle;">
+              {% for user_ in users %}
+                <tr>
+                  <td>
+                    <a href="{% url 'reviews:detail' user_.pk %}">{{ user_.title }}</a>
+                  </td>
+                  <a href="">
+                    <td>{{ user_.movie_name }}</td>
+                  </a>
+                  <td colspan="2">
+                    {{ user_.grade }}점
+                    {% if user_.grade > 0 and user_.grade <= 0.5 %}
+                      <p class='m-0'>
+                        <span>🌗🌑🌑🌑🌑</span></p>
+                    {% elif user_.grade > 0.5 and user_.grade <= 1.0 %}
+                      <p class='m-0'>
+                        <span>🌕🌑🌑🌑🌑</span></p>
+                    {% elif user_.grade > 1.0 and user_.grade <= 1.5 %}
+                      <p class='m-0'>
+                        <span>🌕🌗🌑🌑🌑</span></p>
+                    {% elif user_.grade > 1.5 and user_.grade <= 2.0 %}
+                      <p class='m-0'>
+                        <span>🌕🌕🌑🌑🌑</span></p>
+                    {% elif user_.grade > 2.0 and user_.grade <= 2.5 %}
+                      <p class='m-0'>
+                        <span>🌕🌕🌗🌑🌑</span></p>
+                    {% elif user_.grade > 2.5 and user_.grade <= 3.0 %}
+                      <p class='m-0'>
+                        <span>🌕🌕🌕🌑🌑</span></p>
+                    {% elif user_.grade > 3.0 and user_.grade <= 3.5 %}
+                      <p class='m-0'>
+                        <span>🌕🌕🌕🌗🌑</span></p>
+                    {% elif user_.grade > 3.5 and user_.grade <= 4.0 %}
+                      <p class='m-0'>
+                        <span>🌕🌕🌕🌕🌑</span></p>
+                    {% elif user_.grade > 4.0 and user_.grade <= 4.5 %}
+                      <p class='m-0'>
+                        <span>🌕🌕🌕🌕🌗</span></p>
+                    {% elif user_.grade > 4.5 and user_.grade < 5.0 %}
+                      <p class='m-0'>
+                        <span>🌕🌕🌕🌕🌖</span></p>
+                    {% elif user_.grade == 5.0 %}
+                      <p class='m-0'>
+                        <span>🌕🌕🌕🌕🌕</span></p>
+                    {% endif %}
+                  </td>
+                  <td>{{ user_.created_at|date:"y년 m월 d일 H시 i분" }}</td>
+                  <td>
+                    <a class="btn btn-primary py-sm-1" href="{% url 'reviews:update' user_.pk %}" role="button">변경</a>
+                  </td>
+                  <td>
+                    <a class="btn btn-danger py-sm-1" href="{% url 'reviews:delete' user_.pk %}" role="button">삭제</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock body %}

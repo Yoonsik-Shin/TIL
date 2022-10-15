@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block body %}
+
+<div class="container">
+
+  <div class="card my-3" style="box-shadow:8px 8px 8px 4px rgb(56, 56, 56)">
+    {% if request.resolver_match.url_name == 'create' %}
+      <h3 class="card-header text-white text-center p-3" style="font-weight:bold; background-color:rgb(56, 56, 56)">리뷰 작성</h3>
+    {% else %}
+      <h3 class="card-header text-white text-center p-3" style="font-weight:bold; background-color:rgb(56, 56, 56)">리뷰 수정</h3>
+    {% endif %}
+    <div class="card-body" style="background-color:rgb(128, 128, 128); color:aliceblue">
+      <form action="" method="POST" class="form p-5 m-5">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-dark m-1" type="submit">등록</button>
+        <a class="btn btn-danger m-1" href="{% url 'reviews:index' %}">취소</a>
+      </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+{% endblock body %}

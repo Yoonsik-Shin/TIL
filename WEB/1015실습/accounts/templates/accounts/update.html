@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block body %}
+
+<div class="text-center my-5">
+  <h1>정보수정</h1>
+</div>
+<form action="" method="POST" class="form p-5 m-5">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+
+  {% bootstrap_button button_type="submit" content="등록" %}
+  {% bootstrap_button button_type="reset" content="취소" %}
+</form>
+
+{% endblock body %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block body %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">pk</th>
+        <th scope="col">Username</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for list in user_list %}
+        <tr>
+          <th scope="row">{{ list.pk }}</th>
+          <td>{{ list.username }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock body %}

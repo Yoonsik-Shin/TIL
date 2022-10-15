@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block body %}
+
+<div class="row d-flex justify-content-center mt-5">
+  <div class="col-6">
+    <h1 class="text-center">{{ review.title }}</h1>
+    <p class="text-end text-secondary">{{ review.movie_name }}</p>
+    <br>
+    <p class="text-end">{{ review.grade }}점</p>
+    <p class="text-end">{{ review.created_at }}</p>
+    <hr>
+    <p><span class="text-justify">{{ review.content }}</span></p>
+    <div class="d-flex justify-content-end">
+      <a href="{% url 'reviews:update' review.pk %}" class="btn btn-primary m-1">수정</a>
+      <a href="{% url 'reviews:delete' review.pk %}" class="btn btn-danger m-1">삭제</a>
+    </div>
+  </div>
+</div>
+
+
+{% endblock body %}
