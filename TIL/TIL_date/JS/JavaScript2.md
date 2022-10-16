@@ -146,7 +146,7 @@ colors = ['red', 'red-orange', 'orange', 'yellow', 'green', 'blue']
 ### 1-9.`sort`
 
 - 배열을 줄이는 메서드
-- 잘 안씀
+- 원본이 변형됨
 - 다른 언어와 기능 다름 ❗❗
 
 ```javascript
@@ -155,6 +155,36 @@ months.sort();  >>  ["Dec", "Feb", "Jan", "March"] // UTF16 코드 유닛값을 
   
 let scores = [1, 70, 100, 2500, 9, -12, 0, 34]
 scores.sort()  >>  [-12, 0, 1, 100, 2500, 34, 70, 9] // 첫번째 자리 숫자만 계산하여 정렬
+```
+
+```javascript
+// 숫자 오름차순 정렬
+let scores = [3, 1, 5, 9 , 40]
+scores.sort((a,b)=>{
+  return a-b
+  // return값 양수 : a를 오른쪽
+	// return값 음수 : b를 오른쪽  
+})
+
+// 숫자 내림차순 정렬
+let scores = [3, 1, 5, 9 , 40]
+scores.sort((b,a)=>{
+  return b-a
+  // return값 양수 : a를 오른쪽
+	// return값 음수 : b를 오른쪽  
+})
+
+// 문자 내림차순 정렬
+var arr = ['가', '다', '나']
+arr.sort((a,b){
+	if (a < b) {  // 
+  	return 1
+	} else if {   // 
+    return -1
+  } else {      // 같은 문자일 경우
+    return 0 
+  }
+})
 ```
 
 ​    

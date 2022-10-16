@@ -158,6 +158,7 @@ clearInterval(id);  // 반복 멈춤
 
 - 콜백 함수의 반환 값이 참인 요소들만 모아서 새로운 배열을 반환
 - 기존 배열의 요소들을 필터링할 때 유용
+- 원본은 보존됨
 
 ```javascript
 array.filter(callback(element[, index[, array]]))
@@ -166,7 +167,7 @@ array.filter(callback(element[, index[, array]]))
 ```javascript
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-numbers.filter(n => {
+const filter = numbers.filter(n => {
   return n < 5
 })
 
