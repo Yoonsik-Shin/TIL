@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>detail</h1>
+  <p>{{ article.pk }}</p>
+  <form action="{% url 'articles:comments_create' article.pk %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <button>제출하기</button>
+  </form>
+  <h2>댓글 :
+    {{ comments|length }}개</h2>
+  {% for comment in comments %}
+    <p>{{ comment.content }}
+      <a href="{% url 'articles:comments_delete' article.pk comment.pk %}">
+        <button>삭제하기</button>
+      </a>
+    </p>
+    {% empty %}
+    <p>아직 댓글이 없습니다. 첫 댓글을 작성해보세요!</p>
+  {% endfor %}
+{% endblock content %}

@@ -256,10 +256,79 @@ article.title = ' '    # 2. 클래스 변수명과 같은 이름의 인스턴스
 article.save()         # 3. 인스턴스로 save 메서드 호출
 ```
 
-#### 방법2
+##### 방법2
 
 ```python
 article = Article(title=' ', content=' ')
 article.save()
+```
+
+##### 방법3 ✔️✔️
+
+```python
+Article.objects.create(title=' ', content=' ')
+```
+
+​    
+
+> .save()
+
+- 객체를 DB에 저장함
+- 단순히 모델 클래스를 통해 인스턴스를 생성하는 것은 DB에 영향 x
+- 반드시 save를 호출해야 테이블에 레코드가 생성됨
+
+​     
+
+#### READ
+
+- 전체 데이터 조회 (`.all()`)
+
+```python
+Article.objects.all()
+>> <QuerySet [<Article: Article object (1)>, <Article: Article object (2)>, ...]
+```
+
+​    
+
+- 단일 데이터 조회 (`.get()`)
+
+```python
+Article.objects.get(pk=2)
+```
+
+- 객체를 찾을 수 없으면 DoesNotExist 예외 발생
+- 둘 이상의 객체 찾으면 MultipleObjectsReturned 예외 발생
+- 고유성이 보장되는 primary key와 같이 사용
+
+​    
+
+- 조건에 맞는 데이터 조회 (`.filter()`)
+
+```python
+Article.objects.filter(content='django!'
+```
+
+- 조회된 객체가 없거나 1개여도 QuerySet 반환
+
+​    
+
+#### UPDATE
+
+```python
+article = Article.objects.get(pk=1)
+article.title = '수정'
+article.save()
+```
+
+​    
+
+#### DELETE
+
+```python
+article = Article.objects.get(pk=1)
+article.delete()
+
+Article.objects.get(pk=1)
+DoesNotExist: Article matching query does not exist.
 ```
 

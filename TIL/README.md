@@ -89,6 +89,12 @@
 | 2022.09.19 (월) | [JavaScript7](./TIL_date/JS/JavaScript7.md)                  | AJAX, API, JSON, HTTP, XHR, Fetch, Axios                     |
 | 2022.09.20 (화) | [JavaScript8](./TIL_date/JS/JavaScript8.md)                  | OOP, 프로토타입, 팩토리함수, 생성자함수                      |
 
+### JavaScript Extra Study
+
+| Day             | Contents                                    | Ex                                                           |
+| --------------- | ------------------------------------------- | ------------------------------------------------------------ |
+| 2022.10.15 (토) | [JavaScript9](./TIL_date/JS/JavaScript9.md) | 브라우저 내 저장 공간 (LocalStorage, SessionStorage, IndexedDB) |
+
 ​    
 
 ---
@@ -102,7 +108,15 @@
 | 2022.09.26 (월)                      | [django정리(1)](./TIL_date/Django/Django정리(1).md)          | Variable routing, 템플릿 상속, 추가경로설정, form 다루기     |
 | 2022.09.27 (화)                      | [django정리(2)](./TIL_date/Django/Django정리(2).md)          | URLs, App URL mapping, 템플릿 이름공간,  Naming URL patterns, URL 이름공간 |
 | 2022.09.28 (수)<br />2022.09.29 (목) | [django정리(3)](./TIL_date/Django/Django정리(3).md)          | Framework 특징<br />Django Model                             |
-| 2022.09.30 (금)                      | [0930실습](../WEB/0930실습)                                  | [Django CRUD실습] 페어프로그래밍                             |
-| 2022.10.04 (화)                      | [django정리(4)](./TIL_date/Django/Django정리(4).md)          | ModelForm                                                    |
-| 2022.10.04 (수)                      | [django정리(5)](./TIL_date/Django/Django정리(5).md)          | Admin Site, Static Files, Django - BootStrap                 |
+| 2022.09.30 (금)                      | [django정리(4)](./TIL_date/Django/Django정리(4).md)<br />[0930실습](../WEB/0930실습) | 기본 CRUD 구현과정<br />[Django CRUD실습] 페어프로그래밍     |
+| 2022.10.04 (화)                      | [django정리(5)](./TIL_date/Django/Django정리(5).md)          | ModelForm                                                    |
+| 2022.10.05 (수)                      | [django정리(6)](./TIL_date/Django/Django정리(6).md)<br />[1005실습](../WEB/1005실습) | Admin Site, Static Files, Django - BootStrap                 |
+| 2022.10.06 (목)                      | [1006실습](../WEB/1006실습)                                  | Admin Site, Static Files, Django - BootStrap 활용 실습       |
+| 2022.10.11 (화)                      | [django정리(7)](./TIL_date/Django/Django정리(7).md)<br />[1011실습](../WEB/1011실습) | Django Auth, User Model, 회원가입                            |
+| 2022.10.12 (수)                      | [django정리(8)](./TIL_date/Django/Django정리(8).md)<br />[1012실습](../WEB/1012실습) |                                                              |
+| 2022.10.13 (목)                      | [django정리(9)](./TIL_date/Django/Django정리(9).md)<br />[1013실습](../WEB/1013실습) |                                                              |
+| 2022.10.17 (월)                      | [Django 미디어파일](./TIL_date/Django/Django미디어파일.md)<br />[1017실습](../WEB/1017실습) | 미디어 파일, 이미지 업로드, 이미지 리사이징                  |
+| 2022.10.18 (화)                      | [Django 댓글](./TIL_date/Django/Django댓글.md)<br />[1018실습](../WEB/1018실습) | Foreign Key, Comment모델 CRUD, 역참조, 댓글 갯수, 댓글 없는 경우 |
+
+
 

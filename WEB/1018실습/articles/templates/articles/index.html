@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <a href="{% url 'articles:create' %}">
+    <button>글쓰기</button>
+  </a>
+  {% for article in articles %}
+    <div>
+      <a href="{% url 'articles:detail' article.pk %}">{{ article.pk }}
+        |
+        {{ article.title }}
+        |
+        {{article.content}}</a>
+    </div>
+  {% endfor %}
+{% endblock content %}

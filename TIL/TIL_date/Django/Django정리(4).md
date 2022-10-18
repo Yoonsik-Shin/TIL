@@ -1,230 +1,289 @@
 # Django 개념 (4)
 
-​    
+​     
 
-## 1️⃣ ModelForm
+## ✍️ CRUD 구현
 
-### 1. 생성
+### 0️⃣ base 템플릿
 
-```python
-# articles/forms.py 파일 생성
-
-from django import forms
-from .models import Article
-
-class ArticleForm(forms.ModelForm):
-  
-  class Meta:
-    model = 앱
-    fields = '__all__'
+```html
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- bootstrap CSS CDN -->
+<title>Document</title>
+</head>
+<body>
+<div class="container">
+{% block content %}
+{% endblock content %}
+</div>
+<!-- bootstrap JS CDN -->
+</body>
+</html>
 ```
 
-- forms 라이브러리의 ModelForm 클래스 상속
-- Meta 클래스 선언
-
-​    
-
-> Meta Class
-
-- ModelForm의 정보를 작성하는 곳
-- 참조하는 모델에 정의된 field 정보를 Form에 적용
-
 ```python
-# 앱/forms.py
-
-class 앱폼(forms.ModelForm):
-  
-   class Meta:
-    model = 앱
-    fields = '__all__'            # 모델의 모든 필드 포함
-    exclude = (포함하지 않을 값,)   # 모델에서 사용하지 않을 필드 지정
+# settings.py
+`TEMPLATES = [
+  {
+    ...,
+    'DIRS': [BASE_DIR / 'templates',],
+  }
+]
 ```
 
 ​    
 
-### 2. 활용
-
-1. ModelForm 객체를 context로 전달
+### 1️⃣ urls 정리
 
 ```python
-# 앱/views.py
+# apps/urls.py
+from django.urls import path
+from . import views
 
-from .forms import 앱폼
+app_name = 'apps'
 
+urlpatterns = [
+  path('', views.index, name='index'),
+]
+```
+
+```python
+# project/urls.py
+from django.urls import path, include
+
+urlpatterns = [
+  path('apps/', include('apps.urls'))
+]
+```
+
+​    
+
+### 2️⃣ 전체 게시글 조회
+
+```python
+# apps/views.py
+from .models import App
+
+def index(request):
+  apps = App.objects.all()
+  context = {
+    'apps': apps,
+  }
+  return render(request, 'apps/index.html', context)
+```
+
+```django
+<!-- templates/apps/index.html -->
+{% extends 'base.html' %}
+{% block content %}
+	{% for app in apps %}
+		{{ app.pk }}
+{% endblock content %}
+```
+
+​     
+
+### 3️⃣ CREATE
+
+- create 로직 구현에 사용되는 view 함수
+
+1. `new` : 사용자의 입력을 받을 페이지를 렌더링하는 함수
+2. `create` : 사용자가 입력한 데이터를 전송받아 DB에 저장하는 함수
+
+```python
+# apps/urls.py
+urlpatterns = [
+  path('', views.index, name='index'),
+  path('new/', views.new, name='new'),
+  path('create/', views.create, name='create'),
+]
+```
+
+```python
+# apps/views.py
 def new(request):
-  form = 앱폼()
-  
-  context = {
-    'form': form,
-  }
-  
-  return render(request, '앱/new.html', context)
+  return render(request, 'apps/new.html')
+
+def create(request):
+  title = request.POST.get('title')
+  content = request.POST.get('content')
+  Article.objects.create(title=title, content=content)
+  return redirect('apps:index')
 ```
 
-2. Input Field 활용 (Html)
+```django
+<!-- templates/apps/new.html -->
+{% extends 'base.html' %}
+{% block content %}
+	<form action="{% url 'apps:create' %}" method="POST">  
+  </form>
+{% endblock content %}
+```
 
-```html
-<!-- 앱/new.html -->
-<form action="{% url '앱:create' %}" method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
+​    
+
+> redirect
+
+- 인자에 작성된 곳으로 요청을 보냄
+
+```python
+# apps/views.py
+from django.shortcuts import render, redirect
+
+def create(request):
+  return redirect('apps:index')
+```
+
+- 사용가능 인자
+  1. view name (URL pattern name) : `return redirect('apps:index')`
+  2. absolute or relative URL : `return redirect('/apps/')`
+
+- 동작 원리
+  1. 클라이언트가 create url로 요청을 보냄
+  2. create view 함수의 redirect 함수가 `302` status code를 응답
+  3. 응답받은 브라우저는 redirect인자에 담긴 주소로 이동하기 위해 django에 재요청
+  4. 주소에 담긴 페이지로 정상 응답 받음 (`200` status code)
+
+​    
+
+> 302 Found
+
+- HTTP response status code
+- 브라우저가 사용자를 해당 URL 페이지로 이동 시킴
+
+> 403 Forbidden
+
+- 서버에 요청이 전달되었지만, 권한때문에 거절
+- 서버에 요청은 도달했지만 서버가 접근을 거부할 때
+
+​     
+
+#### ✔️ CSRF
+
+- Cross-Site-Request-Forgery (사이트 간 요청 위조)
+- 사용자의 의지와 무관하게 공격자가 의도한 행동을 하게하여 특정 웹 페이지의 보안을 취약하게하거나 수정, 삭제등의 작업을 하게 만드는 공격
+- 이를 방지하기 위해 `Security Token (CSRF Token)` 방식 사용
+
+> CSRF Token
+
+- 사용자의 데이터에 임의의 난수 값(Token)을 부여하여 매 요청마다 해당 난수 값을 포함시켜 전송
+- 서버에서는 요청을 받을 때마다 전달된 Token 값이 유효한지 검증
+
+```django
+<form action="{% url '' %}" method="POST">
+	{% csrf_token %}
 </form>
 ```
 
-​    
-
-> Form rendering options
-
-1. `as_p()`
-   - 각필드가 `<p>` 로 감싸져 렌더링
-2. `as_ul()`
-   - 각 필드가 `<li>` 로 감싸져 렌더링
-   - `<ul>` 태그는 직접 작성해야 함
-3. `as_table`() 
-   - 각 필드가 `<tr>` 로 감싸져 렌더링
+- 템플릿에서 내부 URL로 향하는 Post form을 사용하는 경우 사용 (외부 URL은 보안 취약)
 
 ​    
 
- ### 3. 로직
+### 4️⃣ READ
 
-1. 요청 방식에 따른 분기
-   - GET/POST
-2. 유효성 검사에 따른 분기
-   - 실패시 다시 Form으로 전달
-   - 성공시 DB저장
-
-​    
-
----
-
-## 2️⃣ CU
-
-### 1. CREATE
+- 개별 게시글 상세 페이지 제작
+- Variable Routing 활용
 
 ```python
-# 앱/views.py
+# apps/urls.py
+urlpatterns = [
+  path('<int:pk>/', views.detail, name='detail'),
+]
+```
 
-def create(request):
-  form = 앱폼(request.POST)
-  if form.is_valid():
-    article = form.save()
-    return redirect('앱:detail', 앱.pk)  # 유효성 검사 통과시 : 데이터 저장 후 상세페이지로 redirect
- 	print( {form.error} )    #
-  return redirect('앱:new')              # 유효성 검사 통과 실패시 : 작성 페이지로 redirect
+```python
+# apps/views.py
+def detail(request, pk)
+  app = Article.objects.get(pk=pk)  # variable routing pk = DB레코드의 id 컬럼
+  context = {
+  	'app': app,
+  }
+  return render(request, 'apps/detail.html', context)	
+```
+
+```django
+<!-- templates/apps/detail.html -->
+...
+{{ app.pk }} {{ app.title }} ...
+
+<!-- templates/apps/index.html -->
+...
+{% for app in apps %}
+	<a href="{% url 'articles:detail' app.pk %}">개별 detail 페이지</a>
+{% endfor %}
 ```
 
 ​    
 
-####  1-1. `is_valid()` 
+### 5️⃣ DELETE
 
-- 유효성 검사를 실행하고, 데이터가 유효한지 여부를 __boolean__ 형태로 반환
-
-> `error` 속성
-
-- is.valid()의 반환 값이 False일 경우, form 인스턴스의 errors 속성에 유효성 검증 실패 원인이 딕셔너리 형태로 저장됨
-- 유효성 검증 실패시 사용자에게 실패 결과 메시지 출력할 때 사용
-
-​     
-
-#### 1-2. `save()`
-
-- form 인스턴스에 바인딩된 데이터를 통해 DB객체를 만들고 저장
-- `instance` 여부로 생성/ 수정 여부 결정
+- 특정 글 조회 후 삭제
 
 ```python
-# CREATE
-form = 앱폼(request.POST)                # 인스턴스 X
-form.save()
-
-# UPDATE
-article = Article.objects.get(id=pk)
-form = 앱폼(request.POST, instance=article)    # 인스턴스 O
-form.save()
+# apps/urls.py
+urlpatterns = [
+  path('<int:pk>/delete/', views.delete, name='delete'),
+]
 ```
 
-​     
+```python
+# apps/views.py
+def delete(request, pk):
+  app = Article.objects.get(pk=pk)
+  app.delete()
+  return redirect('apps:index')
+```
 
-### 2. UPDATE
+​    
+
+### 6️⃣ UPDATE
+
+- UPDATE 로직 구현에 사용되는 view 함수
+
+1. `edit` : 사용자의 입력을 받을 페이지를 렌더링하는 함수
+2. `update` : 사용자가 입력한 데이터를 전송받아 DB에 저장하는 함수
 
 ```python
-# articles/views.py
+# apps/urls.py
+urlpatterns = [
+	path('<int:pk>/edit/', views.edit, name='edit'),
+  path('<int:pk>/update/', views.update, name='update'),
+]
+```
+
+```python
+# apps/views.py
 def edit(request, pk):
-  article = Article.objects.get(id=pk)
-  form = ArticleForm(instance=article)
+  app = App.objects.get(pk=pk)
   context = {
-    'article': article,
-    'form': form,
+  	'app': app,
   }
-  return render(request, 'articles/edit.html', context)
+  return render(request, 'apps/edit.html', context)
 
 def update(request, pk):
-  article = Article.objects.get(id=pk)
-  form = ArticleForm(instance=article)
-  if form.is_valid():
-    form.save()
-    return redirect('articles:detail', article.pk)
-  context = {
-    'form': form,
-    'article': article,
-  }
-  return render(request, 'articles/edit.html', context)
+  app = App.objects.get(pk=pk)
+  app.title = request.POST.get('title')
+  app.content = request.POST.get('content')
+  app.save()
+	return redirect('apps:detail', app.pk)
 ```
 
-```html
-<!-- articles/edit.html -->
-<form action="{% url 'articles:update' article.pk %}" methode="POST">
-  {% csrf token %}
-  {{ form.as_p }}
+```django
+<!-- apps/edit.html -->
+<form action="{% url 'articles:update' article.pk %}" method="POST">
+	{% csrf_token %}
+  <input type="text" name="title" value="{{ app.title }}">
+  <textarea name="content" cols="30" rows="5">{{ app.content }}</textarea>
+  <!-- textarea 태그는 value 속성이 없으므로 태그 내부 값으로 작성해야 한다. -->
+  <input type="submit">
 </form>
+
+<!-- apps/detail.html -->
+<a href="{% url 'apps:edit' app.pk %}">EDIT 페이지로 이동</a><
 ```
-
-- `instance` : 수정이 되는 대상
-- `request.POST` : 사용자가 form을 통해 전송한 데이터
-
-​    
-
----
-
-## 3️⃣ HTTP요청 다루기
-
-- new와 create함수 합치기
-
-```python
-# articles/views.py
-def create(request):
-  if request.method == 'POST':
-    form = ArticleForm(request.POST)
-    if form.is_valid():
-      article = form.save()
-      return redirect('articles:detail', article.pk)
-  else:
-    form = ArticleForm()
-  # context 들여쓰기 위치 주의
-  context = {               
-    'form': form,
-  }  
-  
-  return render(request, 'articles/new.html', context)
-```
-
-- edit과 update함수 합치기
-
-```python
-# articles/views.py
-def update(request, pk):
-  article = Article.objects.get(id=pk)
-  if request.method == 'POST':
-    form = ArticleForm(request.POST, instance=article)
-    if form.is_valid():
-      form.save()
-      return redirect('articles:detail', article.pk)
-  else:
-    form = ArticleForm(instance=article)
-    
-  context = {
-    'form': form,
-    'article': article,
-  }
-  return render(request, 'articles/update.html', context)
-```
-
