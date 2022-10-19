@@ -1,4 +1,4 @@
-# JavaScript 정리 (3)
+#  JavaScript 정리 (3)
 
 ​    
 
@@ -125,6 +125,13 @@ const newMovies = movies.map(movie => (
 	`${movie.title} - ${movie.score / 10}`
 ))
 ```
+
+​    
+
+> this와 화살표함수
+
+- `this` 키워드는 화살표 함수에서 다르게 동작
+- 화살표 함수안에 있는 `this` 키워드는 함수가 만든 범위에 상속되는 `this` 키워드와 같음
 
 ​    
 
@@ -261,15 +268,31 @@ const result = fruits.find((fruit) => {
   return fruit.name === 'banana';
 })
 
-console.log(result)  // { name: 'banana', color:'yellow' }
+console.log(result)  // { name: 'banana', color:'yellow' } 
 ```
 
 ​    
 
-> this와 화살표함수
+### 1-10. apply / call
 
-- `this` 키워드는 화살표 함수에서 다르게 동작
-- 화살표 함수안에 있는 `this` 키워드는 함수가 만든 범위에 상속되는 `this` 키워드와 같음
+- a 함수의 메서드를 b함수에 적용하고 싶을 때 사용
+
+```js
+var person_a = {
+   인사 : function(){
+     console.log(this.name + '반가워요')
+   }
+}
+
+var person_b = {
+  name: '윤식',
+}
+
+person_a.인사.apply(person_b)
+>> 윤식반가워요 
+person_a.인사.apply(person_b, [1,2])  // == person.인사(1), 인자에 배열만 가능
+person_a.인사.call(person_b, 1,2)     // == person.인사(1), 인자에 숫자 가능
+```
 
 ​    
 
@@ -281,6 +304,7 @@ console.log(result)  // { name: 'banana', color:'yellow' }
 
 - 매개변수에 아무 값을 주지않았을 때 자동으로 들어가는 값
 - 디폴트 매개변수는 순서가 중요하기 때문에 첫번째에 넣어서는 안됨
+- 함수도 가능
 
 ```javascript
 function multiply(a, ✔️b=1✔️) {
@@ -294,6 +318,8 @@ multiply(4, 5)  //  20
 ​    
 
 ### 2-2. 전개 (Spread)
+
+- 소괄호, 중괄호, 대괄호 안에서만 사용 가능
 
 ```javascript
 // 숫자
@@ -312,7 +338,7 @@ console.log('hello')
 >> hello
 
 consol.log(...'hello')
->> h e l l o
+>> 'h' 'e' 'l' 'l' 'o'
 ```
 
 ```javascript
@@ -336,7 +362,7 @@ addTurtle
 
 // 배열 속 문자열
 [...'hello']
->> ["h", "e", "l", "l", "o"]
+>> ["h", "e", "l", "l", "o"] 
 ```
 
 ```javascript
@@ -376,12 +402,17 @@ newUser
    }
 ```
 
+> 카피시에 값 중복이 일어나면? : 가장 뒤에 있는 값을 적용
+
 ​    
 
 ### 2-3. 나머지 (Rest)
 
 - 매개변수에 `...` 키워드 사용
+- 함수의 파라미터에서만 사용
 - 매개변수를 배열처럼 묶어줌
+- 항상 가장 뒤에 써야함
+- 여러번 사용 불가
 - 파이썬의 `*arg`
 
 ```javascript
@@ -417,6 +448,22 @@ raceResults('a', 'b', 'c', 'd', 'e', 'h')
 >> a
 >> b
 >> ['c', 'd', 'e', 'h']
+```
+
+​        
+
+> arguments
+
+- 모든 파라미터를 한번에 다루고 싶을 때 사용
+- 배열같은 역할을 해줌
+- 모든 파라미터를 `[]`안에 넣은 변수
+
+```js
+function 함수(a, b, c){
+  console.log(arguments[0]);
+  console.log(arguments[1]);
+  console.log(arguments[2]);
+}
 ```
 
 ​    

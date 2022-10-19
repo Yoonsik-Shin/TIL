@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <h1>index</h1>
+  {{ user }}
+  {% for article in articles %}
+    <a href="{% url 'articles:article_detail' article.pk  %}">
+      <p>{{ article.user }}
+        |
+        {{ article.title }}
+        |
+        {{ article.title }}</p>
+    </a>
+
+  {% endfor %}
+{% endblock content %}

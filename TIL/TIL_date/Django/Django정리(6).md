@@ -123,8 +123,6 @@ $ python manage.py collectstatic
 
 1. 설치 및 세팅
 
-- [BootStrap CDN](https://getbootstrap.kr/docs/5.2/getting-started/introduction/) 붙여넣기
-
 ```bash
 $ pip install django-bootstrap5
 ```
@@ -137,7 +135,23 @@ INSTALLED_APPS = [
 ```
 
 ```django
+<!-- base.html -->
+{% load django_bootstrap5 %}
+...
+<head>
+  ...
+  {% bootstrap_css %}
+</head>
+<body>
+  ...
+  {% bootstrap_javascript %}
+</body>
+```
+
+```django
 <!-- form이 들어갈 template -->
+{% load django_bootstrap5 %}
+
 <form action="" method="post">
   {% csrf_token %}
   {% bootstrap_form 정의된폼이름 %}

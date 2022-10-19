@@ -85,6 +85,12 @@ typeof NaN
 let hello     // 선언
 hello = 100   // 할당
 let bye = 0   // 선언 + 할당
+
+// 변수 동시에 여러개 만들기
+var a = 1, b = 'c', d;
+
+// window로 전역변수 만들기
+window.변수 = '';
 ```
 
 ​    
@@ -95,12 +101,31 @@ let bye = 0   // 선언 + 할당
 - 변수 선언 이전의 위치에서 접근시 `undefined`반환
 - JS는 모든 선언을 호이스팅함
 - `var`는 선언과 초기화가 동시에 발생하여, 일시적인 사각지대가 존재하지 않음 (의도치않은 오류 발생 가능성 O)
+- let, const는 Hoisting시 undefined가 자동으로 할당 안됨 (에러발생)
+
+```js
+// 내가 쓴 코드
+1  function 함수(){
+2    var 변수 = '';
+3  }
+4
+5  var 나이 = 30;
+
+// 자바스크립트가 해석하는 코드
+1  var 나이;
+2
+3  function 함수(){
+4    var 변수 = '';
+5  }
+6  나이 = 30;
+```
 
 ​    
 
 ### 1-1. `let`
 
 - 블록 내부에서 선언된 변수까지도 지역변수로 인정하는 블록레벨 스코프
+- 중괄호 내에서 유효
 
 ```javascript
 let someName = value;
@@ -262,7 +287,7 @@ thing.method(arg)   // arguments o
 
 ​    
 
->  ❗✔️✔️ 템플릿 리터럴 (Template Literals)
+#### ❗템플릿 리터럴 (Template Literals)
 
 - 백틱(back-tick) [``] 사용
 -  `${계산식}`
@@ -274,6 +299,27 @@ thing.method(arg)   // arguments o
 
 `you bought ${변수명}`
 >> "you bought 변수값"
+```
+
+​    
+
+#### ❗tagged Literal
+
+- 문자 해체분석
+- 첫번째 파라미터는 문자를 배열화 해줌
+- 두번째 파라미터 이후부터는 변수들을 뜻함
+
+```js
+function 해체분석(문자, 변수1, 변수2){
+  console.log(문자);
+  console.log(변수1);
+  console.log(변수2);
+}
+
+해체분석`문자1 ${변수1} 문자2 ${변수2}`
+>> ['문자1', '문자2']
+>> 변수1
+>> 변수2
 ```
 
 ​    

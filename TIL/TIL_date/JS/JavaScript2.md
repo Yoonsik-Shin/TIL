@@ -504,7 +504,57 @@ math.add(50, 60)
 
 ## 8️⃣ this
 
-- 메서드에 있는 객체를 가리킬 때 사용
+1. window 객체 
+
+- 그냥 사용하거나 일반함수 안에서는 window 객체 반환
+
+```js
+// 그냥 사용
+console.log(this)
+>> Window { ~~ } 
+
+// 일반함수 안에서 사용 
+function 함수(){
+  console.log(this);
+}
+>> Window { ~~ }
+```
+
+> window 객체 : JS의 기본 함수들의 저장공간
+
+```js
+window : {
+  함수(){
+    console.log(this);
+  }
+}
+```
+
+​    
+
+2. strict mode 
+
+- 엄격한 비교모드
+
+```js
+'use strict'
+
+// 그냥 사용
+console.log(this)
+>> Window { ~~ } 
+
+// 일반함수 안에서 사용 
+function 함수(){
+  console.log(this);
+}
+>> undefined
+```
+
+​    
+
+3. 객체 내 함수
+
+- 그 함수를 가지고 있는 객체를 의미 [person = this]
 
 ```javascript
 const person = {
@@ -513,7 +563,7 @@ const person = {
   weight: 80,
   selfIntro() {
     console.log(`${this.name} is ${this.height}cm and ${this.weight}kg`)
-  }
+  } 
 }
 
 person.selfIntro()
@@ -521,6 +571,44 @@ person.selfIntro()
 ```
 
 ​    
+
+4.  함수 내
+
+- 새로 생성되는 객체 (instance) 의미
+
+```js
+function 함수(){
+  this.a = 'b';
+}
+
+var 새로운객체 = new 함수();
+새로운객체 
+>>{a:'b'}
+```
+
+​    
+
+5. 이벤트리스너
+
+- `e.currentTarget` 과 같은 의미
+
+```js
+document.querySelector('').addEventListener('',
+  function(e){
+  	this;  // e.currentTarget (지금 이벤트가 동작하고 있는 곳)
+})
+```
+
+- `document.querySelector('')` == `this` == `e.currentTarget`
+
+​    
+
+> arrow function에서의 this
+
+- 내부의 this값을 변화시키지 않음
+- 외부 this값을 그대로 재사용 가능
+
+​     
 
 ---
 

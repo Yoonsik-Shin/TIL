@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 
 {% block content %}
-  <h1>detail</h1>
-  <p>작성자 : {{ logined_user }}</p>
-  <p>{{ article.pk }}</p>
-  <form action="{% url 'articles:comments_create' article.pk %}" method="POST">
-    {% csrf_token %}
-    {{ comment_form }}
-    <button>제출하기</button>
-  </form>
+  {{ article.user }}
+  <h1>detail
+  </h1>
+  {{ article.title }}
+  |
+  {{ article.content }}
+
   <h2>댓글 :
     {{ comments|length }}개</h2>
+  <form action="{% url 'articles:comments_create' article.pk %}" method="post">
+    {% csrf_token %}
+    {% bootstrap_form comment_form %}
+    <input type="submit" class='btn btn-primary'>
+  </form>
   {% for comment in comments %}
     <p>{{ comment.content }}
       <a href="{% url 'articles:comments_delete' article.pk comment.pk %}">
@@ -20,4 +25,5 @@
     {% empty %}
     <p>아직 댓글이 없습니다. 첫 댓글을 작성해보세요!</p>
   {% endfor %}
+
 {% endblock content %}
