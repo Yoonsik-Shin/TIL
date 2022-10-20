@@ -122,7 +122,7 @@ window.변수 = '';
 
 ​    
 
-### 1-1. `let`
+1. `let`
 
 - 블록 내부에서 선언된 변수까지도 지역변수로 인정하는 블록레벨 스코프
 - 중괄호 내에서 유효
@@ -149,7 +149,7 @@ num++;
 
 ​    
 
-### 1-2. `const`
+2. `const`
 
 - constant : 상수
 - 항상 일정한 값
@@ -165,7 +165,7 @@ num++;     // ERROR 발생
 
 ​    
 
-### 1-3. `var`
+3. `var`
 
 - `let` 과 유사
 - 현재에는 잘 안씀
@@ -216,7 +216,7 @@ let isGameOver = true;
 
 ## 2️⃣ Primitive Types (기본 원시 타입)
 
-### 2-1. Boolean
+1. Boolean
 
 - 모두 소문자 (파이썬은 `True / False`)
 
@@ -227,7 +227,7 @@ false   // 0
 
 ​    
 
-### 2-2. String
+2. String
 
 ```javascript
 let username = 'Yoonsik';
@@ -287,7 +287,7 @@ thing.method(arg)   // arguments o
 
 ​    
 
-#### ❗템플릿 리터럴 (Template Literals)
+### ❗템플릿 리터럴 (Template Literals)
 
 - 백틱(back-tick) [``] 사용
 -  `${계산식}`
@@ -303,7 +303,7 @@ thing.method(arg)   // arguments o
 
 ​    
 
-#### ❗tagged Literal
+### ❗tagged Literal
 
 - 문자 해체분석
 - 첫번째 파라미터는 문자를 배열화 해줌
@@ -324,7 +324,7 @@ function 해체분석(문자, 변수1, 변수2){
 
 ​    
 
-### 2-3. Null
+3. Null
 
 - 값이 없음을 명시
 - 아무것도 없음
@@ -336,7 +336,7 @@ let log = null;
 
 ​    
 
-### 2-4. undefined
+4. undefined
 
 - 자주 사용함
 - 정의되지 않은 것
@@ -454,7 +454,7 @@ console.log(result) // No
 
 ##  6️⃣ 출력 / 입력
 
-### 6-1. console.log
+1. console.log
 
 - 파이썬의 print와 같은 기능
 
@@ -468,7 +468,7 @@ console.log(1+4, 'hi', true)
 
 ​    
 
-### 6-2. Alert
+2. Alert
 
 - 사용자에게 뭔가를 출력해 주지만 콘솔에는 출력 x
 - 팝업 경고
@@ -479,7 +479,7 @@ alert("팝업창 내용")
 
 ​    
 
-### 6-3. prompt
+3. prompt
 
 - 인수를 받음
 - 파이썬의 input
@@ -492,13 +492,27 @@ let userNumInput = prompt("이름을 입력해주세요.")
 
 ​    
 
-### 6-4. parseInt
+4. parseInt
 
 - 파이썬의 int와 유사
 
 ```javascript
 parseInt("100")
 >> 100
+```
+
+​    
+
+5. toFixed
+
+```js
+let num = 1.23456
+
+console.log(numObj.toFixed());    // '1'
+console.log(numObj.toFixed(1));   // '1.2'
+console.log(numObj.toFixed(2));   // '1.23'
+console.log(numObj.toFixed(3));   // '1.235'
+console.log(numObj.toFixed(10));  // 오류
 ```
 
 ​    

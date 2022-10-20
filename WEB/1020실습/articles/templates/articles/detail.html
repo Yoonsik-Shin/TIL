@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <h1>리뷰상세페이지</h1>
+  <img src="{{article.image.url}}" width="400" height="300">
+  <h5 class="card-title">{{ article.title }}</h5>
+  <p class="card-text">{{ article.user }}</p>
+  <p class="card-text">{{ article.content }}</p>
+  <div>
+    <a href="{% url 'articles:update' article.pk %}" class="btn btn-primary m-1">수정</a>
+    <a href="{% url 'articles:delete' article.pk %}" class="btn btn-danger m-1">삭제</a>
+  </div>
+  <hr>
+  <h2>댓글 :
+    {{ comments|length }}개</h2>
+
+  <form action="{% url 'articles:comments_create' article.pk %}" method="post">
+    {% csrf_token %}
+    {% bootstrap_form comment_form %}
+    <input type="submit" class='btn btn-primary'>
+  </form>
+
+  {% for comment in comments %}
+    <p>{{ comment.content }}
+      <a href="{% url 'articles:comments_delete' article.pk comment.pk %}">
+        <button>삭제하기</button>
+      </a>
+    </p>
+    {% empty %}
+    <p>아직 댓글이 없습니다. 첫 댓글을 작성해보세요!</p>
+  {% endfor %}
+{% endblock content %}

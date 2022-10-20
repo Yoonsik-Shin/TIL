@@ -4,7 +4,7 @@
 
 ## 1️⃣ 배열 메서드
 
-### 1-1. forEach
+1-1. forEach
 
 - 배열 안의 아이템 각각에 대해 함수와 코드를 한번씩 실행
 - 반환값 X
@@ -39,7 +39,7 @@ numbers.forEach(function (el) {
 
 ​    
 
-### 1-2. Map ✔️✔️
+1-2. Map ✔️✔️
 
 - 배열 안의 아이템들 각각에 함수를 적용해서 새로운 배열에 저장
 - 기존 배열 전체를 다른 형태로 바꿀 때 유용
@@ -77,7 +77,7 @@ const titles = movies.map(function (movie) {
 
 ​    
 
-### 1-3.  Arrow ❗
+1-3.  Arrow ❗
 
 - function이라는 키워드 없이도 함수 입력 가능
 
@@ -135,7 +135,7 @@ const newMovies = movies.map(movie => (
 
 ​    
 
-### 1-4.  setTimeout
+1-4.  setTimeout
 
 ```javascript
 setTimeout(함수, x밀리초후 함수 1회 실행)
@@ -147,7 +147,7 @@ setTimeout(() => {
 
 ​    
 
-### 1-5. setInterval / clearInterval
+1-5. setInterval / clearInterval
 
 ```javascript
 setInterval(함수, x밀리초 마다 함수 실행)
@@ -161,7 +161,7 @@ clearInterval(id);  // 반복 멈춤
 
 ​    
 
-### 1-6. Filter ✔️✔️
+1-6. Filter ✔️✔️
 
 - 콜백 함수의 반환 값이 참인 요소들만 모아서 새로운 배열을 반환
 - 기존 배열의 요소들을 필터링할 때 유용
@@ -183,7 +183,7 @@ const filter = numbers.filter(n => {
 
 ​    
 
-### 1-7. Every / Some
+1-7. Every / Some
 
 - 불리언 메서드 (true / false 반환)
 
@@ -208,7 +208,7 @@ exams.some(score => score >= 75)  // 75점보다 높은 점수가 최소 한 개
 
 ​    
 
-### 1-8. Reduce  ✍️✍️ 
+1-8. Reduce  ✍️✍️ 
 
 - 배열을 점차 줄여나가면서 마지막에는 결국 하나의 값만 남김
 
@@ -248,7 +248,7 @@ exams.some(score => score >= 75)  // 75점보다 높은 점수가 최소 한 개
 
 ​    
 
-### 1-9. find
+1-9. find
 
 - 콜백 함수의 반환 값이 참이면, 조건을 만족하는 첫번째 요소를 반환
 - 찾는 값이 배열에 없으면 `undefined` 반환
@@ -273,7 +273,7 @@ console.log(result)  // { name: 'banana', color:'yellow' }
 
 ​    
 
-### 1-10. apply / call
+1-10. apply / call
 
 - a 함수의 메서드를 b함수에 적용하고 싶을 때 사용
 

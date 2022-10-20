@@ -154,10 +154,22 @@ req.send();
 - `fetch`함수를 호출하면 `Promise`가 반환됨
 - JSON을 따로 구문 분석하여 또 다른 프로미스로 반환해야함
 
+```js
+fetch("URL")
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data["price"]);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+```
+
 ```javascript
+// 최신사용법
 const load = async () => {
   try {
-    const res = await fethch("URL");
+    const res = await fetch("URL");
     const data = await res.json();
     console.log(data);
 	} catch (e) {

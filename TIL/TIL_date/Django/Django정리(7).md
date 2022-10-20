@@ -81,6 +81,7 @@ urlpatterns = [
 ```python
 # settings.py
 AUTH_USER_MODEL = 'auth.User'  # 기본값
+AUTH_USER_MODEL = 'accounts.User'  # 커스텀
 ```
 
 ​    

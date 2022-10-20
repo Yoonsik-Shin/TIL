@@ -23,7 +23,7 @@ let 배열명 = [숫자, 문자열, true, NaN, Null, ...];  // 배열 내에 서
 
 > 내장 메서드
 
-### 1-1.`push / pop`
+1-1.`push / pop`
 
 - 배열의 제일 마지막 값을 넣거나 뺄 떄 사용
 - 파이썬의 `append() / pop()` 과 같은 기능
@@ -36,7 +36,7 @@ let 변수 = 배열명.pop()
 
 ​    
 
-### 1-2.`shift / Unshift`
+1-2.`shift / Unshift`
 
 - 배열의 첫 값을 제거 / 추가
 
@@ -52,7 +52,7 @@ fruits = ['peach', 'banana', 'grape']
 
 ​    
 
-### 1-3.`concat`
+1-3.`concat`
 
 - 2개의 배열 끼리 접합
 
@@ -65,7 +65,7 @@ const array3 = array1.concat(array2);
 
 ​    
 
-### 1-4.`includes`
+1-4.`includes`
 
 - 불리언 메소드로 true / false 반환
 
@@ -80,7 +80,7 @@ fruits.includes('nana')    >>  false
 
 ​    
 
-### 1-5.`indexOf`
+1-5.`indexOf`
 
 - 배열의 인덱스 반환
 - 어떤 요소가 배열에 있는지 없는지 알아볼 때 사용
@@ -94,7 +94,7 @@ fruits.indexOf('apple', 2)   >>  3    // 일치하는 배열값중에 두번째�
 
 ​    
 
-### 1-6.`reverse`
+1-6.`reverse`
 
 - 배열을 뒤집어줌
 - 원본을 바꿈 ❗❗
@@ -106,7 +106,7 @@ fruits.reverse()  >>  fruits = ['grape', 'banana', 'apple']
 
 ​    
 
-### 1-7.`slice`
+1-7.`slice`
 
 - 배열의 일부를 복사
 - 하나의 인수값 : 인수값의 인덱스부터 끝까지
@@ -122,7 +122,7 @@ let 새배열 = fruits.slice(-2)    >>  ['peach', 'pineapple']  // index : -1 , 
 
 ​    
 
-### 1-8.`splice`
+1-8.`splice`
 
 - 삽입, 결합
 - 기존 요소들을 제거하거나 대체하거나 새로운 요소들을 추가해 배열 내용 변경
@@ -143,7 +143,7 @@ colors = ['red', 'red-orange', 'orange', 'yellow', 'green', 'blue']
 
 ​    
 
-### 1-9.`sort`
+1-9.`sort`
 
 - 배열을 줄이는 메서드
 - 원본이 변형됨
@@ -189,7 +189,7 @@ arr.sort((a,b){
 
 ​    
 
-### 1-10. join
+1-10. join
 
 - 배열의 모든 요소 연결
 

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <h1>index</h1>
+  {% for article in articles %}
+  </p>
+  <div class="card" style="width: 18rem;">
+    <img src="{{article.image.url}}" class="card-img-top" alt="..." width="300" height="300">
+    <div class="card-body">
+      <h5 class="card-title">{{ article.title }}</h5>
+      <p class="card-text">{{ article.user }}</p>
+      <p class="card-text">{{ article.content }}</p>
+      <a href="{% url 'articles:detail' article.pk %}" class="btn btn-primary">자세히 보기</a>
+    </div>
+  </div>
+{% endfor %}
+{% endblock content %}

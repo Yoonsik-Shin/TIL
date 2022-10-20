@@ -101,7 +101,7 @@ window.document
 
 ​    
 
-### 1-1. getElementById
+1-1. getElementById
 
 - id가 일치하는 요소를 찾음, 없으면 `null` 반환
 
@@ -111,7 +111,7 @@ const 변수 = document.getElementById('ID')
 
 ​    
 
-### 1-2. getElementsByTagName
+1-2. getElementsByTagName
 
 - 태그가 일치하는 요소 찾음
 - `HTMLCollection` 형태로 반환됨
@@ -130,7 +130,7 @@ for (let img of allImages) {
 
 ​    
 
-### 1-3. getElementsByClassName
+1-3. getElementsByClassName
 
 - 클래스가 일치하는 요소 찾음
 - `HTMLCollection` 형태로 반환됨
@@ -146,7 +146,7 @@ for (let img of ImageClass) {
 
 ​    
 
-### 1-4. QuerySelector ✔️✔️
+1-4. QuerySelector ✔️✔️
 
 - 무엇이든 선택가능
 - 첫 번째로 일치하는 값 반환
@@ -166,7 +166,7 @@ document.qureySelector('a[title="Java"]')
 
 ​     
 
-### 1-5. QuerySelectorAll ✔️✔️
+1-5. QuerySelectorAll ✔️✔️
 
 - 무엇이든 선택가능
 - 일치하는 모든 요소 반환
@@ -190,7 +190,7 @@ for (let link of links) {
 
 ## 2️⃣ 조작 메소드 (Manipulating method)
 
-### 2-1. innerText 
+2-1. innerText 
 
 - 여는 태그와 닫는 태그 사이의 내용을 텍스트로 반환
 - 태그는 모두 무시하고 숨겨진 항목은 무시
@@ -207,7 +207,7 @@ document.querySelector('h1').innerText = '<i> title </i>'
 
 ​    
 
-### 2- 2. textContent
+2- 2. textContent
 
 - innerText와 비슷하지만 현재 나타난 내용이나 사용자에게 보이는 내용은 신경 안씀
 - 저장한 방식에 따라 표기됨
@@ -219,7 +219,7 @@ document.querySelector('').textContent
 
 ​    
 
-### 2-3. innerHTML
+2-3. innerHTML
 
 - 태그 이름을 포함한 전체 콘텐츠 검색
 - 요소를 다른 요소 안에 추가할 때 사용가능
@@ -236,13 +236,40 @@ document.querySelector('p').innerHTML = '<b> bold </b>'
 >> bold // 글꼴 굵게 설정됨
 ```
 
+​     
+
+2-4. InsertAdjacentHTML ❗❗
+
+- HTML같은 텍스트 파싱하고, 특정 위치의 DOM tree안에 원하는 노드들을 추가
+
+```js
+// 기본
+element.insertAdjacentHTML(position, text);
+
+// 예시
+const example = document.querySelector('');
+const template = 
+      `<div>
+      	<h1>${title}</h1>
+			</div>`;
+
+example.insertAdjacentHTML('afterbegin', template);
+```
+
+> position 종류
+
+1. `beforebegin` : element 앞에
+2. `afterbegin` : element안에 가장 첫번째 child
+3. `beforeend` : element안에 가장 마지막 child
+4. `afterend`: element 뒤
+
 ​    
 
 ---
 
 ## 3️⃣ 속성 (Attributes) 
 
-### 3-1. setAttribute
+3-1. setAttribute
 
 - 지정된 요소의 값 설정
 - 속성이 이미 존재하면 값을 갱신, 존재하지 않으면 지정된 이름과 값으로 새 속성을 추가
@@ -253,7 +280,7 @@ Element.setAttribute(name, value)
 
 ​    
 
-### 3-2. getAttribute
+3-2. getAttribute
 
 - 해당 요소의 지정된 값(문자열) 반환
 - 인자(attributeName)는 값을 얻고자 하는 속성의 이름
@@ -312,7 +339,7 @@ window.getComputedStyle(h1).fontSize  // 적용되어있는 font-size값 반환
 
 ## 5️⃣ 클래스 적용
 
-### 5-1. classList
+5-1. classList
 
 - classList에는 내장된 메서드들이 존재
 - 클래스를 적용하는 방법
@@ -349,7 +376,7 @@ h2.classList.toggle('purple') // 클래스에 purple이 존재하면 삭제하�
 
 ​    
 
-#### 6-1-1.parentElement 
+6-1-1.parentElement 
 
 - 한 단계 위의 부모요소를 반환
 - 버튼을 클릭했을 때 버튼의 부모 요소나 자식 요소상에 변경을 가하게 할 수 있음
@@ -375,7 +402,7 @@ firstBold.parentElement.parentElement  //  <body></body>
 
 ​    
 
-#### 6-2-1. children
+6-2-1. children
 
 - 배열처럼 생긴 HTMLCollection 반환
 - 반복 가능
@@ -393,7 +420,7 @@ paragraph.children[0]
 
 ​    
 
-#### 6-2-2.  childElementCount
+6-2-2.  childElementCount
 
 - 자식 요소의 개수 알려줌
 
@@ -401,12 +428,12 @@ paragraph.children[0]
 
 ### 6-3.  형제
 
-#### 6-3-1. previousSibling / nextSibling
+6-3-1. previousSibling / nextSibling
 
 - 요소가 아닌 노드를 출력
 - 잘 안씀
 
-#### 6-3-2. previousElementSibling / nextElementSibling ✔️✔️
+6-3-2. previousElementSibling / nextElementSibling ✔️✔️
 
 - 실제 형제 요소를 반환
 
@@ -416,7 +443,7 @@ paragraph.children[0]
 
 ## 7️⃣ 새 요소 만들기
 
-### 7-1. createElement ✔️✔️ / appendChild 
+7-1. createElement ✔️✔️ / appendChild 
 
 - `createElement`: 작성한 태그명의 HTML 요소를 생성
 
@@ -444,7 +471,7 @@ document.body.appendChild(newH3)  // 페이지에 추가
 
 ​    
 
-### 7-2. append ✔️✔️
+7-2. append ✔️✔️
 
 - 어떤 항목의 요소의 마지막 자식으로 삽입
 - 여러개의 Node객체, DOMString 추가 가능 
@@ -468,7 +495,7 @@ p.append('hello', 'bye')
 
 ​    
 
-### 7-3. prepend
+7-3. prepend
 
 - 어떤 항목을 요소의 첫 번째 자녀로 삽입
 
@@ -481,7 +508,7 @@ p.prepend(newB)
 
 ​    
 
-### 7-4. insertAdjacentElement (position, element)
+7-4. insertAdjacentElement (position, element)
 
 - position
   - `beforebegin` : 특정 요소의 앞
@@ -498,7 +525,7 @@ h1.insertAdjacentElement('afterend', h2)
 
 ​    
 
-### 7-5. after
+7-5. after
 
 - 다른 요소 바로 다음에 삽입
 
@@ -510,7 +537,7 @@ h1.after(h3) ✔️
 
 ​    
 
-### 7-6. before
+7-6. before
 
 - 다른요소 바로 전에 삽입
 
@@ -520,7 +547,7 @@ h1.after(h3) ✔️
 
 ## 8️⃣ 요소 제거 
 
-### 8-1. remove
+8-1. remove
 
 - Node가 속한 트리에서 해당 Node 제거
 
@@ -535,7 +562,7 @@ img.remove()
 
 ​    
 
-### 8-2. removeChild
+8-2. removeChild
 
 - 선택한 요소의 자식을 제거
 - 잘 안쓰임

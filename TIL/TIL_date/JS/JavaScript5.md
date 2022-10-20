@@ -61,7 +61,7 @@ for (let h1 of h1s) {
 
 ## 1️⃣ 모든 이벤트 선택/제거
 
-### 1-1. addEventListener  ✔️✔️
+1. addEventListener  ✔️✔️
 
 - 모든 이벤트를 전달 가능 (click, double click, mouseenter...)
 - 이벤트 종류는 mdn문서 참조
@@ -83,9 +83,62 @@ btn3.addEventListener('dbclick', fuction () {
 }, { once: true})   //  addEventListener가 한번만 실행되고 삭제됨
 ```
 
+> event 매개변수
+
+1. `e.target` : 유저가 실제 누른것
+2. `e.currentTarget` : 이벤트리스너가 달린 곳
+3. `e.preventDefault()` : 기본동작 막아줌 (form)
+4. `e.stopPropagation()` : 이벤트버블링 막아줌
+5. `e.clientX` : 현재 마우스위치의 x좌표
+
 ​    
 
-### 1-2. removeEventListener
+> scroll event
+
+```javascript
+window.addEventListener('scroll', () => {
+  var 스크롤량 = document.querySelector('html').scrollTop;
+  var 실제높이 = document.querySelector('html').scrollHeight;
+  var 높이 = document.querySelector('html').clientHeight;
+})
+```
+
+​    
+
+>  모바일에서도 적용하고 싶다면 , ,  활용
+
+```js
+// 케러셀 모바일 터치 적용
+
+// touchstart
+document.querySelectorAll('')[i].addEventListener('touchstart',(e)=>{
+  start = e.touches[i].clientX
+  clicking = true
+})
+
+// touchmove
+document.querySelectorAll('')[i].addEventListener('touchmove',(e)=>{
+  if (clicking == true) {
+    document.querySelector('').style.transform = `translateX(${e.touches[i].clientX - start}px)`
+  }
+})
+
+// touchend
+document.querySelectorAll('')[i].addEventListener('touchend',(e)=>{
+  clicking = false
+  
+  if (e.changedTouches[0].clientX - start < -100){
+    document.querySelector('').style.transform = 'translateX(-100vw)'
+    document.querySelector('').style.transition = 'all 0.5s'
+  } else {
+    document.querySelector('').style.transform = 'translateX(0vw)'
+    document.querySelector('').style.transition = 'all 0.5s'
+  }
+  
+  setTimeout(()=>{
+    document.querySelector('').style.transition = 'none'
+  }, 500)
+```
 
 ​    
 
@@ -93,7 +146,7 @@ btn3.addEventListener('dbclick', fuction () {
 
 ## 2️⃣ 마우스 이벤트
 
-### 2-1. onclick
+2-1. onclick
 
 - 인라인 스타일 : html 태그에 넣기
 
@@ -113,7 +166,7 @@ btn.onclick = function () {
 
 ​    
 
-### 2-2. onmouseenter
+2-2. onmouseenter
 
 - 마우스가 특정 영역 위에 놓였을 때
 
@@ -234,7 +287,7 @@ const addTweet = (username, tweet) => {
 
 ​    
 
-### 5-1. 변경 이벤트 [`change`]
+5-1. 변경 이벤트 [`change`]
 
 - `change`는 입력 했을 때가 아니라, 입력한 후 입력에서 떠날때 마다 이벤트 발동 (blur)
 - enter 키를 치는 것이 아님
@@ -249,7 +302,7 @@ input.addEventListener('change', (e) => {
 
 ​    
 
-### 5-2.입력 이벤트 [`input`]
+5-2.입력 이벤트 [`input`]
 
 - 입력 내의 값이 달라질 때마다 발동
 - 뭔가 타이핑 될때마다 이벤트 발동

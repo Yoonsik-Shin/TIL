@@ -10,6 +10,7 @@
 
   <body>
     <h1>디테일페이지</h1>
+    {{ article.image.url }}
     {% if article.image %}
       <img src="{{ article.image.url }}" alt="{{ article.image }}" width="400" height="300">
     {% endif %}
