@@ -116,7 +116,9 @@
 | 2022.10.12 (수)                      | [django정리(8)](./TIL_date/Django/Django정리(8).md)<br />[1012실습](../WEB/1012실습) |                                                              |
 | 2022.10.13 (목)                      | [django정리(9)](./TIL_date/Django/Django정리(9).md)<br />[1013실습](../WEB/1013실습) |                                                              |
 | 2022.10.17 (월)                      | [Django 미디어파일](./TIL_date/Django/Django미디어파일.md)<br />[1017실습](../WEB/1017실습) | 미디어 파일, 이미지 업로드, 이미지 리사이징                  |
-| 2022.10.18 (화)                      | [Django 댓글](./TIL_date/Django/Django댓글.md)<br />[1018실습](../WEB/1018실습) | Foreign Key, Comment모델 CRUD, 역참조, 댓글 갯수, 댓글 없는 경우 |
+| 2022.10.18 (화)                      | [Django 1:N 관계(1)](./TIL_date/Django/Django1N관계(1).md)<br />[1018실습](../WEB/1018실습) | Foreign Key, Comment모델 CRUD, 역참조, 댓글 갯수, 댓글 없는 경우 |
+| 2022.10.19 (수)                      | [Django 1:N 관계(2)](./TIL_date/Django/Django1N관계(2).md)   | 댓글 <-> 유저 관계                                           |
+| 2022.10.24 (월)                      | [Django M:N 관계](./TIL_date/Django/DjangoNM관계.md)<br />   | M : N 관계, 중개모델, ManyToManyField, Related Manger, 좋아요 구현 |
 
 
 

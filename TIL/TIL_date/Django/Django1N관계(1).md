@@ -1,4 +1,4 @@
-# Comments (댓글)
+# Django 1 : N 관계 (1) - Comments (댓글)
 
 ​    
 

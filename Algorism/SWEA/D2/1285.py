@@ -1,15 +1,14 @@
-from collections import Counter
+# C++만 가능
+for t in range(1, int(input())+1):
 
-T = int(input())
-
-for i in range(T):
     N = int(input())
-    lst = map(int,input().split())
+
+    lst = list(map(int,input().split()))
     lst2 = []
 
-    for j in lst:
-        lst2.append(abs(0-j))
+    for i in range(N):
+        lst2.append(abs(lst[i]))
+    
+    ans = sorted(lst2, reverse=True)[-1]
 
-    ans = Counter(lst2).items()
-    ans = sorted(ans, key=lambda x:x[0])
-    print(f'#{i+1} {ans[0][0]} {ans[0][1]}')
+    print(f'#{t} {ans} {lst2.count(ans)}')

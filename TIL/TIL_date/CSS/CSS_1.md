@@ -87,6 +87,7 @@ Selector(선택자) {
 text-align: center / left / right;       /* 정렬 */
 font-weight: 400(normal), 700(bold);     /* 굵기 */
 text-decoration: 속성(underline);        /* 데코레이션 */
+text-decoration: none;
 line-height: ;                          /* 줄간격 */
 letter-spacing: ;                       /* 자간 */
 word-spacing :                          /* 단어간 */
