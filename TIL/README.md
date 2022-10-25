@@ -113,12 +113,13 @@
 | 2022.10.05 (수)                      | [django정리(6)](./TIL_date/Django/Django정리(6).md)<br />[1005실습](../WEB/1005실습) | Admin Site, Static Files, Django - BootStrap                 |
 | 2022.10.06 (목)                      | [1006실습](../WEB/1006실습)                                  | Admin Site, Static Files, Django - BootStrap 활용 실습       |
 | 2022.10.11 (화)                      | [django정리(7)](./TIL_date/Django/Django정리(7).md)<br />[1011실습](../WEB/1011실습) | Django Auth, User Model, 회원가입                            |
-| 2022.10.12 (수)                      | [django정리(8)](./TIL_date/Django/Django정리(8).md)<br />[1012실습](../WEB/1012실습) |                                                              |
-| 2022.10.13 (목)                      | [django정리(9)](./TIL_date/Django/Django정리(9).md)<br />[1013실습](../WEB/1013실습) |                                                              |
+| 2022.10.12 (수)                      | [django정리(8)](./TIL_date/Django/Django정리(8).md)<br />[1012실습](../WEB/1012실습) | 쿠키, Login, Logout, Limiting access                         |
+| 2022.10.13 (목)                      | [django정리(9)](./TIL_date/Django/Django정리(9).md)<br />[1013실습](../WEB/1013실습) | 회원정보 수정, 비밀번호 변경, 회원탈퇴                       |
 | 2022.10.17 (월)                      | [Django 미디어파일](./TIL_date/Django/Django미디어파일.md)<br />[1017실습](../WEB/1017실습) | 미디어 파일, 이미지 업로드, 이미지 리사이징                  |
 | 2022.10.18 (화)                      | [Django 1:N 관계(1)](./TIL_date/Django/Django1N관계(1).md)<br />[1018실습](../WEB/1018실습) | Foreign Key, Comment모델 CRUD, 역참조, 댓글 갯수, 댓글 없는 경우 |
 | 2022.10.19 (수)                      | [Django 1:N 관계(2)](./TIL_date/Django/Django1N관계(2).md)   | 댓글 <-> 유저 관계                                           |
-| 2022.10.24 (월)                      | [Django M:N 관계](./TIL_date/Django/DjangoNM관계.md)<br />   | M : N 관계, 중개모델, ManyToManyField, Related Manger, 좋아요 구현 |
+| 2022.10.24 (월)                      | [Django M:N 관계(1)](./TIL_date/Django/DjangoNM관계(1).md)   | M : N 관계, 중개모델, ManyToManyField, Related Manger, 좋아요 구현 |
+| 2022.10.25 (화)                      | [Django M:N 관계(2)](./TIL_date/Django/DjangoNM관계(2).md)   |                                                              |
 
 
 

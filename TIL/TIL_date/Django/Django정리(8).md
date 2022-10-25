@@ -48,7 +48,7 @@
 
 ---
 
-## Login
+## 2️⃣ Login
 
  ### AuthenticationForm
 
@@ -88,11 +88,13 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 
 def login(request):
+  if request.user.is_authenticated:
+    return redirect('apps:index')
   if request.method == 'POST':
     login_form = AuthenticationForm(request, date=request.POST)
     if login_form.is_valid():
       auth_login(request, login_form.get_user())
-      return redirect('apps:index')
+      return redirect(request.GET.get('next') or'apps:index')
   else:
     login_form = AuthenticationForm()
   context = {
@@ -139,14 +141,178 @@ login(request, user, backend=None)
 
 #### 로그인 상태의 유저 정보
 
+- context 데이터 없이 user변수를 활용할 수 있는 이유
+  -  settings.py의 context processors 설정의 'django.contrib.auth.context_processors.auth'
+
+​    
+
+> context processors
+
+- django에서 자주 사용하는 데이터 목록을 미리 템플릿에 로드 해둔것
+- 템플릿이 렌더링될 때 호출가능한 컨텍스트 데이터 목록
+- 작성된 컨텍스트 데이터는 기본적으로 템플릿에서 사용가능한 변수로 포함됨
+
+​    
+
+> django.contrib.auth.context_processors.auth
+
 ```django
 {{ user }}
 ```
 
-- context 데이터 없이 user변수를 활용할 수 있는 이유
-  -  settings.py의 context processors 설정의 'django.contrib.auth.context_processors.auth'
+- 클라이언트가 로그인한 경우 User 클래스의 인스턴스
+- 클라이언트가 로그인하지 않은 경우 AnonymousUser 클래스의 인스턴스
 
+​    
 
+---
 
-> context processors
+## 3️⃣ Logout
+
+```python
+# accounts/urls.py
+from django.urls import path
+from . import views
+
+app_name = 'accounts'
+
+urlpatterns = [
+  path('logout/', views.logout, name='logout'),
+]
+```
+
+```python
+# accounts/views.py
+from django.contrib.auth import logout as auth_logout
+
+def logout(request):
+  auth_logout(request)
+  return redirect('apps:index')
+```
+
+```django
+<!-- base.html -->
+<form action="{% url 'accounts:logout' %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="로그아웃">
+</form>
+```
+
+​    
+
+>  logout 함수
+
+```python
+logout(request)
+```
+
+- 요청 유저에 대한 세션 정보를 삭제함
+  - DB에서 session data 삭제
+  - 클라이언트 쿠키에서 세션ID 삭제
+- HttpRequest 객체를 인자로 받음
+- 반환값 없음
+- 사용자가 로그인하지 않은 경우에 호출해도 오류가 발생하지 않음
+
+​    
+
+---
+
+## 4️⃣ Limiting access
+
+- 로그인 사용자에 대한 접근 제한하기
+
+​    
+
+### 1. is_authenticated 속성을 활용한 조건문
+
+- 로그인 / 비로그인 상태에서 출력되는 링크 다르게 하기
+
+```django
+<!-- template -->
+{% if request.user.is_authenticated %}
+```
+
+- 인증된 사용자는 로그인 로직을 수행할 수 없도록 처리
+
+```python
+# accounts/views.py
+def login(request):
+  if request.user.is_authenticated
+  	return redirect('apps:index')
+```
+
+​    
+
+> is_authenticated
+
+```python
+class AbstractBaseUser(models.Model):
+  def is_authenticated(self):
+    return True
+```
+
+- 사용자가 인증되었는지 여부를 알 수 있는 방법
+-  User model의 속성
+- 모든 User 인스턴스에 대해 항상 True
+- AnonymousUser에 대해 항상 False
+- 일반적으로 `request.user`에서 사용
+- 권한(permission)은 관련 없음
+- 사용자가 활성화 상태이거나 유효한 세션을 가지는지 확인하지 않음
+
+​    
+
+### 2. login_required decorator를 활용한 view 제한
+
+- 로그인 상태에서만 글 작성/수정/삭제
+
+```python
+from django.contrib.auth.decorators import logine_required
+
+@login_required
+def create(request):
+  pass
+
+@login_required
+def update(request):
+  pass
+
+@login_required
+def delete(request):
+  pass
+```
+
+​    
+
+> login_required decorator
+
+- 사용자가 로그인 되어있으면 정상적으로 view함수 실행
+- 로그인하지 않은 사용자는 settings.py의 LOGIN_URL 문자열 주소('/accounts/login/')로 redirect됨 
+- 인증 성공시 사용자가 redirect 경로는 `next`라는 query string 매개변수에 저장
+
+```python
+/accounts/login/?next=/articles/create
+```
+
+​    
+
+> "next" query string
+
+```python
+# accounts/views.py
+def login(request):
+  if request.user.is_authenticated:
+    return redirect('apps:index')
+  
+  if request.method == 'POST':
+    login_form = AuthenticationForm(request, request.POST)
+    if login_form.is_valid():
+      auth_login(request, login_form.get_user())
+      return redirect(request.GET.get('next') or 'apps:index')
+```
+
+- 주의사항 : form의 action이 빈 값이여야함
+
+```django
+<form action="" method="POST"></form>
+```
 
