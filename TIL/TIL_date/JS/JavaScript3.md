@@ -525,9 +525,43 @@ userId(newUser)
 
 ​    
 
+## 3️⃣ 레퍼런스 데이터 타입
+
+- object와 array는 레퍼런스 데이터 타입 : 메모리값을 가리킴
+- 새로 중괄호를 할당할 때마다 새로운 화살표 생성
+- 함부로 복사해서 쓰면 안됨
+
+```js
+const obj1 = { name: '신' };  // name:'신'이 할당된 특정 메모리를 가리킴
+const obj2 = obj1;            // 화살표가 복사됨
+obj1.name = '윤'  
+
+console.log(obj1)
+>> '윤'
+console.log(obj2)
+>> '윤'
+```
+
+​    
+
+- 변수는 그 값을 가짐
+
+```js
+var 변수1 = 1
+var 변수2 = 변수1
+변수1 = 3
+
+console.log(변수1)
+>> 3
+console.log(변수2)
+>> 1
+```
+
+
+
 ---
 
-## 3️⃣ JS 라이브러리
+## 4️⃣ JS 라이브러리
 
 > [lodash](https://lodash.com/)
 

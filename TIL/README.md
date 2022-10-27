@@ -119,7 +119,8 @@
 | 2022.10.18 (화)                      | [Django 1:N 관계(1)](./TIL_date/Django/Django1N관계(1).md)<br />[1018실습](../WEB/1018실습) | Foreign Key, Comment모델 CRUD, 역참조, 댓글 갯수, 댓글 없는 경우 |
 | 2022.10.19 (수)                      | [Django 1:N 관계(2)](./TIL_date/Django/Django1N관계(2).md)   | 댓글 <-> 유저 관계                                           |
 | 2022.10.24 (월)                      | [Django M:N 관계(1)](./TIL_date/Django/DjangoNM관계(1).md)   | M : N 관계, 중개모델, ManyToManyField, Related Manger, 좋아요 구현 |
-| 2022.10.25 (화)                      | [Django M:N 관계(2)](./TIL_date/Django/DjangoNM관계(2).md)   |                                                              |
+| 2022.10.25 (화)                      | [Django M:N 관계(2)](./TIL_date/Django/DjangoNM관계(2).md)   | 프로필, 팔로우, view 데코레이터                              |
+| 2022.10.26 (수)                      | [Django 비동기 처리](./TIL_date/Django/Django비동기.md)      | Axios, 비동기 처리 (follow, like)                            |
 
 
 

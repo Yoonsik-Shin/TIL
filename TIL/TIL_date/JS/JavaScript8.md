@@ -2,11 +2,13 @@
 
 ​    
 
-## 1️⃣ Object prototypes
+## 1️⃣ Object prototypes 
 
 -  `__proto__` : proto(프로토) = dunder(double underscore)
 - 모든 배열에 대해 별개의 메서드를 갖는게 아닌 하나의 프로토타입에 각각의 배열이 `__proto__`라는 특별한 특성으로 그 프로토타입을 참조함
 - 프로토를 조작할 일은 거의 없음
+- prototype은 한마디로 유전자 
+- 부모에게 유전자를 등록하면 자식은 자유롭게 활용가능
 
 ​    
 
@@ -22,6 +24,14 @@ String.prototype  // 문자열 프로토타입
 ```javascript
 String.prototype.newMetodName = () => {};
 Array.prototype.pop = () => {};  // 이미 있는 메서드는 오버라이딩됨
+```
+
+- 메서드 적용 방식
+
+```js
+arr.sort();
+1. arr에 sort()가 있는가?
+2. arr의 부모 prototype(Array.prototype)에 sort()가 있는가? 
 ```
 
 ​    
@@ -67,7 +77,7 @@ firstColor.r = 255  // 정의한 값 변경가능
 ```javascript
 // 생성자 함수
 function Color(r, g, b) {
-  this.r = r;
+  this.r = r;   // this는 새로 생성되는 object를 의미
   this.g = g;
   this.b = b;
 }
