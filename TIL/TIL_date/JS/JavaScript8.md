@@ -1,4 +1,4 @@
-# JavaScript 정리 (8) - OOP (객체지향 프로그래밍)
+#  JavaScript 정리 (8) - OOP (객체지향 프로그래밍)
 
 ​    
 
