@@ -45,7 +45,8 @@ arr.sort();
 var 부모 = { name: 'Shin' };
 var 자식 = {};
 
-자식.__proto__ = 부모;
+1. 자식.__proto__ == 부모.prototype;
+2. Object.getPrototypeOf(자식) == 부모.prototype; 
 
 자식.name;
 >> "Shin"
@@ -247,12 +248,81 @@ class Pet {
 
 class Cat extends Pet{   // Pet 클래스 상속
   constructor(name, age, livesLeft = 9){ 
-    super(name, age)   // Pet 클래스 상속
+    super(name, age)   // Pet 클래스 상속 // 부모 class의 constructor 의미
     this.livesLeft = livesLeft;
   }
-  meow(){
+  meow(){ 
     return '야옹';
+  }
+  eat() {
+    return `I'm not dog!`
+    super.eat() // 부모 class의 prototype을 의미 // 부모.prototype.eat()
   }
 }
 ```
 
+​    
+
+> ES5 방식 상속 구현
+
+```js
+Object.create(프로토타입 객체)
+```
+
+```js
+var 부모 = { name: 'Lee', age: 58 };
+var 자식 = Object.creaet(부모);   // 프로토타입을 부모로 지정
+
+자식.name
+>> 'Lee'
+1. 자식이 name을 가졌는가?  [`X`]
+2. 부모 프로토타입에 name을 가졌는가? [`O`]
+
+
+자식.age = 20;
+자식.age
+>> 20
+
+var 손자 = Object.create(자식);
+
+손자.name
+>> 'Lee'
+
+손자.age
+>> 20
+```
+
+​     
+
+---
+
+## 6️⃣ getter / setter
+
+```js
+class people {
+  constructor(){
+    this.name = 'Shin';
+    this.age = 26;
+  }
+  get nextAge(){
+    return this.age + 1
+  }
+  set setAge(age){
+    this.age = parseInt(age);
+  }
+}
+
+person1 = new people();
+
+person1.nextAge;
+>> 27
+
+person1.setAge = 10
+>> people {name:'Shin', age: 10}
+```
+
+- set : 데이터를 변경하는 함수에 사용
+  - 파라미터가 1개 이상 있어야 함
+- get : 데이터를 꺼내쓰는 함수에 사용
+  - return이 반드시 있어야 함
+  - 파라미터가 없어야 함
