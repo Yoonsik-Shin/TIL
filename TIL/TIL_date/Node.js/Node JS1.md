@@ -281,3 +281,30 @@ component 형식으로 만들기
 <%- include('nav.html') %>
 ```
 
+
+
+
+
+Session 방식 로그인 구현
+
+1. 라이브러리 설치 (3가지)
+
+```bash
+$ npm install passport passport-local express-session
+```
+
+```js
+// server.js
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session')
+
+app.use(session({secret: '비밀코드', resave: true, saveUninitialized: false}));
+app.use(passport.initialize());
+app.use(passport.session());
+```
+
+> app.use : 미들웨어
+
+
+
