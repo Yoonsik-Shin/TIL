@@ -613,3 +613,220 @@ function deepFreeze(targetObj) {
 
 ### hasOwnProperty
 
+
+
+​     
+
+## 3️⃣ 함수 다루기
+
+### 함수, 메서드, 생성자 이해하기
+
+```js
+// 함수
+function func() {
+  return this;
+}
+
+// 메서드
+const obj = {
+  method() {  // concise method
+    return this;
+  }
+}
+
+const obj = {
+  conciseMethod: function() {  // 기본형
+    return this;
+  }
+}
+
+// 생성자 함수
+function Func() {
+  return this;
+}
+```
+
+
+
+#### 함수
+
+- 1급 객체
+- 변수나, 데이터에 담길 수 있음
+- 매개변수로 전달 가능 (콜백함수)
+- 함수가 함수를 반환 (고차함수)
+- `this` : 전역객체를 의미 (global)
+
+#### 메서드
+
+- 객체에 의존성이 있는 함
+- `this` : 호출된 객체를 의미
+
+#### 생성자함수
+
+- 인스턴스를 생성하는 역할
+- `this` : 생성될 인스턴스를 의미
+
+​    
+
+### argument ? parameter ?
+
+#### Parameter (Formal Parameter)
+
+- 형식을 갖춘, 매개변수
+
+```js
+function axios(url) {}
+```
+
+​    
+
+#### Argument (Actual Parameter)
+
+- 실제로 사용되는, 인자 / 인수
+
+```js
+axios('https://google.com')
+```
+
+​    
+
+### 복잡한 인자 관리
+
+```js
+// 옛날방식
+function createCar(options) {
+  var name = options.name
+  var brand = options.brand
+  var type = options.type
+  
+  return {
+    name: options.name,
+    brand: options.brand,
+    type: options.type,
+  }
+}
+
+createCar({
+  name: 'name',
+  brand: 'brand',
+  type = 'type'
+})
+```
+
+```js
+// 최신방식
+function createCar({name, brand, type}) {
+
+  return {
+    name,
+    brand,
+    type,
+  }
+}
+
+createCar({
+  type = 'type'
+})
+```
+
+​    
+
+- 에러메시지를 사용하여 함수를 좀 더 안전하게 사용하기
+
+```js
+function createCar({ name, brand, color, type }) {
+  if (!name) {
+    throw new Error('name is required');
+  }
+  if (!brand) {
+    throw new Error('brand is required');
+  }
+}
+
+createCar({ name: 'CAR', type: 'SUV'})
+>> 'brand is required'
+```
+
+​    
+
+### default value 
+
+```js
+const required = (argName) => {
+  throw new Error('required' + argName);
+}
+
+function createCarousel({
+  item = required('items'),
+  margin = 0,
+  center = false,
+  navElement = 'div',
+} = {}) {  // options = options || {} 와 같은 의미
+  
+  return {
+    margin,
+    center,
+    navElement,
+  }
+}
+
+createCarousel() == createCarousel(undefined)
+```
+
+​    
+
+### Rest Parameters
+
+```js
+function sumTotal(
+	initValue,
+ 	bonusValue,
+ 	...args  // 나머지 매개변수는 인자중에 가장 마지막에 들어가야함
+) {
+    
+  return args.reduce(
+  	(acc, curr) => acc + curr, 
+    	initValue,
+    	bonusValue,
+  )
+}
+
+sumTotal(200, 1, 2, 3, 4, 5, 6)
+```
+
+​    
+
+### void & return
+
+- ### `void` : 함수에 반환값이 없음
+
+- 반환값이 없는 키워드에는 `return`을 사용하지 않기
+
+- `return`이 없는 함수에 `return`을 사용하면 `undefined` 출력
+
+```js
+function handleClick() {
+	setState(false);
+}
+
+function showAlert(message) {
+  alert(message);
+}
+```
+
+​    
+
+### 화살표함수
+
+- 화살표함수는 생성자로 사용할 수 없음
+
+```js
+const Person = (name, city) => {
+  this.name = name;
+  this.city = city;
+}
+
+const person = new Person('shin', 'korea');
+>> Person is not a constructor
+```
+
