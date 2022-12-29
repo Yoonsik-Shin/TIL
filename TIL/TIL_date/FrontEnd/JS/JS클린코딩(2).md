@@ -528,11 +528,26 @@ const yoonsik = new Person('yoonsik', {
 - 또다른 활용법
 
 ```js
+// 배열
 const orders = ['First', 'Second', 'Third']
 const { 0: st, 2: rd } = orders
 
 console.log(st)  // First
 console.log(rd)  // Third
+```
+
+```js
+// 객체
+const user = {
+  name: 'shin',
+  age: 27,
+  createdAt: '2022-12-29',
+}
+
+const { name, age, createdAt } = user
+
+console.log(name)  // shin
+console.log(createdAt)  // 2022-12-29
 ```
 
 ​     
@@ -720,7 +735,7 @@ const obj = {
 }
 
 const obj = {
-  conciseMethod: function() {  // 기본형
+  conciseMethod: function () {  // 기본형
     return this;
   }
 }

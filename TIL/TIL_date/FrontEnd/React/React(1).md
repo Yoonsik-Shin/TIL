@@ -118,6 +118,7 @@ return (
 ## State
 
 - 자료 잠깐 보관하기
+- 컴포넌트 전용 변수
 - 변수는 자동으로 내용 변경시 html에 재렌더링 안됨
 - state는 재렌더링이 자동으로 html에 반영
 - 자주 변경될거같은 html 부분은 state로 만들기
@@ -125,12 +126,12 @@ return (
 ```javascript
 import { useState } from "react";
 
-let [변수명1, 변수명2] = useState('보관할 자료')
-let [글제목, b] = useState('남자 코트 추천')
+let [변수, set변수] = useState('보관할 자료')
+let [글제목, set글제목] = useState('남자 코트 추천')
 ```
 
-- 변수명1 : state에 보관했던 자료
-- 변수명2 : state변경을 도와주는 함
+- `변수` : state에 보관했던 자료
+- `set변수` : state변경을 도와주는 함수
 
 ​    
 
