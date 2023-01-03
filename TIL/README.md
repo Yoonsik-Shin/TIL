@@ -35,14 +35,17 @@
 | [파이썬 응용/심화](./TIL_date/Language/PYTHON/파이썬응용심화.md) | 표현식 , 람다함수, 패키지, 가상환경                          |
 | [프로젝트 실습2 / 파이썬 평가](./TIL_date/Language/PYTHON/프로젝트실습(2).md) | requests 라이브러리, 파이썬 평가                             |
 | [자료구조 종류](./TIL_date/Language/PYTHON/자료구조종류.md)<br />[시간복잡도](./TIL_date/Language/PYTHON/시간복잡도.md) | 자료구조 종류 <br />시간복잡도 개념 (리스트, 딕셔너리, 세트) |
+| [리스트](./TIL_date/Language/PYTHON/자료구조(리스트).md)     | 리스트, Static/Dynamic Array, Linked list                    |
+| [해시테이블](./TIL_date/Language/PYTHON/자료구조(해시테이블).md) |                                                              |
 | [스택 / 큐 / 덱](./TIL_date/Language/PYTHON/자료구조(1).md)  | 스택, 큐, 덱                                                 |
 | [우선순위 큐 / 최소힙 /세트](./TIL_date/Language/PYTHON/자료구조(2).md) | 우선순위 큐, 최소힙, 세트                                    |
 | [이차원 리스트](./TIL_date/Language/PYTHON/자료구조(3).md)   | 이차원 리스트                                                |
 | [완전탐색1](./TIL_date/Language/PYTHON/자료구조(4).md)       | 브루트포스, 델타탐색                                         |
 | [그래프](./TIL_date/Language/PYTHON/자료구조(5).md)          | 그래프 활용법                                                |
-| [DFS](./TIL_date/Language/PYTHON/자료구조(6).md)             | DFS 개념 및 구현법                                           |
+| [그래프탐색 (BFS/DFS)](./TIL_date/Language/PYTHON/자료구조(6).md) | BFS, DFS 개념 및 구현법                                      |
+| [트리](./TIL_date/Language/PYTHON/자료구조(7).md)            |                                                              |
 
-​     
+​      
 
 ### C++
 
@@ -181,6 +184,7 @@
 | Contents                                  | Ex                                               |
 | ----------------------------------------- | ------------------------------------------------ |
 | [HTTP(1)](./TIL_date/ETC/HTTP/HTTP(1).md) | IP, TCP, UDP, PORT, DNS, URI, API, HTTP 상태코드 |
+| [HTTP(2)](./TIL_date/ETC/HTTP/HTTP(2).md) | HTTP헤더,                                        |
 
 ​     
 

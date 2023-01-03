@@ -2,7 +2,7 @@
 
 
 
-## IP (인터넷 프로토콜)
+## 1️⃣ IP (인터넷 프로토콜)
 
 - 특정 IP주소에 데이터 전달
 - 통신 단위 : 패킷(Packet) 
@@ -17,7 +17,7 @@
 
 ---
 
-## TCP (UDP)
+## 2️⃣ TCP (UDP)
 
 ### TCP/IP 프로토콜
 
@@ -53,7 +53,7 @@
 
 ---
 
-## PORT
+## 3️⃣ PORT
 
 - 같은 IP내에서 프로세스 구분
 - IP는 아파트 PORT는 몇동 몇호
@@ -66,7 +66,7 @@
 
 ​    
 
-## DNS
+## 4️⃣ DNS
 
 - 도메인 네임 시스템 (Domain Name System)
 - 도메인명을 IP주소로 변환
@@ -82,7 +82,7 @@
 
 ---
 
-## URI (Uniform Resource Identifier)
+## 5️⃣ URI (Uniform Resource Identifier)
 
 - Uniform : 리소스를 식별하는 통일된 방식
 - Resource : 자원 / URI로 식별할 수 있는 모든 것
@@ -143,7 +143,7 @@
 
 ---
 
-## HTTP (HyperText Transfer Protocol)
+## 6️⃣ HTTP (HyperText Transfer Protocol)
 
 - 거의 모든 형태의 데이터 전송 가능
 
@@ -279,7 +279,7 @@ HTTP 메서드의 속성
 
 ---
 
-## API URI 설계
+## 7️⃣ API URI 설계
 
 - 리소스를 기준으로 설계 (회원) [명사]
 - 리소스를 대상으로 하는 행위로 분리 (조회, 등록, 삭제, 변경) [동사]
@@ -342,7 +342,7 @@ HTTP 메서드의 속성
 
 ---
 
-## HTTP 상태코드
+## 8️⃣ HTTP 상태코드
 
 - 클라이언트가 보낸 요청의 처리상태를 응답에서 알려주는 기능
 
