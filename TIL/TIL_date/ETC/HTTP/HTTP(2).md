@@ -123,3 +123,76 @@
 
 ### 특별한 정보
 
+- `Host`
+  - 요청한 호스트 정보 (도메인)
+  - 하나의 서버가 여러 도메인을 처리해야할 때 사용
+  - 하나의 IP주소에 여러 도메인이 적용되어 있을 때 사용
+  - __요청__에서 사용
+- `Location`
+  - 페이지 리다이렉션
+  - 3xx 응답의 결과에 Location 헤더가 있으면 자동 이동
+- `Allow`
+  - 허용가능한 HTTP 메서드
+  - `405 (Method Not Allowd)`에서 응답에 포함됨
+  - `Allow: GET, HEAD, PUT`
+- `Retry-After`
+  - 유저 에어전트가 다음요청을 하기까지 기다려야하는 시간
+  - `503 (Service Unavailable)`에서 서비스가 언제까지 불능인지 알려줄 수 있음
+  - 날짜표기 :`Retry-After: Fri, 31 Dec 1999 23:59:59 GMT`
+  - 초단위표기: `Retry-After: 120` 
+
+​    
+
+### 인증
+
+- `Authorization`
+  - 클라이언트 인증 정보를 서버에 전달
+  - `Authorization: Basic ????`
+- `WWW-Authenticate`
+  - 리소스 접근시 필요한 인증 방법 정의
+  - `401 Unauthorized` 응답과 함께 사용
+  - `WWW-Authenticate: Newauth realm="apps", type=1, title="Login to \"apps\"", Basic realm="simple"`
+
+​    
+
+### 쿠키
+
+- `Set-Cookie`
+  - 서버에서 클라이언트로 쿠키 전달
+- `Cookie`
+  - 클라이언트가 서버에 받은 쿠키를 저장하고, HTTP 요청시 서버로 전달
+
+- 사용처
+  - 사용자 로그인 세션 관리
+  - 광고 정보 트래킹
+- 쿠키 정보는 항상 서버로 전송됨
+  - 네트워크 트래픽을 추가로 유발함
+  - 최소한의 정보만 사용해야함 (세션id, 인증토큰)
+  - 보안에 민감한 데이터는 저장하면 안됨
+- 생명주기 (`Expires`, `max-age`)
+  - `Set-Cookie: expires=날짜` : 만료일이 되면 쿠키 삭제
+  - `Set-Cookie: max-age=3600(s)` 
+  - 세션쿠키 : 만료날짜를 생략하면 브라우저 종료시까지만 유지되는 쿠키
+  - 영속쿠키 : 만료날짜까지 유지되는 쿠키
+- 도메인 (`Domain`)
+  - 명시 (`domain=example.org`)
+    - 명시한 문서 기준 도메인 + 서브 도메인 (`example.org` + `dev.example.org`)
+  - 생략 
+    - 현재 문서 기준 도메인만 적용 (`example.org`)
+- 경로 (`Path`)
+  - 경로를 포함한 하위 경로 페이지만 쿠키 접근 가능
+  - `path=/home`
+    - `/home` : O
+    - `/home/level1` : O
+    - `/home/level1/level2` : O
+    - `/hello` : X
+- 보안 (`Secure`, `HttpOnly`, `SameSite`)
+  - `Secure`
+    - 적용시 https인 경우만 전송됨
+  - `HttpOnly`
+    - XSS 공격 방지
+    - 자바스크립트에서 접근 불가 (document.cookie 불가능)
+    - HTTP 전송에만 사용가능
+  - `SameSite`
+    - XSRF 공격 방지
+    - 요청 도메인과 쿠키에 설정된 도메인이 같은 경우만 쿠키 전송
