@@ -74,7 +74,8 @@ npx create-react-app my-app --template typescript
 
 ## 기본 문법
 
-- 타입 지정하기
+### 타입 지정하기
+
 - `string, number, boolean, null, undefined, bigint, [ ], { }`
 
 ```typescript
@@ -93,16 +94,28 @@ let namesObject :{ name?: string } = { }  // 에러 미발생
 
 ​    
 
-- Union Type : OR 사용 (문자열이거나 숫자)
+### Union Type
+
+-  OR 사용 (문자열이거나 숫자)
 
 ```tsx
-let name :string | number = 'shin'; 
+let name: string | number = 'shin'; 
 ```
 
-​     
+- 타입 합치기
 
-- 함수에 타입지정
-  - 타입이 지정된 파라미터는 필수요소가 됨
+```typescript
+type Name = string;
+type Age = number;
+
+type Person = Name | Age;
+```
+
+​         
+
+### 함수에 타입지정
+
+- 타입이 지정된 파라미터는 필수요소가 됨
 
 
 ```tsx
@@ -112,9 +125,19 @@ function Func(x :number) :number {
 
 Func()  // 오류발생
 Func(3)  // 9
-
-
 ```
+
+- type alias 활용
+
+```typescript
+type FuncType = (a: string) => number;
+
+let Func: FuncType = function (a) {
+  return 10
+}
+```
+
+​    
 
 > 파라미터 필수요소 해제 (`?`)
 
@@ -128,7 +151,7 @@ function Func(x? :number) :number {a
 
 ​    
 
-> void
+### void
 
 - 실수로 뭔가를 return하는 것을 막을 수 있음
 
@@ -141,7 +164,11 @@ function Func(x:number):void {
 
 ​    
 
-- Type alias : 타입 따로 관리
+### Type alias 
+
+- 타입 따로 관리
+- 첫글자 대문자로 작성
+- 재정의 불가능
 
 ```tsx
 type MyType = string | number;  // 첫글자는 주로 대문자
@@ -164,6 +191,36 @@ type Member = {
 }
 
 let john :Member = { name: 'kim' }
+```
+
+​    
+
+> object 타입 합치기 (extend)
+
+```typescript
+type PositionX = { x: number };
+type PositionY = { y: number };
+
+type NewType = PositionX & PositionY 
+
+let position: NewType = { x: 10, y: 20 }
+```
+
+​      
+
+> readonly
+
+- object 자료 수정을 막을때 사용
+- ❗타입스크립트의 에러는 에디터/터미널 상에서만 존재함
+
+```typescript
+type Friend = {
+  readonly name: string  ✔️✔️ 
+}
+
+const 친구: Friend = {
+  name: "shin"
+}
 ```
 
 ​    
@@ -195,6 +252,65 @@ let b: unknown  // any보다 안전, 제일 최근의 형식 반영
 ```typescript
 let age: string | number;
 age + 1;  // Error 발생 : Union 타입과 number타입 연산 불가
+```
+
+​    
+
+### Type Narrowing
+
+- 타입이 아직 하나로 확정되지 않았을 경우 사용
+- 어떤 변수의 타입이 아직 불확실할 경우 if문 등으로 Narrowing 해줘야함
+- Narrowing 판정 문법
+  1. `typeof 변수`
+  2. `속성명 in 객체`
+  3. `인스턴스 instanceof 부모`
+
+```typescript
+function MyFunc(x: number | string) {
+  if (typeof x === 'string') {
+    return
+  } else {
+    return
+  }
+}
+```
+
+- if문 사용했으면 else. else if문으로 끝맺어줘야 에러가 발생할 가능성 낮아짐
+
+​     
+
+> assertion
+
+- 타입 덮어쓰기 
+- Narrowing 할 때만 사용
+- 무슨 타입이 들어올지 확실할 때만 사용
+
+```typescript
+function MyFunc(x: number | string) {
+	let array: number[] = []
+  array[0]  = x as number ✔️✔️
+}
+```
+
+​        
+
+### Literal type
+
+- 특정 글자나 숫자만 가질 수 있게 제한을 두는 타입
+
+```typescript
+function Func(a: 'hi'): 1 | 0 { }  // 0과 1만 return 가능
+```
+
+> `as const`
+
+- object value의 값을 그대로 타입으로 지정해줌
+- object 속성들에 모두 readonly를 붙여줌
+
+```typescript
+let data = {
+  name: 'shin'
+} as const
 ```
 
 ​    
