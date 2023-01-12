@@ -1,5 +1,8 @@
+import sys
+sys.setrecursionlimit(10**6)
+
 def dfs(y, x):
-  if y < 0 | y >= N | x < 0 | x >= M:
+  if y < 0 or y >= N or x < 0 or x >= M:
     return False
   
   if matrix[y][x] == 1:
@@ -31,3 +34,6 @@ for t in range(T):
         total += 1
   
   print(total)
+
+
+# 파이썬에서는 | 와 or이 다름

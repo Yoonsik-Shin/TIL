@@ -80,21 +80,12 @@ $ yarn add @apollo/server graphql
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 
-// A schema is a collection of type definitions (hence "typeDefs")
-// that together define the "shape" of queries that are executed against
-// your data.
-const typeDefs = `#graphql
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
-
-  # This "Book" type defines the queryable fields for every book in our data source.
+const typeDefs = `
   type Book {
     title: String
     author: String
   }
-
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
+  
   type Query {
     books: [Book]
   }
@@ -106,8 +97,6 @@ const typeDefs = `#graphql
 ### resolver 정의
 
 ```js
-// Resolvers define how to fetch the types defined in your schema.
-// This resolver retrieves books from the "books" array above.
 const resolvers = {
   Query: {
     books: () => 'hello',
@@ -128,17 +117,11 @@ app.get('/', (req, res) => {
 ### Apollo Server 인스턴스 만들기
 
 ```js
-// The ApolloServer constructor requires two parameters: your schema
-// definition and your set of resolvers.
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
 
-// Passing an ApolloServer instance to the `startStandaloneServer` function:
-//  1. creates an Express app
-//  2. installs your ApolloServer instance as middleware
-//  3. prepares your app to handle incoming requests
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 },
 });
@@ -154,3 +137,86 @@ console.log(`🚀  Server ready at: ${url}`);
 app.listen(4000)
 ```
 
+​    
+
+### API 만들기 정리
+
+```js
+const resolvers = {
+  Mutation: {
+    createBoard: (parent, args, context, info) => {}
+  }
+}
+```
+
+- `parent` : 부모의 type resolver에서 반환된 결과를 가진 객체
+- `args` : 쿼리 요청시 전달된 parameter를 가진 객체
+- `context` : GraphQL의 모든 resolver가 공유하는 객체, 로그인 인증 / DB 접근권한 등에 사용
+- `info` : 명령 실행 상태 정보를 가진 객체
+
+> 사용하지 않는 매개변수는 `_`(언더바)로 선언
+
+
+
+```js
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+
+// 타입 정의
+const typeDefs = gql`
+	
+	type Query {
+		
+	}
+
+	type Mutation {
+	
+	}
+`
+
+const resolvers = {
+  Query: {
+    fetchBoards: () => {}
+  }
+  
+  Mutation: {
+  	createBoard: (_, args) => {
+			// 1. 데이터를 등록하는 로직 => DB에 접속해서 데이터 저장하기
+      // 2. 저장 결과 응답 주기
+      return '성공'
+    }
+	}
+}
+```
+
+​    
+
+---
+
+## 4️⃣ SMS 전송
+
+### [Coolsms](https://console.coolsms.co.kr/dashboard) 활용 
+
+```bash
+$ yarn add coolsms-node-sdk
+```
+
+```js
+import coolsms from'coolsms-node-sdk'
+
+export async function  sendTokenToSMS(phoneNumber, token) {
+  const MySms = coolsms.default
+  const messageService = new MySms(process.env.SMS_KEY, process.env.SMS_SECRET)
+  const result = await messageService.sendOne({
+    to: phoneNumber,
+    from: process.env.SMS_SENDER,
+    text: `[문자메시지 전송 테스트중] 인증번호는 ${token} 입니다.`
+  })
+}
+```
+
+
+
+> 환경변수 분리하기
+
+- 
