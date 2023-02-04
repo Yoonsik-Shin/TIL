@@ -39,3 +39,28 @@ for i, j, k in zip(a_lst, b_lst, c_lst):
 >> 3, 'c', 'C'
 ```
 
+```python
+# 표준모듈
+import math
+math.pi()
+math.log()
+
+import itertools
+itertools.combinations(배열, 뽑을갯수) # 조합
+itertools.combinateions_with_replacement() # 중복조합
+itertools.permutations() # 순열
+itertools.product(배열, 배열) # 가능한 모든 순서쌍
+```
+
+```python
+# unpacking을 이용한 복사
+a = {1: '신', 2: '윤', 3: '식'}
+b = {**a}
+
+a[1] = '갓'
+print(a)  # {1: '갓', 2: '윤', 3: '식'}
+print(b)  # {1: '신', 2: '윤', 3: '식'}
+```
+
+
+

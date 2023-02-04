@@ -149,7 +149,7 @@
 | ------------------------------------------------ | ------------------------------------------------------------ |
 | [Node(1)](./TIL_date/BackEnd/Node.js/Node(1).md) | node, npm, yarn 개념, node 실행, 퍼서드패턴, export/import 사용 |
 | [Node(2)](./TIL_date/BackEnd/Node.js/Node(2).md) | 얕은/깊은 복사, RestAPI, GraphQL, Express, Swagger           |
-| [Node(3)](./TIL_date/BackEnd/Node.js/Node(3).md) | CORS,                                                        |
+| [Node(3)](./TIL_date/BackEnd/Node.js/Node(3).md) | CORS, nodemon, GraphQl                                       |
 
 ​    
 
