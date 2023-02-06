@@ -1,0 +1,16 @@
+-- 1번 풀이
+SELECT 
+    max(DATETIME) AS "시간" 
+FROM 
+    ANIMAL_INS;
+
+-- 2번 풀이
+SELECT 
+    DATETIME AS '시간'
+FROM 
+    ANIMAL_INS 
+ORDER BY
+    DATETIME DESC
+LIMIT
+    1
+;
