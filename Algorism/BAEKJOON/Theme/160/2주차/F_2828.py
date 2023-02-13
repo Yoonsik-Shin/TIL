@@ -1,23 +1,24 @@
-N, M = map(int,input().split())
-J = int(input())
-m = 0
-l = 1
+n, m = map(int,input().split())
+j = int(input())
+ans = 0
+s, e = 1, m
 
-for i in range(J):
-  d = int(input())
-  s = 0
+for _ in range(j):
+    d = int(input())
 
-  while True:
-    if d >= s and d < M + s:
+    if s <= d <= e:
+      continue
 
-      break
-    elif d < s:
-      s -= 1
-      l -= 1
-    else:
-      s += 1
-      l += 1
-
-  m += s
-
-print(m)
+    if d > s and d > e:
+      ans += (d - e)
+      s = d - m + 1
+      e = d 
+      continue
+    
+    if d < s and d < e:
+      ans += (s - d)
+      s = d
+      e = d + m - 1
+      continue
+    
+print(ans)

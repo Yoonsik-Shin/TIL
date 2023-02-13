@@ -1,5 +1,6 @@
 SELECT 
-    ANIMAL_ID, NAME 
+    ANIMAL_ID,
+    NAME 
 FROM 
     ANIMAL_INS 
 WHERE 

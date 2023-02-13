@@ -1,5 +1,9 @@
 SELECT
-    PT_NAME, PT_NO, GEND_CD, AGE, IFNULL(TLNO, 'NONE')
+    PT_NAME, 
+    PT_NO, 
+    GEND_CD, 
+    AGE, 
+    IFNULL(TLNO, 'NONE')
 FROM 
     PATIENT 
 WHERE
@@ -8,3 +12,4 @@ WHERE
 ORDER BY
     AGE DESC,
     PT_NAME ASC
+;
