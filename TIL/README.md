@@ -22,20 +22,25 @@
 
 ### Python
 
+| Contents                                                     | Ex                                  |
+| ------------------------------------------------------------ | ----------------------------------- |
+| [파이썬 기초](./TIL_date/Language/PYTHON/파이썬기초.md)      | 기초문법, 자료형, 형변환, 컨테이너  |
+| [파이썬 제어문](./TIL_date/Language/PYTHON/파이썬제어문.md)  | 제어문 (조건문, 반복문)             |
+| [파이썬 함수](./TIL_date/Language/PYTHON/파이썬함수.md)      | 함수                                |
+| [파이썬 메서드](./TIL_date/Language/PYTHON/파이썬메서드.md)  | 메서드                              |
+| [프로젝트 실습1](./TIL_date/Language/PYTHON/프로젝트실습(1).md) | 파일입출력, JSON 관련실습           |
+| [파이썬 예외처리](./TIL_date/Language/PYTHON/파이썬에러예외.md) | 에러, 예외처리                      |
+| [파이썬 객체지향 프로그래밍1](./TIL_date/Language/PYTHON/파이썬객체지향(1).md) | 객체, 객체지향 프로그래밍 개념      |
+| [파이썬 객체지향 프로그래밍2](./TIL_date/Language/PYTHON/파이썬객체지향(2).md) | 클래스, 객체지향 4가지 특징         |
+| [파이썬 응용/심화](./TIL_date/Language/PYTHON/파이썬응용심화.md) | 표현식 , 람다함수, 패키지, 가상환경 |
+| [프로젝트 실습2 / 파이썬 평가](./TIL_date/Language/PYTHON/프로젝트실습(2).md) | requests 라이브러리, 파이썬 평가    |
+
+> 자료구조 & 알고리즘
+
 | Contents                                                     | Ex                                                           |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [파이썬 기초](./TIL_date/Language/PYTHON/파이썬기초.md)      | 기초문법, 자료형, 형변환, 컨테이너                           |
-| [파이썬 제어문](./TIL_date/Language/PYTHON/파이썬제어문.md)  | 제어문 (조건문, 반복문)                                      |
-| [파이썬 함수](./TIL_date/Language/PYTHON/파이썬함수.md)      | 함수                                                         |
-| [파이썬 메서드](./TIL_date/Language/PYTHON/파이썬메서드.md)  | 메서드                                                       |
-| [프로젝트 실습1](./TIL_date/Language/PYTHON/프로젝트실습(1).md) | 파일입출력, JSON 관련실습                                    |
-| [파이썬 예외처리](./TIL_date/Language/PYTHON/파이썬에러예외.md) | 에러, 예외처리                                               |
-| [파이썬 객체지향 프로그래밍1](./TIL_date/Language/PYTHON/파이썬객체지향(1).md) | 객체, 객체지향 프로그래밍 개념                               |
-| [파이썬 객체지향 프로그래밍2](./TIL_date/Language/PYTHON/파이썬객체지향(2).md) | 클래스, 객체지향 4가지 특징                                  |
-| [파이썬 응용/심화](./TIL_date/Language/PYTHON/파이썬응용심화.md) | 표현식 , 람다함수, 패키지, 가상환경                          |
-| [프로젝트 실습2 / 파이썬 평가](./TIL_date/Language/PYTHON/프로젝트실습(2).md) | requests 라이브러리, 파이썬 평가                             |
-| [자료구조 종류](./TIL_date/Language/PYTHON/자료구조종류.md)<br />[시간복잡도](./TIL_date/Language/PYTHON/시간복잡도.md) | 자료구조 종류 <br />시간복잡도 개념 (리스트, 딕셔너리, 세트) |
-| [리스트](./TIL_date/Language/PYTHON/자료구조(리스트).md)     | 리스트, Static/Dynamic Array, Linked list                    |
+| [자료구조 종류](./TIL_date/Language/PYTHON/자료구조종류.md)<br />[시간복잡도](./TIL_date/Language/PYTHON/시간복잡도.md) | 자료구조 종류, 메모리 개념 <br />시간복잡도 개념 (리스트, 딕셔너리, 세트) |
+| [리스트](./TIL_date/Language/PYTHON/자료구조(리스트).md)     | 리스트, Static / Dynamic Array, Linked list                  |
 | [해시테이블](./TIL_date/Language/PYTHON/자료구조(해시테이블).md) |                                                              |
 | [스택 / 큐 / 덱](./TIL_date/Language/PYTHON/자료구조(1).md)  | 스택, 큐, 덱                                                 |
 | [우선순위 큐 / 최소힙 /세트](./TIL_date/Language/PYTHON/자료구조(2).md) | 우선순위 큐, 최소힙, 세트                                    |
@@ -44,8 +49,9 @@
 | [그래프](./TIL_date/Language/PYTHON/자료구조(5).md)          | 그래프 활용법                                                |
 | [그래프탐색 (BFS/DFS)](./TIL_date/Language/PYTHON/자료구조(6).md) | BFS, DFS 개념 및 구현법                                      |
 | [트리](./TIL_date/Language/PYTHON/자료구조(7).md)            |                                                              |
+| [DP](./TIL_date/Language/PYTHON/자료구조(8).md)              |                                                              |
 
-​      
+​     
 
 ### C++
 
@@ -128,6 +134,8 @@
 | Contents                                           | Ex               |
 | -------------------------------------------------- | ---------------- |
 | [React (1)](./TIL_date/FrontEnd/React/React(1).md) | 리액트 기본 문법 |
+| [React (2)](./TIL_date/FrontEnd/React/React(2).md) |                  |
+| [React (3)](./TIL_date/FrontEnd/React/React(3).md) |                  |
 
    
 
@@ -147,7 +155,7 @@
 
 | Contents                                         | Ex                                                           |
 | ------------------------------------------------ | ------------------------------------------------------------ |
-| [Node(1)](./TIL_date/BackEnd/Node.js/Node(1).md) | node, npm, yarn 개념, node 실행, 퍼서드패턴, export/import 사용 |
+| [Node(1)](./TIL_date/BackEnd/Node.js/Node(1).md) | node, npm, yarn 개념, node 실행,  v 퍼서드패턴, export/import 사용 |
 | [Node(2)](./TIL_date/BackEnd/Node.js/Node(2).md) | 얕은/깊은 복사, RestAPI, GraphQL, Express, Swagger           |
 | [Node(3)](./TIL_date/BackEnd/Node.js/Node(3).md) | CORS, nodemon, GraphQl                                       |
 

@@ -240,6 +240,7 @@ def detail(request, pk):
 {% for comment in comments %}
 	{{ comment.content }}
 {% endfor %}
+
 ```
 
 ​    
@@ -263,7 +264,7 @@ def comments_delete(request, app_pk, comment_pk):
   return redirect('apps:detail', app_pk)
 ```
 
-```html
+```django
 <!-- apps/detail.html -->
 <form action="{% url 'articles:comments_delete' app.pk comment.pk %}" method="POST">
 	{% csrf_token %}
