@@ -1,6 +1,6 @@
 -- 1번 풀이
 SELECT 
-    max(DATETIME) AS "시간" 
+    MAX(DATETIME) AS "시간" 
 FROM 
     ANIMAL_INS;
 

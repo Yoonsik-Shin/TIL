@@ -162,7 +162,7 @@ def detail(request, pk):
 
 3. detail 페이지에 CommentForm 출력 [template]
 
-```django
+```python
 <!-- apps/detail.html -->
 <form action='' method="POST">
   {% csrf_token %}
@@ -180,7 +180,7 @@ urlpatterns = [
 ]
 ```
 
-```django
+```py
 <!-- apps/detail.html -->
 <form action="{% url 'articles:commments_create' app.pk %}" method="POST">
 	{% csrf_token %}
@@ -264,7 +264,7 @@ def comments_delete(request, app_pk, comment_pk):
   return redirect('apps:detail', app_pk)
 ```
 
-```django
+```python
 <!-- apps/detail.html -->
 <form action="{% url 'articles:comments_delete' app.pk comment.pk %}" method="POST">
 	{% csrf_token %}

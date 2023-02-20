@@ -1,0 +1,17 @@
+-- 1번 풀이
+SELECT 
+    MIN(DATETIME) AS "시간" 
+FROM 
+    ANIMAL_INS
+;
+
+-- 2번 풀이
+SELECT
+    DATETIME AS "시간"
+FROM
+    ANIMAL_INS
+ORDER BY
+    DATETIME ASC
+LIMIT
+    1
+;

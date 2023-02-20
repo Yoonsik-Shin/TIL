@@ -42,14 +42,15 @@
 | [자료구조 종류](./TIL_date/Language/PYTHON/자료구조종류.md)<br />[시간복잡도](./TIL_date/Language/PYTHON/시간복잡도.md) | 자료구조 종류, 메모리 개념 <br />시간복잡도 개념 (리스트, 딕셔너리, 세트) |
 | [리스트](./TIL_date/Language/PYTHON/자료구조(리스트).md)     | 리스트, Static / Dynamic Array, Linked list                  |
 | [해시테이블](./TIL_date/Language/PYTHON/자료구조(해시테이블).md) |                                                              |
-| [스택 / 큐 / 덱](./TIL_date/Language/PYTHON/자료구조(1).md)  | 스택, 큐, 덱                                                 |
-| [우선순위 큐 / 최소힙 /세트](./TIL_date/Language/PYTHON/자료구조(2).md) | 우선순위 큐, 최소힙, 세트                                    |
-| [이차원 리스트](./TIL_date/Language/PYTHON/자료구조(3).md)   | 이차원 리스트                                                |
-| [완전탐색1](./TIL_date/Language/PYTHON/자료구조(4).md)       | 브루트포스, 델타탐색                                         |
+| [스택 / 큐 / 덱](./TIL_date/Language/PYTHON/자료구조(스택,큐,덱).md) | 스택, 큐, 덱                                                 |
+| [우선순위 큐 / 최소힙 / 세트](./TIL_date/Language/PYTHON/자료구조(우선순위큐,최소힙,세트).md) | 우선순위 큐, 최소힙, 세트                                    |
+| [이차원 리스트](./TIL_date/Language/PYTHON/자료구조(이차원리스트).md) | 이차원 리스트                                                |
+| [완전탐색](./TIL_date/Language/PYTHON/알고리즘(완전탐색).md) | 브루트포스, 델타탐색                                         |
 | [그래프](./TIL_date/Language/PYTHON/자료구조(5).md)          | 그래프 활용법                                                |
-| [그래프탐색 (BFS/DFS)](./TIL_date/Language/PYTHON/자료구조(6).md) | BFS, DFS 개념 및 구현법                                      |
+| [그래프탐색 (BFS/DFS)](./TIL_date/Language/PYTHON/알고리즘(BFS,DFS).md) | BFS, DFS 개념 및 구현법                                      |
 | [트리](./TIL_date/Language/PYTHON/자료구조(7).md)            |                                                              |
-| [DP](./TIL_date/Language/PYTHON/자료구조(8).md)              |                                                              |
+| [DP](./TIL_date/Language/PYTHON/알고리즘(DP).md)             | 다이나믹 프로그래밍 개념                                     |
+| [기타알고리즘](./TIL_date/Language/PYTHON/알고리즘(기타알고리즘).md) | 소수, 투포인터, 구간합                                       |
 
 ​     
 
