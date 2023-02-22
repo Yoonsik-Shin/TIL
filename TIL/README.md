@@ -46,6 +46,7 @@
 | [우선순위 큐 / 최소힙 / 세트](./TIL_date/Language/PYTHON/자료구조(우선순위큐,최소힙,세트).md) | 우선순위 큐, 최소힙, 세트                                    |
 | [이차원 리스트](./TIL_date/Language/PYTHON/자료구조(이차원리스트).md) | 이차원 리스트                                                |
 | [완전탐색](./TIL_date/Language/PYTHON/알고리즘(완전탐색).md) | 브루트포스, 델타탐색                                         |
+| [정렬](./TIL_date/Language/PYTHON/알고리즘(정렬).md)         |                                                              |
 | [그래프](./TIL_date/Language/PYTHON/자료구조(5).md)          | 그래프 활용법                                                |
 | [그래프탐색 (BFS/DFS)](./TIL_date/Language/PYTHON/알고리즘(BFS,DFS).md) | BFS, DFS 개념 및 구현법                                      |
 | [트리](./TIL_date/Language/PYTHON/자료구조(7).md)            |                                                              |

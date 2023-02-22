@@ -7,15 +7,13 @@ def solution(progresses, speeds):
     while True:
         if sum(answer) == len(progresses):
             break
-            
-        
+          
         for i in range(len(p)):
             if p[i] >= 100:
                 p[i] = 100
                 continue
             else:
                 p[i] += s[i]
-            
             
         if p[-1] == 100 and len(p):
             p.pop()
