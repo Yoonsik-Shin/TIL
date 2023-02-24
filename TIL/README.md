@@ -73,7 +73,7 @@
 | [DB 기초개념](./TIL_date/BackEnd/DB/DB기초개념.md) / [실습1](./TIL_date/BackEnd/DB/01실습.md) | DB, RDB, RDBMS, SQL 개념정리                  |
 | [SELECT문 활용](./TIL_date/BackEnd/DB/SQL활용(1).md) / [실습2](./TIL_date/BackEnd/DB/02실습.md) | WHERE, 집계함수, LIKE, ORDER BY               |
 | [SELECT문 활용2](./TIL_date/BackEnd/DB/SQL활용(2).md)  / [실습3](./TIL_date/BackEnd/DB/03실습.md) | 문자열함수, 숫자함수, GROUP BY, HAVING, ALTER |
-| [기타구문](./TIL_date/BackEnd/DB/기타구문.md) / [실습4](./TIL_date/BackEnd/DB/04실습.md) | CASE, 서브쿼리                                |
+| [기타구문](./TIL_date/BackEnd/DB/기타구문.md) / [실습4](./TIL_date/BackEnd/DB/04실습.md) | CASE, 시간/날짜, 서브쿼리                     |
 | [조인](./TIL_date/BackEnd/DB/Join.md) / [실습5](./TIL_date/BackEnd/DB/05실습.md) | 조인                                          |
 | [데이터 모델링](./TIL_date/BackEnd/DB/데이터모델링.md)       | 데이터 모델링, ERD                            |
 | [ORM](./TIL_date/BackEnd/DB/ORM.md) / [실습7](./TIL_date/BackEnd/DB/07실습.md) | ORM 개념, 조작                                |

@@ -63,7 +63,7 @@ SELECT last_name AS "이름 성" FROM users WHERE "이름 성" = '김';
 
 - 문장에 WHERE절이 포함된 경우 반드시 WHERE절 뒤에 작성
 - 지정된 컬럼의 값이 같은 행들로 묶음
-- ✔️ 집계함수와 활용하였을 때 의미가 있음 ✔️
+- ✔️ 집계함수와 활용하였을 때 의미가 있음 ❗
 - GROUP BY의 결과는 정렬되지 않음 > ORDER BY를 통해 정렬
 
 ```sql
