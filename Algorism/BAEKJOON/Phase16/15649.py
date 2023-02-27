@@ -1,18 +1,17 @@
-N, M = map(int,input().split())
-
+n, m = map(int,input().split())
+visited = [0] * (n+1)
 lst = []
-visited = [0] * (N+1)
 
-def recur(num):
-    k = 0
-    if num == M:
+def re(num):
+    if num == m:
         print(' '.join(map(str,lst)))
-    for i in range(k, N+1):
-        if visited[i] == 0:
+        return
+    for i in range(1, n+1):
+        if not visited[i]:
             visited[i] = 1
             lst.append(i)
-            recur(num+1) # 재귀함수가 끝날때까지 밑에 구문은 실행이 안됨
+            re(num+1)
             visited[i] = 0
             lst.pop()
 
-recur(0)
+re(0)

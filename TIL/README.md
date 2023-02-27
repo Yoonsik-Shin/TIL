@@ -46,10 +46,11 @@
 | [우선순위 큐 / 최소힙 / 세트](./TIL_date/Language/PYTHON/자료구조(우선순위큐,최소힙,세트).md) | 우선순위 큐, 최소힙, 세트                                    |
 | [이차원 리스트](./TIL_date/Language/PYTHON/자료구조(이차원리스트).md) | 이차원 리스트                                                |
 | [완전탐색](./TIL_date/Language/PYTHON/알고리즘(완전탐색).md) | 브루트포스, 델타탐색                                         |
-| [정렬](./TIL_date/Language/PYTHON/알고리즘(정렬).md)         |                                                              |
-| [그래프](./TIL_date/Language/PYTHON/자료구조(5).md)          | 그래프 활용법                                                |
+| [정렬](./TIL_date/Language/PYTHON/알고리즘(정렬).md)         | 선택정렬, 삽입정렬, 퀵정렬, 계수정렬                         |
+| [그래프](./TIL_date/Language/PYTHON/자료구조(그래프).md)     | 그래프 활용법                                                |
 | [그래프탐색 (BFS/DFS)](./TIL_date/Language/PYTHON/알고리즘(BFS,DFS).md) | BFS, DFS 개념 및 구현법                                      |
-| [트리](./TIL_date/Language/PYTHON/자료구조(7).md)            |                                                              |
+| [트리](./TIL_date/Language/PYTHON/자료구조(트리).md)         |                                                              |
+| [기타그래프 알고리즘](./TIL_date/Language/PYTHON/알고리즘(기타그래프).md) | 유니온 파인드, 최소 신장 트리, 위상정렬                      |
 | [DP](./TIL_date/Language/PYTHON/알고리즘(DP).md)             | 다이나믹 프로그래밍 개념                                     |
 | [기타알고리즘](./TIL_date/Language/PYTHON/알고리즘(기타알고리즘).md) | 소수, 투포인터, 구간합                                       |
 
