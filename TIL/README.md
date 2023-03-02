@@ -35,6 +35,8 @@
 | [파이썬 응용/심화](./TIL_date/Language/PYTHON/파이썬응용심화.md) | 표현식 , 람다함수, 패키지, 가상환경 |
 | [프로젝트 실습2 / 파이썬 평가](./TIL_date/Language/PYTHON/프로젝트실습(2).md) | requests 라이브러리, 파이썬 평가    |
 
+​     
+
 > 자료구조 & 알고리즘
 
 | Contents                                                     | Ex                                                           |
@@ -49,8 +51,8 @@
 | [정렬](./TIL_date/Language/PYTHON/알고리즘(정렬).md)         | 선택정렬, 삽입정렬, 퀵정렬, 계수정렬                         |
 | [그래프](./TIL_date/Language/PYTHON/자료구조(그래프).md)     | 그래프 활용법                                                |
 | [그래프탐색 (BFS/DFS)](./TIL_date/Language/PYTHON/알고리즘(BFS,DFS).md) | BFS, DFS 개념 및 구현법                                      |
-| [트리](./TIL_date/Language/PYTHON/자료구조(트리).md)         |                                                              |
-| [기타그래프 알고리즘](./TIL_date/Language/PYTHON/알고리즘(기타그래프).md) | 유니온 파인드, 최소 신장 트리, 위상정렬                      |
+| [트리](./TIL_date/Language/PYTHON/자료구조(트리).md)         | 트리, 이진트리, 세그먼트(인덱스) 트리, 최소공통조상(LCA), 바이너리 인덱스(펜윅) 트리 |
+| [기타그래프 알고리즘](./TIL_date/Language/PYTHON/알고리즘(기타그래프).md) | 유니온 파인드(서로소 집합), 최소 신장 트리(MST), 크루스칼, 위상정렬 |
 | [DP](./TIL_date/Language/PYTHON/알고리즘(DP).md)             | 다이나믹 프로그래밍 개념                                     |
 | [기타알고리즘](./TIL_date/Language/PYTHON/알고리즘(기타알고리즘).md) | 소수, 투포인터, 구간합                                       |
 

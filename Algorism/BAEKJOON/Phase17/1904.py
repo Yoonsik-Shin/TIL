@@ -2,9 +2,9 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
-lst = [0, 1, 2]
+lst = [1, 2]
 
-for i in range(3, N+1):
+for i in range(2, N):
     lst.append((lst[i-2]+lst[i-1])%15746)
 
 if N == 1:
