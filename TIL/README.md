@@ -150,9 +150,10 @@
 
 ### Linux
 
-| Contents                                             | Ex                                    |
-| ---------------------------------------------------- | ------------------------------------- |
-| [기본 터미널 명령어](./TIL_date/BackEnd/Terminal.md) | ls, pwd, cd, mkdir, touch, rm, rmdir, |
+| Contents                                         | Ex                                                           |
+| ------------------------------------------------ | ------------------------------------------------------------ |
+| [Linux(1)](./TIL_date/BackEnd/Linux/Linux(1).md) | 터미널, 쉘, Argument, option, man, type, which, help, 날짜/시간 |
+| [Linux(2)](./TIL_date/BackEnd/Linux/Linux(2).md) | 경로, ls, pwd, cd, mkdir, touch, rm, rmdir                   |
 
 ​    
 

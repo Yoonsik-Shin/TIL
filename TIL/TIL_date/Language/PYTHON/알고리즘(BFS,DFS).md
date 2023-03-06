@@ -7,7 +7,7 @@
 - 시작 정점에서 간선을 타고 이동할 수 있는 모든 정점을 찾는 알고리즘
 - 깊이우선탐색 (DFS)과 너비우선탐색 (BFS)로 나뉨
 
-<img src="자료구조(6).assets/그래프 탐색 알고리즘.jpg" alt="그래프 탐색 알고리즘" style="zoom: 50%;" />
+<img src="알고리즘(BFS,DFS).assets/그래프 탐색 알고리즘.jpg" alt="그래프 탐색 알고리즘" style="zoom: 50%;" />
 
 ​    
 
@@ -44,7 +44,7 @@ bfs(graph, 'A')
 - BFS에 비해 코드 구현 간단
 - 모든 정점을 방문할 필요가 없거나 최단 거리를 구하는 경우는 BFS가 유리
 
-![DFSvsBFS](자료구조(6).assets/DFSvsBFS.jpg)
+![DFSvsBFS](알고리즘(BFS,DFS).assets/DFSvsBFS.jpg)
 
 ​    
 
