@@ -1,111 +1,17 @@
-node.js 
-
-node_modules : 라이브러리에 필요한 자료들을 담는 공간
-
-package.json : 어떤 라이브러리를 설치했는지 기록 
-
-```bash
-# package.json 자동생성
-npm init
-```
-
-- entry point만 내가 원하는 파일명으로 작성
+# Node.js (2)
 
 
 
-- 서버를 자동으로 재시작해줌
+## MongoDB
+
+![image-20221218134729332](Node.js (2).assets/image-20221218134729332.png)
+
+![image-20221218134738740](Node.js (2).assets/image-20221218134738740.png)
 
 ```bash
-npm install -g nodemon
-yarn add global nodemon
-
-nodemon server.js
-```
-
-
-
-express 라이브러리
-
-```bash
-npm install express
-```
-
-
-
-서버를 띄우기 위한 기본 세팅 (express)
-
-```js
-const express = require('express');
-const app = express();
-
-// listen(서버를 띄울 포트번호, 띄운 후 실행할 코드)
-app.listen(8080, ()=>{})
-```
-
-
-
-GET 요청
-
-```js
-app.get('경로', (요청내용, 응답방법) => {
-  응답.send(); 
-  응답.sendFile(보낼 파일의 경로);  // 파일보내기
-})
-
-app.get('/hi', (request, response) => {
-  response.send();
-  response.sendFile(__dirname + '/index.html')
-})
-```
-
-
-
-POST 요청
-
-```js
-app.post('경로', (요청내용, 응답방법) => {
-  응답.send();
-})
-
-app.post('/bye', (request, response) => {
-  response.send();
-})
-```
-
-
-
-> body-parser : input에 적은 정보 추출 
-
-```bash
-npm install body-parser
-yarn add body-parser
-```
-
-```js
-// js파일 기본세팅
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended : true}));
-```
-
-- form 데이터의 input태그에 name 속성 추가
-
-```html
-<input type="" name=""> 
-```
-
-
-
-
-
-MongoDB 연동하기
-
-![image-20221218134729332](Node JS1.assets/image-20221218134729332.png)
-
-![image-20221218134738740](Node JS1.assets/image-20221218134738740.png)
-
-```bash
-npm install mongodb
-npm install mongodb@3.6.4  # 버전
+$ npm install mongodb
+$ npm install mongodb@3.6.4  # 버전
+$ yarn add mongodb
 ```
 
 ```js
@@ -124,7 +30,7 @@ MongoClient.connect('URL', (error, client) => {
 // URL에 DB Access 메뉴에서 만든 ID, PW 입력필요
 ```
 
-![image-20221218135110983](Node JS1.assets/image-20221218135110983.png)
+![image-20221218135110983](Node.js (2).assets/image-20221218135110983.png)
 
 
 
@@ -184,7 +90,7 @@ app,get('/', (request, response) => {
 
 > auto increment
 
-![image-20221218144724674](Node JS1.assets/image-20221218144724674-1671342447644-1.png)
+![image-20221218144724674](Node.js (2).assets/image-20221218144724674-1671342447644-1.png)
 
 ```js
 app.post('/', (requset, response) => {
@@ -254,6 +160,7 @@ app.use(methodeOverride('_method'))
 2. AJAX 이용
 
 ```js
+
 ```
 
 

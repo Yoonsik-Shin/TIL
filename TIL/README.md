@@ -128,9 +128,10 @@
 
 ### TypeScript
 
-| Contents | Ex   |
-| -------- | ---- |
-|          |      |
+| Contents                                                     | Ex                                                           |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [TypeScript(1)](./TIL_date/FrontEnd/TypeScript/TypeScript(1).md) | 설치법, Union Type, any, unknown, void, 함수, 클래스, Narrowing, Assertion, type, interface, readonly, Literal type, as const |
+| [TypeScript(2)](./TIL_date/FrontEnd/TypeScript/TypeScript(2).md) |                                                              |
 
 ​    
 
@@ -168,13 +169,15 @@
 
 ### Node.js / Nest.js
 
-| Contents                                         | Ex                                                           |
-| ------------------------------------------------ | ------------------------------------------------------------ |
-| [Node(1)](./TIL_date/BackEnd/Node.js/Node(1).md) | node, npm, yarn 개념, node 실행,  v 퍼서드패턴, export/import 사용 |
-| [Node(2)](./TIL_date/BackEnd/Node.js/Node(2).md) | 얕은/깊은 복사, RestAPI, GraphQL, Express, Swagger           |
-| [Node(3)](./TIL_date/BackEnd/Node.js/Node(3).md) | CORS, nodemon, GraphQl                                       |
+| Contents                                               | Ex                                                           |
+| ------------------------------------------------------ | ------------------------------------------------------------ |
+| [Node(1)](./TIL_date/BackEnd/Node.js/Node(1).md)       | node, npm, yarn 개념, node 실행,  퍼서드패턴, export/import 사용 |
+| [Node(2)](./TIL_date/BackEnd/Node.js/Node(2).md)       | 얕은/깊은 복사, RestAPI, GraphQL, Express, Swagger           |
+| [Node(3)](./TIL_date/BackEnd/Node.js/Node(3).md)       | CORS, nodemon, GraphQl                                       |
+| [Node.js(1)](./TIL_date/BackEnd/Node.js/Node.js(1).md) | 기본개념, Express (Get, post)                                |
+| [Node.js(2)](./TIL_date/BackEnd/Node.js/Node.js(2).md) |                                                              |
 
-​    
+
 
 ### Django
 
