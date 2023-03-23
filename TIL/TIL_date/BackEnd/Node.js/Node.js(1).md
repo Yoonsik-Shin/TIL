@@ -31,7 +31,7 @@
 
 - 어떤 라이브러리를 설치했는지 기록 
 
-<img src="Node JS1.assets/image-20230322225458374.png" alt="image-20230322225458374" style="zoom:50%;" />
+<img src="Node.js(1).assets/image-20230322225458374.png" alt="image-20230322225458374" style="zoom:50%;" />
 
 - `dependencies` : 실행에 필요한 라이브러리 모음
 - `devDependencies` : 개발시에만 적용되는 라이브러리 모음
@@ -122,7 +122,7 @@ const express = require('express')  // 'common.js'
 ```
 
 ```js
-import express from 'express
+import express from 'express'
 const app = express();
 
 // listen(서버를 띄울 포트번호, 띄운 후 실행할 코드)
@@ -178,13 +178,22 @@ app.get('경로', (요청내용, 응답방법) => {
 })
 
 // 예시2
-app.get('/hi', (request, response) => {
-  response.send();
-  response.sendFile(__dirname + '/index.html')
+app.get('/hi', (req, res) => {
+  res.send();
+  res.sendFile(__dirname + '/index.html')
 })
 ```
 
 > __dirname : 현재 파일의 경로
+
+```js
+// 동적경로
+app.get('/:id', (req, res) => {
+  db.collection('').findOne({_id: parseInt(req.params.id)}, (error, result) => {
+    res.render('파일', { data: result })
+  })
+})
+```
 
 ​    
 
