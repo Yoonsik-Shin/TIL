@@ -183,7 +183,7 @@ urlpatterns = [
 ```django
 <!-- apps/detail.html -->
 <form action="{% url 'articles:commments_create' app.pk %}" method="POST">
-	{% csrf_token %}
+	<!-- csrf토큰 -->
   {{ comment_form }}
   <input type="submit">
 </form>
