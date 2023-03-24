@@ -15,10 +15,16 @@
 
 ```bash
 $ npm install -g typescript
+$ yarn add global typescript
 ```
 
 - `파일명.ts` 생성
 - `tsconfig.json` 생성 : 컴파일시 옵션 설정
+
+```bash
+# tsconfig.json 자동생성
+$ tsc --init
+```
 
 ```typescript
 // tsconfig.json
@@ -51,6 +57,18 @@ $ npm install -g typescript
 }
 ```
 
+- `tsconfig.build.json`
+
+```json
+{
+  "extends": "./tsconfig.json",  // tsconfig 파일과 연결
+  "include": ["**/*.ts"],  // 모든폴더의 모든 ts파일
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]  // ts 변환 안할 파일설정
+}
+```
+
+
+
 - 타입스크립트 코드를 자동으로 JS 코드로 컴파일하기 
 
 ```bash
@@ -79,7 +97,7 @@ npx create-react-app 프로젝트명 --template typescript
 
 ## 2️⃣ 기본 문법
 
-### 2-1. 타입 지정하기
+### 1. 타입 지정하기
 
 - `string, number, boolean, null, undefined, bigint, [ ], { }`
 - 모든 변수에 타입지정 x
@@ -101,9 +119,53 @@ let namesObject: { name?: string } = { }  // 에러 미발생
 
 ​    
 
-### 2-2. 타입 애매할 때
+#### rest parameter
 
-#### 1. Union Type
+```typescript
+function addAll(...arr: number[]) {
+  console.log(arr)  // [1, 2, 3, 4, 5]
+}
+
+addAll(1, 2, 3, 4, 5);
+```
+
+​    
+
+#### spread 연산자
+
+```typescript
+type RestArr = [number, number, ...number[]];
+
+let arr: number[] = [1, 2, 3]
+let arr2: RestArr = [4, 5, ...arr]
+
+arr2 = [4, 5, 6, 7, 8, 9, 10]  // 갯수 상관없이 사용가능
+```
+
+​    
+
+#### tuple type
+
+- 무조건 타입에 맞는 값만 할당가능
+
+```typescript
+type TupleType = [string, boolean]
+
+const tupleT: TupleType = ['abc', true]
+```
+
+- tuple 안에도 옵션가능하지만 배열 중간에 있는 자료는 불가능
+
+```typescript
+type Num1 = [number, number?, number?]  // 가능
+type Num2 = [number, number?, number]  // 불가능
+```
+
+​    
+
+### 2. 타입 애매할 때
+
+#### Union Type
 
 -  OR 사용 (문자열이거나 숫자)
 
@@ -122,7 +184,7 @@ type Person = Name | Age;
 
 ​         
 
-#### 2. any
+#### any
 
 - 아무 값이나 넣을 수 있는 타입
 - 에러 방지 효과가 아예 없어 버그 추적이 어려워짐
@@ -133,7 +195,7 @@ let a: any  // 그냥 JS와 같아짐
 
 ​    
 
-#### 3. unknown
+####  unknown
 
 - 모든 값을 다 집어넣을 수 있음
 - 값을 넣어도 타입은 그대로 unknown
@@ -154,7 +216,7 @@ age + 1;  // Error 발생 : Union 타입과 number타입 연산 불가
 
 ​    
 
-### 2-3. 함수에 타입지정
+### 3. 함수에 타입지정
 
 - 함수는 `파라미터`와 `return` 값에 타입지정가능
 - __타입이 지정된 파라미터__는 __필수요소__가 됨
@@ -207,7 +269,7 @@ function Func(x:number):void {
 
 ​    
 
-### 2-4. 클래스에 타입지정
+### 4. 클래스에 타입지정
 
 - constructor에서 this키워드 사용시 미리 변수를 선언해줘야함
 - constructor 함수에는 return 타입지정 x
@@ -224,26 +286,59 @@ class User {
 
 ​    
 
-### 2-5. 타입 확정하기
+### 5. 타입 확정하기
 
 #### Type Narrowing
 
 - 타입이 아직 하나로 확정되지 않았을 경우 사용
+
 - 어떤 변수의 타입이 아직 불확실할 경우 if문 등으로 Narrowing 해줘야함
+
 - Narrowing 판정 문법
   1. `typeof 변수`
-  2. `속성명 in 객체`
-  3. `인스턴스 instanceof 부모`
 
-```typescript
-function MyFunc(x: number | string) {
-  if (typeof x === 'string') {
-    return
-  } else {
-    return
+  ```typescript
+  function MyFunc(x: number | string) {
+    if (strs && typeof x === 'string') { // null이나 undefined 필터링
+      return
+    } else {
+      return
+    }
   }
-}
-```
+  
+  ```
+
+  > `&&` 연산자
+
+  - 처음 등장하는 falsy값을 찾아줌
+  - falsy값이 없다면 마지막값을 넘겨줌
+
+  ​    
+
+  2. `속성명 in 객체(object)`
+
+  ```typescript
+  type Fruit = { apple: sting }
+  type Vegetable = { potato: string }
+  
+  function func(food: Fruit | Vegetable) {
+    if ('apple' in food) {
+      return food.apple
+    }
+    return food.potato
+  ```
+
+  ​    
+
+  3. `인스턴스 instanceof 부모(Class)`
+
+  ```typescript
+  let date = new Date();
+  
+  if (data instanceof Date) {
+    
+  }
+  ```
 
 - if문 사용했으면 else. else if문으로 끝맺어줘야 에러가 발생할 가능성 낮아짐
 
@@ -266,7 +361,7 @@ function MyFunc(x: number | string) {
 
 ​        
 
-### 2-6. 타입 별명 (Type alias )
+### 6. 타입 별명 (Type alias)
 
 ####  type
 
@@ -305,14 +400,15 @@ let position: NewType = { x: 10, y: 20 }
 #### interface
 
 - `type`키워드와 거의 유사
+- 파스칼 케이스로 이름지음
 
 ```typescript
-interface Square {
+interface ISquare {
   color: string,
   width: number,
 }
 
-let box: Square = {
+let box: ISquare = {
   color: 'red',
   width: 100.
 }
@@ -386,7 +482,7 @@ let john: Member = { name: 'kim' }
 
 ​    
 
-### 2-7. Literal Types
+### 7. Literal Types
 
 - 특정 글자나 숫자만 가질 수 있게 제한을 두는 타입
 
@@ -402,7 +498,57 @@ function Func(a: 'hi'): 1 | 0 {
 
 ​    
 
-### 2-8. as const
+### 8. Enum
+
+```typescript
+enum authEnum {
+  ADMIN = "admin",
+  MANAGER = "manager",
+  USER = "user",
+}
+
+const authInfo: authEnum = authEnum.ADMIN
+console.log(authInfo) // admin
+```
+
+> js에는 enum이 없기때문에 컴파일되면 enum은 함수형태로 변환됨
+
+```js
+// js
+var authEnum;
+(function (authEnum) {
+  authEnum["ADMIN"] = "admin",
+  authEnum["MANAGER"] = "manager",
+  authEnum["USER"] = "user",
+})(authEnum || (authEnum = {}));
+
+var authInfo = authEnum.ADMIN;
+```
+
+​    
+
+> 따로 값 설정하지 않으면 0부터 자동으로 값 부여
+
+```typescript
+enum testEnum {
+  A,
+  B,
+  C,
+}
+
+
+const testA: testEnum = testEnum.A
+const testB: testEnum = testEnum.B
+const testC: testEnum = testEnum.C
+
+console.log(testA)  // 0
+console.log(testB)  // 1
+console.log(testC)  // 2
+```
+
+​    
+
+### 9. as const
 
 - object를 잠그고 싶을 때 활용
 - object value의 값을 그대로 타입으로 지정해줌
