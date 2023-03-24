@@ -165,7 +165,7 @@ def detail(request, pk):
 ```django
 <!-- apps/detail.html -->
 <form action='' method="POST">
-  <!-- csrf토큰 -->
+  {% csrf_token %}
   {{ comment_form }}
   <input type="submit">
 </form>
@@ -183,7 +183,7 @@ urlpatterns = [
 ```django
 <!-- apps/detail.html -->
 <form action="{% url 'articles:commments_create' app.pk %}" method="POST">
-	<!-- csrf토큰 -->
+	{% csrf_token %}
   {{ comment_form }}
   <input type="submit">
 </form>
@@ -267,7 +267,7 @@ def comments_delete(request, app_pk, comment_pk):
 ```django
 <!-- apps/detail.html -->
 <form action="{% url 'articles:comments_delete' app.pk comment.pk %}" method="POST">
-	<!-- csrf토큰 -->
+	{% csrf_token %}
   <input type="submit" value="DELETE">
 </form>
 ```
