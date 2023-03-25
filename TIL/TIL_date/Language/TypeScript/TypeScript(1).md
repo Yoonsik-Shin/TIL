@@ -182,7 +182,27 @@ type Age = number;
 type Person = Name | Age;
 ```
 
-​         
+​     
+
+#### Intersection Type
+
+- AND 사용
+
+```typescript
+interface IName {
+  name: string;
+}
+interface IAge {
+  age: number;
+}
+
+const nameAndAge: IName & IAge = {
+  name: 'shin',
+  age: 27,
+}
+```
+
+​    
 
 #### any
 
@@ -219,6 +239,7 @@ age + 1;  // Error 발생 : Union 타입과 number타입 연산 불가
 ### 3. 함수에 타입지정
 
 - 함수는 `파라미터`와 `return` 값에 타입지정가능
+- 어디서 몇번이든 호출 가능하므로, 타입추론 할 수 없음
 - __타입이 지정된 파라미터__는 __필수요소__가 됨
 
 
@@ -416,7 +437,7 @@ let box: ISquare = {
 
 ​    
 
-> `extends`
+#### extends
 
 - 다른 interface의 값을 추가해줄 수 있음
 
@@ -470,14 +491,36 @@ const 친구: Friend = {
 
 ​    
 
->  object에 타입지정 속성이 많을 때
+#### index signatures
+
+- object에 타입지정 속성이 많을 때
 
 ```tsx
 type Member = {
   [key: string] : string,  ✔️✔️ // 모든 object 속성
 }
 
-let john: Member = { name: 'kim' }
+let john: Member = { name: 'kim' } // { 모든속성 : string }
+```
+
+```typescript
+// 에러발생
+interface StringOnly {
+  age: number,
+  [key: string]: string,
+}
+
+// 정상작동
+interface StringOnly {
+  age : string, 
+  [key: string]: string,
+}
+
+// 정상작동
+interface StringOnly {
+  age : number,
+  [key: string]: string | number,
+}
 ```
 
 ​    

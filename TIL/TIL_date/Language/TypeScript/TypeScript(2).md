@@ -115,14 +115,14 @@ user.gender = 'test'  // 자식 object에서 수정불가
 
 ```typescript
 class User {
-  private gender: string;
+  private _gender: string;
   
   constructor() {
-    this.gender = '남자';
+    this._gender = '남자';
   }
   
   changePrivate(gender: string) {
-    this.gender = gender
+    this._gender = gender
   }
 }
 
@@ -139,12 +139,18 @@ console.log(user)  // User { gender: '여자' }
 class Person {
   constructor (
   	public name: string,
-    private gender: '남자' | '여자'
+    private gender: '남자' | '여자' = 'default value'
   ) {}
 }
 
 const people = new Person('shin', '남자')
 console.log(people);  // Person { name: 'shin', gender: '남자' }
+
+const people2 = new Person('shin')
+console.log(people2)  // Person { name: 'shin', gender: 'default value' }
+
+// default value없이 인자 빼먹으면 undefined 반환
+console.log(people2) // Person { name: 'shin', gender: 'undefined' }
 ```
 
 ​     
@@ -313,3 +319,35 @@ export const withAuth = <C>(Component: C) => <P>(props: P): [C, P] => {
 const result5 = withAuth("bbb")({ qqq: "철수" });
 ```
 
+​    
+
+### extends
+
+- Generic의 타입을 제한함
+
+```typescript
+interface IObj1 {
+  name: string;
+  age: number;
+}
+interface IObj2 {
+  city: string;
+  phone: number;
+}
+
+function printKey<T extends object, U extends keyof T>(params: T, key: U) {
+  // T는 object 타입만 가능
+  // U는 keyof 키워드로 인해 T에 들어온 객체의 키값만 받음
+  // extends 키워드로 인해 T안의 타입만 가능
+  retrun params[key]
+}
+
+printKey<IObj1, keyof IObj1>({ name: 'yoonsik', age: 27}, "name")
+printKey<IObj2, keyof IObj2>({ city: 'seoul', phone: 01011111111}, "phone")
+```
+
+​    
+
+---
+
+## 5️⃣ Utility Types
