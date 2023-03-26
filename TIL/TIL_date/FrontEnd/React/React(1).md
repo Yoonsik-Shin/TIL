@@ -1,24 +1,34 @@
-# React 정리 (1)
+# React (1)
 
+​     
 
+## 1️⃣ React 
 
-## 왜 사용하는가
+### 사용 이유
 
-- 싱글페이지 어플리케이션 (Single Page Application)을 만들고 싶을 때 사용
+- 싱글페이지 어플리케이션 (SPA: Single Page Application)을 만들고 싶을 때 사용
 - html 재사용 편리
 - React Native에도 활용가능
 
+​    
 
-
-## 설치법
+### 설치법
 
 1. node.js 설치
 2. 프로젝트 폴더 만들기
-3. 터미널에서 명령어 입력
+3. 터미널에서 명령어 입력 (`CRA` : Create React App 라이브러리 사용) 
 
 ```bash
-npx create-react app <앱 이름>
+$ npx create-react app <앱 이름>
 ```
+
+> vite 이용 react 세팅
+
+```bash
+$ npm create vite@latest
+```
+
+
 
 > (윈도우) 설치 오류시
 
@@ -26,44 +36,36 @@ npx create-react app <앱 이름>
 Set-ExecutionPolicy Unrestricted
 ```
 
+​    
 
+----
 
-src파일 > App.js
+## 2️⃣ 보일러 플레이트
 
-미리보기 : npm start
-
-Create React App 라이브러리 사용
-
-
-
-## React 파일정리
-
-node_modules
+### node_modules
 
 - 라이브러리 코드 보관함
-- 따로 수정 x
 
-public 
+### public 
 
 - static 파일 보관함
 - html, 이미지 파일등을 임시로 저장하고 싶을때
 
-src
+### src
 
 - 소스코드 보관함
 - 직접 코드를 작성하는 곳
 - App.js : 메인페이지
 
-package.json
+### package.json
 
 - 프로젝트 정보
-- 따로 수정 x
 
-​    
+​     
 
 ---
 
-## JSX
+## 2️⃣ JSX
 
 - 자바스크립트 파일에서 HTML언어와 유사한 기능을 하는 언어
 
@@ -71,27 +73,25 @@ package.json
 
 ### HTML과 다른점
 
-1. 클래스
+1. 클래스 [`className`]
 
 ```jsx
 <div className="클래스이름"></div>
 ```
 
-2. 변수 (데이터 바인딩)
+2. 변수 (데이터 바인딩) [`{ 변수 }`]
 
 ```jsx
 let 변수명;
 <h4>{ 변수명 }</h4>
 ```
 
-3. 스타일
+3. 스타일 [`style={{ attribute1: value2, attribute2: value2 }}`]
 
 ```jsx
 <h1 style= { {스타일명:'값'} }></h1>
 <h1 style= { {color:'red', fontSize: '16px'} }></h1>
 ```
-
-> ❗ 변수명 카멜케이스 사용
 
 4. return () 안에는 병렬로 태그 2개이상 기입 금지
 
@@ -111,16 +111,21 @@ return (
 )
 ```
 
+5. 변수명 카멜케이스 사용
+
+```jsx
+<div onClick={실행할함수}></div>
+```
+
 ​    
 
 ---
 
-## State
+## 3️⃣ State
 
 - 자료 잠깐 보관하기
 - 컴포넌트 전용 변수
-- 변수는 자동으로 내용 변경시 html에 재렌더링 안됨
-- state는 재렌더링이 자동으로 html에 반영
+- 변수는 자동으로 내용 변경시 html에 재렌더링 안되지만, state는 재렌더링이 자동으로 html에 반영
 - 자주 변경될거같은 html 부분은 state로 만들기
 
 ```javascript
@@ -154,7 +159,7 @@ let [a, b, c] = [1, 2, 3]
 ### State 수정
 
 - array, object를 다룰 때 원본은 보존하는게 좋음
-- array/object를 담은 변수엔 메모리값만 저장되어있음 (reference data type)
+- array / object를 담은 변수엔 메모리값만 저장되어있음 (__reference data type__)
 
 ```jsx
 let a = [1, 3, 5];
@@ -165,14 +170,25 @@ console.log(a === b) // true
 
 - `기존 state == 신규 state`의 경우 변경 안함
 
-- state가 array나 object이면 독립적인 카피본(shallow copy)을 만들어 수정해야함
+- ❗state가 array / object이면 독립적인 카피본(__shallow copy__)을 만들어 수정해야함
 
 ```jsx
-<button onClick={ () => {
-    let copy = [...state_1];   // 메모리값을 바꿔줌
-    copy[바꿀 인덱스] = "바꿀값";
-    state_2(copy);
-  }};
+const [objState, setObjState] = useState({ default: 'value' })
+const [arrState, setArrState] = useState([1, 2, 3])
+
+// object
+<button onClick={() => {
+	let copy = { ...objState };   // 메모리값을 바꿔줌
+  copy[default] = '바꿀값';
+  setObjState(copy);
+}};
+
+// array
+<button onClick={() => {
+	let copy = [ ...arrState ];   // 메모리값을 바꿔줌
+  copy[default] = '바꿀값';
+  setArrState(copy);
+}};
 ```
 
 ​    
@@ -187,19 +203,19 @@ console.log(a === b) // true
 
 ---
 
-## Component (컴포넌트)
+## 4️⃣ Component
+
+> fragment : 의미없는 `<div>` 대신 `<></>` 사용가능 
 
 ```jsx
 // 1번 방법
 function Modal(){    // 대문자 작명
-  return(
-    <>               // 의미없는 `<div>` 대신 `<></>` 사용가능 
+	return(
   		<div className="modal">
       	<h4>제목</h4>
       	<p>날짜</p>
       	<p>상세내용</p>
     	</div>
-    </>
   )
 }
 
@@ -216,10 +232,11 @@ const Modal = () => {
 
 1. function 만들기
 2. return ( ) 안에 html 담기
-3. <함수명></함수명>
+3. <컴포넌트></컴포넌트> or <컴포넌트 />
 
 ```jsx
 <Modal></Modal>
+<Modal />  // 넣을 값 없으면 사용
 ```
 
 ​    
@@ -241,18 +258,19 @@ const Modal = () => {
 
 ---
 
-## 동적 UI 만들기
+## 5️⃣ 동적 UI
 
 1. html, css로 미리 디자인 완성하기
 2. UI의 현재 상태를 state로 저장
 
 ```jsx
 function App (){
-  
   let [modal, setModal] = useState(false);
   
   return (
-    <button onClick={ () => {setModal(!modal)};
+    <button onClick={() => {
+        setModal(!modal)
+     };
   )
 }
 ```
@@ -260,7 +278,7 @@ function App (){
 3. state에 따라 UI가 어떻게 보일지 작성
 
 ```jsx
-{modal === true ? <Modal /> : null}
+{modal ? <Modal /> : null}
 ```
 
 ​    
@@ -278,7 +296,7 @@ function App (){
 
 ---
 
-## map
+## 6️⃣ map 함수
 
 1. array의 자료수만큼 내부코드 반복 실행
 
@@ -307,7 +325,7 @@ function App (){
 3. return문 내용을 array로 담아줌
 
 ```javascript
-[1, 2, 3].map(function (a) {
+[1, 2, 3].map((a) => {
   return "123456";
 });
 
@@ -318,15 +336,17 @@ function App (){
 
 > 같은 html 반복 생성
 
+- 동일한 HTML 코드가 반복될 시 `key`값으로 구분해줘야함
+
 ```jsx
-let [a, b] = useState('')
+let [test, setTest] = useState(['1', '2', '3'])
 
 {
-  a.map(function(param, i){    // i : 인덱스
+  test.map((el, idx) => {    // el: 값, idx: 인덱스
     return (
-      <div key={i}>
-        <h2>{ param }</h2>
-        <h2>{ a[i] }</h2>
+      <div key={idx}>
+        <h2>{ el }</h2>
+        <h2>{ test[idx] }</h2>
         <p></p>
       </div>
     )
@@ -338,17 +358,50 @@ let [a, b] = useState('')
 
 ---
 
-## props
+## 7️⃣ props
 
 - 부모 component에서 자식 component로 state 전송하기
 - 자식에서 부모, 형제끼리는 불가능 ❗
+- 컴포넌트들 중 최고로 높은 부모에게 만들어놔야함
 
 ```jsx
-<자식컴포넌트 작명={state이름}/>
-
-function 자식컴포넌트(props){
+const 부모컴포넌트 = () => {
+  const [pass, setPass] = useState('')
+  
   return (
-    <p>props.작명</p>
+    // 보통 작명은 '{}'안에 값과 동일하게 함
+  	<자식컴포넌트 작명={state값/함수/일반변수} 작명2="일반문자"/>  
+    <자식컴포넌트 pass={pass} setPass={setPass} />
+  )
+}
+
+const 자식컴포넌트 = (props) => {
+  return (
+    <>
+    	<p>{props.작명}</p>
+    	<p>{props.pass}</p>
+    </>
+  )
+}
+```
+
+​    
+
+---
+
+## 8️⃣ input
+
+> 사용자 입력값 저장
+
+```jsx
+function App() {
+  const [inputVal, setInputVal] = useState('')
+  const onChangeEvent = (e) => {
+    setInputVal(e.target.value)
+  }
+  
+  return (
+  	<input onChange={onChangeEvent} />
   )
 }
 ```

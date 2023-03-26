@@ -1,91 +1,169 @@
-# React 정리 (3)
+# React (3)
 
 
 
-컴포넌트의 Lifecycle
+## 1️⃣ 컴포넌트 Lifecycle
 
-- 장착 (mount)
-- 업데이트 (update)
-- 제거 (unmount)
+- 생성, 장착 (mount)
+- 재렌더링, 업데이트 (update)
+- 삭제, 제거 (unmount)
 
+​    
 
-
-컴포넌트에 갈고리 다는법
-
-`useEffect()` : mount, update시 코드 실행
-
-쓰는 이유
-
-- html 랜더링이 완료된 후에 동작
+### class 문법 Lifecycle hook 
 
 ```jsx
-useEffect(() => {}, []) // [] : useEffect의 실행조건을 넣을 수 있는 곳
-// 비어있으면 mount에만 실행됨
+class Detail extends React.Component {
+	componentDidMount() {}  // 컴포넌트가 로드되고 실행할 코드
+	componentDidUpdate() {}  // 컴포넌트가 업데이트 되고나서 실행할 코드
+	componentWillUnmount() {}  // 컴포넌트가 삭제되기전에 실행할 코드
+}
+```
 
-useEffect(() => {}, [count]) // count라는 state가 변할때만 실행됨
+​    
 
-useEffect(() => {
-  let a = setTimeout(() => { })
+### useEffect
+
+- useEffect안에 적은 코드는 html 랜더링이 완료된 후에 동작
+- 오래 걸리는 반복연산, 서버에서 데이터 가져오는 작업, 타이머등 사용시 활용하면 좋음
+
+```jsx
+import { useState, useEffect } from 'react';
+
+function Detail() {
+  useEffect(() => {
+    // 컴포넌트 로드 and 업데이트시 실행되는 부분
+    // html 랜더링이 완료된 후에 동작
+  })
   
-  return () => {
-    clearTimeout(a)  // 타이머 제거해주는 함수
-  }
-})  // return문은 useEffect 동작전에 실행됨
+  return ()
+}
 ```
 
 
 
-1. 재렌더링마다 코드를 실행하고 싶으면
+#### 실행조건
+
+1. 재렌더링(update)마다 코드를 실행하고 싶으면
 
 ```jsx
-useEffect(() => { })
+useEffect(() => {
+  // 실행할코드
+})
 ```
 
-2. mount시 1회 코드 실행하고 싶으면
+2. 생성(mount)시 1회 코드 실행하고 싶으면
 
 ```jsx
-useEffect(() => { }, [])
+useEffect(() => {
+  // 실행할코드
+}, [])
 ```
 
 3. useEffect 안의 코드 실행 전에 항상 실행
 
+> clean up function : `return () => {}`
+
 ```jsx
 useEffect(() => {
-  return () => {}
+  // 다음에 실행할코드
+  return () => {
+    // 먼저 실행할코드
+  }
 })
 ```
 
-4. unmount시 1회 코드 실행하고 싶으면
+4. 제거(unmount)시 1회 코드 실행하고 싶으면
 
 ```jsx
-useEffect(()=>{ 
-  return ()=>{}
+useEffect(() => { 
+  return () => {
+    // 실행할코드
+  }
 }, [])
 ```
 
 5. state가 변경될 때만 실행
 
 ```jsx
-useEffect(()=>{ 
+useEffect(() => { 
   실행할코드
 }, [stateName])
 ```
 
+​    
 
+---
 
+## 2️⃣ axios
 
-
-
-
-axios
-
-
-
-동시에 ajax 요청 여러개하기
+```bash
+$ npm install axios
+$ yarn add axios
+```
 
 ```jsx
-Promise.all([ axios.get(''), axios.get('')] )
-.then(() => {})
+// GET 요청
+import axios from 'axios'
+
+function App() {
+  const onClickAxios = async () => {
+    const result = await axios({
+      method: 'get',
+      url: 'https://..',
+    })
+    console.log(result)
+  }
+  
+  return (
+  	<button onClick={onClickAxios}>ajax 요청</button>
+  )
+}
+```
+
+```jsx
+// POST 요청
+import axios from 'axios'
+
+function App() {
+  const onClickAxios = async () => {
+    const result = await axios({
+      method: 'post',
+      url: 'https://..',
+      data: { 서버로 보내고싶은 데이터 }
+    })
+    console.log(result)
+  }
+  
+  return (
+  	<button onClick={onClickAxios}>ajax 요청</button>
+  )
+}
+```
+
+​    
+
+### 동시에 여러 ajax 요청 보내기
+
+```jsx
+Promise.all([
+  axios.get('url1'), 
+  axios.get('url2')
+]).then(() => {
+  
+})
+```
+
+​    
+
+### fetch
+
+```js
+fetch('url').then(res => {
+  res.json().then((result) => {  // JSON >> object/array로 자동변환을 안해줘서 바꿔줘야함
+    console.log(result)
+  })
+})
 ```
 
 
