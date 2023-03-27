@@ -175,12 +175,14 @@ app.listen(3000, () => {}) // 서버실행
 app.get('경로', (요청내용, 응답방법) => {
   응답.send(); 
   응답.sendFile(보낼 파일의 경로);  // 파일보내기
+  응답.json({}) // JSON 파일 내보내기
 })
 
 // 예시2
 app.get('/hi', (req, res) => {
   res.send();
   res.sendFile(__dirname + '/index.html')
+  res.json({ say: 'hi' })
 })
 ```
 
@@ -219,7 +221,7 @@ app.post('/bye', (request, response) => {
 
 
 
-> body-parser
+### body-parser
 
 - input에 적은 정보 추출 
 - body-parser 라이브러리가 express에 기본 포함이라 따로 설치 x
@@ -234,3 +236,27 @@ app.use(express.urlencoded({extended : true}));
 ```html
 <input type="" name=""> 
 ```
+
+​    
+
+### CORS
+
+```bash
+$ npm install cors
+$ yarn add cors
+```
+
+```js
+import cors from 'cors'
+
+app.use(cors())
+
+// cors 옵션 작성가능
+const corsOptions = {
+  origin: ...,
+  ...
+}
+app.use(cors(corsOptions))
+```
+
+> [cors 옵션확인](https://github.com/expressjs/cors#readme)

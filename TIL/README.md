@@ -136,16 +136,26 @@
 
 ​    
 
-### React
+### React 
 
 | Contents                                           | Ex                                                           |
 | -------------------------------------------------- | ------------------------------------------------------------ |
 | [React (1)](./TIL_date/FrontEnd/React/React(1).md) | 리액트 사용이유, 구조, JSX, State, Component, 동적UI, props, map, input |
 | [React (2)](./TIL_date/FrontEnd/React/React(2).md) | Class문법, React-BootStrap, 이미지, import/export, Router다루기, styled-components |
-| [React (3)](./TIL_date/FrontEnd/React/React(3).md) |                                                              |
-| [React (4)](./TIL_date/FrontEnd/React/React(4).md) |                                                              |
+| [React (3)](./TIL_date/FrontEnd/React/React(3).md) | 컴포넌트 Lifecycle, axios, 전환효과, IF문 작성패턴, localStorage (최근본상품) |
+| [React (4)](./TIL_date/FrontEnd/React/React(4).md) | DevTools, lazy import, Selective Hydration(Suspense), rerendering (memo, usememo, automatic batch, flushSync) |
 
-   
+ 
+
+### State Manager
+
+| Contents                                                     | Ex                                      |
+| ------------------------------------------------------------ | --------------------------------------- |
+| [State Manager (1)](./TIL_date/FrontEnd/State_Manager/State_Manager(1).md) | ContextAPI, Redux Tookit, redux-persist |
+| [State Manager (2)](./TIL_date/FrontEnd/State_Manager/State_Manager(2).md) | React-Query                             |
+| [State Manager (3)](./TIL_date/FrontEnd/State_Manager/State_Manager(3).md) | Recoil                                  |
+
+  
 
 ---
 

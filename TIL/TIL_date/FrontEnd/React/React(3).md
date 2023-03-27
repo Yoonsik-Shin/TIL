@@ -166,100 +166,197 @@ fetch('url').then(res => {
 })
 ```
 
+​    
 
+---
 
+## 3️⃣ 전환 애니메이션
 
+### Fade In
 
-redux
+1. 애니메이션 동작 전/후 스타일을 담을 className만들기
 
-```bash
-$ npm install @reduxjs/toolkit react-redux
+```css
+.start {
+  opacity: 0;  /* 동작전 투명도 0 */
+}
+.end {
+  opacity: 1;  /* 동작후 투명도 1 */
+}
 ```
 
+2. `transition`속성 추가
 
-
-- store.js 파일 생성후 (src폴더안에)
-
-```js
-import { configureStore, createSlice } from '@reduxjs/toolkit'
-
-let 변수 = createSlice({
-  name: 'state이름',
-  initialState: { 변수a: "", 변수b: "" },
-  reducers: {
-  	함수(state, action){  // 파라미터 : 기존 state
-  		state.변수a = "수정값"
-      state.변수b += action.payload
-		},
-    함수2(){
-      return
-    }
-	}	
-})
-
-export let {함수, 함수2} = 변수.actions;  // 만든 함수 내보내기
-
-let user = createSlice({
-  name: 'user',
-  initialState: 'shin'
-})
-
-export default configureStore({
-  reducer: {
-    작명(변수): 변수.reducer 
-    user: user.reducer
-  }
-}) 
+```css
+.start {
+  opacity: 0;
+}
+.end {
+  opacity: 1;
+  transition : opacity 0.5s;  /* 투명도 변화가 0.5초 동안 일어나도록 설정 */ ✔️✔️ 
+}
 ```
 
+3. 동작 후 className을 조작하여 전환효과 부여
 
-
-- index.js 
-
-```js
-import store from './store.js'
-
-root.render(
-  // <React.StrictMode>
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
-  // </React.StrictMode>
-);
-```
-
-
-
-- 꺼내쓰기
-
-```json
-import { 함수 } from
-import { useDispatch, useSelector } from "react-redux"
-
-function a(){
-  let 변수 = useSelector((state)=> { return state })  // redux의 store 가져옴
-  let 변수 = useSelector((state)=> { return state.user })  // redux의 store에서 user만 가져옴
-  let dispatch = useDispatch()  // store.js으로 요청을 보내주는 함수
+```jsx
+function TabContent(props) {
+  const [fade, setFade] = useState('')
   
-  return(
-  	<>
-    	<button onClick={()=>{
-    		dispatch(함수())
-  		}}
-    </>
+  useEffect(() => {
+    let time = setTimeout(() => { setFade('end') }, 100)	
+    
+    return () => {
+      clearTimeout(time)
+      setFade('') 
+    }
+  }, [props])
+  
+  return (
+  	<div className={`start ${fade}`}>
+    </div>
   )
 }
 ```
 
-- state 변경하기
+​    
 
-- state 수정해주는 함수만들기
-- 원할 때 그 함수를 실행해달라고 store.js에 요청
-- 만든 함수 export
+---
+
+## 4️⃣ IF문 작성패턴
+
+### Component
+
+```jsx
+function Component() {
+  if () {
+    return <div>참일 때 보여줄 HTML</div>
+  }
+  return null
+}
+```
+
+​    
+
+### JSX
+
+- 중첩사용도 가능
+
+```jsx
+function Component() {
+  return (
+    <div>
+      {
+        1 === 1  // 조건
+        ? <p>참일 때 보여줄 HTMLL</p>  // 참
+        : null  // 거짓
+      }
+    </div>
+  )
+} 
+```
+
+​    
+
+### `&&` 
+
+- 처음으로 만나는 Falsy값 반환
+- 모두 Truthy라면 마지막 피연산자값 반환
+
+```jsx
+function Component() {
+  return (
+    <div>
+       <!-- 모두 참이므로 마지막 피연산자값 반환 -->
+      { 1 === 1 && <p>참일 때 보여줄 HTML</p> }
+    </div>
+  )
+}
+```
+
+​     
+
+### switch / case
+
+```jsx
+function Component2(){
+  const user = 'seller';
+  
+  switch (user){
+    case 'seller':
+      return <h4>판매자 로그인</h4>
+    case 'customer':
+      return <h4>구매자 로그인</h4>
+    default: 
+      return <h4>로그인</h4>
+  }
+}
+```
+
+​    
+
+### object / array 응용
+
+```jsx
+const TabUI = {
+  info: <p>상품정보</p>,
+  shipping: <p>배송정보</p>,
+  refund: <p>환불정보</p>,
+}
+
+function Component() {
+  const [state, setState] = '';
+  
+  return <div>{ TabUI[state] }</div>  ✔️✔️
+}
+```
+
+​    
+
+---
+
+## 5️⃣ localStorage
+
+```js
+// 값 추가
+localStorage.setItem('저장할 데이터명', '저장할 데이터값')
+
+// 값 읽기
+localStorage.getItem('읽어올 데이터명')
+
+// 값 삭제
+localStorage.removeItem('삭제할 데이터명')
+```
 
 
 
-store.js 파일분할하기
+> array / object 다루기
+
+- JSON으로 변환후 저장 및 읽기
+
+```js
+// 값 추가
+localStorage.setItem('obj', JSON.stringify({ name: 'shin' })) // obj: "{"name": "shin"}"
+
+// 값 읽기
+let obj = localStorage.getItem('obj')
+obj = JSON.parse(obj)
+```
+
+​    
+
+> 최근 본 상품
+
+```jsx
+useEffect(() => {
+  let watched = localStorage.getItem('watched')
+  watched = JSON.parse(watched)
+  watched.push(product.id)
+  
+  // Set으로 중복제거한 후 다시 array로
+  watched = new Set(watched)
+  watched = Array.from(watched)
+  localStorage.setItem('watched', JSON.stringify(watched))
+}, [])
+```
 
