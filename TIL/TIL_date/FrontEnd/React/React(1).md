@@ -42,9 +42,13 @@ Set-ExecutionPolicy Unrestricted
 
 ## 2️⃣ 보일러 플레이트
 
+- 초기 폴더구조
+
+​    
+
 ### node_modules
 
-- 라이브러리 코드 보관함
+- 라이브러리 / 프레임워크 보관함
 
 ### public 
 
@@ -159,6 +163,7 @@ let [a, b, c] = [1, 2, 3]
 ### State 수정
 
 - array, object를 다룰 때 원본은 보존하는게 좋음
+- 비동기적으로 동작, 코드를 끝까지 읽고 한번에 바꿔서 렌더링
 - array / object를 담은 변수엔 메모리값만 저장되어있음 (__reference data type__)
 
 ```jsx
@@ -168,7 +173,7 @@ b[0] == 300;
 console.log(a === b) // true
 ```
 
-- `기존 state == 신규 state`의 경우 변경 안함
+- `기존 state == 신규 state`의 경우 변경 안됨
 
 - ❗state가 array / object이면 독립적인 카피본(__shallow copy__)을 만들어 수정해야함
 
@@ -190,6 +195,15 @@ const [arrState, setArrState] = useState([1, 2, 3])
   setArrState(copy);
 }};
 ```
+
+
+
+> 리렌더링 되는 상황
+
+1. 새로운 props가 들어올 때
+2. 부모 컴포넌트가 렌더링될 때
+3. 강제 업데이트가 실행될 때
+4. state가 변경될 때
 
 ​    
 
@@ -258,45 +272,49 @@ const Modal = () => {
 
 ---
 
-## 5️⃣ 동적 UI
+## 5️⃣ props
 
-1. html, css로 미리 디자인 완성하기
-2. UI의 현재 상태를 state로 저장
+- 부모 component에서 자식 component로 state 전송하기
+- 자식에서 부모, 형제끼리는 불가능 ❗
+- 단방향 전달 방식
+- 컴포넌트들 중 최고로 높은 부모에게 만들어놔야함
 
 ```jsx
-function App (){
-  let [modal, setModal] = useState(false);
+const 부모컴포넌트 = () => {
+  const [pass, setPass] = useState('')
   
   return (
-    <button onClick={() => {
-        setModal(!modal)
-     };
+    // 보통 작명은 '{}'안에 값과 동일하게 함
+  	<자식컴포넌트 작명={state값/함수/일반변수} 작명2="일반문자"/>  
+    <자식컴포넌트 pass={pass} setPass={setPass} />
+  )
+}
+
+const 자식컴포넌트 = (props) => {
+  return (
+    <>
+    	<p>{props.작명}</p>
+    	<p>{props.pass}</p>
+    </>
   )
 }
 ```
 
-3. state에 따라 UI가 어떻게 보일지 작성
-
-```jsx
-{modal ? <Modal /> : null}
-```
-
 ​    
 
-> JSX 조건문 활용
+> props drilling
 
-```jsx
-// 삼항 연산자
-{
-  조건식 ? 참일 때 실행할 코드 : 거짓일때 실행할 코드
-}
-```
+- props가 자식에게 넘겨주는 단계가 두번 이상일 경우를 props drilling이 일어났다라고 함
+- 과도하지 않으면 괜찮지만, 과도하면 가독성과 유지보수면에서 좋지 않음
+- 이를 방지하기 위해서 global state를 활용함
 
 ​    
 
 ---
 
-## 6️⃣ map 함수
+## 6️⃣ 기타
+
+### map함수
 
 1. array의 자료수만큼 내부코드 반복 실행
 
@@ -337,6 +355,7 @@ function App (){
 > 같은 html 반복 생성
 
 - 동일한 HTML 코드가 반복될 시 `key`값으로 구분해줘야함
+- index를 키로 사용하면 안됨, 아예 중복되지 않는 값을 key로 지정해줘야함
 
 ```jsx
 let [test, setTest] = useState(['1', '2', '3'])
@@ -344,7 +363,7 @@ let [test, setTest] = useState(['1', '2', '3'])
 {
   test.map((el, idx) => {    // el: 값, idx: 인덱스
     return (
-      <div key={idx}>
+      <div key={중복되지않는값}>
         <h2>{ el }</h2>
         <h2>{ test[idx] }</h2>
         <p></p>
@@ -356,40 +375,72 @@ let [test, setTest] = useState(['1', '2', '3'])
 
 ​    
 
----
+> Fragment
 
-## 7️⃣ props
-
-- 부모 component에서 자식 component로 state 전송하기
-- 자식에서 부모, 형제끼리는 불가능 ❗
-- 컴포넌트들 중 최고로 높은 부모에게 만들어놔야함
+- 빈 <>에는 태그 속성을 사용할 수 없음
+- 이때는 `<Fragment`> 태그를 사용해야함
 
 ```jsx
-const 부모컴포넌트 = () => {
-  const [pass, setPass] = useState('')
-  
-  return (
-    // 보통 작명은 '{}'안에 값과 동일하게 함
-  	<자식컴포넌트 작명={state값/함수/일반변수} 작명2="일반문자"/>  
-    <자식컴포넌트 pass={pass} setPass={setPass} />
+{
+  arr.map((el, idx) => (
+    <Fragment key={idx}>
+    </Fragment>
   )
 }
+```
 
-const 자식컴포넌트 = (props) => {
+   
+
+### filter함수
+
+- 조건에 맞는 값만 골라내서 배열로 반환해줌
+
+```js
+const stock = [1, 2, 3, 4, 5, 6]
+const filter = stock.filter(item => item >= 3)
+
+// filter = [3, 4, 5]
+```
+
+​    
+
+###  동적 UI
+
+1. html, css로 미리 디자인 완성하기
+2. UI의 현재 상태를 state로 저장
+
+```jsx
+function App (){
+  let [modal, setModal] = useState(false);
+  
   return (
-    <>
-    	<p>{props.작명}</p>
-    	<p>{props.pass}</p>
-    </>
+    <button onClick={() => {
+        setModal(!modal)
+     };
   )
+}
+```
+
+3. state에 따라 UI가 어떻게 보일지 작성
+
+```jsx
+{modal ? <Modal /> : null}
+```
+
+​    
+
+> JSX 조건문 활용
+
+```jsx
+// 삼항 연산자
+{
+  조건식 ? 참일 때 실행할 코드 : 거짓일때 실행할 코드
 }
 ```
 
 ​    
 
----
-
-## 8️⃣ input
+### input
 
 > 사용자 입력값 저장
 
@@ -402,6 +453,40 @@ function App() {
   
   return (
   	<input onChange={onChangeEvent} />
+  )
+}
+```
+
+​    
+
+#### 회원가입
+
+```jsx
+import { useState } from 'react'
+
+export default function SignupStatePage() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [emailError, setEmailError] = useState('')
+
+  const onChangeEmail = (e) => { setEmail(e.target.value) }
+  const onChangePassword = (e) => { setPassword(e.target.value) }
+  const onClickSignup() => {
+    if (!email.includes("@")) {
+      setEmailError('이메일이 올바르지 않습니다.')
+      return
+    }
+    // API 요청
+    alert('회원가입을 축하합니다.')
+  }
+
+  return (
+    <>
+      이메일: <input type='text' onChange={onChangeEmail}/>
+      <div>{emailError}</div>
+      비밀번호: <input type='password' onChange={onChangePassword} />
+      <button onClick={onClickSignup}>회원가입</button>
+    </>
   )
 }
 ```

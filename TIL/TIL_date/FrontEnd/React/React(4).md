@@ -200,3 +200,76 @@ function AutomaticBatch() {
 }
 ```
 
+​    
+
+### useTransition
+
+- __state변경함수__가 성능저하를 일으킬 때 사용
+- `startTransition` : 실행시점을 뒤로 옮겨줌 (늦게처리)
+- `isPending` : `startTransition`이 처리중일 때 `true`인 값
+
+```jsx
+import { useState, useTransition } from 'react'
+
+const box = new Array(100000).fill(0)  // 10만개
+
+function App() {
+  const [name, setName] = useState('')
+  const [isPending, startTransition] = useTransition()  ✔️✔️ 
+  
+  const onChangeVal = (e) => {
+    startTransition(() => {  ✔️✔️
+      setName(e.target.value)  // 성능저하를 일으키는 state변경함수를 삽입
+    })
+  } 
+  
+  return (
+  	<input onChange={onChangeVal} />
+    {
+    	box.map(() => {
+    		return <div>{name}</div> // 일반사용시 10만개 재렌더링
+  		})
+    }
+  )
+}
+```
+
+> 성능 저하 원인
+
+- 브라우저는 single-thread 기반이므로 한번에 하나의 작업만 가능
+- input에 값 입력시 `input 창에 입력값 보여주기`와 `div 10만개 만들기`를  작업하려고 하여 버벅임 발생
+- `startTransition` 사용하면 input 창에 입력값 보여주고, 남는 시간에 div 10만개 만듬
+
+​    
+
+### useDeferredValue
+
+- __state__, __변수__에 사용하고 값에 변동이 생겼을 때, 변경을 뒤로 미뤄줌
+- useTransition과 비슷한 기능
+
+```jsx
+import { useState, useDeferredValue } from 'react'
+
+const box = new Array(100000).fill(0)  // 10만개
+
+function App() {
+  const [name, setName] = useState('')
+  let delayedName = useDeferredValue(name)  ✔️✔️
+  
+  const onChangeVal = (e) => {
+      setName(e.target.value) 
+  } 
+  
+  return (
+  	<input onChange={onChangeVal} />
+    {
+    	box.map(() => {
+    		return <div>{name}</div>
+  		})
+    }
+  )
+}
+```
+
+
+

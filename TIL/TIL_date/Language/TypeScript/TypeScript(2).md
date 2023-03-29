@@ -351,3 +351,84 @@ printKey<IObj2, keyof IObj2>({ city: 'seoul', phone: 01011111111}, "phone")
 ---
 
 ## 5️⃣ Utility Types
+
+```typescript
+export default function TypeScriptUtilityPage() {
+  interface IProfile {
+    name: string
+    age: number
+    school: string
+    hobby?: string
+  }
+
+  // 1. Pick 타입 : 선택한 것들만으로 다시 타입 생성
+  type PickType = Pick<IProfile, "name" | "age">
+
+  // 2. Omit 타입 : 선택된 것을 제외한 나머지로 다시 타입 생성
+  type OmitType = Omit<IProfile, "school">
+
+  // 3. Partial 타입 : 모든 타입에 ? 넣어줌
+  type PartialType = Partial<IProfile>
+
+  // 4. Required 타입 : 모든 타입에서 ? 빼줌
+  type RequiredType = Required<IProfile>
+
+  // 5. Record 타입
+  type RecordType = "특수" | "타입" | "만"  // Union 타입 : 적혀있는 글자만 들어갈 수 있음
+
+  type EtcType = Record<eee, IProfile>  // key : value 형태로 타입 생성됨
+
+  
+  // type과 interface 차이 : 선언병합
+  interface IProfile {
+    candy: number   // 위에 선언한 타입과 합쳐짐
+  }
+  
+  let profile: Partial<IProfile> = {}
+  profile.candy = 10
+}
+```
+
+​    
+
+---
+
+## 6️⃣ 타입조건식
+
+- `extends`키워드와 삼항연산자를 이용하여 조건부로 타입만들기
+
+```typescript
+// T extends string : T라는 파라미터가 string 이면 true 
+type People<T> = T extends string ? string : unknown;
+
+const person1: People<string>  // 
+```
+
+​    
+
+### infer
+
+- 입력한 타입을 변수로 만들어줌
+- 조건문 안에서만 사용가능
+- 자주 안쓰임
+
+```typescript
+// array 내부의 타입만 뽑기
+type Person<T> = T extends (infer R)[] ? R : unknown;  // T의 타입을 추출하여 R이라는 변수에 담아줌
+type NewType = Person<string[]>  // T: string[], R: string
+
+// 함수의 return 타입만 뽑기
+type Person<T> = T extends () => infer R ? R : unknown; 
+type NewType = Person<() =>  number>  // T: () => number, R: number
+```
+
+​     
+
+### ReturnType
+
+- 함수를 넣으면 함수의 return타입을 추출해줌
+
+```typescript
+type RT = ReturnType<() => void>  // RT: void
+```
+

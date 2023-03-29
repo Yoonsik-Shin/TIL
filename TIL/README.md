@@ -63,10 +63,10 @@
 | Contents                                                     | Ex                                                           |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [TypeScript(1)](./TIL_date/Language/TypeScript/TypeScript(1).md) | 설치법, Union Type, any, unknown, void, 함수, 클래스, Narrowing, Assertion, type, interface, readonly, Literal type, as const |
-| [TypeScript(2)](./TIL_date/Language/TypeScript/TypeScript(2).md) | never, 접근제한자, import, namespace, Generic                |
-| [TypeScript(3)](./TIL_date/Language/TypeScript/TypeScript(3).md) |                                                              |
+| [TypeScript(2)](./TIL_date/Language/TypeScript/TypeScript(2).md) | never, 접근제한자, import, namespace, Generic, Utility types, 타입조건식, infer, returnType |
+| [TypeScript(3)](./TIL_date/Language/TypeScript/TypeScript(3).md) | React, redux, declare, Ambient Module, d.ts, implements, Recursive Index Signatures, keyof, Mapped Types |
 
-​    
+​      
 
 ### C++
 
@@ -144,6 +144,8 @@
 | [React (2)](./TIL_date/FrontEnd/React/React(2).md) | Class문법, React-BootStrap, 이미지, import/export, Router다루기, styled-components |
 | [React (3)](./TIL_date/FrontEnd/React/React(3).md) | 컴포넌트 Lifecycle, axios, 전환효과, IF문 작성패턴, localStorage (최근본상품) |
 | [React (4)](./TIL_date/FrontEnd/React/React(4).md) | DevTools, lazy import, Selective Hydration(Suspense), rerendering (memo, usememo, automatic batch, flushSync) |
+| [React (5)](./TIL_date/FrontEnd/React/React(5).md) | Next.js, CSS-IN-JS, 동기/비동기, Graphql                     |
+| [React (6)](./TIL_date/FrontEnd/React/React(6).md) | 폴더구조(Container/Presenter, atomic), export/export default, refetchQueries, 컴포넌트 재사용 (수정값만 요청) |
 
  
 
