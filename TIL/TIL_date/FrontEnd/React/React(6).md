@@ -13,29 +13,39 @@
 프로젝트파일명
 ├── pages
 │     ├── 페이지파일1
-│     │      └── index.js
+│     │      └── index.ts
 │     └── 페이지파일2
-│            └── index.js
+│            └── index.ts
 └── src  # 따로 생성해줘야함
-     ├── commons  # 공통적으로 사용되는 파일들 (함수)
+     ├── commons  # 공통적으로 사용되는 파일들
      │      ├── lib   # 공통 자체 라이브러리
-     │      └── util  # 공통 함수
+     │      ├── util  # 공통 함수
+     │      └── styles  # 공통 CSS
      └── components
              ├── commons  # 두번 이상 쓰이는 컴포넌트
+             │      └── layout  # 레이아웃 컴포넌트
+             │						├── banner
+             │						├── footer
+             │						├── header
+             │						├── navigation
+             │						├── sidebar
+             │						└── index.js  # 모든 레이아웃들을 합쳐주는 파일
              └── units    # 단위컴포넌트 (한번만 사용)
              			├── 기능1 
              			│     ├── 동작1
-             			│     │      ├── 기능동작.container.js
-             			│     │      ├── 기능동작.presenter.js
-             			│     │      ├── 기능동작.queries.js
-             			│     │      └── 기능동작.styles.js
+             			│     │      ├── 기능동작.container.tsx
+             			│     │      ├── 기능동작.presenter.tsx
+             			│     │      ├── 기능동작.queries.ts
+             			│     │      ├── 기능동작.styles.ts
+             			│     │      └── 기능동작.types.ts
              			│     └── 동작2
              			└── board
              			      ├── write
-             			      │      ├── BoardWrite.container.js
-             			      │      ├── BoardWrite.presenter.js
-             			      │      ├── BoardWrite.queries.js
-             			      │      └── BoardWrite.styles.js
+             			      │      ├── BoardWrite.container.tsx
+             			      │      ├── BoardWrite.presenter.tsx
+             			      │      ├── BoardWrite.queries.ts
+             			      │      ├── BoardWrite.styles.ts
+             			      │      └── BoardWrite.types.ts
              			      └── detail
 ```
 
@@ -171,91 +181,127 @@ export const getDate = (date) => {
 
 ---
 
-## 2️⃣ export VS export default
+## 2️⃣ 레이아웃 컴포넌트
 
-### export
+![image-20230330152806087](React(6).assets/image-20230330152806087.png)
 
-- 중괄호를 사용하여 import 
-- 한 컴포넌트내에서 여러개를 내보낼 때 사용
-- export한 이름 그대로 불러와야함
-- 한번에 묶어서 import시에는 `import * as 별명 from '경로'`
+```jsx
+// src/components/commons/layout/header/index.tsx
+import styled from "@emotion/styled";
 
-```js
-// export 방법1 - A.js
-export const value1 = 'value1';
-export const value2 = 'value2';
+const Wrapper = styled.div`
+  height: 50px;
+  background-color: lightcoral;
+`;
 
-// export 방법2 - A.js
-const value1 = 'value1';
-const value2 = 'value2';
+export default function LayoutHeader() {
+  return <Wrapper>여기는 헤더입니다.</Wrapper>;
+}
+```
 
-export { value1, value2 }
+```jsx
+// src/components/commons/layout/index.tsx
+export default function Layout(props) {
+  return (
+  	<>
+    	<LayoutHeader />
+      <LayoutBanner />
+      <LayoutNavigation />
+    	<LayoutBodyWrapper>
+    		<LayoutSidebar />
+      	<LayoutBody>{props.children}</LayoutBody>
+    	</LayoutBodyWrapper>
+    	<LayoutFooter />
+    </>
+  )
+}
+```
 
-// import 방법1 - B.js
-import { value1, value2 } from './A.js'
-
-// import 방법2 - B.js
-import * as 작명 from './A.js'
-console.log(작명.value1)
-console.log(작명.value2)
+```jsx
+// _app.js
+export default function App({ Component, pageProps }) {
+  return (
+  	<Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
+}
 ```
 
 ​    
 
-### export default
+### 레이아웃 미적용 영역설정
 
-- 중괄호 없이 import
-- import시 export한 이름이 아니어도 됨
+- 특정 페이지에는 특정 레이아웃이 보이지 않았으면 할 때
+- `include`메서드로 배열내 값과 현재페이지의 asPath값을 비교하여 동일하면 레이아웃 제외
 
 ```js
-// A.js
-export default function ExportFunc() {}
+// src/components/commons/layout/index.tsx
+const HIDDEN_HEADERS = [
+  '/레이아웃 제외 페이지주소',
+  '/login'
+]  ✔️✔️
 
-// B.js
-import ExportFunc from './B.js' 
-import BBB from './B.js'  // import시 export한 이름이 아니어도 됨
+export default function Layout(props) {
+  const router = useRouter()
+  const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath)  ✔️✔️
+  
+  return (
+  	{!isHiddenHeader && <Header />}  // 해당 페이지에서 제외할 레이아웃
+  )
+}
 ```
 
 ​    
 
 ---
 
-## 3️⃣ refetchQueries
+## 3️⃣ 글로벌 스타일 적용
 
-- 기존 데이터가 변경되었을 때 최신 데이터로 다시 fetch 해주기 위해 사용됨
-- Apollo에서 제공하는 기본 기능
-- 배열로 시작
+- 모든 컴포넌트에 기본적으로 적용시켜주는 스타일
+- `_app.tsx`에 적용해줘야함
 
 ```jsx
-// 글 삭제하고 데이터 다시받아오기
-export default function Page() {
-  const [deleteBoard] = useMutation(DELETE_BOARD)
-  const { data } = useQuery(FETCH_BOARDS)
-  
-  const onClickDelete = async () => {
-    try {
-      const result = await deleteBoard({ 
-        variables: { number: Number(e.target.id) },
-        refetchQueries: [{ 
-          query: FETCH_BOARDS,
-          variables: { 기존 fetch때 보낸내용 }  // 기존 fetch에 variables가 있었다면 작성
-        }]
-      }),
-    } catch (error) {}
-	}
-    
+// _app.tsx
+import { Global } from '@emotion/react'
+import { globalStyles } from "../src/commons/styles/globalStyles";
+
+export default function App({ Component, pageProps }) {
   return (
-   <>
-    {data?.fetchBoards.map(el => (
-    	<Fragment key={el.number}>
-    		<div>{el.number}</div>
-  			<button id={el.number} onClick={onClickDelete}>삭제</button>
-  		</Fragment>	
-  	))}
-   </>
+    <Global styles={globalStyles} />
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
   )
 }
 ```
+
+![image-20230330193448275](React(6).assets/image-20230330193448275.png)
+
+```js
+// global css 적용파일
+import { css } from '@emotion/react'
+
+export const globalStyles = css`
+	* {
+		margin: 0;
+		box-sizing: 0px;
+		font-family: myfont;  ✔️✔️
+	}
+	
+	@font-face {
+		font-family: "myfont";  ✔️✔️
+		src: url("/fonts/폰트파일")  
+	}
+`
+```
+
+> font 설정
+
+- `@font-face` 선택자를 이용해 폰트 호출 이름과 경로를 선언
+- `font-family` : 폰트를 호출할 이름을 정의해주는 속성
+- `src` : 폰타파일의 경로
+- font를 적용할 css에 `font-family`
 
 ​    
 
@@ -343,3 +389,166 @@ export default function DefaultValue(props) {
   defaultValue={props.data?.fetchBoard.title}  ✔️✔️
 />
 ```
+
+​    
+
+---
+
+## 5️⃣ export VS export default
+
+### export
+
+- 중괄호를 사용하여 import 
+- 한 컴포넌트내에서 여러개를 내보낼 때 사용
+- export한 이름 그대로 불러와야함
+- 한번에 묶어서 import시에는 `import * as 별명 from '경로'`
+
+```js
+// export 방법1 - A.js
+export const value1 = 'value1';
+export const value2 = 'value2';
+
+// export 방법2 - A.js
+const value1 = 'value1';
+const value2 = 'value2';
+
+export { value1, value2 }
+
+// import 방법1 - B.js
+import { value1, value2 } from './A.js'
+
+// import 방법2 - B.js
+import * as 작명 from './A.js'
+console.log(작명.value1)
+console.log(작명.value2)
+```
+
+​    
+
+### export default
+
+- 중괄호 없이 import
+- import시 export한 이름이 아니어도 됨
+
+```js
+// A.js
+export default function ExportFunc() {}
+
+// B.js
+import ExportFunc from './B.js' 
+import BBB from './B.js'  // import시 export한 이름이 아니어도 됨
+```
+
+​    
+
+---
+
+## 6️⃣ refetchQueries
+
+- 기존 데이터가 변경되었을 때 최신 데이터로 다시 fetch 해주기 위해 사용됨
+- Apollo에서 제공하는 기본 기능
+- 배열로 시작
+
+```jsx
+// 글 삭제하고 데이터 다시받아오기
+export default function Page() {
+  const [deleteBoard] = useMutation(DELETE_BOARD)
+  const { data } = useQuery(FETCH_BOARDS)
+  
+  const onClickDelete = async () => {
+    try {
+      const result = await deleteBoard({ 
+        variables: { number: Number(e.target.id) },
+        refetchQueries: [{ 
+          query: FETCH_BOARDS,
+          variables: { 기존 fetch때 보낸내용 }  // 기존 fetch에 variables가 있었다면 작성
+        }]
+      }),
+    } catch (error) {}
+	}
+    
+  return (
+   <>
+    {data?.fetchBoards.map(el => (
+    	<Fragment key={el.number}>
+    		<div>{el.number}</div>
+  			<button id={el.number} onClick={onClickDelete}>삭제</button>
+  		</Fragment>	
+  	))}
+   </>
+  )
+}
+```
+
+​    
+
+---
+
+## 7️⃣ [graphql-codegen](https://www.graphql-code-generator.com/)
+
+- graphql API에서 docs를 기준으로 타입파일을 자동으로 추출해줌
+
+​    
+
+### 설치
+
+```bash
+$ yarn add -D @graphql-codegen/cli
+$ yarn add -D @graphql-codegen/typescript 
+```
+
+​    
+
+### 설정
+
+- `schema` : graphql url주소를 넣어줌 (_app.tsx의 주소와 동일)
+
+```yaml
+# codegen.yaml
+schema: 백엔드주소
+generates:
+	./src/commons/types/generated/types.ts:
+		plugins:
+			- typescript
+		config:
+			typesPrefix: I
+```
+
+
+
+### 실행
+
+- graphql-API에서 데이터를 받아 자동으로 TS파일을 `./src/commons/types/generated/types.ts` 위치에 만들어줌
+
+```json
+// package.json
+"scripts": {
+	"generate": "graphql-codegen"
+}
+```
+
+```bash
+$ yarn generate
+```
+
+​    
+
+### 적용
+
+#### Mutation
+
+```typescript
+const [함수] = useMutation<응답타입, variables타입>()
+const [createBoard] = useMutation<Pick<Mutation,"createBoard">,MutationCreateBoardArgs>(CREATE_BOARD)
+```
+
+​    
+
+#### Query
+
+```typescript
+const { data } = useQuery<Pick<Query,"fetchBoard">,QueryFetchBoardArgs>(FETCH_BOARD, {
+  variables: { number: Number(router.query.number )}
+})
+```
+

@@ -19,7 +19,14 @@ $ npm install typescript @types/node @types/react @types/react-dom @types/jest -
 $ yarn add --dev typescript @types/node @types/react @types/react-dom @types/jest
 ```
 
+​    
 
+### 파일 확장자
+
+- `tsx` : JSX를 return하는 컴포넌트
+- `ts` : 자바스크립트만 사용하는 컴포넌트
+
+​    
 
 ### JSX 타입지정
 
@@ -32,12 +39,34 @@ const button: JSX.Element = <button></button>
 
 ### Component 타입지정
 
+#### props 
+
+- 객체타입
+- 주는 입장과 받는 입장이 있음, 타입지정은 받는 입장에서 지정해줘야함
+
 ```tsx
-interface IProps = {
-  a: string;
+// A 페이지
+interface IPrint = (a: string) => string
+
+function APage(props: IProps): JSX.Element {
+  const print: IPrint = (a) => { return a } 
+  const value: number;
+  
+  return (
+  	<Component 
+      print={print}
+      value={value}
+    />
+  )
 }
 
-function App(props: IProps): JSX.Element {  // JSX.Element는 생략가능
+// B 페이지
+interface IProps = {
+  print: IPrint
+  value: number
+}
+
+function BPage(props: IProps): JSX.Element {  // JSX.Element는 생략가능
   return (
   	<></>
   )

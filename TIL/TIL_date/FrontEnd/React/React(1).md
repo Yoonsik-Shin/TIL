@@ -196,7 +196,38 @@ const [arrState, setArrState] = useState([1, 2, 3])
 }};
 ```
 
+​    
 
+### PrevState
+
+- automatic batch에 의해 state 변경함수들이 연달아 여러개 처리되야하면 다 처리 후 __마지막 한 번만 재렌더링됨__
+- 그 전에 state의 값이 변하기 전에 저장해놓는 임시 저장공간
+- 임시 저장공간이 비워져있다면 state의 값을 가져와 임시공간에 저장
+- 보통 `prev` 매개변수를 쓰지만 이름은 의미없음
+
+```js
+// 예시1
+import { useState } from 'react'
+
+export default function CounterStatePage() {
+  const [count, setCount] = useState(0)
+  const onClickCountUp = () => {  // 임시저장공간 = 0
+    setCount((prev) => prev + 1)  // 임시저장공간 = 1
+    setCount((prev) => prev + 1)  // 임시저장공간 = 2
+    setCount((prev) => prev + 1)	// 임시저장공간 = 3
+  }  // count = 임시저장공간 = 3
+}
+
+// 예시2
+const [isOpen, setIsOpen] = useState(false);
+const onToggleModal = () => {
+  setIsOpen((prev) => !prev)
+}
+```
+
+> automatic batch : React (4) 문서 참고
+
+​    
 
 > 리렌더링 되는 상황
 
@@ -309,6 +340,28 @@ const 자식컴포넌트 = (props) => {
 - 이를 방지하기 위해서 global state를 활용함
 
 ​    
+
+### props children
+
+- 컴포넌트 태그사이에 들어가는 요소들은 자동으로 `prop[children] `에 들어감
+
+```jsx
+<Container isEdit={true}>
+	<div>1</div>  ✔️✔️  <!-- props의 children에 들어감 -->
+  <div>2</div>  ✔️✔️	<!-- props의 children에 들어감 -->
+  <div>3</div>  ✔️✔️	<!-- props의 children에 들어감 -->
+</Container>
+```
+
+```jsx
+export default function Page(props) {
+  return (
+  	{props.childern}  // <div>1</div>; <div>2</div>; <div>3</div>;
+  )
+}
+```
+
+   
 
 ---
 

@@ -30,6 +30,12 @@ $ npx create-next-app
 └── yarn.lock      # 버전 잠금 파일
 ```
 
+​    
+
+> package.json
+
+- `devDependencies`에 있는 라이브러리들은 배포시에는 제외됨
+- `resolution`은 라이브러리 하위 모듈 버전을 고정해줌
 - 실제 설치된 파일들은 node_modules안에 있음
 - package.json은 설치파일 목록만 보여줌, 설치가 안돼있는 파일도 있을 수 있음
 
@@ -313,6 +319,20 @@ const FetchDate = async () => {
 | 요청담당자  | apollo-client                     | axios                              |
 | CRUD        | MUTATION (CUD), QUERY (R)         | POST(C), PUT(U), DELETE(D), GET(R) |
 | API 명세서  | 플레이그라운드 (Playground)       | 스웨거 (Swagger)                   |
+
+​    
+
+> UnderFetching
+
+- 하나의 endpoint로 필요한 모든 데이터 요청을 처리하지 못하는 것을 의미
+- 여러번의 API 호출이 필요해, 서버에 과부하를 줄 수 있음
+
+​    
+
+> OverFetching
+
+- 응답받은 정보에 사용하지 않는 데이터들도 담고있는 것을 의미
+- 네트워크가 낭비됨 
 
 ​    
 
