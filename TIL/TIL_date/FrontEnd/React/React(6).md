@@ -296,12 +296,30 @@ export const globalStyles = css`
 `
 ```
 
-> font 설정
+​    
+
+### 폰트 적용
+
+![image-20230331004717224](React(6).assets/image-20230331004717224.png)
 
 - `@font-face` 선택자를 이용해 폰트 호출 이름과 경로를 선언
 - `font-family` : 폰트를 호출할 이름을 정의해주는 속성
 - `src` : 폰타파일의 경로
 - font를 적용할 css에 `font-family`
+- 압축률이 가장 높은 폰트 확장자 : `woff2`
+
+​    
+
+>FOIT (Flash of Invisible Text)
+
+- 브라우저가 웹 폰트를 다운로드하기 전에 텍스트가 보이지 않는 현상
+- 대부분의 웹사이트는 FOIT 현상이 기본값
+
+​    
+
+> FOUT (Flash of Unstyled Text)
+
+- 브라우저가 웹 폰트를 다운로드하기 전에 텍스트가 대체 글꼴로 렌더링되는 현상
 
 ​    
 

@@ -238,33 +238,63 @@ module.exports = {
 }
 ```
 
+​        
+
 ​    
 
----
+## 복사
 
-## 3️⃣ 라이브러리 / 프레임워크
+- 원시타입(Primitive)의 경우 변수에 값을 할당하면 `값 자체`가 저장됨
+- 객체타입의 경우 값 자체가 아닌 `주소` 가 저장됨
+- 객체타입에는 복사라는 개념이 없음
+- 원본과 같은 값을 가진 객체를 새로 만드는 방식으로 사용해야함
 
-- 라이브러리 : 특정기능, 도구 1개, React
-- 프레임워크 : 도구모음, Next
+​    
 
+### 얕은 복사 (Shallow-copy)
 
+- 스프레드 연산자(`...`)를 활용한 복사
+- depth 1의 깊이를 가진 데이터는 복사가능하지만, depth 2부터는 복사하지 못함
 
-### 컴포넌트 디자인 라이브러리
+```js
+let obj = {
+  aaa = "aaa",
+  bbb = "bbb"
+  ccc = {  
+  	ddd: "ddd",  // depth 2 부터는 복사 안됨
+  	eee: "eee"
+	}
+}
 
-#### Ant-Design
-
-#### Material-UI
-
-
-
-### 주소/우편번호 라이브러리
-
-#### [React-daum-postcode](https://www.npmjs.com/package/react-daum-postcode)
-
-- 주소 검색시 우편번호, 번지수, 도로명주소를 알려주는 라이브러리
-- 국내용
-
-```bash
-$ yarn add react-daum-postcode
+let newObj = {
+  ...obj
+}
 ```
+
+
+
+### 깊은 복사 ( Deep-copy)
+
+- depth 2 이상의 깊이를 가진 객체 복사시에 사용
+- `JSON.stringify`와 `JSON.parse` 메소드를 사용
+- 객체타입을 문자열로 변환 후, 다시 그 문자열을 객체로 바꿔 새로운 변수에 담음
+- 깊은 복사를 도와주는 라이브러리인 [Lodash](https://www.npmjs.com/package/lodash)의 `_cloneDeep()` 메서드를 많이 씀
+
+```js
+let obj = {
+  aaa = "aaa",
+  bbb = "bbb"
+  ccc = {  
+  	ddd: "ddd",
+  	eee: "eee"
+	}
+}
+
+let newObj = JSON.parse(JSON.stringify(obj))  ✔️✔️
+let newLodashObj = _.cloneDeep(newObj)  ✔️✔️
+```
+
+   
+
+## 구조분해할당
 

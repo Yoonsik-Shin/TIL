@@ -24,8 +24,10 @@ class Detail extends React.Component {
 
 ### useEffect
 
-- useEffect안에 적은 코드는 html 랜더링이 완료된 후에 동작
+- useEffect안의 코드는 __html 랜더링이 완료된 후에 동작__
 - 오래 걸리는 반복연산, 서버에서 데이터 가져오는 작업, 타이머등 사용시 활용하면 좋음
+- useEffect안에서 setState의 사용은 지양해야함
+- 불필요하게 리렌더링되거나 무한루프를 일으킬 수 있음
 
 ```jsx
 import { useState, useEffect } from 'react';
@@ -40,9 +42,13 @@ function Detail() {
 }
 ```
 
-
+​    
 
 #### 실행조건
+
+- 의존성 배열 (`[]`) 에 따라 렌더방식이 달라짐
+
+​    
 
 1. 재렌더링(update)마다 코드를 실행하고 싶으면
 
@@ -90,6 +96,10 @@ useEffect(() => {
   실행할코드
 }, [stateName])
 ```
+
+​    
+
+
 
 ​    
 

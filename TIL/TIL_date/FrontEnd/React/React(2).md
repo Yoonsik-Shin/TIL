@@ -46,12 +46,20 @@ class TComponent extends React.Component {
     }
   }
   
+  // class내 함수
+  onClickCountUp = () => {
+    this.setState((prev) => {
+      count: prev.count + 1
+    })
+  }
+  
   render() {
     return (
       <>
         <div>{this.state.name}</div>
         <div>{this.state.age}</div>
       	<button onClick={() => { this.setState({ age: 28 }) }}>버튼</button> ✔️✔️
+      	<button onClick={this.onClickCountUp}>카운트올리기</button> ✔️✔️
       	<div>{this.props.작명}</div>
       </>
     )
