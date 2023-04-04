@@ -4,14 +4,22 @@
 
 ## Socket.io
 
+- 실시간, 양방향, 이벤트 기반의 통신을 제공해주는 프레임워크
+
+​    
+
 ### 설치
 
 ```bash
+# back-end
 $ npm install socket.io
 $ yarn add socket.io
 ```
 
+```bash
+```
 
+​    
 
 ### 기본세팅
 
@@ -39,7 +47,23 @@ httpServer.listen(3000, handleListen);
 
 ### 메시지 보내기
 
-#### 유저 => 서버
+#### 유저 => 서버 (Front to Back)
+
+- `emit`
+  - 데이터 전송
+- `done`
+  - 마지막 인자로 오는 함수는 백엔드의 `done`함수에 전달됨
+  - 백엔드에서 실행되지 않고, 프론트엔드에서 실행됨
+
+```js
+socket.emit(
+  '메시지이름',  // 고정
+  보낼 내용들1,  // ❗제한없이 여러개 보낼수 있음
+  ...
+  보낼 내용들11,
+  실행될 함수    // 마지막 인자는 함수만 올 수 있음
+)
+```
 
 ```html
 <!-- front -->
@@ -49,27 +73,28 @@ httpServer.listen(3000, handleListen);
 <script>
 	const message = document.querySelector('#message').value // 메시지 내용
   
-	document
-    .querySelector('#send')
-    .addEventListener('click', () => {
+	const button = document.querySelector('#send')
+    .addEventListener('click', ( ) => {
     	socket.emit('메시지이름', message) ✔️✔️ // 유저 --> 서버로 메시지 전송
+      message.value = ''
  		})
 </script>
 ```
 
 ```js
 // back
-io.on('connection', (socket) => {  // 유저 --> 서버로 온 메시지 받기
+io.on('connection', (socket, done) => {  // 유저 --> 서버로 온 메시지 받기
   // 해당이름의 메시지를 받으면 콜백함수 실행
   socket.on('메시지이름', (data) => {
     console.log(data);  // 유저가 보낸 메시지
+    done() // 프론트에서 보낸 함수를 다시 프론트에서 실행하도록 함
   }) 
 })
 ```
 
 ​    
 
-#### 서버 => 유저
+#### 서버 => 유저 (Back to Front)
 
 ```js
 // back

@@ -154,11 +154,12 @@
 
 ### State Manager
 
-| Contents                                                     | Ex                                      |
-| ------------------------------------------------------------ | --------------------------------------- |
-| [State Manager (1)](./TIL_date/FrontEnd/State_Manager/State_Manager(1).md) | ContextAPI, Redux Tookit, redux-persist |
-| [State Manager (2)](./TIL_date/FrontEnd/State_Manager/State_Manager(2).md) | React-Query                             |
-| [State Manager (3)](./TIL_date/FrontEnd/State_Manager/State_Manager(3).md) | Recoil                                  |
+| Contents                                                     | Ex                                                           |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [State Manager (1)](./TIL_date/FrontEnd/State_Manager/State_Manager(1).md) | ContextAPI, Redux Tookit, redux-persist                      |
+| [State Manager (2)](./TIL_date/FrontEnd/State_Manager/State_Manager(2).md) | [React-Query (1)]  개념, 설정, DevTools, 캐싱라이프사이클, useQuery, useMutation, Parallel, Infinite |
+| [State Manager (3)](./TIL_date/FrontEnd/State_Manager/State_Manager(3).md) | [React-Query (2)]                                            |
+| [State Manager (4)](./TIL_date/FrontEnd/State_Manager/State_Manager(4).md) | Recoil                                                       |
 
   
 
