@@ -109,4 +109,88 @@ return (
 
 ## 지도
 
-##  
+### 카카오지도 연동하기
+
+[카카오개발자사이트](https://developers.kakao.com/)
+
+애플리케이션등록
+
+<img src="React(9).assets/image-20230405125717295.png" alt="image-20230405125717295" style="zoom:50%;" />
+
+<img src="React(9).assets/image-20230405125750367.png" alt="image-20230405125750367" style="zoom:50%;" />
+
+<img src="React(9).assets/image-20230405125843731.png" alt="image-20230405125843731" style="zoom:50%;" />
+
+<img src="React(9).assets/image-20230405125906107.png" alt="image-20230405125906107" style="zoom:67%;" /><img src="React(9).assets/image-20230405125948728.png" alt="image-20230405125948728" style="zoom:80%;" />
+
+[지도Docs](https://apis.map.kakao.com/web/)
+
+
+
+- Next에서 사용
+
+```tsx
+import Head from 'next/head'
+import { useEffect } from 'react'
+
+declare const window: typeof globalThis & {
+  kakao: any;
+}
+
+export default function KakaoMapPage() {
+  useEffect(() => {
+    const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
+    const options = {
+      // 지도를 생성할 때 필요한 기본 옵션
+      center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표.
+      level: 3, // 지도의 레벨(확대, 축소 정도)
+    };
+    const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
+  })
+  
+  return (
+  	<Head>
+      <script
+        type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은APP키"
+      ></script>
+    </Head>
+    <div id="map" style={{ width: "500px", height: "400px" }}></div>
+  )
+}
+```
+
+
+
+> 버튼클릭하여 페이지를 이동했을 때, 지도가 안나오는 현상
+
+```tsx
+import { useRouter } from "next/router";
+import Link from "next/link";
+
+export default function KakaoMapPage() {
+  const router = useRouter();
+
+  const onClickMoveToMap = () => {
+    void router.push("/kakaoMap");
+  };
+
+  return (
+    <>
+    	// SPA 방식으로 이동
+      <button onClick={onClickMoveToMap}>맵으로 이동</button>
+    
+    	// MPA 방식으로 이동 (잘 안씀) - CSR가 안됨
+    	<a href="/kakaoMap">맵으로 이동(a태그)</a>
+    
+    	// SPA 방식으로 이동 - CSR가 적용됨 ✔️✔️
+      <Link href="/kakaoMap">맵으로 이동(Link)</Link>
+    </>
+  );
+}
+```
+
+- SPA의 특징을 이해해야함
+- `<Link>` 대신 `router.push`를 쓰는 경우
+  1. 버튼 클릭으로 이동하는 경우가 아닐 때
+  2. 클릭시 추가 로직을 실행시키고 싶은 경우

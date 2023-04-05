@@ -2,6 +2,56 @@
 
 ​    
 
+## 3️⃣ 동기 vs 비동기
+
+### 비동기
+
+- 서버에 요청(등록, 수정, 삭제 등)이 저장될 때까지 기다리지 않고 다른 작업을 진행
+- 요청들 사이에 서로 기다려 줄 필요가 없을 경우, 여러 가지 요청을 동시에 처리해 줄 때에 사용
+- 외부 라이브러리들은 대부분 비동기 방식으로 작동함
+
+```js
+// axios
+const FetchDate = () => {
+  const result = axios({
+    method: '',
+    url: '',
+  })  // result = Promise 객체로 반환
+}
+```
+
+​    
+
+> Promise 객체
+
+- js에서 비동기 처리에 사용되는 객체
+- 서버에서 데이터를 받아오기 전에 화면에 표시하려고 하면 발생하는 문제를 해결하기 위해 사용
+- 3가지 상태
+  1. Pending (대기) : 비동기 처리 로직이 아직 완료되지 않음
+  2. Fulfilled (이행) : 비동기 처리가 완료되어 프로미스가 결과값을 반환해준 상태
+  3. Rejected (실패) : 비동기 처리가 실패하거나 오류가 발생
+
+​    
+
+### 동기
+
+- 서버의 작업이 끝날 때까지 기다린 후에 다음 작업을 실행
+- JS는 기본적으로 동기처리 방식을 사용
+
+```js
+// axios
+const FetchDate = async () => {
+  const result = await axios({
+    method: '',
+    url: '',
+  }) // result = { 요청한 데이터 값 }
+}
+```
+
+​    
+
+---
+
 ## 1️⃣ 이벤트 전파
 
 ### 이벤트 버블링
@@ -68,181 +118,11 @@ const onClickBottom = (e) => {
 
 ---
 
-## 2️⃣ 코드 작성 규칙
 
-### 코드 린터
 
-- 에러는 아니지만 에러로 약속하자는 규칙을 정하는 것을 의미
-- vscode상에는 오류로 표기되지만 실행에는 영향없음
-- `eslint`를 사용
-- next.js에는 이미 설치 되어있어 이를 활성화만 해주면됨
+----
 
-​    
-
-#### 설치
-
-- 설치가 완료되면 `.eslintrc.js` 파일이 생성됨
-
-```bash
-$ npx eslint --lint
-```
-
-```bash
-# eslint를 어떤식으로 사용할지에 대한 질문
-How would you like to use ESlint ? => syntax, problems, ✔️[code style]
-
-# Javascript modules VS CommonJS
-Waht type of modiles does your project use? => Javascript modules (import/export)
-
-# 프레임워크 선택
-Which framework does your project use? => react
-
-# 타입스크립트 사용여부
-Does your project use TypeScript? => Yes
-
-# 어디서 실행하는지 확인 (Browser, Node)
-Where does your code run? => Browser
-
-# 인기있는 가이드를 할지, 커스텀을 할 지 선택
-How would you like to define a style for your project? => Use a popular style guide
-Which style guide do you want to follow? => standard
-
-# 설정파일을 뭘로 만들지 물어보는 질문 (JavaScript, YAML, JSON)
-What format do you want your config file to be in? => Javascript
-
-# 어떤 패키지 매니저로 설치할지 묻는 질문 
-Which package manager do you want to use? => yarn 
-```
-
-​     
-
-#### ESLint  규칙 제외
-
-- `.eslintrc.js` 파일의 `rules`에서 불편한 규칙 적용을 제외시킬 수 있음
-
-```js
-// .eslintrc.js
-module.exports = {
-	...
-  rules: {  // 제외할 규칙
-    "@typescript-eslint/interface-name-prefix": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "prettier/prettier": ["error", { endOfLine: "auto" }]
-  }
-}
-```
-
-​    
-
-> ESLint 한번에 확인하기
-
-```bash
-# 모든 파일을 검사하여 규칙에 어긋나는 부분을 찾아줌
-$ npx eslint .
-
-# 위 명령어가 잘 안될 경우
-$ npx eslint "**/*.{ts,tsx}"
-```
-
-   
-
-### 코드 포멧터
-
-- 코드를 보기 좋게 만들어주는 역할
-- `prettier`를 사용
-
-​    
-
-#### 설치
-
-```bash
-$ yarn add --dev --exact prettier
-```
-
-​    
-
-#### 설정
-
-1. `.prettierrc.json` 설정파일 생성
-
-```json
-{
-  "tabWidth": 2
-}
-```
-
-![image-20230330132811872](React(7).assets/image-20230330132811872.png)
-
-​    
-
-2. vscode 설정
-
-<img src="React(7).assets/image-20230330115807656.png" alt="image-20230330115807656" style="zoom:50%;" />
-
-<img src="React(7).assets/image-20230330115849464.png" alt="image-20230330115849464" style="zoom: 67%;" />
-
-​     
-
-3. vscode 설정파일로 관리하기
-
-- 최상위 폴더에 `.vscode` 폴더 만들고 그안에 `setting.json` 파일 생성
-
-![image-20230330130413439](React(7).assets/image-20230330130413439.png)
-
-```json
-// setting.json
-{
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode" 
-}
-```
-
-​    
-
-### ESLint Prettier 연결
-
-```bash
-$ npm install --save-dev eslint-config-prettier
-$ yarn add eslint-config-prettier --dev
-```
-
-```js
-// .eslintrc.js
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true
-  },
-  "extends": [
-    "plugin:react/recommended", 
-    "standard-with-typescript", 
-    "prettier"  ✔️✔️
-  ],
-  override: [],
-  parserOptions: {
-    project: '**/tsconfig.json',  ✔️✔️
-    ecmaVersion: 'latest',
-    sourceType: 'module'
-  },
-  plugins: ['react'],
-  rules: {}
-}
-```
-
-```json
-// .eslintrc.json
-{
-  "extends": ["next/babel", "next/core-web-vitals"]
-}
-```
-
-​        
-
-​    
-
-## 복사
+## 2️⃣ 복사
 
 - 원시타입(Primitive)의 경우 변수에 값을 할당하면 `값 자체`가 저장됨
 - 객체타입의 경우 값 자체가 아닌 `주소` 가 저장됨
@@ -296,5 +176,104 @@ let newLodashObj = _.cloneDeep(newObj)  ✔️✔️
 
    
 
-## 구조분해할당
+---
 
+## 3️⃣ 구조분해할당 (비구조화할당)
+
+### 배열
+
+```js
+const people = ['shin', 'yoon', 'sik']
+
+// 기존방식
+const person1 = people[0]
+const person2 = people[1]
+const person3 = people[2]
+
+// 구조분해할당 활용
+const [person1, person2, person3] = people
+```
+
+- 배열의 구조분해할당은 대괄호`[]`를 사용
+- 변수명은 마음대로 설정가능
+- 인덱스의 순서대로 값이 할당됨으로 순서가 중요함
+
+​    
+
+### 객체
+
+```js
+const person = {
+  name: 'yoonsik',
+  age: 27,
+  address: 'seoul'
+}
+
+// 기존방식
+const name = person.name
+const age = person.age
+const address = person.address
+
+// 구조분해할당 활용
+const { name, age, address } = person
+
+// rest 파라미터 활용
+const { name, ...rest } = person
+console.log(rest)  // rest = { age: 27, address: 'seoul' } 
+```
+
+- 객체의 구조분해할당은 중괄화`{}`를 사용
+- 객체의 key값을 변수명으로 사용해야함
+- 할당 순서는 중요하지 않음
+- 사용하지 않을 key값은 제외하고 할당 받을 수 있음
+
+​    
+
+---
+
+## 5️⃣ export VS export default
+
+### export
+
+- 중괄호를 사용하여 import 
+- 한 컴포넌트내에서 여러개를 내보낼 때 사용
+- export한 이름 그대로 불러와야함
+- 한번에 묶어서 import시에는 `import * as 별명 from '경로'`
+
+```js
+// export 방법1 - A.js
+export const value1 = 'value1';
+export const value2 = 'value2';
+
+// export 방법2 - A.js
+const value1 = 'value1';
+const value2 = 'value2';
+
+export { value1, value2 }
+
+// import 방법1 - B.js
+import { value1, value2 } from './A.js'
+
+// import 방법2 - B.js
+import * as 작명 from './A.js'
+console.log(작명.value1)
+console.log(작명.value2)
+```
+
+​    
+
+### export default
+
+- 중괄호 없이 import
+- import시 export한 이름이 아니어도 됨
+
+```js
+// A.js
+export default function ExportFunc() {}
+
+// B.js
+import ExportFunc from './B.js' 
+import BBB from './B.js'  // import시 export한 이름이 아니어도 됨
+```
+
+​    
