@@ -19,7 +19,7 @@
 3. 터미널에서 명령어 입력 (`CRA` : Create React App 라이브러리 사용) 
 
 ```bash
-$ npx create-react app <앱 이름>
+$ npx create-react-app <앱 이름>
 ```
 
 > vite 이용 react 세팅

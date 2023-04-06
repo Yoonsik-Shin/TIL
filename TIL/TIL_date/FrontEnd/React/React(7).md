@@ -50,6 +50,96 @@ const FetchDate = async () => {
 
 ​    
 
+### 비동기 진화과정
+
+1. callback 형식 [`XMLHttpRequest`활용]
+
+```jsx
+const Callback = () => {
+  const firstReq = new XMLHttpRequest()
+  firstReq.open('get', 'URL주소')
+  firstReq.send()
+  firstReq.addEventListener('load', (res) => {
+    const num = res.target.response.???  // 다음 API 요청에 사용할 숫자
+    
+    const secondReq = new XMLHttpRequest()
+    secondReq.open('get', `URL주소/${num}`)
+    secondReq.send()
+    secondReq.addEventListener('load', (res) => {
+      const id = res.target.response.???
+      
+      const thirdReq = new XMLHttpRequest()
+      thirdReq.open('get', `URL주소/${id}`)
+      thirdReq.send()
+      thirdReq.addEventListener('load', (res) => {
+      	const finalResult = res.target.response.???
+      }
+    }
+  }) 
+}
+```
+
+> 문제점 : 콜백함수가 중첩될수록 점점 함수의 깊이가 깊어짐 (콜백지옥)
+
+​    
+
+2. Promise 형식 [`new Promise`활용]
+
+```jsx
+new Promise((resolve, reject) => {
+  try {
+    const result = 시간이 걸리는 함수실행 (결과값: "취업")
+    resolve(result)
+  } catch(error) {
+    reject("요청에 실패했습니다.") 
+  }
+}).then((res) => {
+  console.log(res)  // 취업
+}).catch((err) => {
+  console.log(err)  // 요청에 실패했습니다.
+})
+```
+
+- 개선된 Promise 형식 [`axios, fetch`활용]
+
+```jsx
+const PromiseTest = () => {
+  axios.get('url1')
+  	.then((res) => {
+    	return axios.get('url2')
+  	})
+  	.then((res) => {
+    	return axios.get('url3')
+    .then((res) => {
+    	console.log(res)     
+    })
+  })
+}
+```
+
+> 문제점 : 실행순서를 예측하기 어려움
+
+​    
+
+4. async-await 형식
+
+```jsx
+const AsyncAwait = async () => {
+  const result1 = await axios.get('url1')
+  const result2 = await axios.get('url1')
+  const result3 = await axios.get('url1')
+} 
+```
+
+​    
+
+> axios, fetch등을 기다리는 방법
+
+1. `.then()` 활용
+2. `async/await` 활용 
+
+
+
 ---
 
 ## 1️⃣ 이벤트 전파
