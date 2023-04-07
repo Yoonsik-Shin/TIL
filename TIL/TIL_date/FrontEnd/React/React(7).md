@@ -2,7 +2,18 @@
 
 ​    
 
-## 3️⃣ 동기 vs 비동기
+## 1️⃣ 이벤트루프
+
+- 자바스크립트는 __싱글 스레드__ / __논블록킹__ 방식을 가짐
+- 한 번에 하나의 태스크만 처리 가능
+- 이러한 특성을 가졌지만 실제 브라우저 사용시 태스크가 동시에 처리되는 것 같이 느낌 (동시성)
+- 동시성(concurrency)을 지원하기 위해 이벤트루프 방식 활용
+
+​    
+
+---
+
+## 2️⃣ 동기 vs 비동기
 
 ### 비동기
 
@@ -50,7 +61,7 @@ const FetchDate = async () => {
 
 ​    
 
-### 비동기 진화과정
+### 비동기 발전과정
 
 1. callback 형식 [`XMLHttpRequest`활용]
 
@@ -140,9 +151,31 @@ const AsyncAwait = async () => {
 
 
 
+### 커스텀 AJAX 만들기
+
+```jsx
+const myAjax = {
+  get: (url) => {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest()
+      req.open('get', url)
+      req.send()
+      req.addEventListener('load', (res) => { resolve(res.target.response) })
+    })
+  },
+  post: () => {}
+}
+  
+const onClickAjax = async () => {
+  const result = await myAjax.get('url')
+}
+```
+
+
+
 ---
 
-## 1️⃣ 이벤트 전파
+## 3️⃣ 이벤트 전파
 
 ### 이벤트 버블링
 
@@ -212,7 +245,7 @@ const onClickBottom = (e) => {
 
 ----
 
-## 2️⃣ 복사
+## 4️⃣ 복사
 
 - 원시타입(Primitive)의 경우 변수에 값을 할당하면 `값 자체`가 저장됨
 - 객체타입의 경우 값 자체가 아닌 `주소` 가 저장됨
@@ -268,7 +301,7 @@ let newLodashObj = _.cloneDeep(newObj)  ✔️✔️
 
 ---
 
-## 3️⃣ 구조분해할당 (비구조화할당)
+## 5️⃣ 구조분해할당 (비구조화할당)
 
 ### 배열
 
@@ -321,7 +354,7 @@ console.log(rest)  // rest = { age: 27, address: 'seoul' }
 
 ---
 
-## 5️⃣ export VS export default
+## 6️⃣ export VS export default
 
 ### export
 
@@ -367,3 +400,6 @@ import BBB from './B.js'  // import시 export한 이름이 아니어도 됨
 ```
 
 ​    
+
+## 
+
