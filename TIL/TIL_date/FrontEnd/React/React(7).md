@@ -401,5 +401,10 @@ import BBB from './B.js'  // import시 export한 이름이 아니어도 됨
 
 ​    
 
-## 
+---
 
+## 7️⃣ CRP (Critical Rendering Path)
+
+[브라우저 동작](https://d2.naver.com/helloworld/59361)
+
+[주소창에 google.com 입력했을 때](https://velog.io/@tnehd1998/%EC%A3%BC%EC%86%8C%EC%B0%BD%EC%97%90-www.google.com%EC%9D%84-%EC%9E%85%EB%A0%A5%ED%96%88%EC%9D%84-%EB%95%8C-%EC%9D%BC%EC%96%B4%EB%82%98%EB%8A%94-%EA%B3%BC%EC%A0%95)

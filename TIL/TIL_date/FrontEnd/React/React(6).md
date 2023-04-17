@@ -366,3 +366,50 @@ export default function Page() {
 ```
 
 ​    
+
+---
+
+## 4️⃣ 캐시 직접 수정 (update)
+
+- apollo global state에 저장된 캐시를 직접 수정
+- refetch로 다시 데이터를 받아오지 않아 API요청을  줄일 수 있음
+- 주로 __무한스크롤__을 활용하는 곳에 사용됨
+
+```tsx
+// Create
+const onClickCreate = () => {
+  void createBoard({
+    variables: {},
+    update(cache, { data }) {  ✔️✔️
+      cache.modify({  ✔️✔️
+        fields: {  ✔️✔️
+          fetchBoards: (prev) => { return [data.createBoard, ...prev] },  ✔️✔️
+        },
+      });
+    },
+  });
+};
+```
+
+```tsx
+// Delete
+const onClcikDelete = (id: string) => () => {
+    void deleteBoard({
+      variables: { id },
+      update(cache, { data }) {
+        cache.modify({
+          fields: {
+            fetchBoards: (prev, { readField }) => {
+              const deletedId = data.deleteBoard;
+              const filteredPrev = prev.filter(
+                // el._id가 안됨, readField를 사용해야함
+                (el) => readField("_id", el) !== deletedId 
+              );
+              return [...filteredPrev]; // 삭제된 ID를 제외한 나머지 9개를 리턴
+            },
+          },
+        });
+      },
+    });
+  };
+```

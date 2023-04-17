@@ -140,16 +140,17 @@
 
 | Contents                                             | Ex                                                           |
 | ---------------------------------------------------- | ------------------------------------------------------------ |
-| [React (1)](./TIL_date/FrontEnd/React/React(1).md)   | 리액트 사용이유, 구조, JSX, State, Component, 동적UI, props, map, input |
-| [React (2)](./TIL_date/FrontEnd/React/React(2).md)   | Class문법, React-BootStrap, 이미지, import/export, Router다루기, styled-components |
-| [React (3)](./TIL_date/FrontEnd/React/React(3).md)   | 컴포넌트 Lifecycle, axios, 전환효과, IF문 작성패턴, localStorage (최근본상품) |
-| [React (4)](./TIL_date/FrontEnd/React/React(4).md)   | DevTools, lazy import, Selective Hydration(Suspense), rerendering (memo, usememo, automatic batch, flushSync) |
-| [React (5)](./TIL_date/FrontEnd/React/React(5).md)   | Next.js, CSS-IN-JS, 코드린터/포멧터, 폴더구조(Container/Presenter, atomic), 레이아웃, 글로벌스타일, 컴포넌트 재사용 |
-| [React (6)](./TIL_date/FrontEnd/React/React(6).md)   | [graphql] refetchQueries, graphql-codegen                    |
+| [React (1)](./TIL_date/FrontEnd/React/React(1).md)   | [개념] 리액트 사용이유, 구조, JSX, State, Component, 동적UI, props, map, input |
+| [React (2)](./TIL_date/FrontEnd/React/React(2).md)   | [개념] Class문법, React-BootStrap, 이미지, import/export, Router다루기, styled-components |
+| [React (3)](./TIL_date/FrontEnd/React/React(3).md)   | [개념] 컴포넌트 Lifecycle, axios, 전환효과, IF문 작성패턴, localStorage (최근본상품) |
+| [React (4)](./TIL_date/FrontEnd/React/React(4).md)   | [성능최적화] DevTools, lazy import, Selective Hydration(Suspense), rerendering (memo, usememo, automatic batch, flushSync) |
+| [React (5)](./TIL_date/FrontEnd/React/React(5).md)   | [개념] Next.js, CSS-IN-JS, 코드린터/포멧터, 폴더구조(Container/Presenter, atomic), 레이아웃, 글로벌스타일, 컴포넌트 재사용 |
+| [React (6)](./TIL_date/FrontEnd/React/React(6).md)   | [graphql] refetchQueries, graphql-codegen, 캐시직접수정(update) |
 | [React (7)](./TIL_date/FrontEnd/React/React(7).md)   | [원리] 동기/비동기, 이벤트 전파(버블링, 캡처링), 복사, 구조분해할당, export/export default |
 | [React (8)](./TIL_date/FrontEnd/React/React(8).md)   | [라이브러리] Ant-Design, MUI, 아이콘, 모달, 주소, 별점 / 파이어베이스 |
 | [React (9)](./TIL_date/FrontEnd/React/React(9).md)   | [구현] 댓글수정, 페이지네이션, 무한스크롤, 검색, 지도        |
 | [React (10)](./TIL_date/FrontEnd/React/React(10).md) | [구현] 파일/이미지업로드, 결제                               |
+| [React (11)](./TIL_date/FrontEnd/React/React(11).md) | [성능최적화2] 파일/이미지업로드, 결제                        |
 
  
 
@@ -201,7 +202,7 @@
 | [Node(1)](./TIL_date/BackEnd/Node.js/Node(1).md)       | node, npm, yarn 개념, node 실행,  퍼서드패턴, export/import 사용 |
 | [Node(2)](./TIL_date/BackEnd/Node.js/Node(2).md)       | 얕은/깊은 복사, RestAPI, GraphQL, Express, Swagger           |
 | [Node(3)](./TIL_date/BackEnd/Node.js/Node(3).md)       | CORS, nodemon, GraphQl                                       |
-| [Node.js(1)](./TIL_date/BackEnd/Node.js/Node.js(1).md) | 기본개념, Express (Get, Post)                                |
+| [Node.js(1)](./TIL_date/BackEnd/Node.js/Node.js(1).md) | 기본개념, Express (Get, Post), 디자인패턴                    |
 | [Node.js(2)](./TIL_date/BackEnd/Node.js/Node.js(2).md) | MongoDB, Ejs, DB CRUD, auto increment, method-override, css파일 |
 | [Node.js(3)](./TIL_date/BackEnd/Node.js/Node.js(3).md) | 로그인(세션), 환경변수, 검색, Route, 이미지 업로드           |
 | [Node.js(4)](./TIL_date/BackEnd/Node.js/Node.js(4).md) | Socket.io                                                    |

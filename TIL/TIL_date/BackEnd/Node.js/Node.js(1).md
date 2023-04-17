@@ -260,3 +260,78 @@ app.use(cors(corsOptions))
 ```
 
 > [cors 옵션확인](https://github.com/expressjs/cors#readme)
+
+​     
+
+### 디자인 패턴
+
+#### 싱글톤 패턴
+
+- 객체에 접근할 때 메모리를 줄일 수 있음
+- 다른 클래스간의 데이터 공유가 쉬움
+
+```typescript
+import express from 'express'
+
+class Server {
+	constructor(
+  	public app: express.Application
+  ) {
+    const app = express()
+    this.app = app
+  }
+  
+  private setRoute() {
+    this.app.use(indexRouter)
+    this.app.use(aaaRouter)
+  }
+  
+  private setMiddleware() {
+  	this.app.use(express.json()) // json
+    this.setRoute() // router
+  }
+  
+  public listen() {
+    this.setMiddleware()
+    this.app.listen(8000, () => {
+      console.log('server on 8000')
+    })
+  }
+}
+
+function init() {
+  const server = new Server()
+  server.listen
+}
+
+init()
+```
+
+​    
+
+#### 서비스 패턴
+
+- router와 비지니스 로직 분리
+
+```js
+// example.route.ts
+import { Router } from 'express'
+
+const router = Router()
+
+router.get('/', readAll)
+router.get('/:id', readOne)
+router.post('/', createOne)
+
+export default router
+```
+
+```js
+// example.service.ts
+import { Request, Response } from 'express'
+
+export const readAll = () => { 비지니스 로직 }
+export const readOne = () => { 비지니스 로직 }
+export const createOne = () => { 비지니스 로직 }
+```
+

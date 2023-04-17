@@ -111,9 +111,9 @@ return (
 
 ### 카카오지도 연동하기
 
-[카카오개발자사이트](https://developers.kakao.com/)
+#### 1. [카카오개발자사이트](https://developers.kakao.com/) 접속
 
-애플리케이션등록
+#### 2. 애플리케이션등록
 
 <img src="React(9).assets/image-20230405125717295.png" alt="image-20230405125717295" style="zoom:50%;" />
 
@@ -121,11 +121,13 @@ return (
 
 <img src="React(9).assets/image-20230405125843731.png" alt="image-20230405125843731" style="zoom:50%;" />
 
-<img src="React(9).assets/image-20230405125906107.png" alt="image-20230405125906107" style="zoom:67%;" /><img src="React(9).assets/image-20230405125948728.png" alt="image-20230405125948728" style="zoom:80%;" />
-
-[지도Docs](https://apis.map.kakao.com/web/)
+<img src="React(9).assets/image-20230405125906107.png" alt="image-20230405125906107" style="zoom: 50%;" /><img src="React(9).assets/image-20230405125948728.png" alt="image-20230405125948728" style="zoom: 67%;" />
 
 
+
+#### 3. 코드작성
+
+>  [지도Docs](https://apis.map.kakao.com/web/)
 
 - Next에서 사용
 
@@ -164,6 +166,11 @@ export default function KakaoMapPage() {
 
 > 버튼클릭하여 페이지를 이동했을 때, 지도가 안나오는 현상
 
+- SPA의 특징을 이해해야함
+- `<Link>` 대신 `router.push`를 쓰는 경우
+  1. 버튼 클릭으로 이동하는 경우가 아닐 때
+  2. 클릭시 추가 로직을 실행시키고 싶은 경우
+
 ```tsx
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -190,7 +197,4 @@ export default function KakaoMapPage() {
 }
 ```
 
-- SPA의 특징을 이해해야함
-- `<Link>` 대신 `router.push`를 쓰는 경우
-  1. 버튼 클릭으로 이동하는 경우가 아닐 때
-  2. 클릭시 추가 로직을 실행시키고 싶은 경우
+​    

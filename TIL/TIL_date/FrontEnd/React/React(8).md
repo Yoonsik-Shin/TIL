@@ -14,7 +14,15 @@
 - 주의점
   - 적은 다운로드수, 유명하지 않은 라이브러리는 사용 지양
 
+​    
 
+### 0. 유용한 라이브러리
+
+#### Lodash
+
+​    
+
+---
 
 
 ### 1. 컴포넌트 디자인 라이브러리
@@ -349,6 +357,8 @@ export default function ReactHookFormPage() {
 
 ​    
 
+---
+
 ### 5. 시간 관련 라이브러리
 
 #### Moment.js 
@@ -359,9 +369,137 @@ export default function ReactHookFormPage() {
 - 사용자의 PC가 실제와 다르면, 프론트에서 생성한 시간도 실제와 다른 시간을 따라감
 - 국제 표준시인 UTC 시간을 사용함
 
+​    
 
+---
+
+### 6. 웹 에디터 라이브러리
+
+#### react-quill
+
+```bash
+$ yarn add react-quill
+```
+
+```tsx
+import "react-quill/dist/quill.snow.css";
+import dynamic from 'next/dynamic'  // next를 사용할때만
+
+// next를 사용할때만
+const ReactQuill = dynamic(async () => await import('react-quill'), { ssr: false })  
+
+export default function WebEditorPage() {
+  const onChangeContents = (value: string) => { console.log(value) }
+  
+  return (
+  	<ReactQuill onChange={onChangeContents} />
+  )
+}
+```
 
 ​    
+
+> React-Hook-Form 적용
+
+```tsx
+// 글 등록
+import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+import { useForm } from "react-hook-form";
+
+const ReactQuill = dynamic(async () => await import("react-quill"), { ssr: false });
+
+export default function WebEditorPage() {
+  const { register, handleSubmit, setValue, trigger } = useForm({
+    mode: "onChange",
+  });
+
+  const onChangeContents = (value: string) => {
+    // register로 등록하지 않고, 강제로 값을 넣어주는 기능
+    setValue("contents", value === "<p><br></p>" ? "" : value); 
+
+    // onChange 됐다고 react-hook-form에 강제로 알려주는 기능
+    void trigger("contents"); 
+  };
+	
+  // API 요청	
+  const onClickSubmit = () => {}
+ 	
+  return(
+    <form onSubmit={handleSubmit(onClickSubmit)}>
+      <ReactQuill onChange={onChangeContents} />
+      <button>등록하기</button>
+    </form>
+  )
+}
+```
+
+​    
+
+- 크로스 사이트 스크립트 (XSS) 방지를 위해 __Dompurify__ 라이브러리 활용
+
+```tsx
+// 글 보여주는 페이지
+import Dompurify from "dompurify";
+
+{typeof window !== "undefined" && (  // 서버사이드 렌더링 에러방지, [process.browser &&] 도 활용가능
+	<div 
+    dangerouslySetInnerHTML={{ 
+      __html: Dompurify.sanitize(data?.contents) 
+    }}
+   />
+)}
+```
+
+​    
+
+> 크로스 사이트 스크립트 (XSS)  
+
+- JavaScript와 HTML로 악의적인 코드를 웹브라우저에 심어놔 사용자가 접속하면 심어놓은 악성코드가 실행되도록 하는 해킹 기법
+
+
+
+> next.js에서 나타나는 오류 방지 (Hydration 이슈)
+
+- 브라우저에서만 렌더링되는 태그가 있을 경우 삼항연산자를 이용해 빈태그를 만들어줘야함
+
+```tsx
+return (
+	<div>
+    {process.browser && (
+			<div style={{ color: "green" }}></div>  // 브라우저에서 렌더링 될때 
+		) : (
+			<div style={{color: "green"}} />  // 프론트서버에서 프리렌더링될때
+		)}
+  </div>
+)
+```
+
+​    
+
+#### React Draft Wysiwyg
+
+
+
+#### toast-ui/editor
+
+​    
+
+---
+
+### 7. 이미지 관련 라이브러리
+
+#### React-dropzone
+
+​    
+
+#### React-avator-editor
+
+​    
+
+#### React-beautiful-dnd
+
+​        
 
 ---
 
@@ -446,12 +584,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDjLBjOpY6Z6-ihw7XkSPtV7K3UUNWVy20",
+  apiKey: "AIzaSyDjLBjOpY6Z6-ihw7XkSPtV7----NWVy20",
   authDomain: "test-9adce.firebaseapp.com",
   projectId: "test-9adce",
   storageBucket: "test-9adce.appspot.com",
   messagingSenderId: "509929578393",
-  appId: "1:509929578393:web:c7231ea2fb66a5921cbd08"
+  appId: "1:509929578393:web:c7231ea2fb6---921cbd08"
 };
 
 // Initialize Firebase
