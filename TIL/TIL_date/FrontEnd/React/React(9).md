@@ -20,9 +20,109 @@
 
 ##  무한스크롤
 
-react-ininite-scroller
+### [intersection Observer](https://developer.mozilla.org/ko/docs/Web/API/Intersection_Observer_API)
+
+- 비동기적으로 동작
+
+```tsx
+interface IntersectionObserverInit {
+   root?: Element | Document | null;
+   rootMargin?: string;
+   threshold?: number | number[];
+}
+const options: IntersectionObserverInit = {
+  root: ,
+  rootMargin: ,
+  threshold:
+}
+
+// 관찰되고 있는 요소가 보여지면 실행될 함수
+const callback = (entries, observer) => {
+  entries.forEach(entry => {
+    entry.boundingClientRect  // 관찰되는 대상의 정보반환
+    entry.intersectionRect  // root 영역과 교차된 지점의 정보 반환
+    entry.intersectionRatio  // root 영역과 교차된 지점비율 반환 (threshold와 유사, 0.0 ~ 1.0)
+    entry.isIntersecting  // 교차되어 있는지 여부를 반환 (true/false)
+    entry.rootBounds  // root 정보반환 
+    entry.target  // 관찰되는 대상 자체를 반환
+    entry.time  // 교차가 시작된 시간 반환
+  })
+}
+
+const observer = new IntersectionObserver(callback, options)
+observer.observe(요소)  // 관찰되는 대상이 됨
+observer.unobserve(요소)  // 관찰되는 대상에서 해제됨
+observer.disconnect()  // 관찰되는 모든 요소 관찰해제
+observer.takerecords()  // 관찰되는 요소들을 배열로 리턴
+```
 
 
+
+#### options
+
+- `root`
+  - null 입력시, 기본값으로 브라우저의 __Viewport__로 설정
+- `rootMargin`
+  - root에 마진값을 추가하여 root의 범위를 확장할 수 있음 
+  - 기본값 : `0px 0px 0px 0px`
+  - 단위 반드시 입력해야함
+- `threshold`
+  - 콜백함수가 실행되기 위해 관찰될 요소의 보여지는 정도를 백분율로 표기
+  - 기본값 : 0
+
+​    
+
+#### custom Hook만들기
+
+```tsx
+type IntersectHandler = (
+ entry: IntersectionObserverEntry,
+ observer: IntersectionObserver
+) => void
+
+interface IntersectionObserverInit {
+   root?: Element | Document | null;
+   rootMargin?: string;
+   threshold?: number | number[];
+}
+ 
+export const useIntersect = (
+ onIntersect: IntersectHandler,
+ options?: IntersectionObserverInit
+) => {
+ const ref = useRef<HTMLDivElement>(null)
+ const callback = useCallback(
+   (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+     entries.forEach((entry) => {
+       if (entry.isIntersecting) onIntersect(entry, observer)
+     })
+   },
+   [onIntersect]
+ )
+ 
+ useEffect(() => {
+   if (!ref.current) return
+   const observer = new IntersectionObserver(callback, options)
+   observer.observe(ref.current)
+   
+   return () => observer.disconnect()
+ }, [ref, options, callback])
+ 
+ return ref
+}
+```
+
+
+
+#### 구현
+
+
+
+### react-intersection-observer
+
+### react-ininite-scroller
+
+### 
 
 
 
