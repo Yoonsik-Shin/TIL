@@ -1,397 +1,676 @@
-# React (4)
-
-
-
-## 0️⃣ 성능최적화 개념
-
-### 1. 로딩 최적화
-
-- 이미지 사이즈 최적화
-- Code Split (컴포넌트, 이미지 Lazy Loading)
-- 텍스트압축
-- Preloading
-- 동영상 최적화
-- 폰트 최적화
-- 캐시 최적화
-- 불필요한 css 제거
+# React (4) 
 
 ​    
 
-### 2. 렌더링 최적화
+## 1️⃣ Next.js
 
-- Bottleneck 코드 최적화
-- 애니메이션 최적화 (Reflow/Layout, Repaint/paint)
+- React 기반의 프레임워크
 
 ​    
 
----
+### 설치
 
-## 1️⃣ Prefetch / Preload
-
-### prefetch
-
-- 곧 사용할 될 __페이지, 데이터__를 미리 받아오는 것
-- 현재 페이지를 모두 받아온 이후 제일 나중에 다운로드해옴
-- 미리 받아온 리소소는 캐시에 저장되어 페이지 이동시 바로 보여짐
-
-```html
-<!-- 첫페이지 -->
-<html>
-  <head>
-    <link rel="prefetch" href="미리 받아올 페이지" />
-  </head>
-  <body>
-    <a href="미리 받아올 페이지"></a>
-  </body>
-</html>
+```bash
+$ npx create-next-app
 ```
 
-- 해당글에 마우스 올리면 그 글에 필요한 데이터 미리 받아옴
+​    
+
+### 보일러 플레이트
+
+```bash
+프로젝트파일명
+├── node_modules   # 라이브러리 / 프레임워크 저장소
+├── pages          # 페이지 화면
+├── public         # 사진, 아이콘, 폰트
+├── styles         # css파일
+├── .gitignore     # git에서 제외할 파일
+├── package.json   # 기본 메뉴얼
+├── README.md      # 상세 설명서
+└── yarn.lock      # 버전 잠금 파일
+```
+
+​    
+
+> package.json
+
+- `devDependencies`에 있는 라이브러리들은 배포시에는 제외됨
+- `resolution`은 라이브러리 하위 모듈 버전을 고정해줌
+- 실제 설치된 파일들은 node_modules안에 있음
+- package.json은 설치파일 목록만 보여줌, 설치가 안돼있는 파일도 있을 수 있음
+
+<img src="React(4).assets/image-20230329090054934.png" alt="image-20230329090054934" style="zoom:67%;" />
+
+​    
+
+### 서버실행
+
+```bash
+$ yarn dev
+
+# 3000번 포트가 사용중일 경우
+$ yarn dev -p 다른포트번호
+```
+
+​    
+
+### node_modules 재설치
+
+- 기존 node_modules 삭제 후 
+
+```bash
+$ yarn install
+```
+
+​    
+
+### 페이지 렌더링
+
+- `pages`폴더안에 __주소로 사용할 이름으로 폴더 작성__후 그 폴더안에 `index.js (ts/tsx)` 파일 작성
+
+![image-20230329090457249](React(4).assets/image-20230329090457249.png)
+
+![image-20230329090444114](React(4).assets/image-20230329090444114.png)
+
+​    
+
+### 페이지 라우팅
+
+- 순수 React에서는 `react-router-dom`을 사용
+- Next.js에서는 next에서 제공해주는 `Router` 사용
+
+​    
+
+#### 정적페이지 라우팅 (Static)
+
+- 언제 누구가 접속하든 항상 같은 페이지를 보여주는 페이지로 이동할 때 
 
 ```jsx
-export default Page() {
-  const prefetchBoard = () => {
-    // 데이터 받아오기
-  }
+import { useRouter } from 'next/router'
+
+export default function StaticRoutingPage() {
+  const router = useRouter()  ✔️✔️
+  const onClickMove = () => { router.push('/이동할url') }
   
+  return <button onClick={onClickMove}>페이지이동</button>
+}
+```
+
+​    
+
+#### 동적페이지 라우팅 (Dynamic)
+
+- Next.js에서의 동적라우팅
+- 폴더이름에 대괄호(`[]`) 감싸주기
+- 대괄호로 감싸준 값을 index.js 페이지에서 활용할 수 있음
+- `/05-08-dynamic-routed-board-query/[article_id]`
+
+![image-20230329145548375](React(4).assets/image-20230329145548375.png)
+
+- `/05-08-dynamic-routed-board-query/3`으로 요청시
+
+```jsx
+import { useRouter } from 'next/router'
+
+const router = useRouter()
+console.log(router.query)  // { article_id: 3 }  ✔️✔️
+```
+
+​    
+
+#### Router 객체 
+
+```jsx
+import Router from 'next/router'
+
+export default function Routing() {
+  const handleClickPathname = () => {
+    const pathname = Router.pathname  // 현재 경로 
+    alert(pathname)
+  }
+  const handleClickAsPath = () => {
+    const asPath = Router.asPath  // 쿼리를 포함한 경로
+    const query = Router.query  // object로 파싱한 쿼리스트링
+    alert(asPath)
+  }
+  const handleClickBack = () => { Router.back() }  // 뒤로가기
+  const handleClickReload = () => { Router.reload() }  // 새로고침
+  const handleClickReplace = () => { Router.replace('/') }
+
   return (
     <>
-      {data?.map((el) => (
-        <div onMouseOver={prefetchBoard(el.id)} onClick={글로이동}>글제목</div>
-      ))}
-		</>
-  )
-}
-```
-
-- debouncing과 함께 사용하면 불필요한 요청을 줄일 수 있음
-
-```jsx
-import { debounce } from 'lodash'
-
-export default Page() {
-  	const prefetchBoard = _.debounce((value) => {
-       // api요청
-    }, 400)
-  
-    return (
-    <>
-      {data?.map((el) => (
-        <div onMouseOver={prefetchBoard(el.id)} onClick={글로이동}>글제목</div>
-      ))}
-		</>
-  )
+      <button onClick={handleClickPathname}>현재 경로</button>
+      <button onClick={handleClickAsPath}>쿼리를 포함한 경로</button>
+      <button onClick={handleClickBack}>뒤로가기</button>
+      <button onClick={handleClickReload}>새로고침</button><br/>
+      <button onClick={handleClickReplace}>현재 페이지 삭제 후 다른 페이지로 이동</button>
+    </>
+    )
+  }
 }
 ```
 
 ​    
 
-### preload
+> `pathname` VS  `asPath`
 
-- 현재 페이지에서 이용할 __이미지__나 컴포넌트를 미리 다운받아 놓는 것
-- index.html을 받아올 때, preload는 css, js 보다 이미지를 먼저 받아옴
-- 파일은 한번에 6개씩만 다운로드 받아올 수 있음
-- 따라서, 이미지 다운로드전에 다운로드 받아와야할 요소들이 많다면, 이미지가 늦게 뜰 수 있음
-- 이를 해결하기 위해, 이미지를 먼저 다운로드 받아오게 설정하면 됨
-- 보여져야할 이미지가 많다면 처음 페이지에 보여질 이미지만 먼저 preload 적용
+- `Router.query` : object로 파싱한 쿼리스트링 (`{boardId: 'a7h34vcdr'}`)
+- `pathname` : 폴더주소, 쿼리가 해석되지 않은 상태로 경로를 알려줌 (`/boards/[boardId]`)
+- `asPath` : 실제주소, 쿼리를 해석한 후 그 값을 포함해서 경로를 알려줌 (`/boards/a7h34vcdr`)
 
-```html
-<html>
-  <head>
-    <link rel="preload" href="미리 받아올 이미지" />  ✔️✔️ <!-- css, js 파일보다 먼저 다운로드됨 -->
-    <link rel"stylesheet" href="" />
-    <script src="1"></script>
-    <script src="2"></script>
-    <script src="3"></script>
-    <script src="4"></script>
-    <script src="5"></script>
-    <script src="6"></script>
-  </head>
-  <body>
-    <img src="" />
-  </body>
-</html>
+​    
+
+> `push`  VS `replace`
+
+- push로 페이지를 이동하고, 뒤로가기하면 바로 전 페이지로 이동함
+- 이러한 특성때문에 로그인 직후에 뒤로가기를 누르면 로그인 페이지로 돌아가질 수 있음
+- 이 때, replace를 사용하면 뒤로가기할 페이지에 대한 히스토리를 지울 수 있어 이를 방지할 수 있음
+
+​    
+
+### public 속 이미지
+
+- public 폴더는 `/`로 대체됨
+
+```jsx
+<img src='/사진명.jpg' />
 ```
-
-
 
 ​    
 
 ---
 
-## 2️⃣ lazy import
+## 2️⃣ 폴더구조
 
-### lazy
+### Container / Presentation 패턴
 
-- SPA는 처음 사이트에 접속할 때 모든 페이지를 하나로 합쳐 로딩하여 시간이 많이 걸림
-- 메인페이지를 로드할 때 필요없는 컴포넌트를 필요해질 때 불러올 수 있게 해주는 기능
-- lazy 키워드를 사용하면 사이트 발행시 별도의 js 파일로 분리됨
-
-```jsx
-import { lazy } from 'react';
-
-const 필요할때import할컴포넌트 = lazy(() => import('./routes/컴포넌트.js'))
-const Detail = lazy(() => import('./routes/Detail.js'))
-```
-
-​    
-
-### LazyLoad 
-
-- 처음 페이지가 사용자에게 보여지는 시점에 보여지지 않는 리소스들을 필요로할 때 로드하는 것
-- 보통 스크롤을 내릴 때 로드가 진행되는 식으로 구현
-- preload는 이미 리소스를 다 다운받아 캐시에 저장해놓은 것이고, lazyload는 필요할 때마다 리소스를 다운 받는 방식
-
-​    
-
-- [react-lazyload](https://www.npmjs.com/package/react-lazyload) 라이브러리 활용 가능
+- 소스코드를 JS부분(기능)과 JSX부분(UI)으로 나누는 방법
+- 파일은 나눠져 있지만 실행은 하나로 합쳐서 실행됨
 
 ```bash
-$ npm install react-lazyload
-$ yarn add react-lazyload
+프로젝트파일명
+├── pages
+│     ├── 페이지파일1
+│     │      └── index.ts
+│     └── 페이지파일2
+│            └── index.ts
+└── src  # 따로 생성해줘야함
+     ├── commons  # 공통적으로 사용되는 파일들
+     │      ├── lib   # 공통 자체 라이브러리
+     │      ├── util  # 공통 함수
+     │      └── styles  # 공통 CSS
+     └── components
+             ├── commons  # 두번 이상 쓰이는 컴포넌트
+             │      └── layout  # 레이아웃 컴포넌트
+             │						├── banner
+             │						├── footer
+             │						├── header
+             │						├── navigation
+             │						├── sidebar
+             │						└── index.js  # 모든 레이아웃들을 합쳐주는 파일
+             └── units    # 단위컴포넌트 (한번만 사용)
+             			├── 기능1 
+             			│     ├── 동작1
+             			│     │      ├── 기능동작.container.tsx
+             			│     │      ├── 기능동작.presenter.tsx
+             			│     │      ├── 기능동작.queries.ts
+             			│     │      ├── 기능동작.styles.ts
+             			│     │      └── 기능동작.types.ts
+             			│     └── 동작2
+             			└── board
+             			      ├── write
+             			      │      ├── BoardWrite.container.tsx
+             			      │      ├── BoardWrite.presenter.tsx
+             			      │      ├── BoardWrite.queries.ts
+             			      │      ├── BoardWrite.styles.ts
+             			      │      └── BoardWrite.types.ts
+             			      └── detail
 ```
 
-```tsx
-import LazyLoad from 'react-lazyload';
+​    
 
-export default MyApp() {
-  // 이미지
-	<LazyLoad height={200}>
-    <img src="tiger.jpg" />
-  </LazyLoad>  
-  
-  // 컴포넌트
-  <LazyLoad height={200}>
-    <MyComponent />
-  </LazyLoad>  
+- 실행순서 (부모-자식 관계)
+
+1. _app.js (최상단)
+2. page/페이지파일/index.js 
+
+```jsx
+import BoardWrite from '../../components/units/board/write/BoardWrite.container.js'
+
+export default function BoardWritePage() {
+  return <BoardWrite />
 }
 ```
 
-> option
-
-```jsx
-<LazyLoad height={200}>  <!-- 높이지정 -->
-<LazyLoad once={true}>   <!-- 한번 로드되면 더 이상 신경x -->
-<LazyLoad offset={200}>  <!-- 뷰포트 기준으로 200px 이상이면 로드됨 -->
-```
-
 ​    
 
-## 6️⃣ 코드분할
+3. src/components/units/기능/동작/기능동작.container.js
 
-### [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)
+```jsx
+import { useState } from 'react'
+import { useMutation } from '@apollo/client'
+import BoardWriteUI from './BoardWrite.presenter.js'
+import CREATE_BOARD from './BoardWrite.queries.js'
 
-- 직접 Webpack을 조작하는 경우
-
-```bash
-$ npm install -D webpack-bundle-analyzer
-$ yarn add -D webpack-bundle-analyzer
+export default function BoardWrite() {
+  const [value, setValue] = useState('')
+  const [createBoard] = useMutation(CREATE_BOARD)
+ 
+  const onClickSumbit = async () => {
+    const result = await createBoard({ variables: {} })
+  }
+  const onChangeValue = (e) => { setValue(e.targe.value) }
+  
+  return 
+  	<BoardWriteUI 
+    	onClickSumbit={onClickSumbit} 
+    	onChangeValue={onChangeValue} 
+    />
+}
 ```
 
-- config 파일 뽑아내 설정하기
-
-```bash
-$ yarn eject
-```
-
-![image-20230417143348423](React(4).assets/image-20230417143348423.png)
+> 3-1. graphql 요청파일 분리
 
 ```js
-// config/webpack.config.js
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+import { gql } from '@apollo/client'
 
-module.exports = {
-  ...
-  return {
-  	...
-  	plugins: [
-    	new BundleAnalyzerPlugin()
-  	]
-    ...
+export const CREATE_BOARD = gql`
+	mutation createBoard($value: String) {
+		createBoard(value: $value) {
+	  	_id
+	  	value
+			message
+		}
 	}
-  ...
-}
+`
 ```
-
-![image-20230417143557659](React(4).assets/image-20230417143557659.png)
-
-- package.json 파일에 스크립트 추가
-
-```json
-// package.json
-{
-  "scripts": {
-    "analyze": "webpack-bundle-analyzer ./build/bundle-report.json --default-sizes gzip",
-  }
-}
-```
-
-- 실행하기
-
-```bash
-$ yarn analyze
-```
-
-​    
-
-###  [cra-bundle-analyzer](https://www.npmjs.com/package/cra-bundle-analyzer)
-
-- CRA로 프로젝트를 시작했을 경우
-
-```bash
-$ npm install -D cra-bundle-analyzer
-$ yarn add -D cra-bundle-analyzer
-```
-
-​    
-
-###  Selective Hydration
-
-- Suspense를 사용한 컴포넌트는 자동으로 다른 번들로 코드 분할이 됨
-- http streaming이 될 때 알아서 제외하고 보내서 파일 size가 작아짐
 
 ​     
 
-#### Suspense
-
-- lazy import한 컴포넌트 사용시 약간의 지연시간 발생
-- 그 지연시간동안 보여줄 컴포넌트 지정가능
+4. src/components/units/기능/동작/기능동작.presenter.js
 
 ```jsx
-import { Suspense } from 'react'
+import { ValueInput, SendButton } from './BoardWrite.styles.js'
 
-// 한 컴포넌트만 감싸기
-<Route path='/detail/:id' element={
-   <Suspense fallback={'로딩중에 보여줄 페이지'}>
-    <Detail />  <!--  -->
-  </Suspense>
-} />
+export default function BoardWriteUI(props) {
+  const { onClickSumbit, onChangeValue } = props
+  
+  return (
+    <>
+    	<ValueInput type="text" onChange={onChangeValue} />
+    	<SendButton onClick={onClickSubmit}>요청</SendButton>
+    </>
+  )
+}
+```
 
-// Route 전체에 감싸기  
-<Suspense fallback={'로딩중에 보여줄 페이지'}>
-<Routes>
+​    
+
+5. css-in-js 파일
+
+```js
+import styled from '@emotion/styled'
+
+export const ValueInput = styled.input`
+	border-coler: red;
+`
+export const SendButton = styled.button`
+	background-color: black;
+`
+```
+
+​     
+
+> utils 폴더
+
+- 폴더경로`/src/commons/utils `
+- 공통적으로 쓰이는 함수를 저장하는 폴더
+
+```js
+// getDate.js
+// 날짜를 다루는 함수
+export const getDate = (date) => {
+  const curDate = new Date(date)
+  const year = curDate.getFullYear()
+  const month = curDate.getMonth() + 1
+  const day = curDate.getDate()
+  
+  return `${year}-${month}-${day}`
+}
+```
+
+​    
+
+### atomic 패턴
+
+- 컴포넌트의 중복을 최소화하기 위해 소스코드를 아주 작은 컴포넌트 단위로 쪼개는 방식
+- 재사용성이 좋으나, 상위 코드 수정시 수정해야할 부분이 많아짐
+- 총 5개의 폴더구조로 이루어짐
+  1. Atoms
+     - 버튼, 제목, 텍스트 입력 필드와 같은 가장 작은 구성 컴포넌트
+     - 모든 컴포넌트들의 기초가 되는 블록
+     - 더 이상 분해 될 수 없는 필수 요소
+  2. Molecules : 2개 이상의 원자로 구성
+  3. Organisms : Molecules의 모음
+  4. Templates : Organisms을 모아 템플릿 생성
+  5. Pages : 실제 페이지를 구성하는 단위
+
+​    
+
+---
+
+## 3️⃣ 레이아웃 컴포넌트
+
+![image-20230330152806087](React(4).assets/image-20230330152806087.png)
+
+```jsx
+// src/components/commons/layout/header/index.tsx
+import styled from "@emotion/styled";
+
+const Wrapper = styled.div`
+  height: 50px;
+  background-color: lightcoral;
+`;
+
+export default function LayoutHeader() {
+  return <Wrapper>여기는 헤더입니다.</Wrapper>;
+}
+```
+
+```jsx
+// src/components/commons/layout/index.tsx
+export default function Layout(props) {
+  return (
+  	<>
+    	<LayoutHeader />
+      <LayoutBanner />
+      <LayoutNavigation />
+    	<LayoutBodyWrapper>
+    		<LayoutSidebar />
+      	<LayoutBody>{props.children}</LayoutBody>
+    	</LayoutBodyWrapper>
+    	<LayoutFooter />
+    </>
+  )
+}
+```
+
+```jsx
+// _app.js
+export default function App({ Component, pageProps }) {
+  return (
+  	<Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
+}
+```
+
+​    
+
+### 레이아웃 미적용 영역설정
+
+- 특정 페이지에는 특정 레이아웃이 보이지 않았으면 할 때
+- `include`메서드로 배열내 값과 현재페이지의 asPath값을 비교하여 동일하면 레이아웃 제외
+
+```js
+// src/components/commons/layout/index.tsx
+const HIDDEN_HEADERS = [
+  '/레이아웃 제외 페이지주소',
+  '/login'
+]  ✔️✔️
+
+export default function Layout(props) {
+  const router = useRouter()
+  const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath)  ✔️✔️
+  
+  return (
+  	{!isHiddenHeader && <Header />}  // 해당 페이지에서 제외할 레이아웃
+  )
+}
+```
+
+​    
+
+---
+
+## 4️⃣ 글로벌 스타일 적용
+
+- 모든 컴포넌트에 기본적으로 적용시켜주는 스타일
+- `_app.tsx`에 적용해줘야함
+
+```jsx
+// _app.tsx
+import { Global } from '@emotion/react'
+import { globalStyles } from "../src/commons/styles/globalStyles";
+
+export default function App({ Component, pageProps }) {
+  return (
+    <Global styles={globalStyles} />
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
+}
+```
+
+![image-20230330193448275](React(4).assets/image-20230330193448275.png)
+
+```js
+// global css 적용파일
+import { css } from '@emotion/react'
+
+export const globalStyles = css`
+	* {
+		margin: 0;
+		box-sizing: 0px;
+		font-family: myfont;  ✔️✔️
+	}
+	
+	@font-face {
+		font-family: "myfont";  ✔️✔️
+		src: url("/fonts/폰트파일")  
+	}
+`
+```
+
+​    
+
+### 폰트 적용
+
+![image-20230331004717224](React(4).assets/image-20230331004717224.png)
+
+- `@font-face` 선택자를 이용해 폰트 호출 이름과 경로를 선언
+- `font-family` : 폰트를 호출할 이름을 정의해주는 속성
+- `src` : 폰타파일의 경로
+- font를 적용할 css에 `font-family`
+- 압축률이 가장 높은 폰트 확장자 : `woff2`
+
+​    
+
+>FOIT (Flash of Invisible Text)
+
+- 브라우저가 웹 폰트를 다운로드하기 전에 텍스트가 보이지 않는 현상
+- 대부분의 웹사이트는 FOIT 현상이 기본값
+
+​    
+
+> FOUT (Flash of Unstyled Text)
+
+- 브라우저가 웹 폰트를 다운로드하기 전에 텍스트가 대체 글꼴로 렌더링되는 현상
+
+​    
+
+---
+
+## 5️⃣ 코드 작성 규칙
+
+### 1. 코드 린터
+
+- 에러는 아니지만 에러로 약속하자는 규칙을 정하는 것을 의미
+- vscode상에는 오류로 표기되지만 실행에는 영향없음
+- `eslint`를 사용
+- next.js에는 이미 설치 되어있어 이를 활성화만 해주면됨
+
+​    
+
+#### 설치
+
+- 설치가 완료되면 `.eslintrc.js` 파일이 생성됨
+
+```bash
+$ npx eslint --lint
+```
+
+```bash
+# eslint를 어떤식으로 사용할지에 대한 질문
+How would you like to use ESlint ? => syntax, problems, ✔️[code style]
+
+# Javascript modules VS CommonJS
+Waht type of modiles does your project use? => Javascript modules (import/export)
+
+# 프레임워크 선택
+Which framework does your project use? => react
+
+# 타입스크립트 사용여부
+Does your project use TypeScript? => Yes
+
+# 어디서 실행하는지 확인 (Browser, Node)
+Where does your code run? => Browser
+
+# 인기있는 가이드를 할지, 커스텀을 할 지 선택
+How would you like to define a style for your project? => Use a popular style guide
+Which style guide do you want to follow? => standard
+
+# 설정파일을 뭘로 만들지 물어보는 질문 (JavaScript, YAML, JSON)
+What format do you want your config file to be in? => Javascript
+
+# 어떤 패키지 매니저로 설치할지 묻는 질문 
+Which package manager do you want to use? => yarn 
+```
+
+​     
+
+#### ESLint  규칙 제외
+
+- `.eslintrc.js` 파일의 `rules`에서 불편한 규칙 적용을 제외시킬 수 있음
+
+```js
+// .eslintrc.js
+module.exports = {
 	...
-</Routes>
-</Suspense>
+  rules: {  // 제외할 규칙
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "prettier/prettier": ["error", { endOfLine: "auto" }]
+  }
+}
+```
+
+​    
+
+> ESLint 한번에 확인하기
+
+```bash
+# 모든 파일을 검사하여 규칙에 어긋나는 부분을 찾아줌
+$ npx eslint .
+
+# 위 명령어가 잘 안될 경우
+$ npx eslint "**/*.{ts,tsx}"
 ```
 
    
 
-### Route-based
+### 2. 코드 포멧터
 
-- lazy import와 Suspense 활용
+- 코드를 보기 좋게 만들어주는 역할
+- `prettier`를 사용
 
-```jsx
-import { Suspense, lazy } from 'react'
+​    
 
-const Component1 = lazy(() => import('./routes/1'))
-const Component2 = lazy(() => import('./routes/2'))
+#### 설치
 
-export default function App() {
-  <Router>
-  	<Suspense fallback={로딩중에 보여줄 페이지}>
-      <Route path='/1' element={Component1} />
-      <Route path='/2' eleemnt={Component2} />
-    </Suspense>
-  </Router>
+```bash
+$ yarn add --dev --exact prettier
+```
+
+​    
+
+#### 설정
+
+1. `.prettierrc.json` 설정파일 생성
+
+```json
+{
+  "tabWidth": 2
+}
+```
+
+![image-20230330132811872](React(4).assets/image-20230330132811872.png)
+
+​    
+
+2. vscode 설정
+
+<img src="React(4).assets/image-20230330115807656.png" alt="image-20230330115807656" style="zoom:50%;" />
+
+<img src="React(4).assets/image-20230330115849464.png" alt="image-20230330115849464" style="zoom: 67%;" />
+
+​     
+
+3. vscode 설정파일로 관리하기
+
+- 최상위 폴더에 `.vscode` 폴더 만들고 그안에 `setting.json` 파일 생성
+
+![image-20230330130413439](React(4).assets/image-20230330130413439.png)
+
+```json
+// setting.json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode" 
 }
 ```
 
 ​    
 
----
+### ESLint Prettier 연결
 
-## 3️⃣ 이미지 최적화
+```bash
+$ npm install --save-dev eslint-config-prettier
+$ yarn add eslint-config-prettier --dev
+```
 
-- `lazyload`, `preload`, `webp확장자`, `CDN`를 활용하여 최적화한다.
-
-​    
-
-### PreLoad
-
-```tsx
-// 미리 이미지를 업로드할 페이지
-import { useEffect } from 'react'
-import { preloadImage } from '../../src/commons/lib/preloadImage'
-
-const PRELOAD_IMAGES = ["https://~~"]
-
-export default function ImagePreloadingPage() {
-  useEffect(() => { preloadImage(PRELOAD_IMAGES) }, [])  ✔️✔️
-  
-  return ()
+```js
+// .eslintrc.js
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true
+  },
+  "extends": [
+    "plugin:react/recommended", 
+    "standard-with-typescript", 
+    "prettier"  ✔️✔️
+  ],
+  override: [],
+  parserOptions: {
+    project: '**/tsconfig.json',  ✔️✔️
+    ecmaVersion: 'latest',
+    sourceType: 'module'
+  },
+  plugins: ['react'],
+  rules: {}
 }
 ```
 
-```tsx
-// src/commons/lib/preloadImage.ts
-export const PRELOADED_IMAGES: HTMLImageElement[] = []
-
-export const preloadImage = (images: string[]) => {
-  images.forEach((el) => {
-    const img = new Image()
-    img.src = el
-    img.onload = () => PRELOADED_IMAGES.push(img)
-  })
+```json
+// .eslintrc.json
+{
+  "extends": ["next/babel", "next/core-web-vitals"]
 }
 ```
 
-​    
-
-### Webp 확장자
-
-- 구글에서 만든 이미지 포맷 
-- gif, png, jpeg 확장자를 모두 대체 가능
-- 기존 파일보다 약 30%의 용량을 줄일 수 있음
-
-> [Webp로 변환시켜주는 사이트 - 1](https://cloudconvert.com/)
->
-> [Webp로 변환시켜주는 사이트 - 2](https://squoosh.app/)
-
-​    
-
-### CDN
-
-- imgix 사이트 활용
-
-
-
-### unsplash API 활용
-
-```jsx
-function getParam
-```
-
-​    
-
----
-
-## 동영상 최적화
-
-​    
-
----
-
-## 폰트 최적화
-
-​    
-
----
-
-
-
----
-
-## 애니메이션 최적화
-
-### jank  (쟁크)
-
-- 주사율이 일정하지 못하고 요동치는 현상
-- 쟁크가 발생하면 렉이 걸린다는 느낌을 받음
-
-​    
-
-### Reflow, Repaint 모두 피하기
-
-- GPU의 도움을 받는 속성 사용
-- `transform`, `opacity`
+​      

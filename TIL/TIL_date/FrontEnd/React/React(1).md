@@ -144,22 +144,6 @@ let [글제목, set글제목] = useState('남자 코트 추천')
 
 ​    
 
-> 자바스크립트 Destructuring
-
-```javascript
-let num = [1, 2, 3]
-
-// 기본
-let a = num[0]
-let b = num[1]
-let c = num[2]
-
-// Destructuring
-let [a, b, c] = [1, 2, 3]
-```
-
-​    
-
 ### State 수정
 
 - array, object를 다룰 때 원본은 보존하는게 좋음
@@ -333,14 +317,6 @@ const 자식컴포넌트 = (props) => {
 
 ​    
 
-> props drilling
-
-- props가 자식에게 넘겨주는 단계가 두번 이상일 경우를 props drilling이 일어났다라고 함
-- 과도하지 않으면 괜찮지만, 과도하면 가독성과 유지보수면에서 좋지 않음
-- 이를 방지하기 위해서 global state를 활용함
-
-​    
-
 ### props children
 
 - 컴포넌트 태그사이에 들어가는 요소들은 자동으로 `prop[children] `에 들어감
@@ -361,194 +337,89 @@ export default function Page(props) {
 }
 ```
 
-   
+​    
+
+### props drilling
+
+- props가 자식에게 넘겨주는 단계가 두번 이상일 경우를 props drilling이 일어났다라고 함
+- 과도하지 않으면 괜찮지만, 과도하면 가독성과 유지보수면에서 좋지 않음
+- 이를 방지하기 위해서 global state를 활용함
+
+​    
 
 ---
 
-## 6️⃣ 커스텀 hook
+## 6️⃣ 컴포넌트 재사용
 
-- 그냥 함수와의 차이점 : 함수안에 다른 use로 시작하는 요소의 여부에 따라 구분됨
-
-​     
-
----
-
-## 7️⃣ 기타
-
-### map함수
-
-1. array의 자료수만큼 내부코드 반복 실행
-
-```javascript
-[1, 2, 3].map(()=>{
-  console.log('실행')
-})
-
->> 실행
->> 실행
->> 실행
-```
-
-2. 파라미터 사용시 array의 값들 순서대로 받아옴
-
-```javascript
-[1, 2, 3].map( (a) => { 
-  console.log(a)
-})
-
->> 1
->> 2
->> 3
-```
-
-3. return문 내용을 array로 담아줌
-
-```javascript
-[1, 2, 3].map((a) => {
-  return "123456";
-});
-
->> (3) ['123456', '123456', '123456']
-```
-
-
-
-> 같은 html 반복 생성
-
-- 동일한 HTML 코드가 반복될 시 `key`값으로 구분해줘야함
-- index를 키로 사용하면 안됨, 아예 중복되지 않는 값을 key로 지정해줘야함
+- 수정 / 등록 페이지는 몇몇 요소를 제외하면 동일한 부분이 많아 컴포넌트 재활용을 할 수 있음
+- __props__와 __삼항연산자__ 활용
 
 ```jsx
-let [test, setTest] = useState(['1', '2', '3'])
+// 등록페이지
+import BoardComponent from '../../src/components/units/board/..'
 
-{
-  test.map((el, idx) => {    // el: 값, idx: 인덱스
-    return (
-      <div key={중복되지않는값}>
-        <h2>{ el }</h2>
-        <h2>{ test[idx] }</h2>
-        <p></p>
-      </div>
-    )
-  })
+export default function BoardNewPage() {
+  return <BoardComponent isEdit={false}>
 }
 ```
 
-​    
+```jsx
+// 수정페이지
+import BoardComponent from '../../src/components/units/board/..'
 
-> Fragment
-
-- 빈 <>에는 태그 속성을 사용할 수 없음
-- 이때는 `<Fragment`> 태그를 사용해야함
+export default function BoardEditPage() {
+  return <BoardComponent isEdit={true}
+}
+```
 
 ```jsx
-{
-  arr.map((el, idx) => (
-    <Fragment key={idx}>
-    </Fragment>
+export default function BoardComponent(props) {
+  return (
+    // 삼항연산자 활용
+  	<h1>{props.isEdit ? "수정" : "등록"}</h1>
+  	<button onClick={props.isEdit > props.onClickUpdate : props.onClickCreate}>
+      {props.isEdit ? "수정" : "등록"}하기
+    </button>
   )
 }
 ```
 
-   
+​        
 
-### filter함수
+### defaultValue
 
-- 조건에 맞는 값만 골라내서 배열로 반환해줌
+- input태그의 속성
+- 초기값 설정
 
-```js
-const stock = [1, 2, 3, 4, 5, 6]
-const filter = stock.filter(item => item >= 3)
-
-// filter = [3, 4, 5]
+```jsx
+<input 
+  type="text" 
+  onChange={props.onChangeTitle} 
+  defaultValue={props.data?.fetchBoard.title}  ✔️✔️
+/>
 ```
 
 ​    
 
-###  동적 UI
+### 수정한 값만 요청보내기
 
-1. html, css로 미리 디자인 완성하기
-2. UI의 현재 상태를 state로 저장
+- 문제점 : 전송 객체가 state의 초기값으로 계속 초기화되어 defaultValue 속성을 부여해도 빈 값이 들어감 
+- 해결책 : 변경된 객체만 백엔드에 전송해서 수정하기 (PUT요청)
 
 ```jsx
-function App (){
-  let [modal, setModal] = useState(false);
+export default function DefaultValue(props) {
+  const router = useRouter()
+  const [value1, setValue1] = useState('')
+	const [value2, setValue2] = useState('')
   
-  return (
-    <button onClick={() => {
-        setModal(!modal)
-     };
-  )
-}
-```
-
-3. state에 따라 UI가 어떻게 보일지 작성
-
-```jsx
-{modal ? <Modal /> : null}
-```
-
-​    
-
-> JSX 조건문 활용
-
-```jsx
-// 삼항 연산자
-{
-  조건식 ? 참일 때 실행할 코드 : 거짓일때 실행할 코드
-}
-```
-
-​    
-
-### input
-
-> 사용자 입력값 저장
-
-```jsx
-function App() {
-  const [inputVal, setInputVal] = useState('')
-  const onChangeEvent = (e) => {
-    setInputVal(e.target.value)
-  }
+  const onClickSumbit = async () => {
+  	const variables = { id: Number(router.query.mynumber) }
+    // 변경한 값만 객체에 값 추가
+    if (value1) { variables[value1] = value1 }
+    if (value2) { variables[value2] = value2 }
+	}
   
-  return (
-  	<input onChange={onChangeEvent} />
-  )
+  // 변경된 객체로 API요청
 }
+
 ```
-
-​    
-
-#### 회원가입
-
-```jsx
-import { useState } from 'react'
-
-export default function SignupStatePage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [emailError, setEmailError] = useState('')
-
-  const onChangeEmail = (e) => { setEmail(e.target.value) }
-  const onChangePassword = (e) => { setPassword(e.target.value) }
-  const onClickSignup() => {
-    if (!email.includes("@")) {
-      setEmailError('이메일이 올바르지 않습니다.')
-      return
-    }
-    // API 요청
-    alert('회원가입을 축하합니다.')
-  }
-
-  return (
-    <>
-      이메일: <input type='text' onChange={onChangeEmail}/>
-      <div>{emailError}</div>
-      비밀번호: <input type='password' onChange={onChangePassword} />
-      <button onClick={onClickSignup}>회원가입</button>
-    </>
-  )
-}
-```
-

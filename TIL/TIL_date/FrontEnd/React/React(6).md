@@ -2,414 +2,628 @@
 
 ​    
 
-## 1️⃣ Graphql API
+## 1️⃣ 라이브러리
 
-- facebook에서 대용량 데이터를 처리하기 위해 개발
+- 라이브러리 : 특정기능, 도구 1개, React
+- 프레임워크 : 도구모음, Next
+- 사용이유
+  - 시간절약
+  - 버그 최소화
+  - 다양한 환경에서 적용되야함
 
-​    
-
-### 1. restAPI와의 차이
-
-|             | Graphql                           | REST                               |
-| ----------- | --------------------------------- | ---------------------------------- |
-| 함수이름    | 일반함수와 같은 이름 (board(1))   | 주소 (https://naver.com/board/1)   |
-| 응답 결과물 | 필요한 데이터만 골라 받을 수 있음 | 보내주는 모든 데이터               |
-| 요청담당자  | apollo-client                     | axios                              |
-| CRUD        | MUTATION (CUD), QUERY (R)         | POST(C), PUT(U), DELETE(D), GET(R) |
-| API 명세서  | 플레이그라운드 (Playground)       | 스웨거 (Swagger)                   |
+- 주의점
+  - 적은 다운로드수, 유명하지 않은 라이브러리는 사용 지양
 
 ​    
 
-> UnderFetching
+### 0. 유용한 라이브러리
 
-- 하나의 endpoint로 필요한 모든 데이터 요청을 처리하지 못하는 것을 의미
-- 여러번의 API 호출이 필요해, 서버에 과부하를 줄 수 있음
-
-​    
-
-> OverFetching
-
-- 응답받은 정보에 사용하지 않는 데이터들도 담고있는 것을 의미
-- 네트워크가 낭비됨 
+#### Lodash
 
 ​    
 
-### 2. Playground에서 활용
 
-<img src="React(6).assets/playground.png" alt="playground" style="zoom: 50%;" />
+### 1. 컴포넌트 디자인 라이브러리
 
-​    
-
-#### Playground docs
-
-- `!`는 무조건 보내줘야하는 필수값
-
-<img src="React(6).assets/image-20230329102254085.png" alt="image-20230329102254085" style="zoom:50%;" />
-
-​    
-
-#### Query
-
-```json
-// 형식
-query {
-	함수(보낼값들) {
-		받아올 값들
-	}
-}
-
-// 예시
-query {
-	fetchData(page: 1) {
-		name
-		age
-		address
-	}
-}
-```
-
-​    
-
-#### Mutation
-
-```json
-// 형식
-mutation {
-  함수(보낼값들) {
-    받아올 값들
-  }
-}
-
-// 예시
-mutation {
-  createBoard(
-  	writer: "writer",
-   	title: "title",
-    contents: "contents"
-  ) {
-      _id
-      number
-      message
-    }
-}
-```
-
-
-
-#### 여러 API 한번에 요청
-
-```json
-mutation {
-  createBoard() {}
-  createProfile() {}
-	deleteProfile() {}
-}
-
-// 결과
-{
-  "data": {
-    "createBoard": {},
-    "createProfile": {},
-    "deleteProfile": {}
-  }
-}
-```
-
-​    
-
-### 3. vscode에서 활용
-
-#### 설치
+#### [Ant-Design](https://ant.design/)
 
 ```bash
-$ yarn add @apollo/client graphql
+$ yarn add antd
+$ yarn add @ant-design/icons
 ```
 
-​    
 
-#### 세팅
+
+##### 아이콘 적용
+
+- emotion과 같이 사용하는 방법
 
 ```jsx
-// _app.js
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
+import { MenuUnfoldOutlined } from "@ant-design/icons"
+import styled from "@emotion/styled"
 
-function MyApp({ Component, pageProps }) {
-  const client = new ApolloClient({  ✔️✔️
-    uri: "https://~~",               ✔️✔️ 
-    cache: new InMemoryCache()       ✔️✔️
-  })
-  
+const MyIcon = styled(MenuUnfoldOutlined)`  ✔️✔️
+  font-size: 50px;
+  color: red;
+`;
+
+export default function LibraryIconPage() {
   return (
-    <ApolloProvider client={client}>  ✔️✔️
-    	<Component {...pageProps} />
-    </ApolloProvider> ✔️✔️
+   	<div id='myIcon'> <!-- 다른태그로 감싸줘서 id값을 줘야함 -->
+    	<MyIcon />  <!-- 이모션태그에는 id값을 줄 수 없음 -->
+    </div>
   )
 }
-
-export default MyApp
 ```
-
-
-
-> app.js 작동원리
-
-- `<Component />`에 `index.js`들의 내용들이 들어와 `_app.js`와 합쳐져서 실행됨
 
 ​    
 
-#### Mutation 요청
+##### 별점 적용
 
-1. graphql 코드작성 (`gql`)
-2. 컴포넌트 내에 mutation 코드작성 (`useMutation`)
-3. 요청함수 코드 생성 (`async, await, variables`)
+- 라이브러리가 제공하는 css를 적용해줘야함
+
+```js
+// 전체 페이지에 적용하거나, 라이브러리를 사용하는 페이지에만 적용
+import "antd/dist/antd.css"
+```
 
 ```jsx
-import { useMutation, gql } from '@apollo/client'
-import { useState } from 'react'
+import styled from "@emotion/styled"
+import { Rate } from "antd"
 
-// graphql 코드 생성 
-const CREATE_BOARD = gql`
-	mutation createBoard($writer: String, $title: String){  # 타입적는곳  ✔️✔️
-		createBoard(writer: $writer, title: $title) {         # 실제 우리가 전달할 변수 적는 곳  ✔️✔️
-			_id
-			message
-		}
-	}
-`
+const MyStar = styled(MenuUnfoldOutlined)`  ✔️✔️
+  font-size: 50px;
+  color: red;
+`;
 
-export default function GraphqlMutationPage() {
-  const router = useRouter()
-  const [writer, setWriter] = useState('')
-  const [title, setTitle] = useState('')
+export default function LibraryStarPage() {
+  const [value, setValue] = useState(3)
   
-  // mutation 코드 생성
-	const [createBoard] = useMutation(CREATE_BOARD)  ✔️✔️
-  
-  // 요청함수 코드 생성
-	const onClickSubmit = async () => {  ✔️✔️
-  	// 요청에 실패할 수도 있으므로 `try-catch`문 사용
-  	try { 
-      const result = await createBoard({
-    		variables: {  // variables가 $ 역할을 해줌
-      		writer: writer,
-      		title: title
-    		}
-  		})
-    	// 생성된 게시글로 이동
-    	router.push(`/board/${result.data.createBoard.number}`)
-    } catch(error) {
-      // try에 있는 내용을 시도하다가 실패하면, 아래 코드 모두 무시하고 catch가 실행됨
-      alert(error.message)
-    }
+  return <MyStar onChange={setValue}/>
+}
+```
 
-	}
-  
-  const onChangeWriter = (e) => { setWriter(e.target.value) }
-  const onChangeTitle = (e) => { setTitle(e.target.value) }
-  
+- 라이브러리에서 만든 태그에는 기존에 사용하던 속성과 이름만 같고 기능은 다른 경우가 있을 수 있음
+
+```jsx
+// 같은 onChange같지만, 사용법 다름
+<input onChange={} />  
+<MyStar onChange={} />
+```
+
+​    
+
+##### Modal 적용
+
+```jsx
+// 기본 모달
+import { Modal } from 'antd'
+
+const success = () => { Modal.success({ content: "등록 성공" }) }
+const error = () => { Modal.error({ content: "등록 실패" }) }
+
+export default function App() {
   return (
-    <input type="text" onChange={onChangeWriter} />
-    <input type="text" onChange={onChangeTitle} />
-  	<button onClick={onClickSubmit}>Graphql 요청보내기</button>
+  	<button onClick={success}>성공시</button>
+    <button onClick={error}>실패시</button>
+  )
+}
+```
+
+```tsx
+// 커스텀 모달
+import { useState } from 'react';
+import { Modal } from 'antd';
+
+export default function App() => {
+  const [isOpen, setIsOpen] = useState(false);
+  const onToggleModal = () => { setIsOpen(prev => !prev) }
+
+  return (
+    <>
+      <button onClick={onToggleModal}>모달창 열기</button>
+    	
+    	{/* 모달 종료 방식 - 1. 모달 숨기기 */}
+			<!-- 눈에 안보이도록 css적으로 숨김 처리 -->
+      <Modal open={onToggleModal} onOk={onToggleModal} onCancel={onToggleModal}>
+        <input type="password" />
+      </Modal>
+    	
+		  {/* 모달 종료 방식 - 2. 모달 삭제 */}
+			<!-- state값이 바뀌면 리렌더링되면서 새로운 모달이 생성됨 -->
+    	{isOpen && (
+        <Modal open={true} onOk={onToggleModal} onCancel={onToggleModal}>
+        	<input type="password" />
+      	</Modal>
+      )}
+    </>
+  )
+}
+```
+
+> Modal을 종료하는 방식
+
+1. 숨겼다가 나타나게 하는 방식
+   - 눈에 안보이도록 css적으로 숨김 처리
+   - 이력서
+2. 삭제했다가 새로 생성하는 방식
+   - state값이 바뀌면 리렌더링되면서 새로운 모달이 생성됨
+   - 신용카드, 비밀번호
+
+​    
+
+#### [Material-UI](https://material-ui.com/)
+
+```bash
+$ yarn add @material-ui/core
+```
+
+​     
+
+---
+
+### 2. 주소/우편번호 라이브러리
+
+#### [React-daum-postcode](https://www.npmjs.com/package/react-daum-postcode)
+
+- 주소 검색시 우편번호, 번지수, 도로명주소를 알려주는 라이브러리 (국내용)
+
+```bash
+$ yarn add react-daum-postcode
+```
+
+```tsx
+import DaumPostcodeEmbed, { Address } from 'react-daum-postcode';
+
+export default function PostCode() {
+  const handleComplete = (address: Address) => {
+    console.log(address)
+  }
+  
+  return <DaumPostcodeEmbed onComplete={handleComplete} />;
+}
+```
+
+​    
+
+---
+
+### 3. 캐러셀 라이브러리
+
+#### [react-slick](https://www.npmjs.com/package/react-slick)
+
+```bash
+$ yarn add react-slick
+$ yarn add --dev @types/react-slick
+
+# css 적용
+$ yarn add slick-carousel
+```
+
+​    
+
+```jsx
+// css 적용
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+const settings = {
+  infinite: true,  // 무한루프
+  slidesToShow: 3,  // 한번에 보여줄 이미지수
+  centerMode: true,  // 중앙 강조
+  centerPadding: "20px",  // 중앙 강조시 간격
+  lazyLoad: true,  // 안보이는 이미지 LazyLoad
+  // slidesToScroll: 1,
+  // autoplay: true,  // 자동넘김
+	// autoplaySpeed: 3500,  // 자동넘김 속도
+  swipeToSlide: true,  // 클릭, 터치 슬라이드 가능여부
+  // slidesToScroll: 1,  // 클릭, 터치시 이동가능한 이미지수
+};
+
+export default function SliderImage() {
+  return (
+  	<Slider {...settings}>
+    	{/* 이미지 */}
+    </Slider>
   )
 }
 ```
 
 ​     
 
-#### Query 요청
+---
 
-- ❗ useQuery는 페이지에 접속시 자동으로 요청됨
-- ❗ useQuery는 async, await 사용불가
+### 4. 폼 / 검증 라이브러리
+
+#### React-Hook-Form
+
+- 비제어 컴포넌트를 사용하여 성능이 빠름
+
+```bash
+$ npm install react-hook-form
+$ yarn add react-hook-form
+```
 
 ```jsx
-import { useQuery, gql } from '@apollo/client'
-import { useRouter } from 'next/router'
+import { useForm } from "react-hook-form"
 
-const FETCH_BOARD = gql`
-	query fetchBoard($number: Int) {
-		fetchBoard(number: $number) {
-			writer
-			title
-		}
-	}
-`
+interface IFormDate {
+  state이름1: string;
+  state이름2: string;
+}
 
-export default function DynamicRoutedPage() {
-	const router = useRouter()
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: { number: Number(router.query.boardId) }
-  })
+export default function ReactHookFormPage() {
+  const { register, handleSubmit } = useForm<IFormDate>()
+  
+  const onClickSubmit = (data) => {
+    console.log(data)  // { state이름1: "input입력값1", state이름2: "input입력값2" }
+  }
   
   return (
-    <>
-    	// 비동기적으로 처리되기 때문에 undefined에 대한 처리 해줘야함
-      <div>{data && data.fetchBoard.writer}</div>  ✔️✔️  // Nullish coalescing
-    	<div>{data ? data.fetchBoard.writer : "로딩중"}</div>  ✔️✔️  // 삼항연산자
-      <div>{data?.fetchBoard.title}</div>  ✔️✔️  // 옵셔널 체이닝
+  	<form onSubmit={handleSubmit(onClickSubmit)}>
+      <input type="text" {...register("state이름1")} />
+      <input type="text" {...register("state이름2")} />
+      <button>등록</button>
+    </form>
+  )
+}
+```
+
+
+
+> button 태그의 type 속성
+
+```html
+<button type="button">그냥버튼</button>
+<button type="submit">보내기</button>  <!-- 기본값 -->
+<button type="reset">지우기</button>
+```
+
+​    
+
+#### [Yup](https://www.npmjs.com/package/yup)
+
+- 폼의 데이터들을 검증해줌
+- 검증 데이터 추가에 용이함
+
+> 설치
+
+```bash
+$ yarn add @hookform/resolvers yup
+```
+
+> 검증파일 작성
+
+```js
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+
+export const schema = yup.object({
+  writer: yup.string().required("작성자를 입력해주세요")
+	contents: yup.string().required("내용을 입력해주세요")
+	email: yup
+ 		.string()
+		.email("이메일 형식에 적합하지 않습니다.")
+		.required("이메일은 필수 입력입니다."),
+  password: yup
+  	.string()
+		.min(4, "비밀번호는 최소 4자리 이상 입력해주세요")
+		.max(15, "비밀번호는 최대 15자리까지 입력가능합니다.")
+		.required("비밀번호는 필수 입력입니다.")
+	phone: yup
+  	.string()
+		.matches(/^\d{3}-\d{3,4}-\d{4}$/, "전화번호 형식이 알맞지 않습니다.")
+		.required("전화번호는 필수 입력입니다.")
+})
+```
+
+> Input, button 분리
+
+![image-20230331150201240](React(6).assets/image-20230331150201240.png)
+
+```jsx
+// src/components/commons/inputs/01
+import { UseFormRegisterReturn } from "react-hook-form"
+
+interface IProps {
+  type: "text" | "password";
+  register: UseFormRegisterReturn;
+}
+
+export default function Input01(props: IProps) {
+  return <input type={props.type} {...props.register} />
+}
+```
+
+```jsx
+// src/components/commons/button/01
+interface IProps {
+  isActive: boolean;
+  title: string;
+}
+
+export default function Button01(props: IProps) {
+  return (
+  	<button style={{ backgroundColor: formState.isActive ? "색상" : ""}>
+    	{props.title}    
+    </button>
+  )
+}
+```
+
+> 정리
+
+```jsx
+import { useForm } from "react-hook-form"
+import { schema } from "./src/~~"
+
+interface IFormDate {
+  state이름1: string;
+  state이름2: string;
+}
+
+export default function ReactHookFormPage() {
+  const { register, handleSubmit, formState } = useForm<IFormDate>({
+    resolver: yupResolver(schema),  ✔️✔️
+    mode: "onChange",  ✔️✔️
+  })
+  
+  const onClickSubmit = (data) => {
+    console.log(data)  // { state이름1: "input입력값1", state이름2: "input입력값2" }
+  }
+  
+  return (
+  	<form onSubmit={handleSubmit(onClickSubmit)}>
+      <Input01 type="text" {...register("state이름1")} />
+      <div>{formState.errors.state이름1?.message}</div>
+      <Input01 type="text" {...register("state이름2")} />
+      <div>{formState.errors.state이름2?.message}</div>
+      <Button01 title="등록하기" isActive={formState.isValid} />
+    </form>
+  )
+}
+```
+
+​    
+
+---
+
+### 5. 시간 관련 라이브러리
+
+#### Moment.js 
+
+>  시간관련 이벤트
+
+- 시간을 새로 생성하는 작업은 절대 프론트엔드에서 하면 안됨
+- 사용자의 PC가 실제와 다르면, 프론트에서 생성한 시간도 실제와 다른 시간을 따라감
+- 국제 표준시인 UTC 시간을 사용함
+
+​    
+
+---
+
+### 6. 웹 에디터 라이브러리
+
+#### react-quill
+
+```bash
+$ yarn add react-quill
+```
+
+```tsx
+import "react-quill/dist/quill.snow.css";
+import dynamic from 'next/dynamic'  // next를 사용할때만
+
+// next를 사용할때만
+const ReactQuill = dynamic(async () => await import('react-quill'), { ssr: false })  
+
+export default function WebEditorPage() {
+  const onChangeContents = (value: string) => { console.log(value) }
+  
+  return (
+  	<ReactQuill onChange={onChangeContents} />
+  )
+}
+```
+
+​    
+
+> React-Hook-Form 적용
+
+```tsx
+// 글 등록
+import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+import { useForm } from "react-hook-form";
+
+const ReactQuill = dynamic(async () => await import("react-quill"), { ssr: false });
+
+export default function WebEditorPage() {
+  const { register, handleSubmit, setValue, trigger } = useForm({
+    mode: "onChange",
+  });
+
+  const onChangeContents = (value: string) => {
+    // register로 등록하지 않고, 강제로 값을 넣어주는 기능
+    setValue("contents", value === "<p><br></p>" ? "" : value); 
+
+    // onChange 됐다고 react-hook-form에 강제로 알려주는 기능
+    void trigger("contents"); 
+  };
+	
+  // API 요청	
+  const onClickSubmit = () => {}
+ 	
+  return(
+    <form onSubmit={handleSubmit(onClickSubmit)}>
+      <ReactQuill onChange={onChangeContents} />
+      <button>등록하기</button>
+    </form>
+  )
+}
+```
+
+​    
+
+- 크로스 사이트 스크립트 (XSS) 방지를 위해 __Dompurify__ 라이브러리 활용
+
+```tsx
+// 글 보여주는 페이지
+import Dompurify from "dompurify";
+
+{typeof window !== "undefined" && (  // 서버사이드 렌더링 에러방지, [process.browser &&] 도 활용가능
+	<div 
+    dangerouslySetInnerHTML={{ 
+      __html: Dompurify.sanitize(data?.contents) 
+    }}
+   />
+)}
+```
+
+​    
+
+> 크로스 사이트 스크립트 (XSS)  
+
+- JavaScript와 HTML로 악의적인 코드를 웹브라우저에 심어놔 사용자가 접속하면 심어놓은 악성코드가 실행되도록 하는 해킹 기법
+
+
+
+> next.js에서 나타나는 오류 방지 (Hydration 이슈)
+
+- 브라우저에서만 렌더링되는 태그가 있을 경우 삼항연산자를 이용해 빈태그를 만들어줘야함
+
+```tsx
+return (
+	<div>
+    {process.browser && (
+			<div style={{ color: "green" }}></div>  // 브라우저에서 렌더링 될때 
+		) : (
+			<div style={{color: "green"}} />  // 프론트서버에서 프리렌더링될때
+		)}
+  </div>
+)
+```
+
+​    
+
+#### React Draft Wysiwyg
+
+
+
+#### toast-ui/editor
+
+​    
+
+---
+
+### 7. 이미지 관련 라이브러리
+
+#### React-dropzone
+
+​    
+
+#### React-avator-editor
+
+​    
+
+#### React-beautiful-dnd
+
+​        
+
+---
+
+## 2️⃣ 파이어베이스
+
+- Baas 서비스 (Backend As A Service)
+- 구글에서 백엔드를 서비스로써 제공해줌
+
+
+
+### 사이트 설정
+
+>  https://firebase.google.com/?hl=ko
+
+<img src="React(6).assets/image-20230331153512540.png" alt="image-20230331153512540" style="zoom: 50%;" /><img src="React(6).assets/image-20230331153600223.png" alt="image-20230331153600223" style="zoom:50%;" />
+
+<img src="React(6).assets/image-20230331153649438.png" alt="image-20230331153649438" style="zoom:50%;" />
+
+<img src="React(6).assets/image-20230331153709085.png" alt="image-20230331153709085" style="zoom: 67%;" />
+
+<img src="React(6).assets/image-20230331153742421.png" alt="image-20230331153742421" style="zoom: 67%;" />
+
+<img src="React(6).assets/image-20230331153939692.png" alt="image-20230331153939692" style="zoom: 67%;" /><img src="React(6).assets/image-20230331154007468.png" alt="image-20230331154007468" style="zoom: 67%;" />
+
+<img src="React(6).assets/image-20230331154016970.png" alt="image-20230331154016970" style="zoom:67%;" />
+
+<img src="React(6).assets/image-20230331154249976.png" alt="image-20230331154249976" style="zoom:67%;" />
+
+​    
+
+### 설치 
+
+```bash
+$ npm install firebase
+$ yarn add firebase
+```
+
+​    
+
+### 데이터 등록 / 조회
+
+> [Firebase문서](https://firebase.google.com/docs/?authuser=0&hl=ko)
+
+```jsx
+import { collection, addDoc, getDocs, getFirestore } from 'firebase/firestore/lite'
+
+export default function FirebasePage() {
+  
+  // 데이터 등록
+	const onClickSubmit = async () => {
+    // board라는 컬렉션에 연결, 없으면 만들어서 연결해줌
+    const board = collection(getFirestore(firebaseApp), "board") 
+    await addDoc(board, { // 데이터 전송
+      writer: "작성자",
+      title: "제목",
+      contents: "내용"
+    })
+  }
+  
+  // 데이터 조회
+  const onClickFetch = async () => {
+    const board = collection(getFirestore(firebaseApp), "board")  // 컬렉션 연결
+    const result = await getDocs(board)  // 데이터 조회
+    const datas = result.docs.map(el => el.data())  // 배열형식으로 데이터를 받아와서 가공해줘야함
+  }
+  
+  return (
+  	<>
+    	<button onClick={onClickSubmit}>등록</button>
+    	<button onClick={onClickFetch}>조회</button>
     </>
   )
 }
 ```
 
+```js
+// 파이어베이스 접속정보
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-
----
-
-## 2️⃣ [graphql-codegen](https://www.graphql-code-generator.com/)
-
-- graphql API에서 docs를 기준으로 타입파일을 자동으로 추출해줌
-
-​    
-
-### 설치
-
-```bash
-$ yarn add -D @graphql-codegen/cli
-$ yarn add -D @graphql-codegen/typescript 
-```
-
-​    
-
-### 설정
-
-- `schema` : graphql url주소를 넣어줌 (_app.tsx의 주소와 동일)
-
-```yaml
-# codegen.yaml
-schema: 백엔드주소
-generates:
-	./src/commons/types/generated/types.ts:
-		plugins:
-			- typescript
-		config:
-			typesPrefix: I
-```
-
-
-
-### 실행
-
-- graphql-API에서 데이터를 받아 자동으로 TS파일을 `./src/commons/types/generated/types.ts` 위치에 만들어줌
-
-```json
-// package.json
-"scripts": {
-	"generate": "graphql-codegen"
-}
-```
-
-```bash
-$ yarn generate
-```
-
-​    
-
-### 적용
-
-#### Mutation
-
-```typescript
-const [함수] = useMutation<응답타입, variables타입>()
-const [createBoard] = useMutation<Pick<Mutation,"createBoard">,MutationCreateBoardArgs>(CREATE_BOARD)
-```
-
-​    
-
-#### Query
-
-```typescript
-const { data } = useQuery<Pick<Query,"fetchBoard">,QueryFetchBoardArgs>(FETCH_BOARD, {
-  variables: { number: Number(router.query.number )}
-})
-```
-
-​    
-
----
-
-## 3️⃣ refetchQueries
-
-- 기존 데이터가 변경되었을 때 최신 데이터로 다시 fetch 해주기 위해 사용됨
-- Apollo에서 제공하는 기본 기능
-- 배열로 시작
-
-```jsx
-// 글 삭제하고 데이터 다시받아오기
-export default function Page() {
-  const [deleteBoard] = useMutation(DELETE_BOARD)
-  const { data } = useQuery(FETCH_BOARDS)
-  
-  const onClickDelete = async () => {
-    try {
-      const result = await deleteBoard({ 
-        variables: { number: Number(e.target.id) },
-        refetchQueries: [{ 
-          query: FETCH_BOARDS,
-          variables: { 기존 fetch때 보낸내용 }  // 기존 fetch에 variables가 있었다면 작성
-        }]
-      }),
-    } catch (error) {}
-	}
-    
-  return (
-   <>
-    {data?.fetchBoards.map(el => (
-    	<Fragment key={el.number}>
-    		<div>{el.number}</div>
-  			<button id={el.number} onClick={onClickDelete}>삭제</button>
-  		</Fragment>	
-  	))}
-   </>
-  )
-}
-```
-
-​    
-
----
-
-## 4️⃣ 캐시 직접 수정 (update)
-
-- apollo global state에 저장된 캐시를 직접 수정
-- refetch로 다시 데이터를 받아오지 않아 API요청을  줄일 수 있음
-- 주로 __무한스크롤__을 활용하는 곳에 사용됨
-
-```tsx
-// Create
-const onClickCreate = () => {
-  void createBoard({
-    variables: {},
-    update(cache, { data }) {  ✔️✔️
-      cache.modify({  ✔️✔️
-        fields: {  ✔️✔️
-          fetchBoards: (prev) => { return [data.createBoard, ...prev] },  ✔️✔️
-        },
-      });
-    },
-  });
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDjLBjOpY6Z6-ihw7XkSPtV7----NWVy20",
+  authDomain: "test-9adce.firebaseapp.com",
+  projectId: "test-9adce",
+  storageBucket: "test-9adce.appspot.com",
+  messagingSenderId: "509929578393",
+  appId: "1:509929578393:web:c7231ea2fb6---921cbd08"
 };
+
+// Initialize Firebase
+export const firebaseApp = initializeApp(firebaseConfig);
 ```
 
-```tsx
-// Delete
-const onClcikDelete = (id: string) => () => {
-    void deleteBoard({
-      variables: { id },
-      update(cache, { data }) {
-        cache.modify({
-          fields: {
-            fetchBoards: (prev, { readField }) => {
-              const deletedId = data.deleteBoard;
-              const filteredPrev = prev.filter(
-                // el._id가 안됨, readField를 사용해야함
-                (el) => readField("_id", el) !== deletedId 
-              );
-              return [...filteredPrev]; // 삭제된 ID를 제외한 나머지 9개를 리턴
-            },
-          },
-        });
-      },
-    });
-  };
-```

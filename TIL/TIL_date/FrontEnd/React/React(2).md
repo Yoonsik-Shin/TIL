@@ -2,159 +2,11 @@
 
 ​    
 
-## 1️⃣ Class
+## 1️⃣ Router 
 
-- 기존 리액트에서는 Class를 사용
-
-
-
-### 사용법
-
-1. class명으로 컴포넌트명 작명
-2. `constructor`, `super`, `render` 함수 넣기 (기본 템플릿)
-3. `render`에 `jsx`값 사용
-
-```jsx
-class Modal extends React.Component {
-  constructor() {
-    super()
-  }
-  
-  render() {
-    return (
-    	<div></div>
-    )
-  }
-}
-```
+- `react-router-dom` 라이브러리 사용
 
 ​    
-
-### State
-
-- state 설정시 `this.state = {}` 활용
-- state 변경시 `this.setState({ 변경할state키 : 변경할값 })`
-- props 사용시 `constructor(props)`, `super(props)`
-
-```jsx
-class TComponent extends React.Component { 
-	constructor(props) {
-    super(props);
-    this.state = {  // 이 안에 state로 지정할 값들 나열
-      name: 'shin',
-      age: 27,
-    }
-  }
-  
-  // class내 함수
-  onClickCountUp = () => {
-    this.setState((prev) => {
-      count: prev.count + 1
-    })
-  }
-  
-  render() {
-    return (
-      <>
-        <div>{this.state.name}</div>
-        <div>{this.state.age}</div>
-      	<button onClick={() => { this.setState({ age: 28 }) }}>버튼</button> ✔️✔️
-      	<button onClick={this.onClickCountUp}>카운트올리기</button> ✔️✔️
-      	<div>{this.props.작명}</div>
-      </>
-    )
-  }
-}
-```
-
-​    
-
----
-
-## 2️⃣ [React-BootStrap](https://react-bootstrap.netlify.app/getting-started/introduction/)
-
-- 설치
-
-```bash
-$ npm install react-bootstrap bootstrap
-$ yarn add react-bootstrap bootstrap
-```
-
-​    
-
-- 컴포넌트 import 해오기
-
-```js
-// App.js
-import { Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-```
-
-​    
-
----
-
-## 3️⃣ 이미지 넣기
-
-### JSX
-
-```jsx
-import 작명 from '파일경로'
-import bg from './img/img.png'
-
-<div className="" style={{ backgroundImage : 'url(' + bg + ')'}}></div>
-<img src={bg}></img>
-```
-
-
-
-### public 폴더
-
-- build시 public 폴더에 있는 것들은 그대로 보존
-- html에서 __public__폴더 이미지 사용할 땐 `/이미지경로` 로 사용
-
-```jsx
-<img src={process.env.PUBLIC_URL + '/img/testImg.png'}
-```
-
-​    
-
----
-
-## 4️⃣ import / export
-
-- `./` : 현재경로
-- `export default` 키워드는 파일마다 오직 하나씩만 사용가능
-- 변수, 함수, 자료형 모두 export 가능
-
-```js
-// data1.js (변수 하나)
-let data = []
-
-export default data;
-
-// data2.js (변수 두개 이상)
-let a = 10;
-let b = 100;
-
-export {a, b};
-```
-
-```js
-// App.js
-import 작명 from './data1.js';
-import { a, b } from './data2.js';
-```
-
-​    
-
----
-
-## 5️⃣ Router 
-
-- react-router-dom 라이브러리 사용
-
-
 
 ### 설치 및 기본 세팅
 
@@ -233,14 +85,14 @@ function Detail() {
 1. Link
 
  ```jsx
- import { Link } from "react-router-dom";
- 
- function pageLink() {
-   return (
-   	<Link to="/">홈</Link>
- 		<Link to="/detail">상세페이지</Link>
-   )
- }
+import { Link } from "react-router-dom";
+
+function pageLink() {
+  return (
+  	<Link to="/">홈</Link>
+		<Link to="/detail">상세페이지</Link>
+  )
+}
  ```
 
 ​    
@@ -305,86 +157,174 @@ function About(){
 
 ---
 
-## 6️⃣ styled-components
+## 2️⃣ 컴포넌트 Lifecycle
 
-### 설치
-
-```bash
-$ npm install styled-components
-$ yarn add styled-components
-```
+- 생성, 장착 (mount)
+- 재렌더링, 업데이트 (update)
+- 삭제, 제거 (unmount)
 
 ​    
 
-### 사용법
+### useEffect
+
+- useEffect안의 코드는 __html 랜더링이 완료된 후에 동작__
+- 오래 걸리는 반복연산, 서버에서 데이터 가져오는 작업, 타이머등 사용시 활용하면 좋음
+- useEffect안에서 setState의 사용은 지양해야함
+- 불필요하게 리렌더링되거나 무한루프를 일으킬 수 있음
 
 ```jsx
-import styled from 'styled-componets'
+import { useState, useEffect } from 'react';
 
-let 작명 = styled.태그명`
-	css작성;
-	color: black;
-	padding: 10px;
-`
-let Box = styled.div`
-	padding: 20px;
-	color: grey;
-`
-
-function Styled() {
-  return (
-  	<작명 />
-    <Box></Box>
-  )
+function Detail() {
+  useEffect(() => {
+    // 컴포넌트 로드 and 업데이트시 실행되는 부분
+    // html 랜더링이 완료된 후에 동작
+  })
+  
+  return ()
 }
 ```
 
 ​    
 
-### 사용 이유
+### 의존성배열
 
-| 장점                                 | 단점                                                      |
-| ------------------------------------ | --------------------------------------------------------- |
-| 스타일이 다른 js파일로 오염되지 않음 | js파일이 매우 복잡해짐                                    |
-| 페이지 로딩시간 단축                 | 다른 컴포넌트에서 중복스타일이 필요하면 css와 다를바 없음 |
-| props로 컴포넌트 재활용 가능         |                                                           |
-| 간단한 프로그래밍 가능               |                                                           |
-| 기존스타일 복사가능                  |                                                           |
+- 의존성 배열 (`[]`) 에 따라 렌더방식이 달라짐
+
+​    
+
+1. 재렌더링(update)마다 코드를 실행하고 싶으면
 
 ```jsx
-import styled from 'styled-componets'
+useEffect(() => {
+  // 실행할코드
+})
+```
 
-// 간단한 프로그래밍 가능 / props로 컴포넌트 재활용 가능
-let Btn = styled.button`
-	background: ${ props => props.bg }  ✔️✔️
-	color: ${ props => props.bg == 'black' ? 'white' : 'black' };
-`
+2. 생성(mount)시 1회 코드 실행하고 싶으면
 
-// 기존스타일 복사가능
-let NewBtn = styled.button(Btn)`
-` 
+```jsx
+useEffect(() => {
+  // 실행할코드
+}, [])
+```
+
+3. useEffect 안의 코드 실행 전에 항상 실행
+
+> clean up function : `return () => {}`
+
+```jsx
+useEffect(() => {
+  // 다음에 실행할코드
+  return () => {
+    // 먼저 실행할코드
+  }
+})
+```
+
+4. 제거(unmount)시 1회 코드 실행하고 싶으면
+
+```jsx
+useEffect(() => { 
+  return () => {
+    // 실행할코드
+  }
+}, [])
+```
+
+5. state가 변경될 때만 실행
+
+```jsx
+useEffect(() => { 
+  실행할코드
+}, [stateName])
 ```
 
 ​    
 
-> ❗다른 js파일 오염 방지하려면 `컴포넌트.module.css`로 작명후 import 해서 사용
+---
+
+## 3️⃣ 커스텀 hook
+
+- 그냥 함수와의 차이점 : 함수안에 다른 use로 시작하는 요소의 여부에 따라 구분됨
+
+​    
+
+---
+
+## 4️⃣ Class
+
+- 기존 리액트에서는 Class를 사용
+
+​    
+
+### 사용법
+
+1. class명으로 컴포넌트명 작명
+2. `constructor`, `super`, `render` 함수 넣기 (기본 템플릿)
+3. `render`에 `jsx`값 사용
 
 ```jsx
-// 컴포넌트.module.css
-import styled from 'styled-componets'
-
-export let Btn = styled.button`
-	background: ${ props => props.bg }
-	color: ${ props =? props.bg == 'black' ? 'white' : 'black' };
-`
+class Modal extends React.Component {
+  constructor() {
+    super()
+  }
+  
+  render() {
+    return (
+    	<div></div>
+    )
+  }
+}
 ```
 
-```jsx
-import { Btn } from './컴포넌트.module.css'
+​    
 
-function TestPage() {
-  return (
-  	<Btn>styled-component로 만든 버튼</Btn>
-  )
+### State
+
+- state 설정시 `this.state = {}` 활용
+- state 변경시 `this.setState({ 변경할state키 : 변경할값 })`
+- props 사용시 `constructor(props)`, `super(props)`
+
+```jsx
+class TComponent extends React.Component { 
+	constructor(props) {
+    super(props);
+    this.state = {  // 이 안에 state로 지정할 값들 나열
+      name: 'shin',
+      age: 27,
+    }
+  }
+  
+  // class내 함수
+  onClickCountUp = () => {
+    this.setState((prev) => {
+      count: prev.count + 1
+    })
+  }
+  
+  render() {
+    return (
+      <>
+        <div>{this.state.name}</div>
+        <div>{this.state.age}</div>
+      	<button onClick={() => { this.setState({ age: 28 }) }}>버튼</button> ✔️✔️
+      	<button onClick={this.onClickCountUp}>카운트올리기</button> ✔️✔️
+      	<div>{this.props.작명}</div>
+      </>
+    )
+  }
+}
+```
+
+​    
+
+### class 문법 Lifecycle hook 
+
+```jsx
+class Detail extends React.Component {
+	componentDidMount() {}  // 컴포넌트가 로드되고 실행할 코드
+	componentDidUpdate() {}  // 컴포넌트가 업데이트 되고나서 실행할 코드
+	componentWillUnmount() {}  // 컴포넌트가 삭제되기전에 실행할 코드
 }
 ```

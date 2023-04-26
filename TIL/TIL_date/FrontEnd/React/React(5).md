@@ -1,679 +1,366 @@
-# React (5) 
+# React (5)
 
 ​    
 
-## 1️⃣ Next.js
+## 1️⃣ Graphql API
 
-- React 기반의 프레임워크
-
-
-
-### 설치
-
-```bash
-$ npx create-next-app
-```
-
-
-
-### 보일러 플레이트
-
-```bash
-프로젝트파일명
-├── node_modules   # 라이브러리 / 프레임워크 저장소
-├── pages          # 페이지 화면
-├── public         # 사진, 아이콘, 폰트
-├── styles         # css파일
-├── .gitignore     # git에서 제외할 파일
-├── package.json   # 기본 메뉴얼
-├── README.md      # 상세 설명서
-└── yarn.lock      # 버전 잠금 파일
-```
+- facebook에서 대용량 데이터를 처리하기 위해 개발
 
 ​    
 
-> package.json
+### 1. restAPI와의 차이
 
-- `devDependencies`에 있는 라이브러리들은 배포시에는 제외됨
-- `resolution`은 라이브러리 하위 모듈 버전을 고정해줌
-- 실제 설치된 파일들은 node_modules안에 있음
-- package.json은 설치파일 목록만 보여줌, 설치가 안돼있는 파일도 있을 수 있음
-
-<img src="React(5).assets/image-20230329090054934.png" alt="image-20230329090054934" style="zoom:67%;" />
-
-​    
-
-### 서버실행
-
-```bash
-$ yarn dev
-
-# 3000번 포트가 사용중일 경우
-$ yarn dev -p 다른포트번호
-```
+|             | Graphql                           | REST                               |
+| ----------- | --------------------------------- | ---------------------------------- |
+| 함수이름    | 일반함수와 같은 이름 (board(1))   | 주소 (https://naver.com/board/1)   |
+| 응답 결과물 | 필요한 데이터만 골라 받을 수 있음 | 보내주는 모든 데이터               |
+| 요청담당자  | apollo-client                     | axios                              |
+| CRUD        | MUTATION (CUD), QUERY (R)         | POST(C), PUT(U), DELETE(D), GET(R) |
+| API 명세서  | 플레이그라운드 (Playground)       | 스웨거 (Swagger)                   |
 
 ​    
 
-### node_modules 재설치
+> UnderFetching
 
-- 기존 node_modules 삭제 후 
-
-```bash
-$ yarn install
-```
+- 하나의 endpoint로 필요한 모든 데이터 요청을 처리하지 못하는 것을 의미
+- 여러번의 API 호출이 필요해, 서버에 과부하를 줄 수 있음
 
 ​    
 
-### 페이지 렌더링
+> OverFetching
 
-- `pages`폴더안에 __주소로 사용할 이름으로 폴더 작성__후 그 폴더안에 `index.js (ts/tsx)` 파일 작성
-
-![image-20230329090457249](React(5).assets/image-20230329090457249.png)
-
-![image-20230329090444114](React(5).assets/image-20230329090444114.png)
+- 응답받은 정보에 사용하지 않는 데이터들도 담고있는 것을 의미
+- 네트워크가 낭비됨 
 
 ​    
 
-### 페이지 라우팅
+### 2. Playground에서 활용
 
-- 순수 React에서는 `react-router-dom`을 사용
-- Next.js에서는 next에서 제공해주는 `Router` 사용
+<img src="React(5).assets/playground.png" alt="playground" style="zoom: 50%;" />
 
 ​    
 
-#### 정적페이지 라우팅 (Static)
+#### Playground docs
 
-- 언제 누구가 접속하든 항상 같은 페이지를 보여주는 페이지로 이동할 때 
+- `!`는 무조건 보내줘야하는 필수값
 
-```jsx
-import { useRouter } from 'next/router'
+<img src="React(5).assets/image-20230329102254085.png" alt="image-20230329102254085" style="zoom:50%;" />
 
-export default function StaticRoutingPage() {
-  const router = useRouter()  ✔️✔️
-  const onClickMove = () => { router.push('/이동할url') }
-  
-  return <button onClick={onClickMove}>페이지이동</button>
+​    
+
+#### Query
+
+```json
+// 형식
+query {
+	함수(보낼값들) {
+		받아올 값들
+	}
+}
+
+// 예시
+query {
+	fetchData(page: 1) {
+		name
+		age
+		address
+	}
 }
 ```
 
 ​    
 
-#### 동적페이지 라우팅 (Dynamic)
+#### Mutation
 
-- Next.js에서의 동적라우팅
-- 폴더이름에 대괄호(`[]`) 감싸주기
-- 대괄호로 감싸준 값을 index.js 페이지에서 활용할 수 있음
-- `/05-08-dynamic-routed-board-query/[article_id]`
+```json
+// 형식
+mutation {
+  함수(보낼값들) {
+    받아올 값들
+  }
+}
 
-![image-20230329145548375](React(5).assets/image-20230329145548375.png)
-
-- `/05-08-dynamic-routed-board-query/3`으로 요청시
-
-```jsx
-import { useRouter } from 'next/router'
-
-const router = useRouter()
-console.log(router.query)  // { article_id: 3 }  ✔️✔️
+// 예시
+mutation {
+  createBoard(
+  	writer: "writer",
+   	title: "title",
+    contents: "contents"
+  ) {
+      _id
+      number
+      message
+    }
+}
 ```
 
-​    
 
-#### Router 객체 
 
-```jsx
-import Router from 'next/router'
+#### 여러 API 한번에 요청
 
-export default function Routing() {
-  const handleClickPathname = () => {
-    const pathname = Router.pathname  // 현재 경로 
-    alert(pathname)
-  }
-  const handleClickAsPath = () => {
-    const asPath = Router.asPath  // 쿼리를 포함한 경로
-    const query = Router.query  // object로 파싱한 쿼리스트링
-    alert(asPath)
-  }
-  const handleClickBack = () => { Router.back() }  // 뒤로가기
-  const handleClickReload = () => { Router.reload() }  // 새로고침
-  const handleClickReplace = () => { Router.replace('/') }
+```json
+mutation {
+  createBoard() {}
+  createProfile() {}
+	deleteProfile() {}
+}
 
-  return (
-    <>
-      <button onClick={handleClickPathname}>현재 경로</button>
-      <button onClick={handleClickAsPath}>쿼리를 포함한 경로</button>
-      <button onClick={handleClickBack}>뒤로가기</button>
-      <button onClick={handleClickReload}>새로고침</button><br/>
-      <button onClick={handleClickReplace}>현재 페이지 삭제 후 다른 페이지로 이동</button>
-    </>
-    )
+// 결과
+{
+  "data": {
+    "createBoard": {},
+    "createProfile": {},
+    "deleteProfile": {}
   }
 }
 ```
 
 ​    
 
-> `pathname` VS  `asPath`
-
-- `Router.query` : object로 파싱한 쿼리스트링 (`{boardId: 'a7h34vcdr'}`)
-- `pathname` : 폴더주소, 쿼리가 해석되지 않은 상태로 경로를 알려줌 (`/boards/[boardId]`)
-- `asPath` : 실제주소, 쿼리를 해석한 후 그 값을 포함해서 경로를 알려줌 (`/boards/a7h34vcdr`)
-
-​    
-
-> `push`  VS `replace`
-
-- push로 페이지를 이동하고, 뒤로가기하면 바로 전 페이지로 이동함
-- 이러한 특성때문에 로그인 직후에 뒤로가기를 누르면 로그인 페이지로 돌아가질 수 있음
-- 이 때, replace를 사용하면 뒤로가기할 페이지에 대한 히스토리를 지울 수 있어 이를 방지할 수 있음
-
-​    
-
-### public 속 이미지
-
-- public 폴더는 `/`로 대체됨
-
-```jsx
-<img src='/사진명.jpg' />
-```
-
-
-
----
-
-## 2️⃣ CSS-IN-JS
-
-- CSS를 JS 상수에 저장하여 사용하는 방법
-
-```js
-// styles/emotion.js
-import styled from '@emotion/styled'
-
-export const Box = styled.div`
-	width: 100px;
-	height: 200px;
-`
-```
-
-- HTML 태그처럼 사용할 수 있음
-- 태그에 의미를 부여할 수 있어 결과물을 예상할 수 있음
-- 코드의 길이가 짧아져 읽기 쉬워지고, 코드 재사용성이 좋아짐
-
-```jsx
-// 화면페이지
-import { Box } from '../../styles/emotion.js'
-
-export default function EmotionPage() {
-  
-  return(
-  	// 너비 100px, 높이 200px을 가진 div 태그
-		<Box>박스</Box>  
-  )
-}
-```
-
-- 라이브러리로는 `emotion`과 `styled-components`를 많이 씀
-
-```bash
-$ yarn add @emotion/react
-$ yarn add @emotion/styled
-```
-
-
-
-### emotion의 props
-
-- emotion으로 만들어진 태그에도 props 전달가능
-- 특정 태그에 동작이 행해지면, props를 활용하여 css 변경 가능
-
-```jsx
-import * as S from './Board.styles.js'
-
-export default function BoardUI(props) {
-  return (
-  	<>
-    	<BlackButton
-      	color="black"  ✔️✔️
-        fontSize="16"
-        
-      >
-    		버튼
-    	</BlackButton>
-    </>
-  )
-}
-```
-
-```js
-export const BlackButton = styled.button`
-	background: ${props => props.color}; 
-	font-size: ${props => props.fontSize + "px"};
-`
-```
-
-​    
-
----
-
-## 3️⃣ 코드 작성 규칙
-
-### 코드 린터
-
-- 에러는 아니지만 에러로 약속하자는 규칙을 정하는 것을 의미
-- vscode상에는 오류로 표기되지만 실행에는 영향없음
-- `eslint`를 사용
-- next.js에는 이미 설치 되어있어 이를 활성화만 해주면됨
-
-​    
-
-#### 설치
-
-- 설치가 완료되면 `.eslintrc.js` 파일이 생성됨
-
-```bash
-$ npx eslint --lint
-```
-
-```bash
-# eslint를 어떤식으로 사용할지에 대한 질문
-How would you like to use ESlint ? => syntax, problems, ✔️[code style]
-
-# Javascript modules VS CommonJS
-Waht type of modiles does your project use? => Javascript modules (import/export)
-
-# 프레임워크 선택
-Which framework does your project use? => react
-
-# 타입스크립트 사용여부
-Does your project use TypeScript? => Yes
-
-# 어디서 실행하는지 확인 (Browser, Node)
-Where does your code run? => Browser
-
-# 인기있는 가이드를 할지, 커스텀을 할 지 선택
-How would you like to define a style for your project? => Use a popular style guide
-Which style guide do you want to follow? => standard
-
-# 설정파일을 뭘로 만들지 물어보는 질문 (JavaScript, YAML, JSON)
-What format do you want your config file to be in? => Javascript
-
-# 어떤 패키지 매니저로 설치할지 묻는 질문 
-Which package manager do you want to use? => yarn 
-```
-
-​     
-
-#### ESLint  규칙 제외
-
-- `.eslintrc.js` 파일의 `rules`에서 불편한 규칙 적용을 제외시킬 수 있음
-
-```js
-// .eslintrc.js
-module.exports = {
-	...
-  rules: {  // 제외할 규칙
-    "@typescript-eslint/interface-name-prefix": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "prettier/prettier": ["error", { endOfLine: "auto" }]
-  }
-}
-```
-
-​    
-
-> ESLint 한번에 확인하기
-
-```bash
-# 모든 파일을 검사하여 규칙에 어긋나는 부분을 찾아줌
-$ npx eslint .
-
-# 위 명령어가 잘 안될 경우
-$ npx eslint "**/*.{ts,tsx}"
-```
-
-   
-
-### 코드 포멧터
-
-- 코드를 보기 좋게 만들어주는 역할
-- `prettier`를 사용
-
-​    
+### 3. vscode에서 활용
 
 #### 설치
 
 ```bash
-$ yarn add --dev --exact prettier
+$ yarn add @apollo/client graphql
 ```
 
 ​    
 
-#### 설정
-
-1. `.prettierrc.json` 설정파일 생성
-
-```json
-{
-  "tabWidth": 2
-}
-```
-
-![image-20230330132811872](React(5).assets/image-20230330132811872.png)
-
-​    
-
-2. vscode 설정
-
-<img src="React(5).assets/image-20230330115807656.png" alt="image-20230330115807656" style="zoom:50%;" />
-
-<img src="React(5).assets/image-20230330115849464.png" alt="image-20230330115849464" style="zoom: 67%;" />
-
-​     
-
-3. vscode 설정파일로 관리하기
-
-- 최상위 폴더에 `.vscode` 폴더 만들고 그안에 `setting.json` 파일 생성
-
-![image-20230330130413439](React(5).assets/image-20230330130413439.png)
-
-```json
-// setting.json
-{
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode" 
-}
-```
-
-​    
-
-### ESLint Prettier 연결
-
-```bash
-$ npm install --save-dev eslint-config-prettier
-$ yarn add eslint-config-prettier --dev
-```
-
-```js
-// .eslintrc.js
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true
-  },
-  "extends": [
-    "plugin:react/recommended", 
-    "standard-with-typescript", 
-    "prettier"  ✔️✔️
-  ],
-  override: [],
-  parserOptions: {
-    project: '**/tsconfig.json',  ✔️✔️
-    ecmaVersion: 'latest',
-    sourceType: 'module'
-  },
-  plugins: ['react'],
-  rules: {}
-}
-```
-
-```json
-// .eslintrc.json
-{
-  "extends": ["next/babel", "next/core-web-vitals"]
-}
-```
-
-​      
-
----
-
-## 4️⃣ 폴더구조
-
-### Container / Presentation 패턴
-
-- 소스코드를 JS부분(기능)과 JSX부분(UI)으로 나누는 방법
-- 파일은 나눠져 있지만 실행은 하나로 합쳐서 실행됨
-
-```bash
-프로젝트파일명
-├── pages
-│     ├── 페이지파일1
-│     │      └── index.ts
-│     └── 페이지파일2
-│            └── index.ts
-└── src  # 따로 생성해줘야함
-     ├── commons  # 공통적으로 사용되는 파일들
-     │      ├── lib   # 공통 자체 라이브러리
-     │      ├── util  # 공통 함수
-     │      └── styles  # 공통 CSS
-     └── components
-             ├── commons  # 두번 이상 쓰이는 컴포넌트
-             │      └── layout  # 레이아웃 컴포넌트
-             │						├── banner
-             │						├── footer
-             │						├── header
-             │						├── navigation
-             │						├── sidebar
-             │						└── index.js  # 모든 레이아웃들을 합쳐주는 파일
-             └── units    # 단위컴포넌트 (한번만 사용)
-             			├── 기능1 
-             			│     ├── 동작1
-             			│     │      ├── 기능동작.container.tsx
-             			│     │      ├── 기능동작.presenter.tsx
-             			│     │      ├── 기능동작.queries.ts
-             			│     │      ├── 기능동작.styles.ts
-             			│     │      └── 기능동작.types.ts
-             			│     └── 동작2
-             			└── board
-             			      ├── write
-             			      │      ├── BoardWrite.container.tsx
-             			      │      ├── BoardWrite.presenter.tsx
-             			      │      ├── BoardWrite.queries.ts
-             			      │      ├── BoardWrite.styles.ts
-             			      │      └── BoardWrite.types.ts
-             			      └── detail
-```
-
-​    
-
-- 실행순서 (부모-자식 관계)
-
-1. _app.js (최상단)
-2. page/페이지파일/index.js 
+#### 세팅
 
 ```jsx
-import BoardWrite from '../../components/units/board/write/BoardWrite.container.js'
+// _app.js
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 
-export default function BoardWritePage() {
-  return <BoardWrite />
+function MyApp({ Component, pageProps }) {
+  const client = new ApolloClient({  ✔️✔️
+    uri: "https://~~",               ✔️✔️ 
+    cache: new InMemoryCache()       ✔️✔️
+  })
+  
+  return (
+    <ApolloProvider client={client}>  ✔️✔️
+    	<Component {...pageProps} />
+    </ApolloProvider> ✔️✔️
+  )
 }
+
+export default MyApp
 ```
+
+
+
+> app.js 작동원리
+
+- `<Component />`에 `index.js`들의 내용들이 들어와 `_app.js`와 합쳐져서 실행됨
 
 ​    
 
-3. src/components/units/기능/동작/기능동작.container.js
+#### Mutation 요청
+
+1. graphql 코드작성 (`gql`)
+2. 컴포넌트 내에 mutation 코드작성 (`useMutation`)
+3. 요청함수 코드 생성 (`async, await, variables`)
 
 ```jsx
+import { useMutation, gql } from '@apollo/client'
 import { useState } from 'react'
-import { useMutation } from '@apollo/client'
-import BoardWriteUI from './BoardWrite.presenter.js'
-import CREATE_BOARD from './BoardWrite.queries.js'
 
-export default function BoardWrite() {
-  const [value, setValue] = useState('')
-  const [createBoard] = useMutation(CREATE_BOARD)
- 
-  const onClickSumbit = async () => {
-    const result = await createBoard({ variables: {} })
-  }
-  const onChangeValue = (e) => { setValue(e.targe.value) }
-  
-  return 
-  	<BoardWriteUI 
-    	onClickSumbit={onClickSumbit} 
-    	onChangeValue={onChangeValue} 
-    />
-}
-```
-
-> 3-1. graphql 요청파일 분리
-
-```js
-import { gql } from '@apollo/client'
-
-export const CREATE_BOARD = gql`
-	mutation createBoard($value: String) {
-		createBoard(value: $value) {
-	  	_id
-	  	value
+// graphql 코드 생성 
+const CREATE_BOARD = gql`
+	mutation createBoard($writer: String, $title: String){  # 타입적는곳  ✔️✔️
+		createBoard(writer: $writer, title: $title) {         # 실제 우리가 전달할 변수 적는 곳  ✔️✔️
+			_id
 			message
 		}
 	}
 `
+
+export default function GraphqlMutationPage() {
+  const router = useRouter()
+  const [writer, setWriter] = useState('')
+  const [title, setTitle] = useState('')
+  
+  // mutation 코드 생성
+	const [createBoard] = useMutation(CREATE_BOARD)  ✔️✔️
+  
+  // 요청함수 코드 생성
+	const onClickSubmit = async () => {  ✔️✔️
+  	// 요청에 실패할 수도 있으므로 `try-catch`문 사용
+  	try { 
+      const result = await createBoard({
+    		variables: {  // variables가 $ 역할을 해줌
+      		writer: writer,
+      		title: title
+    		}
+  		})
+    	// 생성된 게시글로 이동
+    	router.push(`/board/${result.data.createBoard.number}`)
+    } catch(error) {
+      // try에 있는 내용을 시도하다가 실패하면, 아래 코드 모두 무시하고 catch가 실행됨
+      alert(error.message)
+    }
+
+	}
+  
+  const onChangeWriter = (e) => { setWriter(e.target.value) }
+  const onChangeTitle = (e) => { setTitle(e.target.value) }
+  
+  return (
+    <input type="text" onChange={onChangeWriter} />
+    <input type="text" onChange={onChangeTitle} />
+  	<button onClick={onClickSubmit}>Graphql 요청보내기</button>
+  )
+}
 ```
 
 ​     
 
-4. src/components/units/기능/동작/기능동작.presenter.js
+#### Query 요청
+
+- ❗ useQuery는 페이지에 접속시 자동으로 요청됨
+- ❗ useQuery는 async, await 사용불가
 
 ```jsx
-import { ValueInput, SendButton } from './BoardWrite.styles.js'
+import { useQuery, gql } from '@apollo/client'
+import { useRouter } from 'next/router'
 
-export default function BoardWriteUI(props) {
-  const { onClickSumbit, onChangeValue } = props
+const FETCH_BOARD = gql`
+	query fetchBoard($number: Int) {
+		fetchBoard(number: $number) {
+			writer
+			title
+		}
+	}
+`
+
+export default function DynamicRoutedPage() {
+	const router = useRouter()
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: { number: Number(router.query.boardId) }
+  })
   
   return (
     <>
-    	<ValueInput type="text" onChange={onChangeValue} />
-    	<SendButton onClick={onClickSubmit}>요청</SendButton>
+    	// 비동기적으로 처리되기 때문에 undefined에 대한 처리 해줘야함
+      <div>{data && data.fetchBoard.writer}</div>  ✔️✔️  // Nullish coalescing
+    	<div>{data ? data.fetchBoard.writer : "로딩중"}</div>  ✔️✔️  // 삼항연산자
+      <div>{data?.fetchBoard.title}</div>  ✔️✔️  // 옵셔널 체이닝
     </>
   )
 }
 ```
 
+
+
+---
+
+## 2️⃣ [graphql-codegen](https://www.graphql-code-generator.com/)
+
+- graphql API에서 docs를 기준으로 타입파일을 자동으로 추출해줌
+
 ​    
 
-5. css-in-js 파일
+### 설치
 
-```js
-import styled from '@emotion/styled'
-
-export const ValueInput = styled.input`
-	border-coler: red;
-`
-export const SendButton = styled.button`
-	background-color: black;
-`
+```bash
+$ yarn add -D @graphql-codegen/cli
+$ yarn add -D @graphql-codegen/typescript 
 ```
 
-​     
+​    
 
-> utils 폴더
+### 설정
 
-- 폴더경로`/src/commons/utils `
-- 공통적으로 쓰이는 함수를 저장하는 폴더
+- `schema` : graphql url주소를 넣어줌 (_app.tsx의 주소와 동일)
 
-```js
-// getDate.js
-// 날짜를 다루는 함수
-export const getDate = (date) => {
-  const curDate = new Date(date)
-  const year = curDate.getFullYear()
-  const month = curDate.getMonth() + 1
-  const day = curDate.getDate()
-  
-  return `${year}-${month}-${day}`
+```yaml
+# codegen.yaml
+schema: 백엔드주소
+generates:
+	./src/commons/types/generated/types.ts:
+		plugins:
+			- typescript
+		config:
+			typesPrefix: I
+```
+
+
+
+### 실행
+
+- graphql-API에서 데이터를 받아 자동으로 TS파일을 `./src/commons/types/generated/types.ts` 위치에 만들어줌
+
+```json
+// package.json
+"scripts": {
+	"generate": "graphql-codegen"
 }
 ```
 
+```bash
+$ yarn generate
+```
+
 ​    
 
-### atomic 패턴
+### 적용
 
-- 컴포넌트의 중복을 최소화하기 위해 소스코드를 아주 작은 컴포넌트 단위로 쪼개는 방식
-- 재사용성이 좋으나, 상위 코드 수정시 수정해야할 부분이 많아짐
-- 총 5개의 폴더구조로 이루어짐
-  1. Atoms
-     - 버튼, 제목, 텍스트 입력 필드와 같은 가장 작은 구성 컴포넌트
-     - 모든 컴포넌트들의 기초가 되는 블록
-     - 더 이상 분해 될 수 없는 필수 요소
-  2. Molecules : 2개 이상의 원자로 구성
-  3. Organisms : Molecules의 모음
-  4. Templates : Organisms을 모아 템플릿 생성
-  5. Pages : 실제 페이지를 구성하는 단위
+#### Mutation
+
+```typescript
+const [함수] = useMutation<응답타입, variables타입>()
+const [createBoard] = useMutation<Pick<Mutation,"createBoard">,MutationCreateBoardArgs>(CREATE_BOARD)
+```
+
+​    
+
+#### Query
+
+```typescript
+const { data } = useQuery<Pick<Query,"fetchBoard">,QueryFetchBoardArgs>(FETCH_BOARD, {
+  variables: { number: Number(router.query.number )}
+})
+```
 
 ​    
 
 ---
 
-## 6️⃣ 레이아웃 컴포넌트
+## 3️⃣ refetchQueries
 
-![image-20230330152806087](React(5).assets/image-20230330152806087.png)
-
-```jsx
-// src/components/commons/layout/header/index.tsx
-import styled from "@emotion/styled";
-
-const Wrapper = styled.div`
-  height: 50px;
-  background-color: lightcoral;
-`;
-
-export default function LayoutHeader() {
-  return <Wrapper>여기는 헤더입니다.</Wrapper>;
-}
-```
+- 기존 데이터가 변경되었을 때 최신 데이터로 다시 fetch 해주기 위해 사용됨
+- Apollo에서 제공하는 기본 기능
+- 배열로 시작
 
 ```jsx
-// src/components/commons/layout/index.tsx
-export default function Layout(props) {
-  return (
-  	<>
-    	<LayoutHeader />
-      <LayoutBanner />
-      <LayoutNavigation />
-    	<LayoutBodyWrapper>
-    		<LayoutSidebar />
-      	<LayoutBody>{props.children}</LayoutBody>
-    	</LayoutBodyWrapper>
-    	<LayoutFooter />
-    </>
-  )
-}
-```
-
-```jsx
-// _app.js
-export default function App({ Component, pageProps }) {
-  return (
-  	<Layout>
-      <Component {...pageProps} />
-    </Layout>
-  )
-}
-```
-
-​    
-
-### 레이아웃 미적용 영역설정
-
-- 특정 페이지에는 특정 레이아웃이 보이지 않았으면 할 때
-- `include`메서드로 배열내 값과 현재페이지의 asPath값을 비교하여 동일하면 레이아웃 제외
-
-```js
-// src/components/commons/layout/index.tsx
-const HIDDEN_HEADERS = [
-  '/레이아웃 제외 페이지주소',
-  '/login'
-]  ✔️✔️
-
-export default function Layout(props) {
-  const router = useRouter()
-  const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath)  ✔️✔️
+// 글 삭제하고 데이터 다시받아오기
+export default function Page() {
+  const [deleteBoard] = useMutation(DELETE_BOARD)
+  const { data } = useQuery(FETCH_BOARDS)
   
+  const onClickDelete = async () => {
+    try {
+      const result = await deleteBoard({ 
+        variables: { number: Number(e.target.id) },
+        refetchQueries: [{ 
+          query: FETCH_BOARDS,
+          variables: { 기존 fetch때 보낸내용 }  // 기존 fetch에 variables가 있었다면 작성
+        }]
+      }),
+    } catch (error) {}
+	}
+    
   return (
-  	{!isHiddenHeader && <Header />}  // 해당 페이지에서 제외할 레이아웃
+   <>
+    {data?.fetchBoards.map(el => (
+    	<Fragment key={el.number}>
+    		<div>{el.number}</div>
+  			<button id={el.number} onClick={onClickDelete}>삭제</button>
+  		</Fragment>	
+  	))}
+   </>
   )
 }
 ```
@@ -682,156 +369,47 @@ export default function Layout(props) {
 
 ---
 
-## 7️⃣ 글로벌 스타일 적용
+## 4️⃣ 캐시 직접 수정 (update)
 
-- 모든 컴포넌트에 기본적으로 적용시켜주는 스타일
-- `_app.tsx`에 적용해줘야함
+- apollo global state에 저장된 캐시를 직접 수정
+- refetch로 다시 데이터를 받아오지 않아 API요청을  줄일 수 있음
+- 주로 __무한스크롤__을 활용하는 곳에 사용됨
 
-```jsx
-// _app.tsx
-import { Global } from '@emotion/react'
-import { globalStyles } from "../src/commons/styles/globalStyles";
-
-export default function App({ Component, pageProps }) {
-  return (
-    <Global styles={globalStyles} />
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  )
-}
+```tsx
+// Create
+const onClickCreate = () => {
+  void createBoard({
+    variables: {},
+    update(cache, { data }) {  ✔️✔️
+      cache.modify({  ✔️✔️
+        fields: {  ✔️✔️
+          fetchBoards: (prev) => { return [data.createBoard, ...prev] },  ✔️✔️
+        },
+      });
+    },
+  });
+};
 ```
 
-![image-20230330193448275](React(5).assets/image-20230330193448275.png)
-
-```js
-// global css 적용파일
-import { css } from '@emotion/react'
-
-export const globalStyles = css`
-	* {
-		margin: 0;
-		box-sizing: 0px;
-		font-family: myfont;  ✔️✔️
-	}
-	
-	@font-face {
-		font-family: "myfont";  ✔️✔️
-		src: url("/fonts/폰트파일")  
-	}
-`
+```tsx
+// Delete
+const onClcikDelete = (id: string) => () => {
+    void deleteBoard({
+      variables: { id },
+      update(cache, { data }) {
+        cache.modify({
+          fields: {
+            fetchBoards: (prev, { readField }) => {
+              const deletedId = data.deleteBoard;
+              const filteredPrev = prev.filter(
+                // el._id가 안됨, readField를 사용해야함
+                (el) => readField("_id", el) !== deletedId 
+              );
+              return [...filteredPrev]; // 삭제된 ID를 제외한 나머지 9개를 리턴
+            },
+          },
+        });
+      },
+    });
+  };
 ```
-
-​    
-
-### 폰트 적용
-
-![image-20230331004717224](React(5).assets/image-20230331004717224.png)
-
-- `@font-face` 선택자를 이용해 폰트 호출 이름과 경로를 선언
-- `font-family` : 폰트를 호출할 이름을 정의해주는 속성
-- `src` : 폰타파일의 경로
-- font를 적용할 css에 `font-family`
-- 압축률이 가장 높은 폰트 확장자 : `woff2`
-
-​    
-
->FOIT (Flash of Invisible Text)
-
-- 브라우저가 웹 폰트를 다운로드하기 전에 텍스트가 보이지 않는 현상
-- 대부분의 웹사이트는 FOIT 현상이 기본값
-
-​    
-
-> FOUT (Flash of Unstyled Text)
-
-- 브라우저가 웹 폰트를 다운로드하기 전에 텍스트가 대체 글꼴로 렌더링되는 현상
-
-​    
-
----
-
-## 8️⃣ 컴포넌트 재사용
-
-- 수정 / 등록 페이지는 몇몇 요소를 제외하면 동일한 부분이 많아 컴포넌트 재활용을 할 수 있음
-- __props__와 __삼항연산자__ 활용
-
-```jsx
-// 등록페이지
-import BoardComponent from '../../src/components/units/board/..'
-
-export default function BoardNewPage() {
-  return <BoardComponent isEdit={false}>
-}
-```
-
-```jsx
-// 수정페이지
-import BoardComponent from '../../src/components/units/board/..'
-
-export default function BoardEditPage() {
-  return <BoardComponent isEdit={true}
-}
-```
-
-```jsx
-export default function BoardComponent(props) {
-  return (
-    // 삼항연산자 활용
-  	<h1>{props.isEdit ? "수정" : "등록"}</h1>
-  	<button onClick={props.isEdit > props.onClickUpdate : props.onClickCreate}>
-      {props.isEdit ? "수정" : "등록"}하기
-    </button>
-  )
-}
-```
-
-​        
-
-> props drilling
-
-- props가 자식에게 넘겨주는 단계가 두번 이상일 경우를 props drilling이 일어났다라고 함
-- 과도하지 않으면 괜찮지만, 과도하면 가독성과 유지보수면에서 좋지 않음
-- 이를 방지하기 위해서 global state를 활용함
-
-
-
-### 수정한 값만 요청보내기
-
-- 문제점 : 전송 객체가 state의 초기값으로 계속 초기화되어 defaultValue 속성을 부여해도 빈 값이 들어감 
-- 해결책 : 변경된 객체만 백엔드에 전송해서 수정하기 (PUT요청)
-
-```jsx
-export default function DefaultValue(props) {
-  const router = useRouter()
-  const [value1, setValue1] = useState('')
-	const [value2, setValue2] = useState('')
-  
-  const onClickSumbit = async () => {
-  	const variables = { id: Number(router.query.mynumber) }
-    // 변경한 값만 객체에 값 추가
-    if (value1) { variables[value1] = value1 }
-    if (value2) { variables[value2] = value2 }
-	}
-  
-  // 변경된 객체로 API요청
-}
-
-```
-
-​    
-
->  defaultValue
-
-- input태그의 속성
-- 초기값 설정
-
-```jsx
-<input 
-  type="text" 
-  onChange={props.onChangeTitle} 
-  defaultValue={props.data?.fetchBoard.title}  ✔️✔️
-/>
-```
-
-​    
