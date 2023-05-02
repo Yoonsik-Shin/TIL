@@ -1,4 +1,34 @@
-# Docker (2)
+# Docker (1)
+
+​    
+
+## 기본개념
+
+- 개발환경을 동일하게 맞추기 위해 사용
+- 가상머신과 비슷한 개념이지만 더 빠르고, 자원을 효율적으로 사용
+- 추가적으로 운영체제 설치가 필요없음
+
+
+​     
+
+## 설치
+
+- 우분투
+
+```bash
+$ sudo apt-get update
+$ sudo apt-get install curl
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ sudo usermod -aG docker $USER # 사용자 권한부여
+```
+
+- 윈도우
+
+>  [WSL2 설치가이드](https://www.lainyzine.com/ko/article/a-complete-guide-to-how-to-install-docker-desktop-on-windows-10/)
+
+- 도커사이트
+
+> [Docker](https://www.docker.com/)
 
 ​    
 
@@ -25,16 +55,16 @@
 ### 이미지 생성
 
 - 이미 존재하는 이미지 사용 (dockerhub)
-- 자신만의 이미지 만들어 사용 (Dockerfile)
+- 자신만의 이미지 만들어 사용 (`Dockerfile`)
 
 ```dockerfile
 # Dockerfile
-FROM node
-WORKDIR /app
-COPY . /app
+FROM node 
+WORKDIR 
+COPY . /app  
 RUN npm install
 EXPOSE 80 
-CMD node server.js
+CMD node server.js 
 ```
 
 ​    
@@ -149,7 +179,7 @@ $ docker build -t goals:13 .
 - 이미 존재하는 이미지를 복사한 후 새로운 태그를 부여
 
 ```bash
-$ docker tage `기존 name:tag` `새로운 name:tag`
+$ docker tag `기존 name:tag` `새로운 name:tag`
 ```
 
 ​    
@@ -157,7 +187,7 @@ $ docker tage `기존 name:tag` `새로운 name:tag`
 ### `run`
 
 - 이미지를 기반으로 __새 컨테이너__를 만들고, 새 컨테이너를 실행
-- `-p (publish)` : 로컬의 포트로 내부 도커 포트를 엑세스
+- `-p (publish)` : 로컬의 포트로 내부 도커 포트를 엑세스 [__포트포워딩__] 
 
 ```bash
 $ docker run -p `로컬포트:도커포트` `이미지ID or 이름 or 태그`
@@ -331,7 +361,29 @@ $ docker cp aaa:/test dummy
 
 ​    
 
+### 도커 내부 접속
 
+```bash
+$ docker exec -it 컨테이너ID /bin/bash
+```
+
+- 화면이 bash쉘로 바뀜
+- 도커가 돌아가고 있는 가상 컴퓨터의 터미널로 들어온 것을 의미
+
+
+
+---
+
+## `.dockerignore`
+
+- 기존에 있는 `node_modules` 폴더의 복사를 방지하기 위해 사용
+
+```dockerfile
+# .dockerignore
+node_modules
+```
+
+​     
 
 ---
 

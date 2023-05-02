@@ -4,6 +4,8 @@
 
 ## 1️⃣ 최근 본 상품
 
+- h
+
 ```jsx
 useEffect(() => {
   let watched = localStorage.getItem('watched')
@@ -16,6 +18,31 @@ useEffect(() => {
   localStorage.setItem('watched', JSON.stringify(watched))
 }, [])
 ```
+
+```jsx
+export default function ProductPage() {
+  const onClickBasket = (basket) => () => {
+    // 1. 기존 장바구니 가져오기
+    const baskets = JSON.parse(localStorage.getItem("baskets") ?? "[]")
+    
+    // 2. 새로 클릭된 상품 장바구니에 추가하기
+    baskets.push(basket)
+    
+    // 3. 추가된 장바구니 저장
+    localStorage.setItem("baskets", JSON.stringify(baskets))
+  }
+  
+  return (
+  	<>
+    	{data.map((el) => {
+    		
+  		})}
+    </>
+  )
+}
+```
+
+
 
 ​    
 
@@ -142,7 +169,7 @@ export default function Pagination() {
   }
   
   // 페이지별로 데이터 불러오기
-  const onClickPage = (e) => { setPage(Number(e.currentTarget.id)) }
+  const onClickPage = (curPage) = (e) => { setPage(curPage) }
   
   // 이전 목록번호
   const onClickPrevPage = () => {
@@ -169,8 +196,7 @@ export default function Pagination() {
     	return (
       	index + startPage <= lastPage && (
         	<Page 
-            id={String(index + startPage)} 
-            onClick={onClickPage} 
+            onClick={onClickPage(index + startPage)} 
             isActive={index + startPage === activedPage}
           >
           	{index + startPage}

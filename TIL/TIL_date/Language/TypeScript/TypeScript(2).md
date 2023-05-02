@@ -376,8 +376,13 @@ export default function TypeScriptUtilityPage() {
   // 5. Record 타입
   type RecordType = "특수" | "타입" | "만"  // Union 타입 : 적혀있는 글자만 들어갈 수 있음
 
-  type EtcType = Record<eee, IProfile>  // key : value 형태로 타입 생성됨
-
+  type EtcType = Record<RecordType, IProfile>  // key : value 형태로 타입 생성됨-
+  // key는 RecordType의 값, value는 IProfile
+  // type EtcType = {
+  //   특수: IProfile
+  //   타입: IProfile
+  //   만: IProfile
+	// }
   
   // type과 interface 차이 : 선언병합
   interface IProfile {

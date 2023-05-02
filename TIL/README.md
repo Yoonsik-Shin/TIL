@@ -144,7 +144,7 @@
 | [React (1)](./TIL_date/FrontEnd/React/React(1).md)   | [개념] 사용이유, 구조, JSX, State, Component, props, Component recycle |
 | [React (2)](./TIL_date/FrontEnd/React/React(2).md)   | [개념] Router, Component Lifecycle, Custom Hooks, Class      |
 | [React (3)](./TIL_date/FrontEnd/React/React(3).md)   | [개념] CSS-IN-JS, React-BootStrap,  IF문 작성패턴, 이미지, 기타구문(map, filter, input, axios) |
-| [React (4)](./TIL_date/FrontEnd/React/React(4).md)   | [Next.js]  사용법, 폴더구조(Container/Presenter, atomic), 레이아웃, 글로벌스타일, 코드린터/포멧터 |
+| [React (4)](./TIL_date/FrontEnd/React/React(4).md)   | [Next.js]  개념, 사용법, 폴더구조(Container/Presenter, atomic), 레이아웃, 글로벌스타일, 코드린터/포멧터 |
 | [React (5)](./TIL_date/FrontEnd/React/React(5).md)   | [graphql] 개념, refetchQueries, graphql-codegen, 캐시직접수정(update) |
 | [React (6)](./TIL_date/FrontEnd/React/React(6).md)   | [라이브러리] Ant-Design, MUI, 아이콘, 모달, 주소, 별점 / 파이어베이스 |
 | [React (7)](./TIL_date/FrontEnd/React/React(7).md)   | [구현] 최근 본 상품, 댓글, 페이지네이션, 무한스크롤          |
@@ -153,7 +153,7 @@
 | [React (10)](./TIL_date/FrontEnd/React/React(10).md) | [구현] 로그인                                                |
 | [React (11)](./TIL_date/FrontEnd/React/React(11).md) | [성능최적화]                                                 |
 | [React (12)](./TIL_date/FrontEnd/React/React(12).md) | [성능최적화] DevTools, lazy import, Selective Hydration(Suspense), rerendering (memo, usememo, automatic batch, flushSync) |
-| [React (13)](./TIL_date/FrontEnd/React/React(13).md) | [배포] 정적배포(SSG), 도메인 연결,                           |
+| [React (13)](./TIL_date/FrontEnd/React/React(13).md) | [배포] 정적배포(SSG), 도메인 연결, HTTPS 설정, EC2 생성, 로드밸런서 연결, 페이지분기 |
 
  
 
@@ -214,9 +214,9 @@
 
 ### Nest.js
 
-| Contents | Ex   |
-| -------- | ---- |
-|          |      |
+| Contents                                          | Ex   |
+| ------------------------------------------------- | ---- |
+| [Nest (1)](./TIL_date/BackEnd/Nest.js/Nest(1).md) |      |
 
 ​    
 
