@@ -1089,3 +1089,87 @@ async findByIdUpdateImage(id: string, fileName: string) {
 }
 ```
 
+
+
+## socket 통신
+
+```bash
+$ npm install @nestjs/websockets @nestjs/platform-socket.io
+$ yarn add @nestjs/websockets @nestjs/platform-socket.io
+```
+
+```typescript
+// chats.module.ts
+import { Module } from '@nestjs/common';
+import { ChatsGateway } from './chats.gateway';
+
+@Module({
+  providers: [ChatsGateway],
+})
+export class ChatsModule {}
+
+// app.module.ts
+@Module({
+  imports: [
+    ...
+    ChatsModule,
+    ...
+  ]
+})
+```
+
+```typescript
+// chats.gateway.ts
+import { Socket } from 'socket.io'
+import { 
+	ConnectedSocket,
+  MessageBody,
+  SubscribeMessage,
+  WebSocketGateway
+} from '@nestjs/websockets'
+
+@WebSocketGateway(80, { namespace: 'chattings' })
+export class ChatsGateway {
+  @SubscribeMessage('메시지명(From Front)')
+  handleNewUser(
+  	@MessageBody() username: string,
+    @ConnectedSocket() socket: Socket
+  ) {
+  	console.log(username)
+    console.log(socket.id)
+    socket.emit('메시지명(To Front)' ,`반갑습니다 ${username}`)
+    socket.broadcast.emit('메시지명(To Front)', `보낼내용`) // 연결된 모든 socket에게 데이터 전송
+    return username
+  }
+}
+```
+
+namespace : 영역분리 (chatting, stock)
+
+
+
+생명주기 hooks
+
+- `OnGatewayInit`
+
+```typescript
+export class ChatsGateway implements OnGatewayInit {
+  afterInit() {}  // constructor 다음으로 실행됨
+```
+
+- `OnGatewayConnection` 
+
+```typescript
+export class ChatsGateway implements OnGatewayConnection {
+  handleConnection(@ConnectedSocket() socket: Socket) {}  // 클라이언트와 연결되면 실행됨
+```
+
+- `OnGatewayDisconnet`
+
+```typescript
+export class ChatsGateway implements OnGatewayDisconnet {
+  handleDisconnect(@ConnectedSocket() socket: Socket) {}  // 클라이언트와의 연결이 종료되면 실행됨
+```
+
+
+
