@@ -167,7 +167,9 @@ const getData = async () => {
 const { data, isLoading, isError, ... } = useQuery({
   queryKey: ['작명'],  
   queryFn: 데이터를 불러오는 함수
-  options: {}
+  option1: ,
+  option2: ,
+  ...
 })
 ```
 
@@ -415,12 +417,11 @@ const { data } = useQuery([''], Fn1(productId), {
 
 ```js
 const Fn = async (obj) => {
-  const { data } = await axios({
+  return await axios({
     method: 'post',
     url: '/',
     data: obj
   })
-  return data
 } 
 
 const mutation = useMutation({ mutationFn: Fn })

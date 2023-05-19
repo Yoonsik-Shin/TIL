@@ -2,7 +2,7 @@
 
 ​    
 
-설치
+## 설치
 
 ```bash
 # CLI 설치
@@ -13,7 +13,7 @@ $ yarn add -g @nestjs/cli
 $ nest new project-name
 ```
 
-
+> cli 명령어
 
 ```bash
 $ nest g mo 모듈명  # Module 파일 자동 생성
@@ -23,16 +23,16 @@ $ nest g middleware 미들웨어명  # Middleware 파일 자동 생성
 
 
 
-캡슐화
+> 캡슐화
 
-module의 providers에 사용하는 Service를 모두 추가해주는 방식
-
-사용하는 서비스가 많아지면 추가할 값들이 너무 많아짐
+- module의 providers에 사용하는 Service를 모두 추가해주는 방식
+- 사용하는 서비스가 많아지면 추가할 값들이 너무 많아짐
 
 ```typescript
 @Module({
   imports: [AAAModule, BBBModule, CCCModule],
   ...
+  // providers에 값들이 너무 많아짐
   providers: [
      AAAService,
      BBBService,
@@ -42,7 +42,7 @@ module의 providers에 사용하는 Service를 모두 추가해주는 방식
 })
 ```
 
-해당 module에서 export해준 Service는 다른 모듈에서 사용할 때, providers에 추가할 필요없이 사용가능
+- 해당 module에서 export해준 Service는 다른 모듈에서 사용할 때, providers에 추가할 필요없이 사용가능
 
 ```typescript
 @Module({
@@ -78,9 +78,9 @@ app.enableCors({
 
 
 
+## 기본개념
 
-
-## middleware
+### middleware
 
 - 라우트 핸들러 이전에 호출되는 함수
 - Express의 미들웨어와 동일
@@ -106,8 +106,6 @@ export class LoggerMiddleware implements NestMiddleware {
   }
 }
 ```
-
-
 
 ```typescript
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
