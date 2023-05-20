@@ -2,7 +2,7 @@
 
 ​    
 
-## 설치
+## 0️⃣ 설치
 
 ```bash
 # CLI 설치
@@ -21,9 +21,356 @@ $ nest g co 컨트롤러명  # Controller 파일 자동 생성
 $ nest g middleware 미들웨어명  # Middleware 파일 자동 생성
 ```
 
+​    
+
+---
+
+## 1️⃣ 기본개념
+
+### Controller
+
+``` bash
+# Controller 파일 자동 생성 명령어
+$ nest g co 컨트롤러명
+```
+
+- 클라이언트에서 들어오는 __요청(request)__을 처리하고, __응답(response)__을 반환하는 역할
+- Express.js와 유사한 방식으로 라우팅 처리
+- 클래스로 정의되며, `@Controller` 데코레이터를 사용
+
+```typescript
+// app.controller.ts
+import { Controller, Get } from '@nestjs/common'
+
+@Controller('end-point')
+export class AppsController {
+  @Get()
+  fetchAll() {
+    return 'fetch all things'
+  }
+}
+```
+
+- `@Controller`를 통해 라우트 end-point를 그룹화
+
+```typescript
+// users로 그룹화
+@Controller('users')  
+export class UserController {
+  // users/signup
+  @Get('/signup')  
+  ...
+  
+  // users/upload
+  @Get('/upload')
+	...
+}
+```
 
 
-> 캡슐화
+
+> 라우트 와일드카드
+
+- 정규표현식 활용가능
+
+```typescript
+@Get('ab*cd')
+```
+
+​    
+
+#### request 객체
+
+| 종류                             | 설명                                                         |
+| -------------------------------- | ------------------------------------------------------------ |
+| `@Req()`                         | 요청(request) 객체에 대한 접근                               |
+| `@Res()`                         | 응답(response) 객체에 대한 접근                              |
+| `@Body(param?: string)`          | 요청(request)의 body 객체에 대한 접근, param 매개변수로 특정값 접근가능 |
+| `@Param(param?: string)`         | 경로(:id) 매개변수를 가져옴, param 매개변수로 특정 경로값 접근가능 |
+| `@Query(param?: string)`         | 쿼리 (?) 매개변수를 가져옴, param 매개변수로 특정 쿼리 접근가능 |
+| `@Headers(name?: string)`        | HTTP 헤더 접근 가능, name 매개변소로 특정 헤더값 접근가능    |
+| `@Next()`                        | 다음 미들웨어 함수에 대한 접근                               |
+| `@UploadFile() / @UploadFiles()` | 업로드된 파일에 대한 접근                                    |
+| `@Session()`                     | 세션 객체에 접근                                             |
+
+ ```typescript
+ // apps.controller.ts
+ import { Controller, Get, Req, Res, Body, Param } from '@nestjs/common'
+ import { Request, Response } from 'express'
+ 
+ @Controller()
+ export class AppsController {
+   // Req 활용
+   @Get()
+   fetchData(@Req() request: Request) {  ✔️✔️
+     return ...
+   }
+   
+   // Body, Res 활용
+   @Post()
+   createDate(
+     @Body() createDto: CreateDto
+     @Res({ passthrough: true }) res: Response
+   ) {
+     return ...
+   }
+   
+   // Params 활용 (1)
+   @Get(':id/:category')
+   findOne(@Param() params: any): T {
+     console.log(params.id);
+     console.log(params.category);
+     return ...
+   }	
+     
+   // Params 활용 (2)
+   @Get(':id/:category')
+   findOne(
+     @Param('id') id: number
+     @Param('category') category: string
+   ): T {
+     console.log(id);
+     console.log(category);
+     return ...
+   }	
+ }
+ ```
+
+
+
+- Express에서 사용하는 응답객체 사용가능
+- 이 경우 따로 설정이 필요함
+
+```typescript
+@Res({ passthrough: true })
+```
+
+
+
+- Standard
+- Nest에 기본 내장된 기능 활용
+
+
+
+- Library-specific
+- Express등의 다른 라이브러리의 응답(response) 객체를 사용
+
+```typescript
+
+```
+
+
+
+#### DTO
+
+- Data Trasfer Object (데이터 전송 객체)
+- DTO 클래스 자체를 타입으로 지정가능
+
+```typescript
+// create-app.dto.ts
+export class CreateAppDto {
+	name: string;
+  age: number;
+}
+```
+
+```typescript
+// apps.controller.ts
+@Post()
+async create(@Body() createAppDto: CreateAppDto) {  ✔️✔️
+  return ...
+}
+```
+
+​    
+
+#### HTTP 메서드 데코레이터
+
+| 종류         | 설명                  |
+| ------------ | --------------------- |
+| `@Get()`     |                       |
+| `@Post()`    |                       |
+| `@Put()`     |                       |
+| `@Delete()`  |                       |
+| `@Patch()`   |                       |
+| `@Options()` |                       |
+| `@Head()`    |                       |
+| `@All()`     | 모든 HTTP 메서드 처리 |
+
+
+
+#### 상태코드
+
+- 응답 기본 상태코드는 __200__ (Post 요청은 __201__)
+- `@HttpCode()` 데코레이터를 통해 상태코드 커스텀 가능 (__Standard 방식__)
+
+```typescript
+import { HttpCode } from '@nestjs/common'
+
+@Post()
+@HttpCode(204)  ✔️✔️
+create() { 
+  return 'created' 
+}
+```
+
+- 상태코드가 동적일 때는 __library-specific 방식__으로 사용함 (Express 방식)
+
+```typescript
+import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
+import { Response } from 'express';
+
+@Controller()
+export class AppsController {
+  @Get()
+  findAll(@Res({ passthrough: true }) res: Response) {  // passthrough 옵션 필수 ✔️✔️
+    const userHasPermission = checkUserPermission(); // 권한 확인하는 함수
+    
+    // 조건에 따라 상태코드 분기
+    if (userHasPermission) {
+      res.status(HttpStatus.OK).json({ message: 'Success' });
+    } else {
+      res.status(HttpStatus.FORBIDDEN).json({ message: 'Access denied' });
+    }
+  }
+}
+```
+
+​    
+
+#### 커스텀 헤더
+
+- __Standard 방식__ : `@Header()` 데코레이터를 통해 커스텀 응답 헤더 지정 가능
+
+```typescript
+import { Header } from '@nestjs/common'
+
+@Get()
+@Header('Custom-Header', 'Custom-Header-Value')
+findAll() {
+	return 'found All'
+}
+```
+
+- __library-specific 방식__
+
+```typescript
+import { Controller, Get, Res } from '@nestjs/common';
+import { Response } from 'express';
+
+@Controller('cats')
+export class CatsController {
+  @Get()
+  findAll(@Res() res: Response) {
+    // 응답 헤더 설정
+    res.setHeader('Custom-Header', 'Custom Value');
+		
+    // 응답 헤더 해제
+    res.removeHeader('WantRemovHeader')
+  }
+}
+```
+
+​    
+
+#### Redirect
+
+- __Standard 방식__ :`@Redirect()` 데코레이터 사용
+- 매개변수로 이동할 `url`과 상태코드를 받음 (상태코드 기본값: __302__)
+
+```typescript
+@Get()
+@Redirect('https://yoonsik.com', 301)
+redirectToPage() {
+  // none
+}
+
+// 객체로 표현
+@Redirect({
+  'url': 'https://yoonsik.com',
+  'statusCode': 301
+})
+```
+
+> HTTP 상태코드나 redirect URL을 동적으로 결정하고 싶을때
+
+```typescript
+@Get()
+@Redirect('https://yoonsik.com', 301)  // 조건에 맞으면 무시됨
+getDocs(@Query('version') version) {
+  // 조건에 맞으면 해당 페이지로 인자가 변경된 후 리다이렉트됨
+  if (version === '5') {
+    return { 
+      url: 'https://yoonsik.com/v5/',
+      statusCode: 302
+    }  
+  }
+}
+```
+
+- __library-specific 방식__
+
+```typescript
+import { Controller, Get, Res } from '@nestjs/common';
+import { Response } from 'express';
+
+@Controller('cats')
+export class CatsController {
+  @Get()
+  findAll(@Res() res: Response) {
+    // 응답 헤더 설정
+    res.redirect('https://yoonsik.com')
+  }
+}
+```
+
+​    
+
+---
+
+### Providers
+
+- Controller로부터 복잡한 작업을 위임받아 수행한 후 결과값 반환
+- Provider의 핵심은 __의존성 주입 (DI)__
+- Service, Repository, Factory, 헬퍼등의 기본적인 Nest 클래스는 모두 Provider로 취급될 수 있음
+
+
+
+#### Services
+
+```bash
+# Service 파일 자동 생성
+$ nest g s 서비스명
+```
+
+```typescript
+// apps.controller.ts
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { AppsService } from './apps.service';
+
+@Controller()
+export class AppsController {
+  constructor(private appsService: AppsService) {} ✔️✔️
+
+  @Get()
+  async findAll(): Promise<Apps[]> {
+    // service.ts로 비지니스 로직을 넘김
+    return this.appsService.findAll() ✔️✔️
+  }
+}
+```
+
+
+
+#### 의존성 주입 (DI: Dependency Injection)
+
+
+
+### Module
+
+
+
+### 캡슐화 
 
 - module의 providers에 사용하는 Service를 모두 추가해주는 방식
 - 사용하는 서비스가 많아지면 추가할 값들이 너무 많아짐
@@ -63,9 +410,9 @@ export BBBModule{}
 export class AAAModule {}
 ```
 
+​    
 
-
-CORS
+### CORS
 
 ```typescript
 // main.ts
@@ -76,9 +423,7 @@ app.enableCors({
 })
 ```
 
-
-
-## 기본개념
+​    
 
 ### middleware
 
@@ -123,11 +468,9 @@ export class AppModule implements NestModule {
 }
 ```
 
+​    
 
-
-## 예외처리
-
-Exception filters
+### Exception filters (예외처리)
 
 ```typescript
 import { HttpStatus } from '@nestjs/common'
@@ -220,9 +563,9 @@ async function bootstrap() {
 }
 ```
 
+​    
 
-
-## Pipes
+### Pipes
 
 - 클라이언트 요청에서 들어오는 데이터를 유효성 검사 및 변환을 수행해 서버가 원하는 데이터를 얻을 수 있도록 도와주는 클래스
 - 사용사례
@@ -237,8 +580,6 @@ getData(@Param('id', ParseIntPipe) param) {
 }
 ```
 
-
-
 ```bash
 # 내장 파이프들
 ValidationPipe
@@ -252,9 +593,9 @@ DefaultValuePipe
 ParseFilePipe
 ```
 
+​    
 
-
-## Interceptors
+### Interceptors
 
 `@Injectable` 데코레이터 사용, DI 가능
 
@@ -328,9 +669,54 @@ export class TestController {
 
 @Body에는 Dto를 활용
 
+​    
+
+### Repository 패턴
+
+```typescript
+@Injectable()
+export class TestRepository {
+  constructor(
+  	@InjectModel(Test.name)
+  	private readonly testModel: Model<Test>
+  ) {}
+  
+  async existsByEmail(email: string): Promise<boolean> {
+    try {
+      const result = await this.testModel.exists({ email })
+      retunr result
+    } catch (error) {
+      throw new HttpException('DB 에러발생', 400)
+    }
+  }
+}
+```
+
+```typescript
+// module
+@Module({
+  ...
+  providers: [TestRepository]
+})
+
+// service
+...
+export class TestService { 
+	constructor(private readonly testRepository: TestRepository) {}
+  
+  async signUp() {
+    ...
+    const isExist = await this.testRepository.existsByEmail(email)
+    ...
+  }
+}
+```
 
 
-Graphql
+
+---
+
+## Graphql
 
 ```bash
 $ npm install @nestjs/graphql @nestjs/apollo graphql apollo-server-express
@@ -375,7 +761,7 @@ export class TestResolver {
 
 
 
-DTO : Data Transfer Object
+DTO : Data Transfer Object 데이터 전송 객체
 
 ```typescript
 // /dto/createTest.input.ts
@@ -460,6 +846,10 @@ class Test {
 
 
 
+## DB 연동
+
+### MySQL
+
 mysql 초기설정
 
 ```typescript
@@ -508,7 +898,7 @@ const BASE_URI = process.env.TEST_URI
 
 
 
-
+### MongoDB
 
 mongodb / mongoose
 
@@ -753,421 +1143,5 @@ export class ReadOnlyTestDto extends PickType(Test, ['email']) {
 ```
 
 ​    
-
-## Repository 패턴
-
-```typescript
-@Injectable()
-export class TestRepository {
-  constructor(
-  	@InjectModel(Test.name)
-  	private readonly testModel: Model<Test>
-  ) {}
-  
-  async existsByEmail(email: string): Promise<boolean> {
-    try {
-      const result = await this.testModel.exists({ email })
-      retunr result
-    } catch (error) {
-      throw new HttpException('DB 에러발생', 400)
-    }
-  }
-}
-```
-
-```typescript
-// module
-@Module({
-  ...
-  providers: [TestRepository]
-})
-
-// service
-...
-export class TestService { 
-	constructor(private readonly testRepository: TestRepository) {}
-  
-  async signUp() {
-    ...
-    const isExist = await this.testRepository.existsByEmail(email)
-    ...
-  }
-}
-```
-
-
-
-## JWT 로그인
-
-```bash
-$ npm install @nestjs/passport passport passport-local
-$ npm install -D @types/passport-local
-```
-
-```typescript
-// jwt.guard.ts
-import { AuthGuard } from '@nestjs/passport'
-
-@Injectable()
-export class JwtAuthGuard extends AuthGuard('jwt') {} // AuthGuard는 strategy를 자동으로 실행해줌
-```
-
-```typescript
-// jwt.strategy.ts
-import { ExtractJwt, Strategy } from 'passport-jwt'
-import { PassportStrategy } from '@nestjs/passport'
-
-@Injectable()
-export class JwtStrategy extends PassPortStrategy(Strategy) {
-  constructor(private readonly testRepository: TestRepository) {
-    super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),  // request에서 jwt토큰 추출
-      secretOrKey: '시크릿키',  // 유출되면 안됨
-      ignoreExpiration: false,  // 만료기간 무시여부
-    })
-  }
-  
-  async validate(payload: Payload) {
-    const user = await this.TestRepository.findUserByIdWithoutPassword(payload.sub)
-    if (user) return user  // request.user = user
-    
-    throw new UnauthorizedException()
-  }
-}
-
-type Payload = {
-  email: string
-  sub: string
-}
-
-// test.Repository.ts
-...
-async findUserByIdWithoutPassword(id: string): Promise<Test | null> {
-  const user = await this.testModel.findById(id),select('-password')
-	return user
-}
-```
-
-```typescript
-// auth.module.ts
-import { PassportModule } from '@nestjs/passport'
-import { JwtModule } from '@nestjs/jwt'
-import { JwtStrategy } from './jwt.strategy'
-
-@Module({
-  imports: [
-    PassportModule.register({
-      defaultStrategy: 'jwt',
-      session: false  // 세션쿠키 사용여부
-    }),
-    JwtModule.register({
-      secret: '시크릿키',
-      signOptions: { expiresIn: '1y' }
-    })
-  ],
-  providers: [
-    AuthService,
-    JwtStrategy
-  ]
-})
-```
-
-```typescript
-// auth.service.ts
-@Injectable()
-export class AuthService {
-  constructor(private readonly testRepository: TestRepository) {}
-  
-  async login(data: LoginRequestDto) {
-  	const { email, password } = data
-    
-    // email 일치여부
-    const user = await this.TestRepository.findUserByEmail(email)
-    if (!user) throw new UnauthorizedException('이메일과 비밀번호를 확인해주세요.')
-    
-    // password 일치여부
-    const isPasswordValidated: boolean = await bcrypt.compare(password, user.password)
-    if (!isPasswordValidated) throw new UnauthorizedException('이메일과 비밀번호를 확인해주세요.')
-    
-    const payload = { email: email, sub: user.id }
-    
-    return {
-      token: this.jwtService.sign(payload)
-    }
-  }
-}
-```
-
-
-
-순환참조모듈
-
-- 모듈간 순환 종속성을 해결하기 위해 `forwardRef()`함수 사용
-
-```typescript
-@Module({
-  imports: [
-    forwardRef(() => TestModule)
-  ]
-})
-```
-
-​    
-
-### 커스텀 데코레이터
-
-```typescript
-// user.decorator.ts
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-
-export const CurrentUser = createParamDecorator(
-  (data: unknown, ctx: ExecutionContext) => {
-    const request = ctx.switchToHttp().getRequest();
-    return request.user;
-  },
-);
-```
-
-
-
-## 파일업로드
-
-- express용 multer 미들웨어 사용
-- http post요청을 통해 multipart/form-data 형식의 데이터를 처리
-
-```bash
-$ npm install -D @types/multer
-$ yarn add -D @types/multer
-```
-
-```typescript
-// main.ts
-import * as path from 'path'
-import { NestExpressApplication } from '@nestjs/platform-express'
-
-async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule)
-  ...
-	app.useStaticAssets(path.join(__dirname, './common', 'uploads'), {
-  	prefix: '/media'
-	})
-  ...
-}
-
-```
-
-```typescript
-// test.module.ts
-@Module({
-  imports: [
-    MulterModule.register({
-      dest: './upload'
-    })
-  ]
-})
-```
-
-```typescript
-// commons/utils/multer.options.ts
-import * as multer from 'multer'
-import * as path from 'path'
-import * as fs from 'fs'
-import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface'
-
-// 새로운 upload폴더생성
-const createFolder = (folder: string) => {
-	try {  // upload 폴더생성
-    console.log('💾 새로운 폴더를 생성 후 업로드합니다.')
-		fs.mkdirSync(path.join(__dirname, '..', `uploads`))
-  } catch (error) {
-		console.log('이미 폴더가 존재합니다.')
-	}
-  
-	try {  // upload안에 폴더생성
- 		console.log(`💾 Create a ${folder} uploads folder...`)
-		fs.mkdirSync(path.join(__dirname, '..', `uploads/${folder}`))
-	} catch (error) {
-		console.log(`The ${folder} folder already exists...`)
-  }
-}
-
-const storage = (folder: string): multer.StorageEngine => {
-	createFolder(folder)
-	return multer.diskStorage({
-		// 저장 위치 지정    
-		destination(req, file, cb) { 
-			const folderName = path.join(__dirname, '..', `uploads/${folder}`)
-    	cb(null, folderName)
- 		},
-    // 저장할 파일명 지정
- 		filename(req, file, cb) {
-    	const ext = path.extname(file.originalname)
-      const fileName = `${path.basename(file.originalname, ext)}${Date.now()}${ext}`
-      cb(null, fileName)
- 		},
-  })
-}
-
-export const multerOptions = (folder: string) => {
-  const result: MulterOptions = { storage: storage(folder),}
-	return result
-}
-```
-
-mkdirSync : 폴더를 만드는 명령
-
-path.join(__dirname) : 현재폴더를 의미
-
-path.join(__dirname, '..') : 현재폴더의 부모폴더
-
-path.join(__dirname, '..', 'uploads') : 현재폴더의 부모폴더에 uploads라는 폴더를 만들어라
-
-path.extname('index.html') : 확장자 추출 ('.html')
-
-
-
-### 단일 파일
-
-```typescript
-// controller.ts
-import { UploadedFile } from '@nestjs/common'
-import { FileInterceptor } from '@nestjs/platform-express'
-...
-@Post('upload')
-@UseInterceptors(FileInterceptor('file'))
-uploadFile(@UploadedFile() file: Express.Multer.File) {
-  
-}
-```
-
-FileInterceptor / FilesInterceptor 의 인자
-
-- fieldName : 프론트엔드에서 전달하는 필드명
-- maxCount : FilesInterceptor에서만 사용가능, 업로드가능한 파일수 지정
-- options
-
-
-
-### 다중파일
-
-```typescript
-// controller.ts
-import { UploadedFiles } from '@nestjs/common'
-import { FilesInterceptor } from '@nestjs/platform-express'
-
-@Post('upload')
-@UseInterceptors(FilesInterceptor('file', 10, multerOptions('저장할폴더명')))
-@UseGuards(JwtAuthGuard)
-uploadFile(
-  @UploadedFiles() files: Array<Express.Multer.File>
-  @CurrentUser() user: Test
-) {
-  return this.testService.uploadImage(user, files)
-}
-```
-
-```typescript
-// service.ts
-...
-async uploadImage(user: Test, files: Express.Multer.File[]) {
-  const fileName = `test/${files[0].filename}`
-  const newImageUser = await this.testRepository.findByIdUpdateImage(user.id, fileName)
-  return newImageUser
-}
-```
-
-```typescript
-// repository.ts
-...
-async findByIdUpdateImage(id: string, fileName: string) {
-  const user = await this.testModel.findById(id)
-  user.imgUrl = `http://~~/media/${fileName}`
-  const newImageUser = await user.save()
-  retunr newImageUser.readOnlyData
-}
-```
-
-
-
-## socket 통신
-
-```bash
-$ npm install @nestjs/websockets @nestjs/platform-socket.io
-$ yarn add @nestjs/websockets @nestjs/platform-socket.io
-```
-
-```typescript
-// chats.module.ts
-import { Module } from '@nestjs/common';
-import { ChatsGateway } from './chats.gateway';
-
-@Module({
-  providers: [ChatsGateway],
-})
-export class ChatsModule {}
-
-// app.module.ts
-@Module({
-  imports: [
-    ...
-    ChatsModule,
-    ...
-  ]
-})
-```
-
-```typescript
-// chats.gateway.ts
-import { Socket } from 'socket.io'
-import { 
-	ConnectedSocket,
-  MessageBody,
-  SubscribeMessage,
-  WebSocketGateway
-} from '@nestjs/websockets'
-
-@WebSocketGateway(80, { namespace: 'chattings' })
-export class ChatsGateway {
-  @SubscribeMessage('메시지명(From Front)')
-  handleNewUser(
-  	@MessageBody() username: string,
-    @ConnectedSocket() socket: Socket
-  ) {
-  	console.log(username)
-    console.log(socket.id)
-    socket.emit('메시지명(To Front)' ,`반갑습니다 ${username}`)
-    socket.broadcast.emit('메시지명(To Front)', `보낼내용`) // 연결된 모든 socket에게 데이터 전송
-    return username
-  }
-}
-```
-
-namespace : 영역분리 (chatting, stock)
-
-
-
-생명주기 hooks
-
-- `OnGatewayInit`
-
-```typescript
-export class ChatsGateway implements OnGatewayInit {
-  afterInit() {}  // constructor 다음으로 실행됨
-```
-
-- `OnGatewayConnection` 
-
-```typescript
-export class ChatsGateway implements OnGatewayConnection {
-  handleConnection(@ConnectedSocket() socket: Socket) {}  // 클라이언트와 연결되면 실행됨
-```
-
-- `OnGatewayDisconnet`
-
-```typescript
-export class ChatsGateway implements OnGatewayDisconnet {
-  handleDisconnect(@ConnectedSocket() socket: Socket) {}  // 클라이언트와의 연결이 종료되면 실행됨
-```
-
 
 
