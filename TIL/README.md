@@ -186,6 +186,7 @@
 | ------------------------------------------------ | ------------------------------------------------------------ |
 | [Linux(1)](./TIL_date/BackEnd/Linux/Linux(1).md) | 터미널, 쉘, Argument, option, man, type, which, help, 날짜/시간 |
 | [Linux(2)](./TIL_date/BackEnd/Linux/Linux(2).md) | 경로, ls, pwd, cd, mkdir, touch, rm, rmdir                   |
+| [Linux(3)](./TIL_date/BackEnd/Linux/Linux(3).md) |                                                              |
 
 ​    
 
