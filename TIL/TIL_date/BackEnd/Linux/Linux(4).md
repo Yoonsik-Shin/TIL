@@ -2,77 +2,67 @@
 
 ​    
 
-## 권한
+## 1️⃣ 권한
 
 - 다중 사용자 
 - 각 사용자는 개인별로 Home 디렉토리가 존재
 
-
-
 ![image-20230525012806755](Linux(4).assets/image-20230525012806755.png)
 
-파일소유자 그룹소유
-
-파일속성 (File Attributes)
-
-- 읽기, 쓰기, 실행권한
-
 ```bash
-drwxr-x--- 7 yoonsik yoonsik  4096 May 24 21:52 .
-drwxr-xr-x 3 root    root     4096 Mar  6 15:53 ..
-lrwxrwxrwx 1 yoonsik yoonsik    23 Mar  9 14:59 .aws -> /mnt/c/Users/pocke/.aws
-lrwxrwxrwx 1 yoonsik yoonsik    25 Mar  9 14:59 .azure -> /mnt/c/Users/pocke/.azure
--rw------- 1 yoonsik yoonsik  5864 May 24 21:51 .bash_history
--rw-r--r-- 1 yoonsik yoonsik   220 Mar  6 15:53 .bash_logout
--rw-r--r-- 1 yoonsik yoonsik  3771 Mar  6 15:53 .bashrc
+# 파일속성  ?? 파일소유자 그룹소유자 파일크기 날짜        파일명
+drwxr-x---  7  yoonsik  yoonsik   4096    May 24 21:52 .
+drwxr-xr-x  3  root     root      4096    Mar  6 15:53 ..
+lrwxrwxrwx  1  yoonsik  yoonsik     23    Mar  9 14:59 .aws -> /mnt/c/Users/pocke/.aws
+lrwxrwxrwx  1  yoonsik  yoonsik     25    Mar  9 14:59 .azure -> /mnt/c/Users/pocke/.azure
+-rw-------  1  yoonsik  yoonsik   5864    May 24 21:51 .bash_history
+-rw-r--r--  1  yoonsik  yoonsik    220    Mar  6 15:53 .bash_logout
+-rw-r--r--  1  yoonsik  yoonsik   3771    Mar  6 15:53 .bashrc
 ```
 
-- 첫 글자는 파일 유형을 나타냄
+​    
+
+### 파일속성 (File Attributes)
+
+```bash
+drwxr-x---
+drwxr-xr-x
+-rw-------
+```
+
+- 첫 글자는 __파일 유형__을 나타냄
 - 디렉토리는 `d`로 시작, 파일은 `-`로 시작, 심볼릭 링크는 `l`로 시작
+- 뒤 9글자는 각각 파일, 그룹, 모든사람의 읽기, 쓰기, 실행권한을 의미함
+- 파일 속성 해석
+  - `-` : 비활성화 상태
+  - `r` : 읽기 권한 (Read)
+  - `w`  : 쓰기 권한 (Write)
+  - `x` : 실행 권한 (Execute)
 
-뒤 9글자
-
-| 파일소유자 (Owner) | 그룹소유자 (Group) | 모든사람 (World) |
-| ------------------ | ------------------ | ---------------- |
-| rwx                | rwx                | rwx              |
-
-
-
-Read : 읽기 권한 r
-
-Write : 쓰기 권한 w
-
-Execute : 실행 권한 x
-
-
+​    
 
 ### chmod
 
 - change mode
+- 권한을 설정해주는 명령어
 
 ```bash
 $ chmod 부여할권한 권한을수정할파일
 ```
 
-방법1
+- 부여받는 사용자
+  - u : user 
+  - g : group 
+  - o : others 
+  - a : all (u + g + o)
+- 설정 방식
+  - `+` : 권한부여
+  - `-`: 권한박탈
+  - `=` : 해당 권한을 제외한 나머지 권한박탈
 
-u : user 
+​    
 
-g : group 
-
-o : others 
-
-a : all (u + g + o)
-
-`+` : 권한부여
-
-`-`: 권한박탈
-
-`=` : 해당 권한을 제외한 나머지 권한박탈
-
-
-
-방법2 : 팔진법
+#### 팔진법
 
 ```bash
 chmod 777 파일명
@@ -80,29 +70,38 @@ chmod 777 파일명
 
 
 
+​    
+
 ### su
 
 - 대체 사용자의 커맨드 사용
+- 현재 사용자를 로그아웃하지 않고도 다른 사용자의 커맨드를 이용할 수 있음
 
 ```bash
 $ su 사용자명 # 현재 디렉토리를 변경하지 않음
 $ su - 사용자명 # 사용자의 Home 디렉토리로 이동함
 ```
 
+​    
 
+### root user
 
-root user
+- super user
+- 모든 커맨드에 엑세스, 실행할 수 있고, 모든 파일에 엑세스 할 수 있음
+- 일반 사용자가 할 수 없는 작업을 수행하는 특수계정(사용자)를 의미
 
-sudo  
+   
 
+#### sudo
 
-
-sudo
+- root 사용자로서 다른 커맨드를 실행할 수 있는 커맨드
+- root 사용자의 비밀번호는 알 수 없지만, 커맨드를 실행 할 수 있는 권한은 부여되어 있음
+- 첫 계정을 생성한 사용자의 경우 `sudo` 명령어를 사용할 수 있음
 
 ```bash
 $ sudo -l
 >> 비밀번호 요구
->> 로그인 후 15분 동안 root명령어 사용가능
+>> 로그인 후 15분 동안 비밀번호 요구없이 root명령어 사용가능
 ```
 
 
@@ -132,7 +131,9 @@ $ chown 유저명:그룹명 파일명 # 둘다 변경
 $ groups 유저명
 ```
 
-### addgroup
+​    
+
+#### addgroup
 
 - 새로운 그룹만들기
 - root 계정만 가능
@@ -141,7 +142,9 @@ $ groups 유저명
 $ sudo addgroup 그룹명
 ```
 
-### adduser
+​    
+
+#### adduser
 
 - 그룹에 멤버 추가하기
 
@@ -197,7 +200,9 @@ Startup Files
 - 파일이 실행파일인 것을 알려줌
 
 ```bash
-#!/bin/bash
+# shebang
+#!/bin/bash 
+
 # 이글은 주석처리됩니다. 
 
 # 명령어입력
@@ -209,9 +214,18 @@ echo "테스트입니다."
 $ bash 경로/파일명
 ```
 
+> 파이썬으로 스크립트 실행하기
+
+```bash
+# shebang 설정
+#!/usr/bin/python3
+```
+
 ​    
 
 ### PATH변수
+
+- 쉘이 실행가능한 프로그램을 찾기 위해 살펴보는 디렉토리 목록
 
 ```bash
 $ printenv | grep PATH
@@ -231,7 +245,47 @@ $ which adduser
 
 ![image-20230526154940760](Linux(4).assets/image-20230526154940760.png)
 
-   
+
+
+####  PATH 추가
+
+- `/.profile` 파일에 PATH에 __사용자의 개인저장소__를 포함하라는 명령어가 이미 정의되어 있음
+
+```bash
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+```
+
+- `bin` 폴더를 만들고, 실행만 시켜주면 됨
+
+```bash
+$ source .profile
+# PATH에 'home/사용자/bin' 추가됨
+```
+
+>  위 명령어가 안될 경우, 수동으로 지정가능
+
+```bash
+# .bashrc 파일 열기
+$ vi .bashrc
+----------------------------
+# .bashrc에 PATH 입력
+PATH="$HOME/bin:$PATH"
+----------------------------
+# .bashrc 실행
+$ source .bashrc
+```
+
+- 실행권한 부여
+
+```bash
+$ cd bin/
+$ chmod +x 실행할파일
+```
+
+  
 
 ---
 

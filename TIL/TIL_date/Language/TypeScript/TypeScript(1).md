@@ -126,7 +126,7 @@ $ yarn add @types/node @tsconfig/node18 --dev
 1. 이미 있는 프로젝트
 
 ```bash
-$ npm install --save typescript @types/node @types/react @types/react-dom @types/jest
+$ npm install typescript @types/node @types/react @types/react-dom @types/jest
 ```
 
 2. 새로운 프로젝트
@@ -521,7 +521,7 @@ searchBook({ title: 'bookbook', price: 27000 })
 
 #### extends
 
-- 다른 interface의 값을 추가해줄 수 있음
+- 다른 interface의 값을 추가해줄 수 있음 (상속)
 
 ```typescript
 interface Student {
@@ -542,6 +542,21 @@ interface Animal {
 interface Dog extends Animal { 
   name: number 
 }
+```
+
+- 상속여부를 통해 boolean 값으로 활용가능
+
+```typescript
+interface IA {
+  aaa: string;
+}
+interface IB extends IA {
+  bbb: number
+}
+
+type ConditionType = IB extends IA ? number : string ✔️✔️ 
+// IB extends IA === true
+// ConditonType === number
 ```
 
 ​    
