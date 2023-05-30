@@ -24,6 +24,8 @@ lrwxrwxrwx  1  yoonsik  yoonsik     25    Mar  9 14:59 .azure -> /mnt/c/Users/po
 
 ### 파일속성 (File Attributes)
 
+![KakaoTalk_20230529_111520457](Linux(4).assets/KakaoTalk_20230529_111520457.jpg)
+
 ```bash
 drwxr-x---
 drwxr-xr-x
@@ -46,8 +48,16 @@ drwxr-xr-x
 - change mode
 - 권한을 설정해주는 명령어
 
+​    
+
+#### 기호표기법
+
 ```bash
 $ chmod 부여할권한 권한을수정할파일
+
+$ chmod +x test.txt # 모든 권한 부여
+$ chmod u+x test.txt # user에게 실행권한(x) 부여
+$ chmod o-r test.txt # others에게 읽기권한(r) 박탈
 ```
 
 - 부여받는 사용자
@@ -65,10 +75,14 @@ $ chmod 부여할권한 권한을수정할파일
 #### 팔진법
 
 ```bash
-chmod 777 파일명
+$ chmod 751 파일명
 ```
 
+![KakaoTalk_20230529_113226684](Linux(4).assets/KakaoTalk_20230529_113226684.jpg)
 
+- `r` : 4 
+- `w` : 2 
+- `x` : 1
 
 ​    
 
@@ -156,10 +170,13 @@ $ sudo adduser 유저명 그룹명
 
 ----
 
-## 환경
+## 2️⃣ 환경
+
+### 변수
 
 - 셀 변수(사용자가 정의)와 환경변수는 다름
 - 따옴표를 꼭 써야하는 것은 아님
+- 대소문자 구분 o
 
  ```bash
  $ printenv # 환경변수들을 보여줌
@@ -173,6 +190,7 @@ $ $변수명
 ```
 
 - 쉘변수정의
+- 해당 쉘 세션에서만 존재함
 
 ```bash
 $ 변수명=변수값
@@ -186,13 +204,105 @@ $ export 환경변수명=환경변수
 
 ​    
 
-PS1 변수 : 프롬프트 변경
+### Startup FIles 
 
-Startup Files
+#### 로그인 세션 파일
+
+1. `/etc/profile` 
+   - 모든 사용자의 전역설정
+2. `~/.bash_profile`
+   - 개별사용자의 개인 설정파일
+3. `~/.bash_login`
+   - `.bash_profile`파일을 찾을 수 없을 때 읽음
+4. `~/.profile`
+   - `.bash_profile`, `~/.bash_login` 파일 둘 다 찾을 수 없을 때 사용함
+
+​    
+
+#### 비로그인 세션 파일
+
+1. `/etc/bash.bashrc`
+   - 모든 사용자의 전역설정
+2. `~/.bashrc` 
+   - 사용자의 홈 디렉토리에 존재
+   - 해당 사용자만의 설정 저장
+
+​    
+
+### 프롬프트 변경
+
+- PS1 변수 활용
+
+```bash
+$ printenv | grep PS1
+```
+
+- 쉘환경에서의 프롬프트 설정
+
+```bash
+$ PS1='커스텀프롬프트'
+```
+
+- 개인사용자만의 프롬프트 설정
+
+```bash
+# .bashrc 진입
+$ vi .bashrc
+
+# .bashrc 내용수정
+export PS1=""
+
+# .bashrc 실행
+$ source .bashrc
+```
+
+​    
+
+### 별칭
+
+![image-20230529125121152](Linux(4).assets/image-20230529125121152.png)
+
+- 쉘환경에서의 별칭 설정
+
+```bash
+$ alias 사용할별칭='명령어'
+```
+
+- 개인사용자만의 별칭 설정
+
+```bash
+# .bashrc 진입
+$ vi .bashrc
+
+# .bashrc 내용수정
+alias 사용할별칭='명령어'
+
+# .bashrc 실행
+$ source .bashrc
+```
+
+
+
+> 별칭 별도 파일로 관리하기
+
+- `.bash_aliases` 파일 활용
+- `.bashrc` 파일에 `.bash_aliases` 파일 존재하면 이를 활용하도록 하는 명령어가 내장되어있음
+
+![image-20230529130026214](Linux(4).assets/image-20230529130026214.png)
+
+```bash
+# 홈 디렉토리에 `.bash_aliases` 파일 생성
+$ vi .bash_aliases
+
+# .bash_aliases 파일에 커스텀 alias 작성
+alias test="명령어"
+```
+
+   
 
 ---
 
-## bash script
+## 3️⃣ bash script
 
 ### shebang 
 
@@ -289,7 +399,7 @@ $ chmod +x 실행할파일
 
 ---
 
-## 크론 (Cron)
+## 4️⃣ 크론 (Cron)
 
 - 특정 간격이나 시간에 실행되도록 커맨드를 예약하는데 사용하는 서비스 
 - 모든 사용자는 자신의 작업을 예약하고 cronjob을 설정할 수 있는 자체테이블을 가지고 있음

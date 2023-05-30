@@ -186,8 +186,17 @@
 | ------------------------------------------------ | ------------------------------------------------------------ |
 | [Linux(1)](./TIL_date/BackEnd/Linux/Linux(1).md) | 터미널, 쉘, Argument, option, man, type, which, help, 날짜/시간 |
 | [Linux(2)](./TIL_date/BackEnd/Linux/Linux(2).md) | 경로, ls, pwd, cd, mkdir, touch, rm, rmdir                   |
-| [Linux(3)](./TIL_date/BackEnd/Linux/Linux(3).md) |                                                              |
-| [Linux(4)](./TIL_date/BackEnd/Linux/Linux(4).md) | 권한, 스크립트 ,cron                                         |
+| [Linux(3)](./TIL_date/BackEnd/Linux/Linux(3).md) | 파일보기, 표준스트림/redirection, 파이프                     |
+| [Linux(4)](./TIL_date/BackEnd/Linux/Linux(4).md) | 권한(chmod, su, chown, addgroup, adduser), 환경(변수, 별칭), 스크립트, cron |
+| [Linux(5)](./TIL_date/BackEnd/Linux/Linux(5).md) |                                                              |
+
+​    
+
+### Vim
+
+| Contents                         | Ex   |
+| -------------------------------- | ---- |
+| [Vim](./TIL_date/ETC/Vim/Vim.md) |      |
 
 ​    
 
@@ -260,14 +269,6 @@
 | [HTTP(2)](./TIL_date/ETC/HTTP/HTTP(2).md) | HTTP헤더,                                        |
 
 ​     
-
-### Vim
-
-| Contents                         | Ex   |
-| -------------------------------- | ---- |
-| [Vim](./TIL_date/ETC/Vim/Vim.md) |      |
-
-​    
 
 ### 정규표현식
 

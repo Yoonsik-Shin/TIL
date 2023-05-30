@@ -84,7 +84,41 @@ function BPage(props: IProps): JSX.Element {  // JSX.Element는 생략가능
 const [user, setUser] = useState<string | null>('');
 ```
 
-​       
+​    
+
+### Event 타입지정
+
+#### onClick
+
+```tsx
+const onClickButton = (e: MouseEvent<HTMLButtonElement>) => {}
+
+<button onClick={onClickButton} />
+```
+
+​    
+
+#### onChange
+
+```tsx
+const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {} 
+
+<input onChange={onChangeEvent} />
+```
+
+​    
+
+#### onSubmit 
+
+```tsx
+const onSubmitEvent = (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+}
+
+<form onSubmit={onSubmitEvent} ></form>
+```
+
+​      
 
 ### Redux
 
