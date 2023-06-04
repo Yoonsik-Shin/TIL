@@ -261,6 +261,16 @@
 
 ## 6. 기타
 
+### AWS
+
+| Contents                                | Ex   |
+| --------------------------------------- | ---- |
+| [AWS (1)](./TIL_date/ETC/AWS/AWS(1).md) | IAM  |
+| [AWS (2)](./TIL_date/ETC/AWS/AWS(2).md) | EC2  |
+|                                         |      |
+
+​     
+
 ### HTTP
 
 | Contents                                  | Ex                                               |
