@@ -129,7 +129,7 @@
 | [JavaScript5](./TIL_date/FrontEnd/JS/JavaScript5.md)     | DOM 이벤트                                                   |
 | [JavaScript6](./TIL_date/FrontEnd/JS/JavaScript6.md)     | Promise, async, await, 콜스택, 콜백지옥                      |
 | [JavaScript7](./TIL_date/FrontEnd/JS/JavaScript7.md)     | AJAX, API, JSON, HTTP, XHR, Fetch, Axios                     |
-| [JavaScript8](./TIL_date/FrontEnd/JS/JavaScript8.md)     | OOP, 프로토타입, 팩토리함수, 생성자함수                      |
+| [JavaScript8](./TIL_date/FrontEnd/JS/JavaScript8.md)     | OOP, 프로토타입, 팩토리함수, 생성자함수, 클래스              |
 | [JavaScript9](./TIL_date/FrontEnd/JS/JavaScript9.md)     | 브라우저 내 저장 공간 (LocalStorage, SessionStorage, IndexedDB) |
 | [JS클린코딩(1)](./TIL_date/FrontEnd/JS/JS클린코딩(1).md) | 변수, 타입, 경계, 분기 다루기                                |
 | [JS클린코딩(2)](./TIL_date/FrontEnd/JS/JS클린코딩(2).md) | 배열, 객체, 함수 다루기                                      |

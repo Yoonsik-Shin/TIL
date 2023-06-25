@@ -4,7 +4,7 @@
 
 ## 1️⃣ 기초
 
-### Node.js?
+### Node.js
 
 - JavaScript는 브라우저에서만 실행 가능했었음
 - node.js를 통해 로컬 환경에서 JavaScript를 실행할 수 있게 해줌
@@ -13,26 +13,22 @@
 - SNS, 채팅서비스등에 많이 사용
 - 수학연산, 이미지 처리등의 라이브러리가 부족하고 처리속도가 떨어지는 단점이 있음
 
+​    
 
-
-### npm? 
+### npm
 
 - Node Package Manager
 - 노드 기반에서 실행될 수 있는 모듈을 관리
 - [npmjs.com](https://www.npmjs.com/)
 
+​    
 
-
-### yarn?
+### yarn
 
 - npm 개량판
 - 페이스북이 개발
 
-
-
-> [CLI 정리](../BackEnd/Terminal.md)
-
-
+​    
 
 ### node 파일실행
 
@@ -78,7 +74,7 @@ getToken(6)
 
 ```js
 // index.js
-import {checkValidationPhone, getToken, sendTokenToSMS} from './phone.js'
+import { checkValidationPhone, getToken, sendTokenToSMS } from './phone.js'
 
 function createTokenOfPhone(phoneNumber, digit) {
   // 1. 핸드폰번호 자릿수 맞는지 확인하기
