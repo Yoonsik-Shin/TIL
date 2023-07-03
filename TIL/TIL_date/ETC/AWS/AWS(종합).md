@@ -461,7 +461,7 @@
 - 가용영역 기준이 아닌 가용영역내에 위치한 대상 자원을 기준으로 균일한 비중으로 부하를 분산
 - 가용영역별로 인스턴스 수량이 불균형하게 위치할 때, 트래픽 비중을 보정
 
-<img src="AWS(종합).assets/image-20230702202903081.png" alt="image-20230702202903081" style="zoom: 80%;" /><img src="AWS(종합).assets/image-20230702202922457.png" alt="image-20230702202922457" style="zoom: 80%;" />
+<img src="AWS(종합).assets/image-20230702202903081.png" alt="image-20230702202903081" style="zoom: 67%;" /><img src="AWS(종합).assets/image-20230702202922457.png" alt="image-20230702202922457" style="zoom: 67%;" />
 
 ​    
 
@@ -486,3 +486,180 @@
 | 보안그룹            | 사용                         | 미사용              |
 | 교차영역 로드밸런서 | 기본값으로 활성화            | 기본값으로 비활성화 |
 
+​    
+
+---
+
+## Route53
+
+- AWS에서 제공하는 관리형 DNS 서비스
+- 도메인 네임 등록
+  - 도메인 네임의 TLD에 해당하는 등록소에 도메인 등록작업을 하는 등록대행소 역할을 수행 (권한있는 네임서버)
+
+- 호스팅 영역 생성
+  - 퍼블릭 호스팅 영역과 프라이빗 호스팅 영역으로 분류됨
+  - 권한있는 네임서버 정의 
+    - ns-xxx.awsdns-yy.org.
+    - ns-xxx.awsdns-yy.com.
+    - ns-xxx.awsdns-yy.net.
+    - ns-xxx.awsdns-yy.co.uk.
+
+- 레코드 작성
+  - www.abc.com CNAME abc.com
+  - abc.com A 13.05.132.32
+  - abc. NS ns-xxx.awsdns-yy.com
+
+
+​     
+
+> 라우팅 정책
+
+- 레코드를 생성할 때 라우팅 정책을 지정하여 DNS 요청에 대한 응답 방식을 정의하는 것
+
+1. 단순 라우팅 (Simple Routing)
+
+   - 도메인에 대한 대상을 지정 (도메인에 IPv4 주소 매핑)
+   - 다수의 대상을 지정하면 랜덤하게 라우팅함
+
+   <img src="AWS(종합).assets/KakaoTalk_20230703_225719807.jpg" alt="KakaoTalk_20230703_225719807" style="zoom:50%;" />
+
+2. 가중치 기반 라우팅 (Weighted Routing)
+
+   - 도메인에 대한 다수 대상을 비중에 따라 라우팅
+   - 가중치 범위 : 0 ~ 255 
+
+   <img src="AWS(종합).assets/KakaoTalk_20230703_225730796.jpg" alt="KakaoTalk_20230703_225730796" style="zoom:50%;" />
+
+3. 장애 조치 라우팅 (Failover Routing)
+
+   - 도메인에 대한 다수 대상을 액티브/패시브 구조로 지정하고 상태확인을 통해 라우팅
+
+   <img src="AWS(종합).assets/KakaoTalk_20230703_225750818.jpg" alt="KakaoTalk_20230703_225750818" style="zoom:80%;" />
+
+4. 지연시간 기반 라우팅 (Letency Routing)
+   - 리전별로 분리된 대상으로 라우팅시, 지연시간을 확인해 최적의 경로를 선택
+
+5. 지리위치 라우팅 (Geolocation Routing)
+   - 사용자 PC가 지정하는 DNS서버의 지리적 위치를 파악해 인접한 리전으로 경로를 선택
+
+6. 지리근접 라우팅 (Geoproximity Routing)
+   - 지리위치 라우팅과 동일한 형태에서, 영향도 조정으로 값을 제어할 수 있는 라우팅방식
+
+7. 다중값 응답 라우팅 (Multi-Value Answer Routing)
+   - DNS 요청에 대해 다수의 값을 반환
+
+
+
+### DNS
+
+<img src="AWS(종합).assets/KakaoTalk_20230703_225645006.jpg" alt="KakaoTalk_20230703_225645006" style="zoom:67%;" />
+
+- Domain Name System
+
+- 통신을 위한 주소체계를 문자형태로 매핑하여 연결한 것
+
+- DNS 프로토콜은 UDP 53 포트번호를 사용
+
+- 도메인 네임 = SLD + TLD
+
+  <img src="AWS(종합).assets/KakaoTalk_20230703_225658086.jpg" alt="KakaoTalk_20230703_225658086" style="zoom:67%;" />
+
+
+
+> 레코드 유형
+
+- 도메인에 대한 요청 처리 방법에 대한 다양한 DNS 레코드 유형이 존재함
+
+1. `A`
+   - 도메인을 IPv4 주소에 매핑
+   - `abc.com A 13.17.102.3`
+2. `AAAA`
+   - 도메인을 IPv6 주소에 매핑
+   - `abc.com AAAA 2000:B20::3000`
+3. `NS`
+   - 도메인에 대해 네임서버를 정의
+   - `com NS abc.com`
+4. `CNAME`
+   - 도메인의 별칭 정의
+   - 도메인 네임을 다른 도메인 네임으로 정의
+   - `www.aaa.net CNAME abc.com`
+5. etc : SOA, MX, SRV, TXT, PTR, ANY
+
+
+
+### 네임서버
+
+- 네임서버는 계층적인 구조로 이루어짐
+
+- 상위 네임서버가 하위 네임서버를 관리함
+
+  
+
+> 종류
+
+1. SLD 네임 서버
+   - `learncode.com.`
+   - 실제 도메인 네임의 최종 정보를 가지고 있는 서버
+   - 권한 있는 네임서버(Authoritative Name Server) or 신뢰하는 네임서버라고도 불림
+2. TLD 네임서버
+   - `.com.`
+   - SLD 서버를 알고 있음
+   - SLD 서버에서 관리하는 서브도메인은 알지못함
+3. 루트 네임 서버
+   - `.`
+   - 전세계의 TLD 네임 서버의 주소를 알고 있음
+   - SLD 네임 서버까지는 알고 있지 않음
+
+​    
+
+> 권한 없는 응답
+
+- 캐싱을 통해 권한있는 네임서버에 묻지 않고 DNS 서버가 자체적으로 응답하는 것
+
+​    
+
+### 실습
+
+#### 단순 라우팅 정책
+
+>  A레코드 : 인스턴스1 + 인스턴스2
+
+![image-20230703130803121](AWS(종합).assets/image-20230703130803121.png)
+
+![image-20230703130827248](AWS(종합).assets/image-20230703130827248.png)
+
+![image-20230703131902395](AWS(종합).assets/image-20230703131902395.png)
+
+> A 레코드 : ALB
+
+![image-20230703132444516](AWS(종합).assets/image-20230703132444516.png)
+
+​    
+
+#### 가중치 라우팅 정책
+
+![image-20230703133223788](AWS(종합).assets/image-20230703133223788.png)
+
+![image-20230703133303828](AWS(종합).assets/image-20230703133303828.png)
+
+​    
+
+#### 장애조치 라우팅 정책
+
+![image-20230703133748551](AWS(종합).assets/image-20230703133748551.png)
+
+![image-20230703133847306](AWS(종합).assets/image-20230703133847306.png)
+
+![image-20230703133906512](AWS(종합).assets/image-20230703133906512.png)
+
+![image-20230703134043409](AWS(종합).assets/image-20230703134043409.png)
+
+![image-20230703134103455](AWS(종합).assets/image-20230703134103455.png)
+
+![image-20230703134313647](AWS(종합).assets/image-20230703134313647.png)
+
+![image-20230703134334567](AWS(종합).assets/image-20230703134334567.png)
+
+![image-20230703134736408](AWS(종합).assets/image-20230703134736408.png)
+
+![image-20230703134721687](AWS(종합).assets/image-20230703134721687.png)
