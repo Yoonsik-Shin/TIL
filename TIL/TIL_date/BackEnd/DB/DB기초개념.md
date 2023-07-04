@@ -7,17 +7,16 @@
 ### 1. DB (Database) : 데이터 베이스
 
 - DB 장점
-  
   - 데이터 중복 최소화
-  
+
   - 데이터 무결성 (정확한 정보 보장)
-  
+
   - 데이터 일관성
-  
+
   - 데이터 독립성
-  
+
   - 데이터 표준화
-  
+
   - 데이터 보안유지
 
 ​    
@@ -176,16 +175,14 @@ sqlite> .table
 
 ---
 
-## 3️⃣ SQL _CRUD
+## 3️⃣ SQL  CRUD
 
 #### 1. 테이블 생성 및 삭제  (CREATE)
 
 ##### 1-1. CREATE
 
 ```sql
-CREATE TABLE <테이블명> (
-    <컬럼명> <데이터타입> PRIMARY KEY,
-);
+
 ```
 
 ```sqlite
@@ -281,8 +278,6 @@ INSERT INTO classmates (name, age, address) VALUES ('홍길동', 500, '서울');
 
 - 테이블에서 데이터를 조회
 
-​    
-
 > SELECT의 다양한 절(Clause)
 
 - LIMIT 
@@ -329,3 +324,85 @@ INSERT INTO classmates (name, age, address) VALUES ('홍길동', 500, '서울');
   ```sql
   SELECT DISTINCT 컬럼 FROM <테이블명>;
   ```
+
+
+
+---
+
+Mysql
+
+
+
+```sql
+mysql> show databases;
+```
+
+![image-20230704133429871](DB기초개념.assets/image-20230704133429871.png)
+
+- 데이터베이스 생성
+
+```sql
+mysql> create database <데이터베이스명>;
+```
+
+- 데이터베이스 삭제
+
+```sql
+mysql> drop database <데이터베이스명>;
+```
+
+- 데이터베이스 사용 / 확인
+
+```sql
+mysql> use <데이터베이스명>;
+
+# 사용중인 DB 보기
+mysql> select database();
+```
+
+
+
+데이터 타입
+
+int
+
+varchar
+
+
+
+- 테이블 생성
+
+```sql
+create table <테이블명> (
+    <컬럼명> <데이터타입> PRIMARY KEY,
+);
+```
+
+- 테이블 보기
+
+```sql
+mysql> show tables;
+```
+
+- 테이블 열 정보보기
+
+```sql
+mysql> show columns from <테이블명> # 방법1
+mysql> desc <테이블명> # 방법2
+```
+
+- 테이블 삭제
+
+```sql
+mysql> drop table <테이블명>
+```
+
+
+
+> 주석
+
+```sql
+-- 주석1
+# 주석2
+```
+

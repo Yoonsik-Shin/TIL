@@ -21,13 +21,14 @@ $ npx create-next-app
 ```bash
 프로젝트파일명
 ├── node_modules   # 라이브러리 / 프레임워크 저장소
-├── pages          # 페이지 화면
 ├── public         # 사진, 아이콘, 폰트
 ├── styles         # css파일
 ├── .gitignore     # git에서 제외할 파일
 ├── package.json   # 기본 메뉴얼
 ├── README.md      # 상세 설명서
-└── yarn.lock      # 버전 잠금 파일
+├── yarn.lock      # 버전 잠금 파일
+└── pages          # 페이지 화면
+	└──	_app.tsx   # 모든 페이지 공통설정
 ```
 
 ​    
@@ -64,7 +65,7 @@ $ yarn install
 
 ​    
 
-### 페이지 렌더링
+### 페이지 렌더링 (V12)
 
 - `pages`폴더안에 __주소로 사용할 이름으로 폴더 작성__후 그 폴더안에 `index.js (ts/tsx)` 파일 작성
 
@@ -383,11 +384,11 @@ export default function Layout(props) {
   return (
   	<>
     	<LayoutHeader />
-      <LayoutBanner />
-      <LayoutNavigation />
+      	<LayoutBanner />
+      	<LayoutNavigation />
     	<LayoutBodyWrapper>
     		<LayoutSidebar />
-      	<LayoutBody>{props.children}</LayoutBody>
+      		<LayoutBody>{props.children}</LayoutBody>
     	</LayoutBodyWrapper>
     	<LayoutFooter />
     </>

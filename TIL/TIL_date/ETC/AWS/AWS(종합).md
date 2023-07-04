@@ -76,41 +76,34 @@
 ### 클라우드 서비스
 
 1. 컴퓨팅 서비스
-
-- 클라우드 서버자원에서 가상서버를 생성하고 관리
-- 종류 : EC2, ECS, EKS, Lambda, Ligthsail
+   - 클라우드 서버자원에서 가상서버를 생성하고 관리
+   - 종류 : EC2, ECS, EKS, Lambda, Ligthsail
 
 2. 네트워킹/컨텐츠 전송
-
-- 클라우드에서 생성한 다양한 자원들의 내/외부 통신을 위한 서비스
-- 종류 : VPC, ELB, Route53, Transit Gateway, Global Accelerator, Direct Connect, VPC Peering, CloudFront, Site-to-Site VPN
+   - 클라우드에서 생성한 다양한 자원들의 내/외부 통신을 위한 서비스
+   - 종류 : VPC, ELB, Route53, Transit Gateway, Global Accelerator, Direct Connect, VPC Peering, CloudFront, Site-to-Site VPN
 
 3. 스토리지 서비스
-
-- 클라우드에 안정적이고 확장성있는 데이터 스토어
-- 종류 : S3, EBS, EFS
+   - 클라우드에 안정적이고 확장성있는 데이터 스토어
+   - 종류 : S3, EBS, EFS
 
 4. 데이터베이스 서비스
-
-- 클라우드 상에서 완전관리되는 데이터베이스
-- 종류 : Aurora, RDS, DynamoDB
+   - 클라우드 상에서 완전관리되는 데이터베이스
+   - 종류 : Aurora, RDS, DynamoDB
 
 ​    
 
 ### 자원관리
 
 1. AWS 관리콘솔 (Management Console)
-
-- 웹 기반의 사용자 인터페이스를 제공
+   - 웹 기반의 사용자 인터페이스를 제공
 
 2. AWS CLI (Command Line Interface)
-
-- shell 프로그램에서 명령어 기반으로 AWS 관리
-- 오픈소스로 만들어진 awscli라는 도구를 사용하여 AWS와 상호작용함
+   - shell 프로그램에서 명령어 기반으로 AWS 관리
+   - 오픈소스로 만들어진 awscli라는 도구를 사용하여 AWS와 상호작용함
 
 3. AWS SDK (Software Development Kit)
-
-- AWS자원을 프로그래밍에서 사용하기 위해 제공하는 라이브러리
+   - AWS자원을 프로그래밍에서 사용하기 위해 제공하는 라이브러리
 
 ​     
 
