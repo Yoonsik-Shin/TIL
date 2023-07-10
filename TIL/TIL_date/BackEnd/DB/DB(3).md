@@ -1,7 +1,5 @@
 # DB (3)
 
-​    
-
 ## DML
 
 ### 1️⃣ SELECT
@@ -10,7 +8,7 @@
 
 ​    
 
-#### 실행 순서
+#### 1. 실행 순서
 
 - FROM > WHERE > GROUP BY > HAVING > SELECT > ORDER BY
 
@@ -26,7 +24,7 @@ LIMIT 숫자 OFFSET 숫자; # 7. 특정 위치의 값을 가져온다.
 
 ​    
 
-#### 별칭 (Alias)
+#### 2. 별칭 (Alias)
 
 - 컬럼명이나 테이블명이 길어 다른 명칭으로 확인하고 싶을때 사용
 - AS를 생략하여 공백으로 표현가능
@@ -40,7 +38,7 @@ SELECT last_name AS "이름 성" FROM users WHERE "이름 성" = '김';
 
 ​    
 
-#### 절 (Clause)
+#### 3. 절 (Clause)
 
 ##### WHERE
 
@@ -147,7 +145,9 @@ SELECT * FROM <테이블명> WHERE 조건;
 - GROUP BY의 결과는 정렬되지 않음 > ORDER BY를 통해 정렬
 
 ```sql
-SELECT * FROM <테이블명> GROUP BY 컬럼1, 컬럼2, ...;
+SELECT 컬럼명 FROM <테이블명> GROUP BY 컬럼명;
+SELECT 컬럼명, 집계함수 FROM <테이블명> GROUP BY 컬럼명;
+SELECT 컬럼명1 FROM <테이블명> GROUP BY 컬럼명1, 컬럼명2, ...;
 ```
 
 ​    
@@ -250,7 +250,7 @@ SELECT DISTINCT 컬럼 FROM <테이블명>;
 
 ​    
 
-#### 문자열 함수
+#### 4. 문자열 함수
 
 ```sql
 SUBSTR(문자열, start, length)    # 문자열 자르기 (시작 인덱스 = 1, 마지막 인덱스 = -1)
@@ -278,7 +278,7 @@ RTRIM(문자열)                    # 문자열 오른쪽 공백제거
 
 ​    
 
-#### 숫자 함수
+#### 5. 숫자 함수
 
 ```sql
 ABS(숫자)         # 절대값
@@ -293,7 +293,7 @@ SQRT(숫자)        # 제곱근
 
 ​    
 
-#### 산술연산자
+#### 6. 산술연산자
 
 -  `+`, `-`, `*`, `/` 와 () 활용가능
 
@@ -303,26 +303,42 @@ SELECT age+1 FROM users;
 
 ​    
 
-#### 집계함수
+#### 7. 집계함수
 
 - Aggregate Function
 - 값의 집합에 대한 계산을 수행하고 `단일값` 반환 ( = 여러행으로부터 하나의 결과값 반환)
+- Group By도 포함
 - SELECT 구문에서만 사용가능 ❗
 
 > 집계함수 종류
 
 1. COUNT : 그룹의 항목수
-2. AVG : 평균
-3. MAX
-4. MIN
-5. SUM
 
 ```sql
-SELECT COUNT(컬럼) FROM 테이블이름;
-SELECT AVG(컬럼) FROM 테이블이름;
-SELECT SUM(컬럼) FROM 테이블이름;
-SELECT MIN(컬럼) FROM 테이블이름;
-SELECT MAX(컬럼) FROM 테이블이름;
+SELECT COUNT(컬럼명) FROM 테이블명
+SELECT COUNT(DISTINCT 컬럼명) FROM 테이블명;
+```
+
+2. AVG : 평균
+
+````sql
+SELECT AVG(컬럼명) FROM 테이블명;
+````
+
+3. MAX / MIN
+   - 숫자일 경우, 최대/최소값 반환
+   - 문자일 경우, 알파벳 순서중 가장 앞/뒤에 있는 값 반환
+
+```sql
+SELECT MAX(컬럼명) FROM 테이블명;
+SELECT MIN(컬럼명) FROM 테이블명;
+```
+
+4. SUM
+   - 문자일 경우, 0으로 취급
+
+```sql
+SELECT SUM(컬럼명) FROM 테이블명;
 ```
 
 ​    

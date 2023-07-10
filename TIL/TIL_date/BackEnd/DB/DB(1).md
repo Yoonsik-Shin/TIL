@@ -1,7 +1,5 @@
 # DB (1)
 
-​    
-
 ## 1️⃣ DB, RDB, SQL 개념
 
 ### Database

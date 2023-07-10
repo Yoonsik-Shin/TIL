@@ -129,14 +129,32 @@ ORDER BY last_name;
 
 ### 3️⃣ 날짜 / 시간 다루기
 
-- 현재 날짜 / 시간
+- 현재 날짜 + 시간 : `NOW`, `CURRENT_TIMESTAMP`
 
 ```sql
+-- yyyy-mm-dd hh:mm:ss
 SELECT NOW()
+select CURRENT_TIMESTAMP();
 >> 2023-02-23 00:00:00
 ```
 
-- 날짜 / 시간 형식 변환
+- 현재 날짜 : `CURDATE`, `CURRENT_DATE`
+
+```sql
+-- yyyy-mm-dd / 2023-07-10
+select curdate();
+select CURRENT_DATE();
+```
+
+- 현재 시간 : `CURTIME`, `CURRENT_TIME`
+
+```sql
+-- hh:mm:ss / 15:30:20
+select curtime();
+select CURRENT_TIME();
+```
+
+- 날짜 / 시간 형식 변환 : `DATE_FORMAT`
 
 ```sql
  SELECT DATE_FORMAT(NOW(), "%Y-%m")
@@ -165,7 +183,7 @@ SELECT NOW()
 
 
 
-- 날짜 더하기 빼기
+- 날짜 더하기 빼기 : `DATE_ADD`, `DATE_SUB`
 
 ```sql
 SELECT DATE_ADD('2022-02-23', INTERVAL 1 DAY); -- 날짜에 하루를 더합니다.
@@ -175,7 +193,7 @@ SELECT DATE_SUB('2022-02-23', INTERVAL 1 WEEK); -- 날짜에서 일주일을 뺍
 >> 2022-02-16
 ```
 
-- 날짜 차이 계산하기
+- 날짜 차이 계산하기 : `DATEDIFF`
 
 > ❗주의점 : 1일 차이 주의
 
@@ -199,16 +217,40 @@ SELECT MONTH('2022-02-23'); -- 날짜에서 월을 추출합니다.
 SELECT DAY('2022-02-23'); -- 날짜에서 일을 추출합니다.
 ```
 
+- 날짜 요일 추출하기 (`DAYOFWEEK`, `DATYNAME`)
+
+```sql
+-- 요일에 대한 숫자반환
+SELECT DAYOFWEEK(date); 
+>> 일: 1, 월: 2, ..., 토: 7
+
+-- 요일이름 반환
+SELECT DAYNAME(date);
+>> Monday, Tuesday
+```
+
+
+
 - 연월 단위로 그룹핑
 
 ```sql
 SELECT 
-		DATE_FORMAT(order_date, '%Y-%m') AS order_month, 
-		COUNT(*) AS orders_count
+    DATE_FORMAT(order_date, '%Y-%m') AS order_month, 
+    COUNT(*) AS orders_count
 FROM 
-		orders
+    orders
 GROUP BY
-		order_month;
+    order_month;
+```
+
+​    
+
+- 시간 추출하기
+
+```sql
+SELECT YEAR('2022-02-23'); -- 날짜에서 연도를 추출합니다.
+SELECT MONTH('2022-02-23'); -- 날짜에서 월을 추출합니다.
+SELECT DAY('2022-02-23'); -- 날짜에서 일을 추출합니다.
 ```
 
 ​    

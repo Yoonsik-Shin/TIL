@@ -81,16 +81,16 @@
 
 ## 3. 데이터베이스
 
-| Contents                                                     | Ex                                  |
-| ------------------------------------------------------------ | ----------------------------------- |
-| [DB (1)](./TIL_date/BackEnd/DB/DB(1).md)                     | DB, RDB, RDBMS, SQL 개념            |
-| [DB (2)](./TIL_date/BackEnd/DB/DB(2).md)                     | DB다루기, DDL, CREATE, ALTER, DROP  |
-| [DB (3)](./TIL_date/BackEnd/DB/DB(3).md)                     | DML, SELECT, INSERT, UPDATE, DELETE |
-| [DB (4)](./TIL_date/BackEnd/DB/DB(4).md)                     | CASE, 시간/날짜, 서브쿼리           |
-| [조인](./TIL_date/BackEnd/DB/Join.md) / [실습5](./TIL_date/BackEnd/DB/05실습.md) | 조인                                |
-| [데이터 모델링](./TIL_date/BackEnd/DB/데이터모델링.md)       | 데이터 모델링, ERD                  |
-| [ORM](./TIL_date/BackEnd/DB/ORM.md) / [실습7](./TIL_date/BackEnd/DB/07실습.md) | ORM 개념, 조작                      |
-| [QuerySet API](./TIL_date/BackEnd/DB/QuerySet_API.md) / [실습8](./TIL_date/BackEnd/DB/08실습.md) | OuerySet 메소드, 1:N 관계           |
+| Contents                                                     | Ex                                             |
+| ------------------------------------------------------------ | ---------------------------------------------- |
+| [DB (1)](./TIL_date/BackEnd/DB/DB(1).md)                     | DB, RDB, RDBMS, SQL 개념                       |
+| [DB (2)](./TIL_date/BackEnd/DB/DB(2).md)                     | DB manage, Data Type, DDL, CREATE, ALTER, DROP |
+| [DB (3)](./TIL_date/BackEnd/DB/DB(3).md)                     | DML, SELECT, INSERT, UPDATE, DELETE            |
+| [DB (4)](./TIL_date/BackEnd/DB/DB(4).md)                     | CASE, 시간/날짜, 서브쿼리                      |
+| [조인](./TIL_date/BackEnd/DB/Join.md)                        | 조인                                           |
+| [데이터 모델링](./TIL_date/BackEnd/DB/데이터모델링.md)       | 데이터 모델링, ERD                             |
+| [ORM](./TIL_date/BackEnd/DB/ORM.md) / [실습7](./TIL_date/BackEnd/DB/07실습.md) | ORM 개념, 조작                                 |
+| [QuerySet API](./TIL_date/BackEnd/DB/QuerySet_API.md) / [실습8](./TIL_date/BackEnd/DB/08실습.md) | OuerySet 메소드, 1:N 관계                      |
 
 ​    
 
@@ -120,19 +120,20 @@
 
 ### JavaScript
 
-| Contents                                                 | Ex                                                           |
-| -------------------------------------------------------- | ------------------------------------------------------------ |
-| [JavaScript1](./TIL_date/FrontEnd/JS/JavaScript1.md)     | JS 기초, 변수, 기본 메서드, 템플릿 리터럴, tagged literal    |
-| [JavaScript2](./TIL_date/FrontEnd/JS/JavaScript2.md)     | 배열, 객체, for, while, 함수, 메서드, this, try문            |
-| [JavaScript3](./TIL_date/FrontEnd/JS/JavaScript3.md)     | 배열 메서드, 최신 기능                                       |
-| [JavaScript4](./TIL_date/FrontEnd/JS/JavaScript4.md)     | DOM 기초                                                     |
-| [JavaScript5](./TIL_date/FrontEnd/JS/JavaScript5.md)     | DOM 이벤트                                                   |
-| [JavaScript6](./TIL_date/FrontEnd/JS/JavaScript6.md)     | Promise, async, await, 콜스택, 콜백지옥                      |
-| [JavaScript7](./TIL_date/FrontEnd/JS/JavaScript7.md)     | AJAX, API, JSON, HTTP, XHR, Fetch, Axios                     |
-| [JavaScript8](./TIL_date/FrontEnd/JS/JavaScript8.md)     | OOP, 프로토타입, 팩토리함수, 생성자함수, 클래스              |
-| [JavaScript9](./TIL_date/FrontEnd/JS/JavaScript9.md)     | 브라우저 내 저장 공간 (LocalStorage, SessionStorage, IndexedDB) |
-| [JS클린코딩(1)](./TIL_date/FrontEnd/JS/JS클린코딩(1).md) | 변수, 타입, 경계, 분기 다루기                                |
-| [JS클린코딩(2)](./TIL_date/FrontEnd/JS/JS클린코딩(2).md) | 배열, 객체, 함수 다루기                                      |
+| Contents                                                    | Ex                                                           |
+| ----------------------------------------------------------- | ------------------------------------------------------------ |
+| [JavaScript1](./TIL_date/FrontEnd/JS/JavaScript1.md)        | JS 기초, 변수, 기본 메서드, 템플릿 리터럴, tagged literal    |
+| [JavaScript2](./TIL_date/FrontEnd/JS/JavaScript2.md)        | 배열, 객체, for, while, 함수, 메서드, this, try문            |
+| [JavaScript3](./TIL_date/FrontEnd/JS/JavaScript3.md)        | 배열 메서드, 최신 기능                                       |
+| [JavaScript4](./TIL_date/FrontEnd/JS/JavaScript4.md)        | DOM 기초                                                     |
+| [JavaScript5](./TIL_date/FrontEnd/JS/JavaScript5.md)        | DOM 이벤트                                                   |
+| [JavaScript6](./TIL_date/FrontEnd/JS/JavaScript6.md)        | Promise, async, await, 콜스택, 콜백지옥                      |
+| [JavaScript7](./TIL_date/FrontEnd/JS/JavaScript7.md)        | AJAX, API, JSON, HTTP, XHR, Fetch, Axios                     |
+| [JavaScript8](./TIL_date/FrontEnd/JS/JavaScript8.md)        | OOP, 프로토타입, 팩토리함수, 생성자함수, 클래스              |
+| [JavaScript9](./TIL_date/FrontEnd/JS/JavaScript9.md)        | 브라우저 내 저장 공간 (LocalStorage, SessionStorage, IndexedDB) |
+| [JS클린코딩(1)](./TIL_date/FrontEnd/JS/JS클린코딩(1).md)    | 변수, 타입, 경계, 분기 다루기                                |
+| [JS클린코딩(2)](./TIL_date/FrontEnd/JS/JS클린코딩(2).md)    | 배열, 객체, 함수 다루기                                      |
+| [JavaScript (10)](./TIL_date/FrontEnd/JS/JavaScript(10).md) |                                                              |
 
 ​    
 
