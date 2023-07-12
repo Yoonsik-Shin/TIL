@@ -48,7 +48,7 @@ SELECT last_name AS "이름 성" FROM users WHERE "이름 성" = '김';
 SELECT * FROM <테이블명> WHERE 조건;
 ```
 
-
+​     
 
 > WHERE절에서 사용할 수 있는 연산자
 
@@ -58,11 +58,14 @@ SELECT * FROM <테이블명> WHERE 조건;
 
    ```sql
    WHERE name = "shin"
+   WHERE age <= 34
+   WHERE year >= 2000
    ```
 
 2. 논리연산자
 
    - 종류 : `AND`, `OR`, `NOT`
+   - 조건이 true면 1 반환, false이면 0 반환
    - 논리 연산자 주의사항
 
    ```sql
@@ -77,10 +80,16 @@ SELECT * FROM <테이블명> WHERE 조건;
 
    ```sql
    WHERE 컬럼 BETWEEN a AND b
+   WHERE 컬럼 NOT BETWEEN a AND b
    ```
 
 4. IN(`a`, `b`, `c`, ...)
    - IN 속 목록중 값이 하나라도 일치할 때
+
+   ```sql
+   WHERE 컬럼 IN ('a', 'b', 'c')
+   WHERE 컬럼 NOT IN ('a', 'b', 'c')
+   ```
 
 5. LIKE
 
@@ -95,10 +104,11 @@ SELECT * FROM <테이블명> WHERE 조건;
 
      ```sql
      SELECT * FROM <테이블명> WHERE <컬럼> LIKE '패턴';
+     SELECT * FROM <테이블명> WHERE <컬럼> NOT LIKE '패턴';
      ```
-
+     
      > 패턴 예시
-
+     
      | 패턴           | 의미                                          |
      | -------------- | --------------------------------------------- |
      | 2%             | 2로 시작하는 값                               |
@@ -109,6 +119,19 @@ SELECT * FROM <테이블명> WHERE 조건;
      | 2\_%\_% / 2__% | 2로 시작하고 적어도 3자리인 값                |
 
 6. IS NULL / IS NOT NULL
+
+   - null인 행 다루기
+
+   ```sql
+   -- NULL인 행만 가져오기
+   WHERE 컬럼명 IS NULL
+   
+   -- NULL이 아닌 행만 가져오기
+   WHERE 컬럼명 IS NOT NULL 
+   
+   -- 틀린방법
+   WHERE 컬럼명 = NULL 
+   ```
 
 7. 부정연산자
 

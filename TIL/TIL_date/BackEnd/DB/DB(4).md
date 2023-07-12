@@ -24,12 +24,15 @@ SELECT
 		WHEN age < 18 THEN '청소년'
 		WHEN age <= 30 THEN '청년'
 		WHEN age <= 64 THEN '중장년'
+		ELSE '기타'
 	END
 FROM users
 LIMIT 15;
 ```
 
 ​    
+
+---
 
 ### 2️⃣ 서브쿼리
 
@@ -127,6 +130,8 @@ ORDER BY last_name;
 
 ​    
 
+---
+
 ### 3️⃣ 날짜 / 시간 다루기
 
 - 현재 날짜 + 시간 : `NOW`, `CURRENT_TIMESTAMP`
@@ -181,8 +186,6 @@ select CURRENT_TIME();
 | %Y     | 4자리 연도         |
 | %y     | 2자리 연도         |
 
-
-
 - 날짜 더하기 빼기 : `DATE_ADD`, `DATE_SUB`
 
 ```sql
@@ -202,14 +205,14 @@ SELECT DATEDIFF('2022-02-28', '2022-02-23'); -- 두 날짜 간의 차이(일)를
 >> 5
 ```
 
-- 날짜 비교
+- 날짜 비교 (`비교연산자`)
 
 ```sql
 -- order_date가 2022-02-23 이후인 주문 정보를 조회합니다.
 SELECT * FROM orders WHERE order_date > '2022-02-23'; 
 ```
 
-- 날짜 추출하기
+- 날짜 추출하기 (`YEAR`, `MONTH`, `DAY`)
 
 ```sql
 SELECT YEAR('2022-02-23'); -- 날짜에서 연도를 추출합니다.
@@ -255,12 +258,18 @@ SELECT DAY('2022-02-23'); -- 날짜에서 일을 추출합니다.
 
 ​    
 
+---
+
 ### 4️⃣ 실습 개념 추가정리
 
 ```sql
 -- Alias 설정시 주의사항
 한글 띄어쓰기 사용시 작은 따옴표 대신 `큰 따옴표 ("")` 사용해야함
 ```
+
+​    
+
+### strftime
 
 ```sql
 -- strftime 함수 > 문자열로 반환
@@ -270,6 +279,10 @@ strftime('형식', 컬럼)
 strftime('%Y', 컬럼명)
 >> '2013'
 ```
+
+​     
+
+### cast
 
 ```sql
 -- cast 함수 : 형식변환

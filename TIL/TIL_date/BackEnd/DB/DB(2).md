@@ -204,6 +204,7 @@ create table <테이블명> (
 - AUTO_INCREMENT : 기본키에 1부터 자동으로 증가하는 기본 설정값을 만들어줌
 - FOREIGN KEY : 외래키, 다른 테이블의 Key
 - CHECK : 조건으로 설정된 값만 입력 허용
+- CONSTRAINT : 제약조건에 별칭 지정
 - DEFAULT : 기본 설정 값 (직접적으로 삽입되는 null값은 제어불가)
 
 > CURRENT_TIMESTAMP : 새로운 column 생성시 첫 생성 당시 시간 저장됨
@@ -222,14 +223,24 @@ CREATE TABLE 테이블명 (
 CREATE TABLE students(
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
   name TEXT NOT NULL,
+  address VARCHAR (255) NOT NULL,
   age INTEGER DEFAULT 1 CHECK (0 < age)
 );
 
 CREATE TABLE students(
   id INTEGER AUTO_INCREMENT,
   name TEXT NOT NULL,
-  age INTEGER DEFAULT 1 CHECK (0 < age)
+  address VARCHAR (255) NOT NULL,
+  age INTEGER DEFAULT 1 
+  CONSTRAINT age_check CHECK (0 < age)
+  CONSTRAINT name_address UNIQUE (name, address)
   PRIMARY KEY(id)
+);
+
+CREATE TABLE houses (
+  purchase_price INT NOT NULL,
+  sale_price INT NOT NULL,
+  CONSTRAINT sprice_gt_pprice CHECK(sale_price >= purchase_price)
 );
 ```
 
@@ -240,15 +251,20 @@ CREATE TABLE students(
 1. 테이블 이름 변경 (`rename to`)
 
 ```sql
+-- 방법1
 ALTER TABLE <변경전 테이블명>
 RENAME TO <변경후 테이블명>;
+
+-- 방법2
+RENAME TABLE <변경전 테이블명>
+TO <변경후 테이블명>;
 ```
 
 2. 새로운 컬럼 추가 (`add column`)
 
 ```sql
 ALTER TABLE <테이블명>
-ADD COLUMN <새로 추가할 컬럼명>
+ADD COLUMN <새로 추가할 컬럼명> <데이터타입>
 ```
 
 3. 컬럼명 이름 수정 (`rename column`) 
@@ -258,7 +274,19 @@ ALTER TABLE <테이블명>
 RENAME COLUMN <변경전 컬럼명> TO <변경후 컬럼명>
 ```
 
-4. 컬럼 삭제 (`drop column`)
+4. 컬럼 정의 수정 (`modify`, `change`)
+
+```sql
+-- 방법1 : 제약사항만 변경
+ALTER TABLE <테이블명>
+MODIFY <수정할 컬럼명> <데이터타입>
+
+-- 방법2 : 제약사항 + 컬럼명까지 변경
+ALTER TABLE <테이블명>
+CHANGE <변경전 컬럼명> <변경후 컬럼명> <데이터타입>
+```
+
+5. 컬럼 삭제 (`drop column`)
 
 ```sql
 ALTER TABLE <테이블명>
