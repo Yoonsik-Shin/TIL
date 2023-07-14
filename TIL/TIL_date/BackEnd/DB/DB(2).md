@@ -199,27 +199,49 @@ create table <테이블명> (
 > 필드 제약 조건
 
 - NOT NULL : NULL값 입력금지
+
 - UNIQUE : 중복값 입력금지 (NULL값은 중복 입력 가능)
+
 - PRIMARY KEY : 테이블에서 반드시 하나만 존재 (NOT NULL + UNIQUE)
+
 - AUTO_INCREMENT : 기본키에 1부터 자동으로 증가하는 기본 설정값을 만들어줌
-- FOREIGN KEY : 외래키, 다른 테이블의 Key
+
 - CHECK : 조건으로 설정된 값만 입력 허용
+
 - CONSTRAINT : 제약조건에 별칭 지정
+
 - DEFAULT : 기본 설정 값 (직접적으로 삽입되는 null값은 제어불가)
 
-> CURRENT_TIMESTAMP : 새로운 column 생성시 첫 생성 당시 시간 저장됨
->
-> ON UPDATE CURRENT_TIMESTAMP : update시 자동으로 현재시간으로 변경
+  - CURRENT_TIMESTAMP : 새로운 column 생성시 첫 생성 당시 시간 저장됨
+  - ON UPDATE CURRENT_TIMESTAMP : update시 자동으로 현재시간으로 변경
+
+  ```sql
+  CREATE TABLE 테이블명 (
+    created_at TIMESTAMP default CURRENT_TIMESTAMP, 
+    updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  );
+  ```
+
+- FOREIGN KEY : 외래키, 다른 테이블의 Key
+
+  - ON DELETE CASCADE : 부모 테이블의 row 에 `DELETE` 또는 `UPDATE` 명령어를 적용할 때, 자동적으로 자식 테이블의 매치되는 row 에도 똑같이 `DELETE` 또는 `UPDATE` 를 반영
+
+  ```sql
+  CREATE TABLE orders (
+      id INT PRIMARY KEY AUTO_INCREMENT,
+      order_date DATE,
+      amount DECIMAL(8 , 2 ),
+      customer_id INT,
+      FOREIGN KEY (customer_id)
+          REFERENCES customers (id)
+          ON DELETE CASCADE
+  );
+  ```
+
+> 테이블 생성 예시
 
 ```sql
-CREATE TABLE 테이블명 (
-  created_at TIMESTAMP default CURRENT_TIMESTAMP, 
-  updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-```
-
-```sql
--- 활용 예시
+-- primary key 설정방법1
 CREATE TABLE students(
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
   name TEXT NOT NULL,
@@ -227,6 +249,7 @@ CREATE TABLE students(
   age INTEGER DEFAULT 1 CHECK (0 < age)
 );
 
+-- primary key 설정방법2
 CREATE TABLE students(
   id INTEGER AUTO_INCREMENT,
   name TEXT NOT NULL,
@@ -240,7 +263,9 @@ CREATE TABLE students(
 CREATE TABLE houses (
   purchase_price INT NOT NULL,
   sale_price INT NOT NULL,
+  customer_id INT NOT NULL,
   CONSTRAINT sprice_gt_pprice CHECK(sale_price >= purchase_price)
+  FOREIGN KEY (customer_id) REFERENCES students(id) -- 외래키 설정
 );
 ```
 

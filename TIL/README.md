@@ -81,16 +81,16 @@
 
 ## 3. 데이터베이스
 
-| Contents                                                     | Ex                                             |
-| ------------------------------------------------------------ | ---------------------------------------------- |
-| [DB (1)](./TIL_date/BackEnd/DB/DB(1).md)                     | DB, RDB, RDBMS, SQL 개념                       |
-| [DB (2)](./TIL_date/BackEnd/DB/DB(2).md)                     | DB manage, Data Type, DDL, CREATE, ALTER, DROP |
-| [DB (3)](./TIL_date/BackEnd/DB/DB(3).md)                     | DML, SELECT, INSERT, UPDATE, DELETE            |
-| [DB (4)](./TIL_date/BackEnd/DB/DB(4).md)                     | CASE, 시간/날짜, 서브쿼리                      |
-| [조인](./TIL_date/BackEnd/DB/Join.md)                        | 조인                                           |
-| [데이터 모델링](./TIL_date/BackEnd/DB/데이터모델링.md)       | 데이터 모델링, ERD                             |
-| [ORM](./TIL_date/BackEnd/DB/ORM.md) / [실습7](./TIL_date/BackEnd/DB/07실습.md) | ORM 개념, 조작                                 |
-| [QuerySet API](./TIL_date/BackEnd/DB/QuerySet_API.md) / [실습8](./TIL_date/BackEnd/DB/08실습.md) | OuerySet 메소드, 1:N 관계                      |
+| Contents                                              | Ex                                             |
+| ----------------------------------------------------- | ---------------------------------------------- |
+| [DB (1)](./TIL_date/BackEnd/DB/DB(1).md)              | DB, RDB, RDBMS, SQL 개념                       |
+| [DB (2)](./TIL_date/BackEnd/DB/DB(2).md)              | DB manage, Data Type, DDL, CREATE, ALTER, DROP |
+| [DB (3)](./TIL_date/BackEnd/DB/DB(3).md)              | DML, SELECT, INSERT, UPDATE, DELETE            |
+| [DB (4)](./TIL_date/BackEnd/DB/DB(4).md)              | CASE, 시간/날짜, 서브쿼리                      |
+| [DB (5)](./TIL_date/BackEnd/DB/DB(5).md)              | 조인                                           |
+| [DB (6)](./TIL_date/BackEnd/DB/DB(6).md)              | 데이터 모델링, ERD                             |
+| [ORM](./TIL_date/BackEnd/DB/ORM.md)                   | ORM 개념, 조작                                 |
+| [QuerySet API](./TIL_date/BackEnd/DB/QuerySet_API.md) | OuerySet 메소드, 1:N 관계                      |
 
 ​    
 

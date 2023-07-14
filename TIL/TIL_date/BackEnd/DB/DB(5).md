@@ -1,4 +1,6 @@
-# ✍️ JOIN
+# DB (5)
+
+## 1️⃣ JOIN
 
 - RDB의 가장 큰 장점이자 핵심 기능
 - 일반적으로 레코드는 기본키(PK)나 외래키(FK)값의 관계로 결합
@@ -9,7 +11,7 @@
 
 ​    
 
-## 1. INNER JOIN
+## 2️⃣ INNER JOIN
 
 - 두 테이블에 모두 일치하는 행만 반환
 - INNER 생략가능
@@ -21,11 +23,11 @@ FROM 테이블1 [INNER] JOIN 테이블2
 	ON 테이블1.컬럼 = 테이블2.컬럼;
 ```
 
-![image-20220822174033248](Join.assets/image-20220822174033248.png)
+![image-20220822174033248](DB(5).assets/image-20220822174033248.png)
 
 ​    
 
-## 2. OUTER JOIN
+## 3️⃣ OUTER JOIN
 
 - 동일한 값이 없는 데이터도 반환할 때 사용
 - 기준되는 테이블에 따라 `LEFT`, `RIGHT`, `FULL`로 나뉨
@@ -41,24 +43,28 @@ FROM 테이블1 (LEFT / RIGHT / FULL) [OUTER] JOIN 테이블2
 
 - LEFT OUTER  JOIN
 
-![image-20220822174237731](Join.assets/image-20220822174237731.png)
+![image-20220822174237731](DB(5).assets/image-20220822174237731.png)
 
 - RIGHT OUTER JOIN
 
-![image-20220822174430284](Join.assets/image-20220822174430284.png)
+![image-20220822174430284](DB(5).assets/image-20220822174430284.png)
 
 - FULL OUTER JOIN
 
-![image-20220822174510500](Join.assets/image-20220822174510500.png)
+![image-20220822174510500](DB(5).assets/image-20220822174510500.png)
 
 ​    
 
-## 3. CROSS JOIN
+## 4️⃣ CROSS JOIN
 
 - 모든 가능한 경우의 수
+- 쓸모없음
 
 ```sql
-SELECT *
-FROM 테이블1 CROSS JOIN 테이블2;
+-- 방법1
+SELECT * FROM 테이블1 CROSS JOIN 테이블2;
+
+-- 방법2
+SELECT * FROM 테이블1, 테이블2;
 ```
 

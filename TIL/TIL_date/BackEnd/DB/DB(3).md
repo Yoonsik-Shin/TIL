@@ -366,6 +366,36 @@ SELECT SUM(컬럼명) FROM 테이블명;
 
 ​    
 
+#### 8. 기타
+
+1. Alias 설정시 주의사항 : 한글 띄어쓰기 사용시 작은 따옴표 대신 `큰 따옴표 ("")` 사용해야함
+2. strftime
+
+```sql
+-- strftime 함수 > 문자열로 반환
+strftime('형식', 컬럼) 
+
+-- 예시
+strftime('%Y', 컬럼명)
+>> '2013'
+```
+
+3. CAST
+
+```sql
+-- cast 함수 : 형식변환
+cast(바꿀값 as int) 
+```
+
+4. IFNULL
+
+```sql
+-- 표현식이 NULL인 값을 조작하는 함수
+SELECT IFNULL(평가식, null일경우나타낼것) FROM ...
+```
+
+
+
 ---
 
 ### 2️⃣ INSERT
