@@ -132,7 +132,42 @@ ORDER BY last_name;
 
 ---
 
-### 3️⃣ 날짜 / 시간 다루기
+### 3️⃣ View
+
+- 논리(가상)의 테이블
+- 자주 사용하는 쿼리문 결과를 하나의 테이블처럼 만들어 조회할 수 있게 해줌 
+- view에서 데이터를 직접 삭제할 수 없음
+- CUD를 할 수 있는 view도 존재
+- view 생성
+
+```sql
+CREATE VIEW 뷰이름 AS 
+쿼리문;
+```
+
+- 이미 존재하는 view를 새 쿼리로 대체/교체하기
+
+```sql
+-- 방법1
+CREATE VIEW REPLACE VIEW 뷰이름 AS 
+쿼리문;
+
+-- 방법2
+ALTER VIEW 뷰이름 AS
+쿼리문;
+```
+
+- view 삭제
+
+```sql
+DROP VIEW 뷰이름;
+```
+
+​    
+
+----
+
+### 4️⃣ 날짜 / 시간 다루기
 
 - 현재 날짜 + 시간 : `NOW`, `CURRENT_TIMESTAMP`
 
@@ -255,3 +290,75 @@ SELECT YEAR('2022-02-23'); -- 날짜에서 연도를 추출합니다.
 SELECT MONTH('2022-02-23'); -- 날짜에서 월을 추출합니다.
 SELECT DAY('2022-02-23'); -- 날짜에서 일을 추출합니다.
 ```
+
+​    
+
+---
+
+### 5️⃣ 원도우 함수
+
+- window라는 특정한 방식으로 파이션을 분할하여 값을 연산
+- 집계함수와 함께 사용
+- 모든 행마다 값이 출력
+
+​    
+
+#### OVER
+
+1. PARTITION BY
+
+```sql
+SELECT 
+	emp_no, 
+	department, 
+	salary, 
+	AVG(salary) OVER(PARTITION BY department) AS dept_avg
+FROM emps;
+```
+
+| emp_no | department       | salary |
+| ------ | ---------------- | ------ |
+| 1      | sales            | 59000  |
+| 2      | sales            | 60000  |
+| 10     | customer service | 56000  |
+| 11     | customer service | 55000  |
+
+- sales window
+
+| emp_no | department | salary |
+| ------ | ---------- | ------ |
+| 1      | sales      | 59000  |
+| 2      | sales      | 60000  |
+
+- customer service window
+
+| emp_no | department       | salary |
+| ------ | ---------------- | ------ |
+| 10     | customer service | 56000  |
+| 11     | customer service | 55000  |
+
+- 결과
+
+| emp_no | department       | salary | dept_avg   |
+| ------ | ---------------- | ------ | ---------- |
+| 1      | sales            | 59000  | 55500.0000 |
+| 2      | sales            | 60000  | 55500.0000 |
+| 10     | customer service | 56000  | 59500.0000 |
+| 11     | customer service | 55000  | 59500.0000 |
+
+
+
+2. ORDER BY
+
+- 각 window에 속한 행의 순서 변경
+
+```sql
+ SELECT 
+    emp_no, 
+    department, 
+    salary, 
+    SUM(salary) OVER(PARTITION BY department ORDER BY salary) AS rolling_dept_salary,
+    SUM(salary) OVER(PARTITION BY department) AS total_dept_salary
+FROM employees;
+```
+

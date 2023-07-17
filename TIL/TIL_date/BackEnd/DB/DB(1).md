@@ -49,19 +49,7 @@
 ### RDBMS
 
 - 관계형 데이터베이스 관리시스템
-- 종류 : MySQL, PostgreSQL, SQLite, ORACLE-SQL, MS-SQL, 
-
-#### MySQL
-
-​    
-
-#### SQLite
-
-- 서버 형태가 아닌 파일 형식으로 응용 프로그램에 넣어 사용 (비교적 가벼운 DB)
-- 구글 안드로이드 OS에 기본 탑재
-- 임베디드 SW에도 많이 활용
-- 로컬에서 간단한 DB구성가능
-- 오픈소스 프로젝트
+- 종류 : MySQL, PostgreSQL, SQLite, ORACLE-SQL, MS-SQL
 
 ​    
 
@@ -99,7 +87,49 @@ mysql> insert into <테이블명>(컬럼명) values ('shin\'s house')
 
 ---
 
-## 2️⃣ SQLite
+## 2️⃣ MySQL 
+
+### SQL모드
+
+- SQL 모드 확인
+
+```sql
+SELECT @@GLOBAL.sql_mode;  -- 전역에 활성화되어 있는 글로벌 모드 설정
+SELECT @@SESSION.sql_mode;  -- 현재 세션의 설정
+```
+
+- SQL 모드 설정
+
+```sql
+SET GLOBAL sql_mode = '모드';
+SET SESSION sql_mode = '모드';
+```
+
+> 모드 종류
+
+1. STRICT_TRANS_TABLES
+   - INSERT, UPDATE같은 데이터 변경문에서 MySQL이 유효하지 않거나 누락된 값을 처리하는 방식을 제어
+   - 기본적으로 활성화되어 있는 모드
+2. ONLY_FULL_GROUP_BY
+   - GROUP BY를 할 때, 선택할 수 있는 컬럼을 제어
+   - SELECT 목록이 집계되지 않은 컬럼을 참조하는 쿼리를 거부함
+3. NO_ZERO_IN_DATE / NO_ZERO_DATE
+   - 날짜형식에 0이 들어가는 것을 제어함 
+   - 모드 활성화시 `2023-01-00` 같은 데이터 금지
+
+​    
+
+---
+
+## 3️⃣ SQLite
+
+- 서버 형태가 아닌 파일 형식으로 응용 프로그램에 넣어 사용 (비교적 가벼운 DB)
+- 구글 안드로이드 OS에 기본 탑재
+- 임베디드 SW에도 많이 활용
+- 로컬에서 간단한 DB구성가능
+- 오픈소스 프로젝트
+
+​    
 
 > csv파일을 table로 만들기
 

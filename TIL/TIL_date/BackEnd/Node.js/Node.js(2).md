@@ -163,9 +163,28 @@ db.collection('collection명').insertOne('저장할데이터(Object자료형)', 
 });
 
 // 예시1
-db.collection('post')
-  .insertOne({ _id : 100, 이름 : 'John' }, (error, result) => {
-	    console.log('저장완료'); 
+db.collection('post').insertOne({ _id : 100, 이름 : 'John' }, (error, result) => {
+    console.log('저장완료'); 
+});
+```
+
+```js
+app.post('/add', (req, res) => {
+  res.send('전송완료');
+  db.collection('counter').findOne({ name: '게시물갯수' }, (error, result) => {
+   	const totalPostCount = result.totalPost;
+    const post = { 
+        _id: totalPostCount + 1, 
+        writer: req.user._id, 
+        title: req.body.title, 
+        date: req.body.date 
+    }
+    db.collection('post').insertOne(post, (error, result) => {
+      db.collection('counter').updateOne({ name: 'totalPostCount' }, { $inc: { totalPost: 1 } }, (error, result) => {
+        if (error) console.log(error)
+      })
+    });
+  });
 });
 ```
 
@@ -275,7 +294,7 @@ db.collection('').deleteOne({}, () => {})
 ```
 
 ```js
-app.delete('/', (req, res) => {
+app.delete('/delete', (req, res) => {
   req.body._id = parseInt(req.body._id)  // 형변환
   db.collection('').deleteOne({
      _id: req.body._id, 

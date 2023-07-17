@@ -221,7 +221,7 @@
 | [Node.js(1)](./TIL_date/BackEnd/Node.js/Node.js(1).md) | 기본개념, Express (Get, Post), 디자인패턴                    |
 | [Node.js(2)](./TIL_date/BackEnd/Node.js/Node.js(2).md) | MongoDB, Ejs, DB CRUD, auto increment, method-override, css파일 |
 | [Node.js(3)](./TIL_date/BackEnd/Node.js/Node.js(3).md) | 로그인(세션), 환경변수, 검색, Route, 이미지 업로드           |
-| [Node.js(4)](./TIL_date/BackEnd/Node.js/Node.js(4).md) | Socket.io                                                    |
+| [Node.js(4)](./TIL_date/BackEnd/Node.js/Node.js(4).md) | SSE, Socket.io                                               |
 
 ​    
 

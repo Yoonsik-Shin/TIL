@@ -173,11 +173,20 @@ SELECT 컬럼명, 집계함수 FROM <테이블명> GROUP BY 컬럼명;
 SELECT 컬럼명1 FROM <테이블명> GROUP BY 컬럼명1, 컬럼명2, ...;
 ```
 
+> WITH ROLLUP
+
+- 집계함수의 통계를 마지막 행에 추가해서 보여줌
+
+```sql
+SELECT 컬럼명 FROM <테이블명> GROUP BY 컬럼명 WITH ROLLUP;
+```
+
 ​    
 
 ##### HAVING
 
 - 집계함수는 WHERE절의 조건식 사용 불가 (실행 순서가 다름)
+- GROUP BY로 얻은 그룹을 필터링하는데 사용
 - 집계 결과에서 조건에 맞는 값을 따로 활용하기 위해 사용
 
 ```sql

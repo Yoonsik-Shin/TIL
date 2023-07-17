@@ -45,7 +45,7 @@ passport.use(new LocalStrategy({
     if (error) return done(error)
     if (!result) return done(null, false, { message: '존재하지 않는 ID입니다.' })
     if (inputPW == result.pw) return done(null, result)
-	  done(null, false, { message: '비밀번호가 일치하지 않습니다.' })
+	return done(null, false, { message: '비밀번호가 일치하지 않습니다.' })
   })
 })
 ```
@@ -158,7 +158,7 @@ app.get('/search', (req, res) => {
 
 ### Indexing
 
-- 인덱싱만 되어있으면 binary search적용하여 빠르게 검색가능 
+- 인덱싱만 되어있으면 binary search를 활용하여 빠르게 검색가능 
 - MongoDB Atlas내 기능 사용
 
 ​    
@@ -183,8 +183,6 @@ app.get('/search', (req, res) => {
   "인덱싱할 항목(내림차순)": -1
 }
 ```
-
-​    
 
 - 등록된 Indexing 활용
 
@@ -255,13 +253,14 @@ const searchCondition = [
     },
     { $sort: { _id: 1} },  // _id를 오름차순으로 정렬
     { $limit: 10 },  // 맨위의 10개 항목만 보여줌
-    { $project: { _id: 1, title: 0 } },  // _id는 보여주고, title은 제외
+    { $project: { _id: 1, title: 0, score: { $meta: "searchScore" } } },  // _id는 보여주고, title은 제외
   ]
 ```
 
 - `$sort` : 결과를 정렬해서 가져옴
 - `$limit` : 결과의 수를 제한해서 보여줌
 - `$project` :  찾아온 결과중에 원하는 항목만 보여줌 (`0: 제외 / 1: 포함`)
+- `score: { $meta: "searchScore" }` : mongoDB가 검색어와 검색된 정보의 관련정도를 나타내는 수치
 
 ​    
 
@@ -272,10 +271,12 @@ const searchCondition = [
 - `routes` 폴더 생성
 
 ```js
-// routes/index.js
+// routes/shop.js
 import { Router } from "express";
 
 const router = Router();
+
+// 해당파일의 router들에만 미들웨어 모두 적용
 router.use((req, res, next) => {
   next()
 })
@@ -295,7 +296,7 @@ export default router;
 import indexRouter from './routes/index.js'
 
 app.use('/공통으로 사용되는 키워드', '파일명Router')
-app.use('/common', indexRouter)  // ('/common'으로 시작하는 라우트들, 'index.js' 파일)
+app.use('/shop/detail', shopRouter)  // ('/common'으로 시작하는 라우트들, 'shop.js' 파일)
 ```
 
 ​    
@@ -335,7 +336,7 @@ const storage = multer.diskStorage({
   // public/image 폴더안에 이미지 저장
   destination: (req, file, cb) => { 
   	cb(null, './public/image')
-	},
+  },
   // 저장하는 이미지 파일명 설정
   filename: (req, file, cb) => {
     cb(null, file.orginalname)
@@ -347,7 +348,7 @@ const storage = multer.diskStorage({
   limits:
 }) 
 
-const upload = multer({ storage: storage })
+const upload = multer({ storage })
 
 // 단일 파일업로드
 app.post('/upload', upload.single('input의 name속성명'), (req, res) => { })
@@ -356,8 +357,8 @@ app.post('/upload', upload.single('input의 name속성명'), (req, res) => { })
 app.post('/upload', upload.array('input의 name속성명', '받을 최대갯수'), (req, res) => { })
 
 // 업로드된 파일보내기
-app.get('/image/:imageName', (req, res) => {
-  res.sendFile(`${__dirname}/public/image/${req.params.imageName}`)
+app.get('/image/:imgName', (req, res) => {
+  res.sendFile(`${__dirname}/public/image/${req.params.imgName}`)
 })
 ```
 
