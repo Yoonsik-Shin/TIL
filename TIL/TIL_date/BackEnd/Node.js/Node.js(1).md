@@ -122,8 +122,8 @@ const express = require('express')  // 'common.js'
 ```
 
 ```js
-import express from 'express'
-const app = express();
+import express, { Express } from 'express'
+const app: Express = express();
 
 // listen(서버를 띄울 포트번호, 띄운 후 실행할 코드)
 app.listen(8080, () => {
@@ -160,10 +160,35 @@ app.use(express.json())  ✔️✔️
 
 ​    
 
+### 미들웨어
+
+- 미들웨어 이후의 라우터에만 미들웨어 실행값이 적용되어 실행순서가 중요함
+
+```ts
+app.use((req, res, next) => {
+    // 라우터로 가기전 먼저 실행할 것들
+    next();  // 모두 실행후 next함수 실행시 해당하는 라우터 실행
+})
+```
+
+```ts
+// 404 에러처리
+// 마지막 부분에 작성
+app.use((req, res, next) => {
+    res.send({ error: '404 Not Found'})
+})
+
+app.listen(8000, () => {})
+```
+
+​    
+
 ### GET 요청
 
 ```js
-app.get('/URL', (req, res) => {
+import { Request, Response } from "express";
+
+app.get('/URL', (req: Request, res: Response) => {
   // 1. 데이터를 조회하는 로직 => DB에 접속해서 데이터 꺼내오기
   // 2. 꺼내온 결과 응답 주기
   res.send()
@@ -228,6 +253,12 @@ app.post('/bye', (request, response) => {
 
 ```js
 // js파일 기본세팅
+app.use(express.json()); 
+
+// 예전 세팅
+import bodyParser from 'body-parser'
+
+app.use(express.json()); 
 app.use(express.urlencoded({extended : true}));
 ```
 
@@ -267,44 +298,48 @@ app.use(cors(corsOptions))
 
 #### 싱글톤 패턴
 
+- 객체의 인스턴스를 오직 하나만 생성하여 사용하는 패턴
 - 객체에 접근할 때 메모리를 줄일 수 있음
 - 다른 클래스간의 데이터 공유가 쉬움
 
 ```typescript
-import express from 'express'
+import express, { Application, Express } from "express";
+import catsRouter from "./cats/cats.route";
 
 class Server {
-	constructor(
-  	public app: express.Application
-  ) {
-    const app = express()
-    this.app = app
-  }
-  
-  private setRoute() {
-    this.app.use(indexRouter)
-    this.app.use(aaaRouter)
-  }
-  
-  private setMiddleware() {
-  	this.app.use(express.json()) // json
-    this.setRoute() // router
-  }
-  
-  public listen() {
-    this.setMiddleware()
-    this.app.listen(8000, () => {
-      console.log('server on 8000')
-    })
-  }
+    public app: Application;
+
+    constructor() {
+        this.app = express();
+    }
+
+    private setRoute() {
+        this.app.use(catsRouter);
+    }
+
+    private setMiddleWare() {
+        this.app.use(express.json());
+        this.setRoute();
+        this.app.use((req, res, next) => {
+            res.send({ error: "404 Not Found" });
+        });
+    }
+
+    public listen() {
+        this.setMiddleWare();
+        this.app.listen(8000, () => {
+            console.log(`서버가 정상적으로 실행됨 (http://localhost:}/)`);
+        });
+    }
 }
 
 function init() {
-  const server = new Server()
-  server.listen
+    const server = new Server();
+    server.listen();
 }
 
-init()
+init();
+
 ```
 
 ​    

@@ -7,17 +7,18 @@
 ```bash
 # CLI 설치
 $ npm install -g @nestjs/cli
-$ yarn add -g @nestjs/cli
 
 # 프로젝트 시작
-$ nest new project-name
+$ nest new 프로젝트이름
 ```
 
 > cli 명령어
 
 ```bash
+$ nest g resource 폴더명 # 기본 CRUD 생성
 $ nest g mo 모듈명  # Module 파일 자동 생성
 $ nest g co 컨트롤러명  # Controller 파일 자동 생성
+$ nest g s 서비스명 # Service 파일 자동 생성
 $ nest g middleware 미들웨어명  # Middleware 파일 자동 생성
 ```
 
@@ -27,7 +28,7 @@ $ nest g middleware 미들웨어명  # Middleware 파일 자동 생성
 
 ## 1️⃣ 기본개념
 
-### Controller
+### 1. Controller
 
 ``` bash
 # Controller 파일 자동 생성 명령어
@@ -87,13 +88,13 @@ export class UserController {
 | `@Res()`                         | 응답(response) 객체에 대한 접근                              |
 | `@Body(param?: string)`          | 요청(request)의 body 객체에 대한 접근, param 매개변수로 특정값 접근가능 |
 | `@Param(param?: string)`         | 경로(:id) 매개변수를 가져옴, param 매개변수로 특정 경로값 접근가능 |
-| `@Query(param?: string)`         | 쿼리 (?) 매개변수를 가져옴, param 매개변수로 특정 쿼리 접근가능 |
+| `@Query(param?: string)`         | 쿼리(?) 매개변수를 가져옴, param 매개변수로 특정 쿼리 접근가능 |
 | `@Headers(name?: string)`        | HTTP 헤더 접근 가능, name 매개변소로 특정 헤더값 접근가능    |
 | `@Next()`                        | 다음 미들웨어 함수에 대한 접근                               |
 | `@UploadFile() / @UploadFiles()` | 업로드된 파일에 대한 접근                                    |
 | `@Session()`                     | 세션 객체에 접근                                             |
 
- ```typescript
+ ``` typescript
  // apps.controller.ts
  import { Controller, Get, Req, Res, Body, Param } from '@nestjs/common'
  import { Request, Response } from 'express'
@@ -136,41 +137,79 @@ export class UserController {
  }
  ```
 
+​    
 
+> 응답 조작 옵션
 
-- Express에서 사용하는 응답객체 사용가능
-- 이 경우 따로 설정이 필요함
+1. Standard (권장됨)
+
+   - Nest에 기본 내장된 기능(메서드) 활용
+   - Object type을 반환할 때, 자동으로 JSON으로 변환되어 처리함
+   - primitive type을 반환할 때는 값 그대로 전송
+   - 기본적 상태코드는 200이고, POST만 201
+   - `HttpCode()`데코레이터를 사용하여 기본 상태코드값을 변경할 수 있음
+
+   ```js
+   import { Controller, Get, HttpCode } from '@nestjs/common';
+   
+   @Controller('cats')
+   export class CatsController {
+     @Get()
+     @HttpCode(200)
+     findAll(): string {
+       return 'This action returns all cats';
+     }
+   }
+   ```
+
+2. Library-specific
+
+   - Express등의 다른 라이브러리의 응답(response) 객체를 사용
+
+   ```js
+   import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
+   import { Response } from 'express'
+   
+   @Controller('cats')
+   export class CatsController {
+     @Get()
+     findAll(@Res({ passthrough: true }) res: Response) {
+       res.status(HttpStatus.OK).send({
+         test: '됨?', 
+         problem: '뭐가 문제야?',
+         solved: 'return도 JSON으로 직렬화하고 send도 JSON으로 직렬화해서 나는 오류같아',
+       });
+     }
+   }
+   ```
+
+   - `return`문의 반환값도 자동으로 JSON으로 직렬화해주고, `res.send()`도 자동으로 JSON으로 직렬화해줘서, 두가지 모두 사용하면 오류발생!
+   - 이 방식을 사용할 때는 `return` 키워드를 안써야함
+
+> 주의사항
+
+- `@Res()` 또는 `@Next()` 사용시, __Library-specific__ 옵션이 선택된 것으로 감지함
+- 따라서 Standard 방식이 자동으로 비활성화됨
+- 동시에 두가지 접근 방식을 사용하려면 아래 예시처럼 사용해야함
 
 ```typescript
 @Res({ passthrough: true })
+@Next({ passthrough: true })
 ```
 
-
-
-- Standard
-- Nest에 기본 내장된 기능 활용
-
-
-
-- Library-specific
-- Express등의 다른 라이브러리의 응답(response) 객체를 사용
-
-```typescript
-
-```
-
-
+​    
 
 #### DTO
 
 - Data Trasfer Object (데이터 전송 객체)
+- 데이터가 네트워크를 통해 전송되는 방식을 정의하는 객체
 - DTO 클래스 자체를 타입으로 지정가능
 
 ```typescript
 // create-app.dto.ts
 export class CreateAppDto {
-	name: string;
-  age: number;
+    name: string;
+    age: number;
 }
 ```
 
@@ -328,15 +367,52 @@ export class CatsController {
 
 ---
 
-### Providers
+### 2. Providers
 
 - Controller로부터 복잡한 작업을 위임받아 수행한 후 결과값 반환
 - Provider의 핵심은 __의존성 주입 (DI)__
-- Service, Repository, Factory, 헬퍼등의 기본적인 Nest 클래스는 모두 Provider로 취급될 수 있음
+- Service, Repository, Factory, helpers(헬퍼)등의 기본적인 Nest 클래스는 모두 Provider로 취급될 수 있음
+- 애플리케이션과 동일한 수명을 가짐
+- 애플리케이션 부팅시 모든 의존성이 해결되어야 하므로 모든 provider가 인스턴스화됨
 
 
+
+#### Injection scopes
+
+- 의존성 주입 컨테이너를 통해 프로바이더의 수명을 제어
+- 필요한 스코프에 따라 인스턴스를 생성하거나 공유
+- 싱글톤 스코프를 사용하는 것을 권장함
+
+```typescript
+import { Injectable, Scope } from '@nestjs/common';
+
+@Injectable({ scope: Scope.DEFAULT })
+@Injectable({ scope: Scope.REQUEST })
+@Injectable({ scope: Scope.TRANSIENT })
+export class CatsService {}
+```
+
+1. `DEFAULT`
+   - provider가 애플리케이션 전체에서 공유되는 __싱글톤__으로 동작함
+   - 기본적으로 모든 provider는 Default Scope를 가짐
+   - 인스턴스 수명은 애플리케이션 라이프사이클에 직접적으로 연결됨
+2. `REQUEST`
+   - 매 요청마다 provider 인스턴스를 생성 (new)
+   - 인스턴스는 요청 처리가 완료된 후 가비지 컬렉션됨
+3. `TRANSIENT`
+   - 매 주입마다 provider 인스턴스를 생성 (new)
+   - 소비자간에 인스턴스가 공유되지 않음
+
+> 제한사항
+
+- 웹소켓 게이트웨이는 단일 인스턴스로 작동해야 하므로 요청 스코프 provider를 사용해서는 안됨
+- Passport 전략이나 Cron 컨트롤러와 같은 다른 몇 가지 provider에도 적용
+
+​    
 
 #### Services
+
+- 비지니스 로직 작성
 
 ```bash
 # Service 파일 자동 생성
@@ -344,27 +420,66 @@ $ nest g s 서비스명
 ```
 
 ```typescript
-// apps.controller.ts
-import { Controller, Get, Post, Body } from '@nestjs/common';
-import { AppsService } from './apps.service';
+// cats.service.ts
+import { Injectable } from '@nestjs/common';
+import { Cat } from './interfaces/cat.interface';
 
-@Controller()
-export class AppsController {
-  constructor(private appsService: AppsService) {} ✔️✔️
+@Injectable() ✔️✔️ 
+export class CatsService {
+  private readonly cats: Cat[] = [];
+
+  create(cat: Cat) {
+    this.cats.push(cat);
+  }
+
+  findAll(): Cat[] {
+    return this.cats;
+  }
+}
+
+// interfaces/cat.interface.ts
+export interface Cat {
+  name: string;
+  age: number;
+  breed: string;
+}
+```
+
+- service는 controller 클래스의 constructor를 통해 의존성 주입 (DI: Dependency Injection)됨
+
+```typescript
+// cats.controller.ts
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { CreateCatDto } from './dto/create-cat.dto';
+import { CatsService } from './cats.service';
+import { Cat } from './interfaces/cat.interface';
+
+@Controller('cats')
+export class CatsController {
+  constructor(private catsService: CatsService ✔️✔️) {}
+
+  @Post()
+  async create(@Body() createCatDto: CreateCatDto) {
+    this.catsService.create(createCatDto);
+  }
 
   @Get()
-  async findAll(): Promise<Apps[]> {
-    // service.ts로 비지니스 로직을 넘김
-    return this.appsService.findAll() ✔️✔️
+  async findAll(): Promise<Cat[]> {
+    return this.catsService.findAll();
   }
 }
 ```
 
+​    
 
+#### 프로퍼티 기반주입
 
-#### 의존성 주입 (DI: Dependency Injection)
+- Property-based injection
+- 
 
+​    
 
+---
 
 ### Module
 
@@ -1143,5 +1258,4 @@ export class ReadOnlyTestDto extends PickType(Test, ['email']) {
 ```
 
 ​    
-
 

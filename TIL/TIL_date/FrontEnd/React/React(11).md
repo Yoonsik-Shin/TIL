@@ -1,8 +1,6 @@
 # React (11)
 
-
-
-## 4️⃣ Memoization (재렌더링 이슈)
+## 1️⃣ Memoization (재렌더링 이슈)
 
 - 부모컴포넌트만 재렌더링될 때, 렌더링할 필요가 없는 자식도 같이 렌더링되어 성능 지연이 발생
 
@@ -196,9 +194,9 @@ function App() {
 
 ​    
 
+---
 
-
-## 7️⃣ DevTools
+## 2️⃣ DevTools
 
 ### 1. Chrome DevTools
 
@@ -215,6 +213,83 @@ function App() {
 #### Ligthhouse
 
 <img src="React(11).assets/image-20230417111208504.png" alt="image-20230417111208504" style="zoom:50%;" />
+
+> aria-label
+
+- img태그의 alt 속성과 같은 기능을 함
+- 웹 접근성을 개선시키는데 사용됨
+
+```tsx
+<button aria-label="선택버튼">클릭</button>
+```
+
+​    
+
+##### SEO 개선
+
+- `next-seo` 라이브러리 사용
+
+```bash
+$ npm i next-seo
+```
+
+- 모든 페이지에 사용할 전역 SEO properties를 작성 (`seo.config.js`)
+
+```js
+// seo.config.js
+export default {
+    titleTemplate: '%s - 공통으로보여질문자' // %s에는 페이지에서 작성한 title값 들어감
+    openGraph: {
+        type: "website",
+        site_name: "사이트 이름",
+        images: [
+            { url: 'op:image에 들어갈 이미지' }
+        ],
+    },
+    additionalLinkTags: [  // 추가로 필요한 link tag 
+        // 파비콘 추가
+        {
+            rel: 'favicon',
+            href: '/'  // public 폴더내에 있는 이미지
+        }
+    ]
+}
+```
+
+- `_app.tsx`파일에 내용추가
+
+```tsx
+// _app.tsx
+import { DefaultSeo } from 'next-seo'
+import SEO from '../seo.config'
+
+export default function App({ Component, pageProps }: AppProps) {
+    return (
+        <>
+        	<DefaultSeo {...SEO} />  ✔️✔️
+        	<Component {...pageProps} />
+        </>
+    )
+}
+```
+
+- 개별 페이지에 SEO 적용하기
+
+```tsx
+// 개별페이지
+import { NextSeo } from 'next-seo'
+
+export default function TestPage() {
+    return (
+    	<>
+        	<NextSeo
+                title="해당페이지 이름"
+                description="해당페이지 설명"
+        	/>
+        </>
+    )
+}
+```
 
 ​    
 

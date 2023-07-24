@@ -301,14 +301,14 @@ var 손자 = Object.create(자식);
 
 ```js
 class people {
-  constructor(){
+  constructor() {
     this.name = 'Shin';
     this.age = 26;
   }
-  get nextAge(){
+  get nextAge() {
     return this.age + 1
   }
-  set setAge(age){
+  set setAge(age) {
     this.age = parseInt(age);
   }
 }
@@ -327,3 +327,4 @@ person1.setAge = 10
 - get : 데이터를 꺼내쓰는 함수에 사용
   - return이 반드시 있어야 함
   - 파라미터가 없어야 함
+

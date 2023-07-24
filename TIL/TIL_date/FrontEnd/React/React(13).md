@@ -1,7 +1,5 @@
 # React (13)
 
-​    
-
 ## 0️⃣ 배포 개요
 
 ![배포개요](React(13).assets/배포개요.jpg)
@@ -585,5 +583,20 @@ const nextConfig = {
 }
 ```
 
+​    
 
+---
 
+## Vercel 배포
+
+1. vercel 사이트 접속 [https://vercel.com/new]
+
+![image-20230724230018950](React(13).assets/image-20230724230018950.png)
+
+2. 계정연동
+
+![image-20230724230702658](React(13).assets/image-20230724230702658.png)
+
+3. 배포할 레포지토리 import 버튼 눌러서 들어가기
+
+![image-20230724231108583](React(13).assets/image-20230724231108583.png)

@@ -375,6 +375,15 @@ import 작명 from './data1.js';
 import { a, b } from './data2.js';
 ```
 
+```html
+<!-- html -->
+<script type="module">
+    import data from '/data1.js'
+    import { a, b as 별명 } from '/data2.js'
+    import * as 별명 from '/data2.js'
+</script>
+```
+
 ​    
 
 ---
@@ -433,3 +442,48 @@ import BBB from './B.js'  // import시 export한 이름이 아니어도 됨
 [브라우저 동작](https://d2.naver.com/helloworld/59361)
 
 [주소창에 google.com 입력했을 때](https://velog.io/@tnehd1998/%EC%A3%BC%EC%86%8C%EC%B0%BD%EC%97%90-www.google.com%EC%9D%84-%EC%9E%85%EB%A0%A5%ED%96%88%EC%9D%84-%EB%95%8C-%EC%9D%BC%EC%96%B4%EB%82%98%EB%8A%94-%EA%B3%BC%EC%A0%95)
+
+​    
+
+---
+
+## 페이지 렌더링 방식
+
+### SSR
+
+- Server Side Rendering
+- 완성된 HTML을 제공
+
+### CSR
+
+### SSG
+
+[ISR](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration)
+
+- Incremental Static Regeneration
+- 이미 빌드된 페이지에서 정적인 페이지(SSG)를 주기적으로 업데이트할 수 있음
+- `getStaticProps`에 `revalidate`옵션과 함께 값을 전달
+- `revalidate` 옵션이 적용된 페이지만 업데이트하여 전체 페이지를 다시 빌드할 필요가 없음
+
+> revalidate
+
+- 서버가 request를 받고나서 revalidate에 설정한 시간이 지난 후에 다시 request가 왔을 때, 함수를 다시 실행하여 데이터가 바뀌었다면, 새로운 값으로 다시 pre-rendering함
+- 만약 데이터가 변하지 않으면, pre-rendering이 다시 수행되지 않음
+
+```tsx
+import type { NextPage } from 'next';
+
+export default function ISRPage({ data }): NextPage<Props> => {
+    return <>{data}</>
+}
+
+function async function getStaticProps() {
+    return {
+        props: { data },
+        revalidate: 5
+  	};
+}
+```
+
+​    
+
