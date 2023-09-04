@@ -18,9 +18,38 @@
 
 ---
 
-## 2. Language 
+## 2. Language      
 
-### Python
+### ✔️ JavaScript
+
+| Contents                                                    | Ex                                                           |
+| ----------------------------------------------------------- | ------------------------------------------------------------ |
+| [JavaScript1](./TIL_date/FrontEnd/JS/JavaScript1.md)        | JS 기초, 변수, 기본 메서드, 템플릿 리터럴, tagged literal    |
+| [JavaScript2](./TIL_date/FrontEnd/JS/JavaScript2.md)        | 배열, 객체, for, while, 함수, 메서드, this, try문            |
+| [JavaScript3](./TIL_date/FrontEnd/JS/JavaScript3.md)        | 배열 메서드, 최신 기능                                       |
+| [JavaScript4](./TIL_date/FrontEnd/JS/JavaScript4.md)        | DOM 기초                                                     |
+| [JavaScript5](./TIL_date/FrontEnd/JS/JavaScript5.md)        | DOM 이벤트                                                   |
+| [JavaScript6](./TIL_date/FrontEnd/JS/JavaScript6.md)        | Promise, async, await, 콜스택, 콜백지옥                      |
+| [JavaScript7](./TIL_date/FrontEnd/JS/JavaScript7.md)        | AJAX, API, JSON, HTTP, XHR, Fetch, Axios                     |
+| [JavaScript8](./TIL_date/FrontEnd/JS/JavaScript8.md)        | OOP, 프로토타입, 팩토리함수, 생성자함수, 클래스              |
+| [JavaScript9](./TIL_date/FrontEnd/JS/JavaScript9.md)        | 브라우저 내 저장 공간 (LocalStorage, SessionStorage, IndexedDB) |
+| [JS클린코딩(1)](./TIL_date/FrontEnd/JS/JS클린코딩(1).md)    | 변수, 타입, 경계, 분기 다루기                                |
+| [JS클린코딩(2)](./TIL_date/FrontEnd/JS/JS클린코딩(2).md)    | 배열, 객체, 함수 다루기                                      |
+| [JavaScript (10)](./TIL_date/FrontEnd/JS/JavaScript(10).md) |                                                              |
+
+
+
+### ✔️ TypeScript
+
+| Contents                                                     | Ex                                                           |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [TypeScript(1)](./TIL_date/Language/TypeScript/TypeScript(1).md) | 설치법, Union Type, any, unknown, void, 함수, 클래스, Narrowing, Assertion, type, interface, readonly, Literal type, as const |
+| [TypeScript(2)](./TIL_date/Language/TypeScript/TypeScript(2).md) | never, 접근제한자, import, namespace, Generic, Utility types, 타입조건식, infer, returnType |
+| [TypeScript(3)](./TIL_date/Language/TypeScript/TypeScript(3).md) | React, redux, declare, Ambient Module, d.ts, implements, Recursive Index Signatures, keyof, Mapped Types |
+
+
+
+### ✔️ Python
 
 | Contents                                                     | Ex                                  |
 | ------------------------------------------------------------ | ----------------------------------- |
@@ -56,49 +85,13 @@
 | [DP](./TIL_date/Language/PYTHON/알고리즘(DP).md)             | 다이나믹 프로그래밍 개념                                     |
 | [기타알고리즘](./TIL_date/Language/PYTHON/알고리즘(기타알고리즘).md) | 소수, 투포인터, 구간합                                       |
 
-​     
 
-### TypeScript
-
-| Contents                                                     | Ex                                                           |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [TypeScript(1)](./TIL_date/Language/TypeScript/TypeScript(1).md) | 설치법, Union Type, any, unknown, void, 함수, 클래스, Narrowing, Assertion, type, interface, readonly, Literal type, as const |
-| [TypeScript(2)](./TIL_date/Language/TypeScript/TypeScript(2).md) | never, 접근제한자, import, namespace, Generic, Utility types, 타입조건식, infer, returnType |
-| [TypeScript(3)](./TIL_date/Language/TypeScript/TypeScript(3).md) | React, redux, declare, Ambient Module, d.ts, implements, Recursive Index Signatures, keyof, Mapped Types |
-
-​      
-
-### C++
-
-| Contents                                                     | Ex                           |
-| ------------------------------------------------------------ | ---------------------------- |
-| [C++ 알고리즘 (1)](./TIL_date/Language/C++/C++알고리즘(1).md) | 코드 실행, STL, 입출력, 타입 |
-|                                                              |                              |
-
-​    
 
 ---
 
-## 3. 데이터베이스
+## 3. Front
 
-| Contents                                              | Ex                                             |
-| ----------------------------------------------------- | ---------------------------------------------- |
-| [DB (1)](./TIL_date/BackEnd/DB/DB(1).md)              | DB, RDB, RDBMS, SQL 개념                       |
-| [DB (2)](./TIL_date/BackEnd/DB/DB(2).md)              | DB manage, Data Type, DDL, CREATE, ALTER, DROP |
-| [DB (3)](./TIL_date/BackEnd/DB/DB(3).md)              | DML, SELECT, INSERT, UPDATE, DELETE            |
-| [DB (4)](./TIL_date/BackEnd/DB/DB(4).md)              | CASE, 시간/날짜, 서브쿼리                      |
-| [DB (5)](./TIL_date/BackEnd/DB/DB(5).md)              | 조인                                           |
-| [DB (6)](./TIL_date/BackEnd/DB/DB(6).md)              | 데이터 모델링, ERD                             |
-| [ORM](./TIL_date/BackEnd/DB/ORM.md)                   | ORM 개념, 조작                                 |
-| [QuerySet API](./TIL_date/BackEnd/DB/QuerySet_API.md) | OuerySet 메소드, 1:N 관계                      |
-
-​    
-
----
-
-## 4. 프론트엔드
-
-### HTML
+### ✔️ HTML
 
 | Contents                                 | Ex                              |
 | ---------------------------------------- | ------------------------------- |
@@ -106,7 +99,7 @@
 
 ​    
 
-  ### CSS
+  ### ✔️ CSS
 
 | Contents                                          | Ex                                                     |
 | ------------------------------------------------- | ------------------------------------------------------ |
@@ -118,26 +111,7 @@
 
 ​    
 
-### JavaScript
-
-| Contents                                                    | Ex                                                           |
-| ----------------------------------------------------------- | ------------------------------------------------------------ |
-| [JavaScript1](./TIL_date/FrontEnd/JS/JavaScript1.md)        | JS 기초, 변수, 기본 메서드, 템플릿 리터럴, tagged literal    |
-| [JavaScript2](./TIL_date/FrontEnd/JS/JavaScript2.md)        | 배열, 객체, for, while, 함수, 메서드, this, try문            |
-| [JavaScript3](./TIL_date/FrontEnd/JS/JavaScript3.md)        | 배열 메서드, 최신 기능                                       |
-| [JavaScript4](./TIL_date/FrontEnd/JS/JavaScript4.md)        | DOM 기초                                                     |
-| [JavaScript5](./TIL_date/FrontEnd/JS/JavaScript5.md)        | DOM 이벤트                                                   |
-| [JavaScript6](./TIL_date/FrontEnd/JS/JavaScript6.md)        | Promise, async, await, 콜스택, 콜백지옥                      |
-| [JavaScript7](./TIL_date/FrontEnd/JS/JavaScript7.md)        | AJAX, API, JSON, HTTP, XHR, Fetch, Axios                     |
-| [JavaScript8](./TIL_date/FrontEnd/JS/JavaScript8.md)        | OOP, 프로토타입, 팩토리함수, 생성자함수, 클래스              |
-| [JavaScript9](./TIL_date/FrontEnd/JS/JavaScript9.md)        | 브라우저 내 저장 공간 (LocalStorage, SessionStorage, IndexedDB) |
-| [JS클린코딩(1)](./TIL_date/FrontEnd/JS/JS클린코딩(1).md)    | 변수, 타입, 경계, 분기 다루기                                |
-| [JS클린코딩(2)](./TIL_date/FrontEnd/JS/JS클린코딩(2).md)    | 배열, 객체, 함수 다루기                                      |
-| [JavaScript (10)](./TIL_date/FrontEnd/JS/JavaScript(10).md) |                                                              |
-
-​    
-
-### React 
+### ✔️ React 
 
 | Contents                                             | Ex                                                           |
 | ---------------------------------------------------- | ------------------------------------------------------------ |
@@ -158,7 +132,7 @@
 
  
 
-### State Manager
+### ✔️ State Manager
 
 | Contents                                                     | Ex                                                           |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -169,7 +143,7 @@
 
 ​     
 
-### Test Code
+### ✔️ Test Code
 
 | Contents                                                   | Ex   |
 | ---------------------------------------------------------- | ---- |
@@ -179,9 +153,22 @@
 
 ---
 
-## 5. 백엔드
+## 4. Back
 
-### Linux
+### ✔️ DB
+
+| Contents                                 | Ex                                             |
+| ---------------------------------------- | ---------------------------------------------- |
+| [DB (1)](./TIL_date/BackEnd/DB/DB(1).md) | DB, RDB, RDBMS, SQL 개념                       |
+| [DB (2)](./TIL_date/BackEnd/DB/DB(2).md) | DB manage, Data Type, DDL, CREATE, ALTER, DROP |
+| [DB (3)](./TIL_date/BackEnd/DB/DB(3).md) | DML, SELECT, INSERT, UPDATE, DELETE            |
+| [DB (4)](./TIL_date/BackEnd/DB/DB(4).md) | CASE, 시간/날짜, 서브쿼리                      |
+| [DB (5)](./TIL_date/BackEnd/DB/DB(5).md) | 조인                                           |
+| [DB (6)](./TIL_date/BackEnd/DB/DB(6).md) | 데이터 모델링, ERD                             |
+
+​    
+
+### ✔️ Linux
 
 | Contents                                         | Ex                                                           |
 | ------------------------------------------------ | ------------------------------------------------------------ |
@@ -189,52 +176,53 @@
 | [Linux(2)](./TIL_date/BackEnd/Linux/Linux(2).md) | 경로, ls, pwd, cd, mkdir, touch, rm, rmdir                   |
 | [Linux(3)](./TIL_date/BackEnd/Linux/Linux(3).md) | 파일보기, 표준스트림/redirection, 파이프, 확장, 검색, grep   |
 | [Linux(4)](./TIL_date/BackEnd/Linux/Linux(4).md) | 권한(chmod, su, chown, addgroup, adduser), 환경(변수, 별칭), 스크립트, cron |
-| [Linux(5)](./TIL_date/BackEnd/Linux/Linux(5).md) |                                                              |
 
 ​    
 
-### Vim
+### ✔️ Docker
 
-| Contents                         | Ex   |
-| -------------------------------- | ---- |
-| [Vim](./TIL_date/ETC/Vim/Vim.md) |      |
-
-​    
-
-### Docker
-
-| Contents                                            | Ex   |
-| --------------------------------------------------- | ---- |
-| [Docker(1)](./TIL_date/BackEnd/Docker/Docker(1).md) |      |
-| [Docker(2)](./TIL_date/BackEnd/Docker/Docker(2).md) |      |
-| [Docker(3)](./TIL_date/BackEnd/Docker/Docker(3).md) |      |
+| Contents                                            | Ex                                                           |
+| --------------------------------------------------- | ------------------------------------------------------------ |
+| [Docker(1)](./TIL_date/BackEnd/Docker/Docker(1).md) | 설치, 기본개념(컨테이너, 이미지), Dockerfile, CLI 명령어, .dockerignore, 이미지 공유 |
+| [Docker(2)](./TIL_date/BackEnd/Docker/Docker(2).md) | Volumes, Bind Mounts, 도커네트워킹 (웹, 로컬, 컨테이너간)    |
+| [Docker(3)](./TIL_date/BackEnd/Docker/Docker(3).md) | docker-compose                                               |
 
 ​    
 
-### Node.js / Express
+### ✔️ AWS
+
+| Contents                                | Ex       |
+| --------------------------------------- | -------- |
+| [AWS (1)](./TIL_date/ETC/AWS/AWS(1).md) | IAM      |
+| [AWS (2)](./TIL_date/ETC/AWS/AWS(2).md) | EC2      |
+| [AWS (3)](./TIL_date/ETC/AWS/AWS(3).md) | ELB, ASG |
+
+​    
+
+### ✔️ Node.js / Express
 
 | Contents                                               | Ex                                                           |
 | ------------------------------------------------------ | ------------------------------------------------------------ |
-| [Node(1)](./TIL_date/BackEnd/Node.js/Node(1).md)       | node, npm, yarn 개념, node 실행,  퍼서드패턴, export/import 사용 |
-| [Node(2)](./TIL_date/BackEnd/Node.js/Node(2).md)       | 얕은/깊은 복사, RestAPI, GraphQL, Express, Swagger           |
-| [Node(3)](./TIL_date/BackEnd/Node.js/Node(3).md)       | CORS, nodemon, GraphQl                                       |
-| [Node.js(1)](./TIL_date/BackEnd/Node.js/Node.js(1).md) | 기본개념, Express (Get, Post), 디자인패턴                    |
-| [Node.js(2)](./TIL_date/BackEnd/Node.js/Node.js(2).md) | MongoDB, Ejs, DB CRUD, auto increment, method-override, css파일 |
-| [Node.js(3)](./TIL_date/BackEnd/Node.js/Node.js(3).md) | 로그인(세션), 환경변수, 검색, Route, 이미지 업로드           |
-| [Node.js(4)](./TIL_date/BackEnd/Node.js/Node.js(4).md) | SSE, Socket.io                                               |
+| [Node.js(1)](./TIL_date/BackEnd/Node.js/Node.js(1).md) | node.js 기본개념, GraphQL, 기타구현 (이메일, SMS)            |
+| [Node.js(2)](./TIL_date/BackEnd/Node.js/Node.js(2).md) | Express, 디자인패턴(싱글톤, 서비스), Swagger                 |
+| [Node.js(3)](./TIL_date/BackEnd/Node.js/Node.js(3).md) | MongoDB, Ejs, DB CRUD, auto increment, method-override, css파일 |
+| [Node.js(4)](./TIL_date/BackEnd/Node.js/Node.js(4).md) | 로그인(세션), 환경변수, 검색, Route, 이미지 업로드           |
+| [Node.js(5)](./TIL_date/BackEnd/Node.js/Node.js(5).md) | SSE, Socket.io                                               |
 
 ​    
 
-### Nest.js
+### ✔️ Nest.js
 
-| Contents                                          | Ex   |
-| ------------------------------------------------- | ---- |
-| [Nest (1)](./TIL_date/BackEnd/Nest.js/Nest(1).md) |      |
-| [Nest (2)](./TIL_date/BackEnd/Nest.js/Nest(2).md) |      |
+| Contents                                          | Ex                                                 |
+| ------------------------------------------------- | -------------------------------------------------- |
+| [Nest (1)](./TIL_date/BackEnd/Nest.js/Nest(1).md) | [개념] Nest 기본개념, 환경변수 설정, 요청 생명주기 |
+| [Nest (2)](./TIL_date/BackEnd/Nest.js/Nest(2).md) | [개념] DB연동 (ORM, ODM), 트랜잭션, CQRS           |
+| [Nest (3)](./TIL_date/BackEnd/Nest.js/Nest(3).md) | [개념] 인증/인가, CORS, Swagger, GraphQL, 로깅     |
+| [Nest (4)](./TIL_date/BackEnd/Nest.js/Nest(4).md) | [구현]                                             |
 
 ​    
 
-### Django
+### ✔️ Django
 
 | Contents                                                     | Ex                                                           |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -255,26 +243,24 @@
 | [Django M:N 관계(1)](./TIL_date/BackEnd/Django/DjangoNM관계(1).md) | M : N 관계, 중개모델, ManyToManyField, Related Manger, 좋아요 구현 |
 | [Django M:N 관계(2)](./TIL_date/BackEnd/Django/DjangoNM관계(2).md) | 프로필, 팔로우, view 데코레이터                              |
 | [Django 비동기 처리](./TIL_date/BackEnd/Django/Django비동기.md) | Axios, 비동기 처리 (follow, like)                            |
+| [ORM](./TIL_date/BackEnd/DB/ORM.md)                          | ORM 개념, 조작                                               |
+| [QuerySet API](./TIL_date/BackEnd/DB/QuerySet_API.md)        | OuerySet 메소드, 1:N 관계                                    |
 
 ​    
 
 ---
 
-## 6. 기타
+## 5. Etc
 
-### AWS
+### ✔️ Vim
 
-| Contents                                       | Ex       |
-| ---------------------------------------------- | -------- |
-| [AWS (1)](./TIL_date/ETC/AWS/AWS(1).md)        | IAM      |
-| [AWS (2)](./TIL_date/ETC/AWS/AWS(2).md)        | EC2      |
-| [AWS (3)](./TIL_date/ETC/AWS/AWS(3).md)        | ELB, ASG |
-|                                                |          |
-| [AWS (CI/CD)](./TIL_date/ETC/AWS/AWS(CICD).md) |          |
+| Contents                         | Ex   |
+| -------------------------------- | ---- |
+| [Vim](./TIL_date/ETC/Vim/Vim.md) |      |
 
-​     
 
-### HTTP
+
+### ✔️ HTTP
 
 | Contents                                  | Ex                                               |
 | ----------------------------------------- | ------------------------------------------------ |
@@ -283,7 +269,7 @@
 
 ​     
 
-### 정규표현식
+### ✔️ 정규표현식
 
 | Contents                                                     | Ex              |
 | ------------------------------------------------------------ | --------------- |
@@ -291,7 +277,7 @@
 
 ​    
 
-### Figma
+### ✔️ Figma
 
 | Contents | Ex   |
 | -------- | ---- |
@@ -299,7 +285,7 @@
 
 ​    
 
-### Notion
+### ✔️ Notion
 
 | Contents | Ex   |
 | -------- | ---- |
@@ -307,7 +293,7 @@
 
 ​    
 
-### PhotoShop
+### ✔️ PhotoShop
 
 | Contents | Ex   |
 | -------- | ---- |

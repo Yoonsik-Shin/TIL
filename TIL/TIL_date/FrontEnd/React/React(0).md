@@ -447,18 +447,34 @@ import BBB from './B.js'  // import시 export한 이름이 아니어도 됨
 
 ---
 
-## 페이지 렌더링 방식
+## 9️⃣ 페이지 렌더링 방식
 
 ### SSR
 
 - Server Side Rendering
 - 완성된 HTML을 제공
+- 화면전환시 화면 깜빡임이 있음
+- 서버 부하의 위험이 있음
+- 초기 용량 작음
+- SEO에 좋음
+- 보안 유리
+
+​    
 
 ### CSR
 
+- Client Side Rendering
+- 처ㅇ
+
+​     
+
 ### SSG
 
-[ISR](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration)
+
+
+​    
+
+### [ISR](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration)
 
 - Incremental Static Regeneration
 - 이미 빌드된 페이지에서 정적인 페이지(SSG)를 주기적으로 업데이트할 수 있음

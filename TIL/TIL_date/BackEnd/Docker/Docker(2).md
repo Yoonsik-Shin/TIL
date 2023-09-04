@@ -1,442 +1,322 @@
-# Docker (1)
+# Docker (2)
+
+## 1️⃣ 데이터 종류
+
+ ### 1. Application
+
+- 소스코드와 애플리케이션이 실행되는 환경
+- 이미지가 빌드될 때 코드가 이미지에 복사됨
+- 이미지 빌드시에 복사되었으므로 코드는 고정되어 변경될 수 없음
+- Read-Only 속성을 가져야함
 
 ​    
 
-## 기본개념
+### 2. Temporary App Data
 
-- 개발환경을 동일하게 맞추기 위해 사용
-- 가상머신과 비슷한 개념이지만 더 빠르고, 자원을 효율적으로 사용
-- 추가적으로 운영체제 설치가 필요없음
-
-
-​     
-
-## 설치
-
-- 우분투
-
-```bash
-$ sudo apt-get update
-$ sudo apt-get install curl
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-$ sudo usermod -aG docker $USER # 사용자 권한부여
-```
-
-- 윈도우
-
->  [WSL2 설치가이드](https://www.lainyzine.com/ko/article/a-complete-guide-to-how-to-install-docker-desktop-on-windows-10/)
-
-- 도커사이트
-
-> [Docker](https://www.docker.com/)
+- 애플리케이션이 실행되는 동안 생성된 데이터 (input 입력값)
+- 메모리등에 임시저장
+- 컨테이너가 종료되면 이 데이터을 모두 잃음
+- Read + Write 속성을 가지고 있으며, 컨테이너에 존재함
 
 ​    
 
-## 1️⃣ 컨테이너
+### 3.  Permanent App Data
 
-- 애플리케이션을 실행하는 전체환경을 포함하는 작은 패키지
-- 이미지의 구체적인 실행 인스턴스
-- 소프트웨어 실행 유닛이 실행됨
+- 데이터가 지속되어 실행중인 컨테이너에서 데이터를 활용
+- 컨테이너가 중지된 후 다시 시작되어도 데이터가 보존됨
+- Read + Write 속성을 가짐
+- 컨테이너에 저장하지만, 볼륨의 도움을 받음
 
 ​    
 
 ---
 
-## 2️⃣ 이미지
+## 2️⃣ Data Storages
 
-- 모든 설정 명령과 모든 코드가 포함된 공유 가능한 패키지
-- 실제 코드와 코드를 실행하는데 필요한 도구를 포함
-- 이미지를 정의하면 여러개의 동일한 환경의 컨테이너를 만들어 낼 수 있음 (블루프린트)
-- 읽기 전용
-- 스스로 실행되지 않고 컨테이너로만 실행될 수 있음
+### 1. Volumes
 
-​    
-
-### 이미지 생성
-
-- 이미 존재하는 이미지 사용 (dockerhub)
-- 자신만의 이미지 만들어 사용 (`Dockerfile`)
+- 도커에 의해 관리됨
+- 호스트 머신의 파일 시스템 상의 볼륨이 어디에 있는지 알 수 없음
+- 컨테이너가 종료, 제거된 경우에도 볼륨을 통해 데이터를 유지할 수 있게 해줌
+- 호스트 머신의 폴더으로 도커 컨테이너 내부의 폴더와 매핑됨
+- 두 폴더의 변경사항이 다른 폴더에 반영됨
+- 컨테이너는 볼륨에 데이터를 읽거나 쓸 수 있음
 
 ```dockerfile
 # Dockerfile
-FROM node 
-WORKDIR 
-COPY . /app  
-RUN npm install
-EXPOSE 80 
-CMD node server.js 
+VOLUME []
 ```
-
-​    
-
-- `FROM` : 다른 이미지에서 자신이 필요로 하는 이미지를 가져옴
-
-```dockerfile
-FROM `이미 존재하는 이미지`
-```
-
-​    
-
-- `WORKDIR` : 컨테이너 내의 작업 디렉토리 설정
-
-```dockerfile
-WORKDIR `도커내부 작업 디렉토리`
-```
-
-> `./` : 도커 컨테이너의 현재 작업 디렉토리를 의미
-
-​    
-
-- `COPY` : 로컬파일들을 컨테이너로 복사
-
-```dockerfile
-COPY `복사될 자료` `복사된 자료를 이미지에 넣을 경로`
-```
-
-​    
-
-- `RUN` : 이미지에 명령 내리기
-
-```dockerfile
-RUN `npm 파일 설치하기`
-```
-
-​    
-
-- `EXPOSE` : 컨테이너 실행시, 로컬 시스템에 특정포트를 노출
-
-```dockerfile
-EXPOSE `로컬에서 사용할 포트번호`
-```
-
-​    
-
-- `CMD` : 이미지가 생성될 때 실행되지 않고, 컨테이너가 시작될 때 실행됨
-
-```dockerfile
-CMD ["node", "server.js"]
-```
-
-> 배열 구조로 명령어를 입력해줘야함 
-
-​    
-
-### 이미지 레이어
-
-- 기본적으로 명령어를 다시 실행했을 때의 결과 이전과 동일하고 추론하면 캐시된 데이터를 가져옴
-- 다시 실행해야 하는 항목만 다시 빌드하여 이미지 생성속도를 빠르게함
-- 레이어 활용 최적화 예시
-
-```dockerfile
-# Dockerfile
-FROM node
-WORKDIR /app
-
-COPY package.json /app # 패키지는 따로 관리
-RUN npm install
-
-COPY . /app # 코드 변경시 패키지에는 영향x
-EXPOSE 80 
-CMD node server.js
-```
-
-​    
-
----
-
-## 3️⃣ 주요 명령어
-
-### 도움말
-
-```bash
-$ docker [command] --help
-```
-
-
-
-### `build`
-
-- `Dockerfile`을 빌드하고 파일을 기반으로 자신만의 이미지 생성
-
-```bash
-$ docker build . # Dockerfile이 있는 위치에서 실행해야함
-```
-
-- `-t`
-
-```bash
-$ docker build -t `name:tag` .
-$ docker build -t goals:13 .
-```
-
-- `name `: 이미지의 일반적인 이름 설정 (리포지토리)
-- `tag` : 이미지의 특정화된 버전 정의
-
-​    
-
-### `tag`
-
-- 이미 존재하는 이미지를 복사한 후 새로운 태그를 부여
-
-```bash
-$ docker tag `기존 name:tag` `새로운 name:tag`
-```
-
-​    
-
-### `run`
-
-- 이미지를 기반으로 __새 컨테이너__를 만들고, 새 컨테이너를 실행
-- `-p (publish)` : 로컬의 포트로 내부 도커 포트를 엑세스 [__포트포워딩__] 
-
-```bash
-$ docker run -p `로컬포트:도커포트` `이미지ID or 이름 or 태그`
-$ docker run -p 3000:80 34abda4213
-```
-
-- `-i` : 인터렉티브 모드
-  - 표준 입력을 열린상태로 유지
-  - `attached`모드가 아니여도 무언가를 입력할 수 있게 해줌
-- `-t` : 터미널 생성
-- `-it` : 터미널에 입력가능한 상태로 만들어줌
-
-```bash
-$ docker run -it `이미지ID`
-```
-
-- `--rm` : 컨테이너가 중지되었을 때 자동으로 삭제되도록 설정
-
-```bash
-$ docker run --rm `이미지ID`
-```
-
-- `--name` : 컨테이너 이름설정
-
-```bash
-$ docker run --name `커스텀 컨테이너 이름` `이미지ID`
-```
-
-​    
-
-### `ps`
-
-- 현재 실행중인 프로세스만 표시
-
-```bash
-$ docker ps
-```
-
-- 모든 프로세스 표시
-
-```bash
-$ docker ps -a
-```
-
-​    
-
-### `stop`
-
-- 실행중인 컨테이너 종료
-
-```bash
-$ docker stop `컨테이너ID or 이름 or 태그`
-```
-
-​    
-
-### `start`
-
-- 종료된 컨테이너 실행
-
-```bash
-$ docker start `컨테이너ID or 이름 or 태그`
-$ docker start -ai `컨테이너ID` # 입력값이 있을 경우
-```
-
-​    
-
-### `Attached vs Detached`
-
-- `Detached`
-
-  - 컨테이너는 실행중이지만, 터미널과는 연결되어있지 않음
-  - __docker start__ 로 실행시 default
-  - `docker run`에서 detached 모드로 실행
-
-  ```bash
-  $ docker run -d `컨테이너ID`
-  ```
-
-  - detached 상태에서 생성된 로그보기
-
-  ```bash
-  $ docker logs `컨테이너ID or 이름`
-  $ docker logs -f `컨테이너ID or 이름` # Attached 상태로 만듬
-  ```
-
-​    
-
-- `Attached`
-
-  - __docker run__으로 실행시 default
-  - 실행중인 컨테이너와 다시 연결하기
-
-  ```bash
-  $ docker attach `컨테이너ID or 이름`
-  ```
-
-  - 실행중지된 컨테이너 다시 실행시에 attached 모드로 실행
-
-  ```bash
-  $ docker start -a `컨테이너ID or 이름`
-  ```
 
 ​        
 
-### `rm`
-
-- 컨테이너 삭제
-- 삭제하기전에 컨테이너가 실행종료상태여야함
-
-```bash
-$ docker rm `컨테이너ID or 이름`
-```
-
-​    
-
-### `images`
-
-- 현재 가지고있는 모든 이미지 표시
-
-```bash
-$ docker images
-```
-
-​    
-
-### `rmi`
-
-- 이미지 삭제
-- 이미지로 생성된 컨테이너가 먼저 삭제되어야 이미지 삭제가능
-
-```bash
-$ docker rmi `이미지ID or 이름`
-```
-
-​    
-
-### `image prune`
-
-- 사용되지 않는 모든 이미지 제거
-
-```bash
-$ docker image prune
-```
-
-​    
-
-### `image inspect`
-
-- 이미지에 대한 정보
-
-```bash
-$ docker image inspect `이미지ID`
-```
-
-​     
-
-### `cp`
-
-- 실행중인 컨테이너 안에서 밖으로 or 밖에서 안으로 파일이나 폴더를 복사할 수 있음
-
-```bash
-$ docker cp `폴더or파일` `복사경로(컨테이너이름:컨테이너내부경로)`
-
-# 로컬 >>> 도커내부
-$ docker cp dummy/. aaa:/test
-
-## 도커내부 >>> 로컬
-$ docker cp aaa:/test dummy
-```
-
-​    
-
-### 도커 내부 접속
-
-```bash
-$ docker exec -it 컨테이너ID /bin/bash
-```
-
-- 화면이 bash쉘로 바뀜
-- 도커가 돌아가고 있는 가상 컴퓨터의 터미널로 들어온 것을 의미
-
-
-
----
-
-## `.dockerignore`
-
-- 기존에 있는 `node_modules` 폴더의 복사를 방지하기 위해 사용
+#### 1-1. Anonymous Volumes
 
 ```dockerfile
-# .dockerignore
-node_modules
+# Dockerfile
+VOLUME [ "/app/test"]
+```
+
+- 컨테이너가 존재하는 동안에만 실재함
+- 하나의 특정 컨테이너에 밀접하게 연결되어있어 컨테이너 간의 데이터 공유는 불가능함
+- 컨테이너가 제거되면 익명 볼륨도 같이 제거됨
+- `--rm` 명령어로 실행된 컨테이너가 중지되면, 익명 볼륨은 자동으로 제거됨
+- 옵션없이 컨테이너를 시작하고 제거하면 익명 볼륨은 제거되지않음
+- 하지만, 컨테이너를 다시 실행할 때마다 새로운 익명 볼륨이 만들어져서 기존 익명 볼륨은 쓸모없게됨
+- 데이터가 다른 모듈에 의해 덮어쓰여지는 것을 방지하는 데 사용됨
+
+```bash
+$ docker run -v /app/node_modules
+```
+
+```bash
+$ docker volume prune # 익명볼륨 모두 삭제
+```
+
+​    
+
+#### 1-2. Named Volumes
+
+- 컨테이너가 종료된 후에도 볼륨이 유지돼 해당 폴더에 저장된 모든 데이터 계속 사용가능
+- 영구적이어야 하는 데이터, 편집하지 않거나 직접 볼 필요가 없는 중요한 데이터에 적합
+- 하나의 컨테이너에 종속되지 않아, 여러 컨테이너 간의 데이터 공유가능
+- Dockerfile 내부에서는 Named Volumns 생성불가
+- docker run시에 `-v` 옵션 사용
+
+```bash
+$ docker run -v 이름:/app/test
+```
+
+
+
+### 2. docker volume CLI
+
+#### `help`
+
+- docker volume 명령어 모음
+
+```bash
+$ docker volume --help
+```
+
+​    
+
+#### `ls`
+
+- 현재 활성화중인 볼륨을 모두 보여줌
+- 바인트 마운트는 도커에 의해 관리되는 볼륨이 아니여서 안나옴
+
+```bash
+$ docker volume ls 
+```
+
+​    
+
+#### `create`
+
+- 수동으로 볼륨 생성
+
+```bash
+$ docker volume create 볼륨명
+```
+
+
+
+#### `rm / prune` 
+
+- `rm` : 하나의 볼륨 제거
+- `prone` : 사용하지 않는 모든 볼륨 제거
+
+```bash
+$ docker volume rm 볼륨명
+$ docker volume prone
+```
+
+​    
+
+#### `inspect`
+
+- 볼륨에 대한 정보를 보여줌
+- `Mountpoint` 프로퍼티는 실제로 데이터가 저장되는 호스트 머신상의 경로 (실제 경로는 아니라 시스템에서 찾을 수는 없음)
+- `Options` 프로퍼티로 `Read-Only` 속성 적용여부 확인가능
+
+```bash
+$ docker volume inspect 볼륨명
+```
+
+​    
+
+### 3. BInd Mounts
+
+- 개발 중 도커를 사용하는 경우에 코드의 변경사항이 반영되는 것이 중요함
+- 위 동작이 안되면 매번 전체 이미지를 리빌드해고, 컨테이너를 재시작해야함
+- 개발자가 호스트 머신상에 매핑될 컨테이너의 경로를 설정
+- 하나의 컨테이너에 종속되지 않아, 여러 컨테이너 간의 데이터 공유가능
+- 컨테이너 종료 및 제거후에도 유지됨
+- 바인트마운트를 삭제하고 싶으면 호스트 머신에서 삭제 (도커 명령어로는 삭제할 수 없음)
+- 소스코드의 스냅샷을 복사하는 게 아닌, 바인트마운트에서 복사하여 컨테이너는 항상 최신코드에 엑세스 할 수 있음
+- 영구적이고 편집가능한 데이터에 적합
+- 실행하는 컨테이너에만 적용되므로 이미지에는 영향을 주지 않아 Dockerfile 내부에서 설정할 수 없음
+- 컨테이너를 실행할 때 터미널에서 바인트마운트 설정
+
+```bash
+# 폴더 to 폴더
+$ docker run -v 호스트머신상의폴더절대경로:도커내부폴더경로 
+
+# 파일 to 파일도 가능
+$ docker run -v 호스트머신상의파일절대경로:도커내부파일경로
+
+# 예시
+$ docker -v "/Users/yoonsik/development/test:/app"
+```
+
+- 도커가 호스트 머신의 로컬파일을 덮어쓰지 않고, 로컬파일이 도커 컨테이너에 있는 내용을 덮어씀
+- 외부에서 덮어쓰지 않았으면 하는 부분이 있다는 걸 도커에 알려야함
+- 도커 컨테이너에 익명 볼륨 추가
+
+```bash
+$ docker run 
+>	-v "/Users/yoonsik/development/test:/app"
+>	-v /app/node_modules # 익명볼륨
+```
+
+```dockerfile
+# Dockerfile
+Volume ["/app/node_module"] # -v /app/node_modules 옵션과 같음
+```
+
+- 도커는 모든 볼륨을 평가하고, 충돌이 있을 경우 더 길고 구체적인 내부경로를 우선시함
+
+```bash
+/app/node_module✔️  >> /app
+# /app의 node_module 폴더를 제외한 나머지는 외부에서 덮어씌워짐
+```
+
+
+
+>바인트마운트가 있는데 COPY 명령어를 사용하는 이유
+
+- `docker run` 명령어는 개발중에 사용하는 명령어
+- 개발중에는 코드의 변경사항을 실행중인 컨테이너에 즉시 반영
+- 배포시에는 바인트 마운트를 사용하지 않고, `COPY` 명령어의 결과인 스냅샷을 활용함
+
+​    
+
+### 4. Read-Only Volumes
+
+- 볼륨은 기본적으로 `read-write` (컨테이가 볼륨에서 데이터를 읽고 쓸 수 있음)
+- read-only 옵션을 통해 읽기전용으로 설정할 수 있음 (`volume_path:ro`)
+
+```bash
+$ docker run -v "/Users/yoonsik/development/test:/app:ro"
+```
+
+- 옵션 적용에서 제외되어야하는 파일은 볼륨 설정을 통해 제외할 수 있음
+
+```bash
+$ docker run 
+>	-v "/Users/yoonsik/development/test:/app:ro" 
+>	-v /app/temp  # read-only 적용 제외
+> 	-v feedback:/app/temp # read-only 적용 제외
+```
+
+​    
+
+---
+
+## 3️⃣ 도커네트워킹
+
+### 1. 웹 통신
+
+- 기본적으로 컨테이너는 www에 요청을 보낼 수 있음
+- 도커화된 애플리케이션 내부에서 웹 API나 웹페이지와 통신가능
+- 특별한 설정 필요없이 자동으로 동작함
+
+​    
+
+### 2. 로컬호스트 통신
+
+- 도커화된 컨테이너 코드와 로컬 호스트 머신간의 통신
+- 통신을 위해서는 `localhost`를 도커가 이해할 수 있는 특별한 도메인인 `host.docker.internal`로 대체해야함
+
+```js
+// 일반적인 통신 도메인
+'mongodb://localhost:27017/aaa'
+'http://localhost:3000'
+
+// 로컬호스트 - 도커 통신
+'mongodb://host.docker.internal:27017/aaa'
+'http://host.docker.internal:3000'
+```
+
+​    
+
+### 3. 컨테이너간 통신
+
+- 서로 다른 도커 컨테이너끼리 통신
+
+​     
+
+#### 도커 IP주소
+
+- 도커가 가지는 IP주소를 이용하여 통신
+- IP주소를 하드코딩하기 때문에 컨테이너의 IP주소 변경될 때마다 매번 새 이미지를 빌드해야해서 좋은 방법은 아님
+
+```bash
+$ docker container inspect 컨테이너명
+
+...
+"NetworkSettings" : {
+	"IPAddress": "172.11.05.3"
+	...
+}
+...
+```
+
+```js
+'mongodb://172.11.05.3:27017/aaa'
+```
+
+​    
+
+#### `--network` 옵션
+
+- `docker run` 명령에 `--network` 옵션 추가하면 모든 컨테이너를 하나의 동일한 네트워크에 존재하여 서로 통신가능
+- 같은 네트워크상에서는 도커가 자동으로 IP조회 및 연결을 수행함
+- 네트워크는 도커가 자동으로 생성하지 않아 직접 만들어줘야함
+
+```bash
+# 도커 네트워크 생성
+$ docker network create 네트워크이름
+
+# 도커 네트워크 리스트보기
+$ docker network ls
+
+# 생성한 네트워크에 도커 연결하여 실행
+$ docker run --network 네트워크이름
+```
+
+- 다른 컨테이너의 이름을 도메인으로 사용
+
+```js
+'mongodb://mongodb:27017/aaa'
 ```
 
 ​     
 
----
+> 도커 네트워크 드라이버
 
-## 4️⃣ 이미지 공유하기
-
-- 방법
-  1. `Dockerfile` 공유하기
-  2. `DockerHub` 이용하기
-
-
-
-### [DockerHub](https://hub.docker.com/)
-
-- 레포지토리 만들기
-
-![image-20230309022217005](Docker(2).assets/image-20230309022217005.png)
-
-![image-20230309022246843](Docker(2).assets/image-20230309022246843.png)
-
-> Private는 계정당 한개만 만들수 있음
-
-![image-20230309022338250](Docker(2).assets/image-20230309022338250.png)
-
-- 로그인
+- 네트워크 생성시 `--driver` 옵션으로 설정가능
 
 ```bash
-$ docker login
+$ docker network create --driver 네트워크옵션 네트워크이름
 ```
 
-- 로그아웃
-
-```bash
-$ docker logout
-```
+- 대부분의 시나리오에서 `bridge` 드라이버가 가장 적합
+- 종류
+  - `host` : 스탠드얼론 컨테이너의 경우, 컨테이너와 호스트 시스템간의 격리가 제거됨 (localhost를 네트워크로 통신)
+  - `overlay` : 거의 사용 안함 
+  - `macvlan` : 컨테이너에 custom MAC주소를 설정하여 이 주소로 컨테이너와 통신가능
+  - `none` : 모든 네트워킹 비활성화
+  - 서드파티 플러그인
 
 ​    
-
-### `push`
-
-```bash
-$ docker push `dockerhub아이디/레포이름:태그이름`
-$ docker push yoonsikshin/test:tagname
-```
-
-​    
-
-### `pull`
-
-- 최신 이미지만 가져옴
-
-```bash
-$ docker pull `dockerhub아이디/레포이름:태그이름`
-```
-
-- pull받지 않고 `docker run`을 실행하면 로컬에서 파일 못 찾으면, dockerhub로 접근시도
-- 만약 이전에 사용한 로컬파일이 있다면 `docker run` 만으로는 최신 업데이트된 이미지를 제공받지 못함

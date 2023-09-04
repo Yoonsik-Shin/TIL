@@ -15,7 +15,7 @@
 
 ```bash
 $ npm install -g typescript
-$ yarn add global typescript
+$ yarn add -g typescript
 ```
 
 - `파일명.ts` 생성
@@ -68,8 +68,6 @@ $ tsc --init
 }
 ```
 
-
-
 - 타입스크립트 코드를 자동으로 JS 코드로 컴파일하기 
 
 ```bash
@@ -86,8 +84,6 @@ $ tsc -w
 $ ts-node 파일명.ts
 ```
 
-​    
-
 - 설치
 
 ```bash
@@ -100,20 +96,18 @@ $ npm install -D @types/node @tsconfig/node18
 $ yarn add @types/node @tsconfig/node18 --dev
 ```
 
-​     
-
 - 설정파일
 
 ```json
 // tsconfig.json
 {
   "compilerOptions" = {...},
-	"extends": "@tsconfig/node18/ts.config.json",
+	"extends": "@tsconfig/node18/tsconfig.json",
 	"ts-node": {
-    "compilerOptions" = {
-    	"target": "",
-    	"module": "",
-    	"lib": ["DOM"], 
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "CommonJS",
+        "lib": ["DOM"], 
   	}
   }
 }

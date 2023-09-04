@@ -22,9 +22,9 @@ import { BrowserRouter } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-  	<BrowserRouter>  // 새로 입력한 부분
-    	<App />
-    </BrowserRouter>  // 새로 입력한 부분
+        <BrowserRouter>  // 새로 입력한 부분
+            <App />
+        </BrowserRouter>  // 새로 입력한 부분
 	</React.StrictMode>
 )
 ```

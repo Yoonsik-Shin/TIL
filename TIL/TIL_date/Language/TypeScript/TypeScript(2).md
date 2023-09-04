@@ -394,6 +394,66 @@ export default function TypeScriptUtilityPage() {
 }
 ```
 
+- `ReturnType` : 함수의 리턴값에 대한 타입을 추출
+
+```ts
+const myFunc = () => {
+    return { sample: 'test', value: 3 }
+}
+
+type MyFuncReturn = ReturnType<typeof myFunc>
+/**
+    MyFuncReturn = {
+        sample: string;
+        value: number;
+    }
+*/
+```
+
+- `Await` : 타입에서 Promise를 제거
+
+```typescript
+const promiseFunc = () => {
+    return Promise.resolve({
+        aaa: 'aaa',
+        bbb: 'bcv',
+        ddd: 13
+    })
+}
+
+type ReturnValueWithoutPromise = Awaited<ReturnType<typeof promiseFunc>>
+/**
+    ReturnValueWithoutPromise = {
+        aaa: string;
+        bbb: string;
+        ddd: number
+    }
+*/
+```
+
+- `Parameters` : 함수타입의 파라미터의 타입을 추출 (__튜플__ 타입으로 추출됨)
+
+```typescript
+const paramsFunc = (
+	aaa: string,
+    ooo: {
+    	qqq: number;
+    	bbb: boolean;
+    }
+) => {}
+
+type FuncParameters = Parameters<typeof paramsFunc>
+/**
+    FuncParameters = [
+        aaa: string;
+        ooo: {
+        	qqq: number;
+            bbb: boolean;
+        }
+    ]
+*/
+```
+
 ​    
 
 ---

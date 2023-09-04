@@ -1,14 +1,61 @@
 # Node.js (3) 
 
+## 0️⃣ MongoDB 개념
 
+- NoSQL의 한 종류
+- 스키마 정의 x, SQL문 x
+- JOIN 연산이 어려움
+- 스케일링이 쉬움
+- Key-value, Document 모델을 차용
+- database : 폴더 / collection : 파일
 
-## 1️⃣ 로그인 (Session 방식)
+![db_collection](Node.js(3).assets/db_collection.jpg)
 
-### 설치 
+​    
+
+## 1️⃣ [MongoDB Atlas](https://www.mongodb.com/) 설정
+
+### Database Access
+
+- DB접속용 ID, Password 생성
+
+![image-20230323000150509](Node.js(3).assets/image-20230323000150509.png)<img src="Node.js(3).assets/image-20230323000233079.png" alt="image-20230323000233079" style="zoom: 67%;" />
+
+​    
+
+### Network Access
+
+- DB에 접속할 수 있는 IP 정의
+- `0.0.0.0/0` 이나 `Allow access from anywhere`
+
+![image-20230323000451587](Node.js(3).assets/image-20230323000451587.png)
+
+![image-20230323000522159](Node.js(3).assets/image-20230323000522159.png)
+
+​    
+
+### Database
+
+- `Connect` 클릭
+
+![image-20221218134729332](Node.js(3).assets/image-20221218134729332.png)
+
+- `connect your application` 선택
+
+![](Node.js(3).assets/image-20221218134738740.png)
+
+​    
+
+---
+
+## 2️⃣ 기본설정
+
+### 설치
 
 ```bash
-$ npm install passport passport-local express-session
-$ yarn add passport passport-local express-session
+$ npm install mongodb
+$ npm install mongodb@3.6.4  # 버전
+$ yarn add mongodb
 ```
 
 ​    
@@ -16,356 +63,269 @@ $ yarn add passport passport-local express-session
 ### 기본세팅
 
 ```js
-// server.js
-import passport from 'passport'
-import { Strategy as LocalStrategy } from "passport-local";
-import session from 'express-session';
+import { MongoClient } from 'mongodb'
 
-// 미들웨어
-app.use(session({secret: '비밀코드', resave: true, saveUninitialized: false}));
-app.use(passport.initialize());
-app.use(passport.session());
-```
+// URL에 DB Access 메뉴에서 만든 ID, PW 입력필요
+const uri = "mongodb+srv://yoonsik-Shin:<password>@cluster0.yezylr1.mongodb.net/<DB명>?retryWrites=true&w=majority";
 
-> `app.use()` : 미들웨어, 요청-응답 중간에서 실행되는 코드
-
-​    
-
-### Strategy
-
-```js
-// Strategy
-passport.use(new LocalStrategy({
-  usernameField: 'id',  // form태그에서 'id'라는 name속성을 가진 input의 값
-  passwordField: 'pw',  // form태그에서 'pw'라는 name속성을 가진 input의 값
-  session: true,  // 로그인 후 세션을 저장할 것인지 여부
-  passReqToCallback: true,  // 다른 정보도 검증을 원할시 사용
-}), (req, inputID, inputPW, done) => {  // 회원 검증 로직
-  db.collection('회원정보 저장된 collection명').findOne({id: inputID}, (error, result) => {
-    if (error) return done(error)
-    if (!result) return done(null, false, { message: '존재하지 않는 ID입니다.' })
-    if (inputPW == result.pw) return done(null, result)
-	return done(null, false, { message: '비밀번호가 일치하지 않습니다.' })
-  })
-})
-```
-
-> `done('서버에러', '성공시 사용자의 DB데이터', [에러메시지])`
-
-​    
-
-### 로그인 API
-
-```js
-app.post('/login', passport.authenticate('local', { // 회원 인증 과정
-  failureRedirect: '/fail'  // 회원인증 실패시 이동할 페이지
-}), (req, res) => {
-  res.redirect("/");
-})
-
-// 세션을 저장하는 코드 (로그인 성공시 실행)
-passport.serializeUser((user, done) => {
-  done(null, user.id)
-}) 
-```
-
-​    
-
-- 마이페이지
-
-```js
-// 로그인 여부 확인 미들웨어 함수
-const isLogin = (req, res, next) => {
-  if (req.user) { 
-    next() 
-  } else {
-    res.send('로그인해주세요.')
-  }
-}
-
-// req.user에 유저정보가 담겨있음
-app.get('/mypage', isLogin, (req, res) => {
-  response.render("mypage.ejs", { user: req.user });
-})
-
-// 로그인한 유저의 개인정보를 DB에서 찾는 역할
-passport.deserializeUser((id, done) => {
-  db.collection('login').findOne({ id: id }, (error, result) => {
-     done(null, result)
-  })
-})
-```
-
-​    
-
----
-
-## 2️⃣ 환경변수
-
-```bash
-$ npm install dotenv
-$ yarn add dotenv
-```
-
-```js
-// server.js
-import dotenv from "dotenv";
-dotenv.config();
-
-const URI = process.env.URI
-```
-
-```yaml
-# .env
-URI=http://~~
-```
-
-​     
-
----
-
-## 3️⃣ 검색
-
-### Query string
-
-- Get요청시 데이터 전달
-- 문제점 : 정확히 일치하는 것만 찾아줌
-
-```http
-?key1=value1&key2=value2
-```
-
-```html
-<input  id="search-input">
-<button  id="search">검색</button>
-
-<script>
-	document.querySelector('#search').addEventListener('click', () => {
-    let inputValue = document.querySelector('#search-input').value
-    window.location.replace(`/search?value=${inputValue}`)
-  })
-</script>
-```
-
-```js
-// 서버에서 query string 확인
-app.get('/search', (req, res) => { 
-  console.log(req.query)  // object형태로 반환
-})
-```
-
-​    
-
-### Indexing
-
-- 인덱싱만 되어있으면 binary search를 활용하여 빠르게 검색가능 
-- MongoDB Atlas내 기능 사용
-
-​    
-
-####  text search
-
-- 띄어쓰기 검색시 `or` 연산 적용 (`신발 양말` => 신발이나 양말이라는 단어가 포함된 항목만)
-- 단어 앞에 `-`붙이면 그 단어를 제외하고 검색 (`신발 -양말` => 양말이라는 단어가 포함되지 않는 신발을 검색)
-- `""`를 사용하면 정확하게 일치하는 항목만 검색 (`"신발 양말"` => `신발 양말`이라는 덩어리가 포함된 항목 검색)
-- 영어가 아니면 정확성이 떨어짐 (`글쓰기` 검색시 `글쓰기입니다!`는 못찾아줌)
-
-![image-20230323212813799](Node.js(3).assets/image-20230323212813799.png)
-
-<img src="Node.js(3).assets/image-20230323212907092.png" alt="image-20230323212907092" style="zoom:67%;" />
-
-- Fields
-
-```json
-{
-  "인덱싱할 항목(문자열)": "text", 
-  "인덱싱할 항목(오름차순)": 1,  
-  "인덱싱할 항목(내림차순)": -1
-}
-```
-
-- 등록된 Indexing 활용
-
-```json
-{
-  "text": "text"
-}
-```
-
-```js
-app.get('/search', (req, res) => {
-  db.collection('post').find({ $text: { $search: req.qeury.value } }).toArray((error, result) => {
-    res.render('search.ejs', { posts: result })
-  })
-})
-```
-
-
-
-#### Search index
-
-- text search의 단점 보완
-
-![image-20230323214937850](Node.js(3).assets/image-20230323214937850.png)
-
-![image-20230323215055678](Node.js(3).assets/image-20230323215055678.png)
-
-![image-20230323215134822](Node.js(3).assets/image-20230323215134822.png)
-
-```js
-app.get('/search', (req, res) => {
-  const searchCondition = [
-    {
-      $search: {
-        index: 'titleSearch'  // 내가 만든 인덱스명
-        text: {
-        	query: req.query.value // 찾을 값
-        	path: [] // 값이 포함되었는지 알고싶은 항목
-      	}
-      }
+MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
+    if (error) {
+        return console.log(error);
     }
-  ]
-  
-  db.collection('post').aggregate(searchCondition).toArray((error, result) => {
-    res.render('search.ejs', { posts: result })
+    let db = client.db('DB명');
+    app.listen(8080, () => {
+        console.log("listening on 8080");
+    });
+});
+```
+
+![image-20221218135110983](Node.js(3).assets/image-20221218135110983.png)
+
+​    
+
+---
+
+## 3️⃣ DB 데이터 다루기
+
+### EJS
+
+```bash
+$ npm install ejs
+$ yarn add ejs
+```
+
+- 파일확장자 : `.ejs`
+- ejs 파일들은 `views`폴더 안에 생성해야함
+- ejs문법을 이용하여 Server 데이터 삽입 가능
+
+```ejs
+<!-- HTML 중간에 서버데이터 사용하기 -->
+<%= 변수이름 %>
+```
+
+```js
+// 상단에 등록
+app.set('view engine', 'ejs');
+
+app.get('/', (request, response) => {
+  // DB에 저장된 col이라는 collection안의 모든 데이터 꺼내기
+  db.collection('col').find().toArray((error, result) => {
+    console.log(error);
+    response.render('*.ejs', { result : result });
+  });
+})
+```
+
+​    
+
+> 반복문 사용해보기
+
+```ejs
+<% for (let i = 0; i < data.length; i++) { %>
+	array[i]
+<% } %>
+```
+
+​    
+
+> component 형식으로 만들기
+
+- 네비게이션바 : views/nav.html
+
+```ejs
+<%- include('nav.html') %>
+```
+
+​    
+
+### 데이터 저장
+
+```js
+db.collection('').insertOne()
+```
+
+```js
+// 기본
+db.collection('collection명').insertOne('저장할데이터(Object자료형)', (에러, 결과) => {
+  console.log('저장완료');
+});
+
+// 예시1
+db.collection('post').insertOne({ _id : 100, 이름 : 'John' }, (error, result) => {
+    console.log('저장완료'); 
+});
+```
+
+```js
+app.post('/add', (req, res) => {
+  res.send('전송완료');
+  db.collection('counter').findOne({ name: '게시물갯수' }, (error, result) => {
+   	const totalPostCount = result.totalPost;
+    const post = { 
+        _id: totalPostCount + 1, 
+        writer: req.user._id, 
+        title: req.body.title, 
+        date: req.body.date 
+    }
+    db.collection('post').insertOne(post, (error, result) => {
+      db.collection('counter').updateOne({ name: 'totalPostCount' }, { $inc: { totalPost: 1 } }, (error, result) => {
+        if (error) console.log(error)
+      })
+    });
+  });
+});
+```
+
+​    
+
+### 데이터 불러오기
+
+```js
+db.collection('').find()
+db.collection('').findOne()
+```
+
+```js
+// 예시1
+app.get('/', (req, res) => {
+  db.collection('collection명')  // 해당 collection에서 속한
+    .find() // 모든 데이터를 찾아
+    .toArray((error, result) => {  // Array 자료형으로 가져옴
+    	console.log(result)
+    	
+    	// result값을 post라는 이름으로 ejs파일에 보내줌
+    	res.render('파일.ejs', { posts: result })
+  })
+})
+
+// 예시2 - 수정(동적) 페이지
+app.get('/edit/:id', (req, res) => {
+  db.collection('').findOne({_id: parseInt(req.params.id)}, (error, result) => {
+    res.render('edit.ejs', { post: result })
   })
 })
 ```
 
-> aggregate
+​    
 
-- 검색조건을 여러개 넣을 수 있게 해줌
-
-```js
-aggregate([{검색조건1}, {검색조건2}, ...])
-```
+### 데이터 수정
 
 ```js
-const searchCondition = [
-    {
-      $search: {
-        index: 'titleSearch'  // 내가 만든 인덱스명
-        text: {
-        	query: req.query.value // 찾을 값
-        	path: [] // 값이 포함되었는지 알고싶은 항목
-      	}
-      }
-    },
-    { $sort: { _id: 1} },  // _id를 오름차순으로 정렬
-    { $limit: 10 },  // 맨위의 10개 항목만 보여줌
-    { $project: { _id: 1, title: 0, score: { $meta: "searchScore" } } },  // _id는 보여주고, title은 제외
-  ]
+db.colleciton('').updateOne({'바꾸고싶은 값'}, { <operator>: {'새롭게 바뀔값'} }, 
+	(error, result) => { // 끝나면 실행할 함수
+})
+
+db.colleciton('').updateOne({name: 'a'}, { $set: {count: 1} }, (error, result) => {})
 ```
 
-- `$sort` : 결과를 정렬해서 가져옴
-- `$limit` : 결과의 수를 제한해서 보여줌
-- `$project` :  찾아온 결과중에 원하는 항목만 보여줌 (`0: 제외 / 1: 포함`)
-- `score: { $meta: "searchScore" }` : mongoDB가 검색어와 검색된 정보의 관련정도를 나타내는 수치
+>operator
+
+1. `$set` : 변경 
+
+```js
+{ $set : {totalPost : 바꿀값} }
+```
+
+2. `$inc` : 증가
+
+```js
+{ $inc : {totalPost: 기존값에 더해줄 값} }
+```
+
+3. `$min` : 기존값보다 적을때만 변경
+
+4. `$rename` : key값 이름변경
 
 ​    
 
----
+### auto increment
 
-## 4️⃣ Route 파일관리
+- DB에 항목을 추가할 때마다 `_id`를 자동으로 1증가 시켜 저장
+- MongoDB는 해당기능이 없어 직접 구현해야함
 
-- `routes` 폴더 생성
+![image-20230323012516743](Node.js(3).assets/image-20230323012516743.png)
+
+![image-20221218144724674](Node.js(3).assets/image-20230323012710613.png)
 
 ```js
-// routes/shop.js
-import { Router } from "express";
-
-const router = Router();
-
-// 해당파일의 router들에만 미들웨어 모두 적용
-router.use((req, res, next) => {
-  next()
+app.post('/', (req, res) => {
+  res.send();
+  db.collection('counter').findOne({name : '게시물수'}, (error, result) => {
+    // 현재 글 개수 불러오기
+    let totalPostCount = result.totalPost
+    
+    // 새로운 글 발행 
+    const post = {
+      _id : totalPostCount + 1,
+      writer: req.user.id
+    }
+    
+    db.collection('post').insertOne(post, (error, result) => {
+      console.log(result)
+      
+      // counter라는 collection에 있는 totalPost값을 1 증가
+      db.collection('counter').updateOne({ name:'개시물개수' }, { $inc : {totalPost:1}}, 
+      (error, result) => {	
+        if (error) { return console.log(error) }
+      })
+    })
+  })
 })
+```
 
-router.get("/a", (req, res) => {
-    res.status(201).send("a");
-});
-router.get("/b", (req, res) => {
-    res.status(201).send("b");
-});
+​    
 
-export default router;
+### 데이터 삭제
+
+```js
+db.collection('').deleteOne({}, () => {})
+```
+
+```js
+app.delete('/delete', (req, res) => {
+  req.body._id = parseInt(req.body._id)  // 형변환
+  db.collection('').deleteOne({
+     _id: req.body._id, 
+     writer: req.user._id 
+  	}, (error, result)=> {
+  })
+})
+```
+
+​    
+
+### method-override
+
+- method-override 라이브러리
+- HTML에서 PUT/DELETE 요청을 할 수 있게 해줌
+
+```bash
+$ npm install method-override
+$ yarn add method-override
 ```
 
 ```js
 // server.js
-import indexRouter from './routes/index.js'
-
-app.use('/공통으로 사용되는 키워드', '파일명Router')
-app.use('/shop/detail', shopRouter)  // ('/common'으로 시작하는 라우트들, 'shop.js' 파일)
+import { methodOverride } from 'method-override'
+app.use(methodeOverride('_method'))
 ```
 
-​    
+```ejs
+<!-- ejs -->
+<form action='/edit?_method=PUT' method="POST"></form>
+```
+
+2. AJAX 이용
+
+
 
 ---
 
-## 5️⃣ 이미지 업로드
+## 4️⃣ css파일 넣기
 
-```html
-<form method='post' action="/upload" enctype="multipart/form-data">
-  <input type='file' name='profile'>
-</form>
-```
+- public이라는 폴더 생성 후 그안에 생성 : `public/main.css`
 
 ```js
-app.get('/upload', (req, res) => {
-  res.render('upload.ejs')
-})
+// static 파일을 보관하기 위해 public 폴더 사용을 정의
+app.use('/public', express.static('public'));
 ```
-
-​    
-
-### multer
-
-```bash
-$ npm install multer
-$ yarn add multer
-```
-
-- `public/image` 폴더안에 저장
-
-```js
-import multer from 'multer';
-
-// HDD에 저장
-const storage = multer.diskStorage({
-  // public/image 폴더안에 이미지 저장
-  destination: (req, file, cb) => { 
-  	cb(null, './public/image')
-  },
-  // 저장하는 이미지 파일명 설정
-  filename: (req, file, cb) => {
-    cb(null, file.orginalname)
-  },
-  // 파일 형식(확장자) 필터
-  filefilter: (req, file, cb) => {
-    
-  },
-  limits:
-}) 
-
-const upload = multer({ storage })
-
-// 단일 파일업로드
-app.post('/upload', upload.single('input의 name속성명'), (req, res) => { })
-
-// 다중 파일업로드
-app.post('/upload', upload.array('input의 name속성명', '받을 최대갯수'), (req, res) => { })
-
-// 업로드된 파일보내기
-app.get('/image/:imgName', (req, res) => {
-  res.sendFile(`${__dirname}/public/image/${req.params.imgName}`)
-})
-```
-
-```js
- // RAM에 저장
-const storage = multer.memoryStorage({})
-```
-
-​    
-
