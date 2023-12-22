@@ -1,6 +1,15 @@
 # Nest (4)
 
-## JWT 로그인
+```bash
+$ yarn add bcrypt
+$ yarn add -D @types/bcrypt
+```
+
+
+
+## 1️⃣ 로그인
+
+### JWT  방식
 
 ```bash
 $ npm install @nestjs/passport passport passport-local
@@ -101,39 +110,45 @@ export class AuthService {
 }
 ```
 
-
-
-순환참조모듈
-
-- 모듈간 순환 종속성을 해결하기 위해 `forwardRef()`함수 사용
-
-```typescript
-@Module({
-  imports: [
-    forwardRef(() => TestModule)
-  ]
-})
-```
-
 ​    
 
-### 커스텀 데코레이터
+### 세션방식
 
-```typescript
-// user.decorator.ts
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+```bash
+$ npm install @nestjs/passport passport passport-local express-session
+$ npm install -D @types/passport-local @types/express-session
+```
 
-export const CurrentUser = createParamDecorator(
-  (data: unknown, ctx: ExecutionContext) => {
-    const request = ctx.switchToHttp().getRequest();
-    return request.user;
-  },
-);
+```ts
+// main.ts
+import * as session from 'express-session';
+import * as passport from 'passport';
+
+async function bootstrap() {	
+    const app = await NestFactory.create(AppModule);
+    app.use(
+    	session({
+            secret: '시크릿키',
+            resave: false,
+            saveUninitialized: false,
+            cookie: { maxAge: 1000 * 60 * 60 * 30 },
+    	}),
+    );
+    
+    // passport 초기화 및 세션 저장소 초기화
+    app.use(passport.initialize());
+  	app.use(passport.session());
+    await app.listen(8000);
+}
 ```
 
 
 
-## 파일업로드
+​     
+
+---
+
+## 2️⃣ 파일업로드
 
 - express용 multer 미들웨어 사용
 - http post요청을 통해 multipart/form-data 형식의 데이터를 처리
@@ -290,9 +305,37 @@ async findByIdUpdateImage(id: string, fileName: string) {
 }
 ```
 
+​    
+
+```bash
+$ yarn add @aws-sdk/client-s3
+```
 
 
-## socket 통신
+
+
+
+---
+
+## 3️⃣ socket 통신
+
+- 프로토콜이 `ws`이면 `gateway`(게이트웨이)로 부터 요청을 받음
+
+```bash
+$ nest g gateway chat
+```
+
+- 게이트웨이는 컨트롤러와 유사하지만, 프로바이더이므로 모듈의 providers에 등록해줘야함
+
+```ts
+@Module({
+    providers: [ChatGateway]
+})
+```
+
+
+
+
 
 ```bash
 $ npm install @nestjs/websockets @nestjs/platform-socket.io
@@ -345,7 +388,72 @@ export class ChatsGateway {
 }
 ```
 
-namespace : 영역분리 (chatting, stock)
+>  `@WebSocketGateway()`
+
+- 게이트웨이 설정을 위한 데코레이터
+- 내부적으로는 socket.io 서버를 생성하는 것과 같아, 생성시 옵션도 동일하게 줄 수 있음
+
+```ts
+@WebSocketGateway(port, options)
+```
+
+> `@WebSocketServer()`
+
+- 웹소켓 서버 인스턴스에 접근하는 데코레이터
+- 사용자가 직접 웹소켓 서버의 인스턴스를 생성하는 것이 아니기 때문에 이 데코레이터를 사용해야함
+
+> `@SubscribeMessage('이벤트명')`
+
+- 이벤트를 구독하는 리스너
+- 이 데코레이터가 붙는 메서드는 인수로 `socket(client)`과 `data(payload)`를 가짐
+- 클라이언트에서 해당 이벤트로 데이터가 전송되면 그 데이터는 `data` 인수에 담김
+- `socket` 인수의 타입은 `Socket`이고, 이는 웹소켓 연결에 대한 인스턴스를 받음 
+
+```ts
+import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
+import { Server, Socket } from 'socket.io';
+
+@WebSocketGateway()
+export class ChatGateway {
+  @SubscribeMessage('message')
+  handleMessage(client: Socket, payload: any): string {
+    return ...;
+  }
+}
+```
+
+- 만약 인수중 하나라도 생략하고 싶다면 각각 속성에 맞는 매개변수 데코레이터를 사용해야함
+
+```ts
+import { Socket } from 'socket.io'
+import { MessageBody } from '@nestjs/websockets';
+
+// socket 인수를 생략한 경우
+@SubscribeMessage('message')
+handleMessage(
+	@MessageBody() data: any
+) {}
+
+// data 인수를 생략한 경우
+import { Socket } from 'socket.io'
+import { ConnectedSocket } from '@nestjs/websockets';
+
+@SubscribeMessage('message')
+handleMessage(
+	@ConnectedSocket() socket: Socket
+) {}
+```
+
+`emit()`
+
+- 클라이언트 전체에 메시지를 보냄
+- 첫 번째 인수는 이벤트명
+- 두번째 인수는 클라이언트로 보내주는 데이터
+
+> namespace : 영역분리 (chatting, stock)
+
+- 네임스페이스로 지정된 곳에만 이벤트를 발생시키고 메시지를 전송함 (멀티플렉싱)
+- 
 
 
 
@@ -372,3 +480,8 @@ export class ChatsGateway implements OnGatewayDisconnet {
   handleDisconnect(@ConnectedSocket() socket: Socket) {}  // 클라이언트와의 연결이 종료되면 실행됨
 ```
 
+
+
+
+
+- 

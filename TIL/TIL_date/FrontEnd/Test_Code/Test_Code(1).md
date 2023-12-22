@@ -11,14 +11,38 @@
 
 - 유닛 간의 상호작용 테스트
 - 여러 기능 한꺼번에 테스트
+- react-router, redux등이 특정 컴포넌트와 함께 잘 동작하는지를 테스트
 - 주로 jest 사용
 
 3. E2E 테스트 (End To End)
 
 - 시나리오가 있는 테스트를 진행
+- 필요한 경우 웹서버와 데이터베이스도 테스트에 포함됨
 - 가상의 브라우저를 띄워 테스트 진행
+- 범위가 너무 넓어 에러가 발생할 경우 정확히 어느 부분에서 문제가 발생한 것인지 알기 힘듦
 
 ​    
+
+Mocking
+
+- 특정 동작을 흉내냄
+- 실제 API를 호출하는 것이 아닌, 가짜 응답을 생성하는 mocking 함수를 만듦
+
+Stub
+
+- 같은 로직에서 같은 동작을 실행하지만 결과값을 더미 데이터로 받도록 하는 기법 
+
+
+
+화이트박스
+
+- 컴포넌트의 내부구조를 미리 알고 있는 상태에서 테스트를 진행
+
+블랙박스
+
+- 컴포넌트의 내부구조를 알지 못하는 상태에서 테스트를 진행
+
+
 
 - React Testing Library
   - 가상 DOM 렌더링, 검색, 상호작용
@@ -28,6 +52,35 @@
   - 테스트를 찾아 실행한 후 테스트 통과여부를 결정
 - Jest-dom
   - DOM을 기반으로 한 매처를 제공
+
+
+
+- assertion matchers
+  - `expect()` 함수는 `expectation` 객체를 리턴하고 이 객체의 메서드들(matcher)을 활용하여 assert 여부를 확인
+- async assertion
+  - 비동기 상황의 테스트를 처리할 수 있는 방법 제공 (Callback, Promise, async/await)
+- mock functions
+  - mock 함수를 만들 수 있음
+  - 모듈 전체를 mocking 할 수 있음
+  - 라이브러리 전체를 mocking 할 수 있음
+- testing lifecycle functions
+  - beforeEach, afterEach, beforeAll, afterAll
+  - describe 블록안에서 사용시 별도의 scope를 가짐
+- grouping
+  - describe 함수를 이용하여 여러 test() 함수를 그룹핑할 수 있음
+  - describe함수안에 describe함수가 중첩될 수 있음
+- snapshot testing
+  - 특정함수, 모듈, 컴포넌트등의 결과를 snapshot으로 저장하고, 이후에 변경이 발생했을 때, 이전 snapshot과 새로운 snapshot을 비교하는 식으로 테스트 진행
+
+
+
+assertion matchers 종류
+
+- `toBe()`
+- `toEqual()`
+- `toContain()`
+- `toMatch()`
+- `toThrow()`
 
 
 
@@ -65,6 +118,75 @@ import { render, screen } from '@testing-library/react'
 Watch Mode
 
 - 마지막 커밋이후 파일의 모든 변경사항을 확인하여 마지막 커밋 이후 변경된 파일과 연관된 테스트만 실행
+
+
+
+1. 어떤 테스트를 할 것인지 작성
+
+```js
+test('버튼 초기 설정', () => {
+    
+})
+```
+
+2. 컴포넌트 렌더링을 통해 가상 DOM 생성
+
+```js
+import { render } from '@testing-library/react'  ✔️✔️
+
+test('버튼 초기 설정', () => {
+	render(<렌더링할컴포넌트 />)  ✔️✔️
+})
+```
+
+3. 가상 DOM 에 엑세스할 수 있는 `screen` 전역 객체에서 요소 찾기
+
+- `role`을 사용하여 요소 찾기 [`getByRole('role문자열', 옵션) 메서드`] [사용가능한 role들](https://www.w3.org/TR/wai-aria/#role_definitions)
+
+```js
+import { render, screen } from '@testing-library/react'
+
+test('버튼 초기 설정', () => {
+	render(<렌더링할컴포넌트 />)         
+	const Button = screen.getByRole('button', 옵션)
+})
+```
+
+4. assertion(단언) 과정실행
+
+- Matcher (매처) 함수를 이용하여 expect되는 값을 찾기
+
+
+
+> 버튼클릭시 테스트
+
+```ts
+import { 
+    render, 
+    screen, 
+    fireEvent ✔️✔️
+} from '@testing-library/react'
+
+test('버튼 초기 설정', () => {
+    // 렌더링
+	render(<렌더링할컴포넌트 />) 
+    
+	// 클릭되는 요소 찾기
+	const Button = screen.getByRole('button', 옵션)
+    
+    // fireEvent를 이용하여 찾은 요소 조작
+    fireEvent.click(Button)
+    
+    // 클릭결과 매칭
+    expect(Button).매처({ 변경된 어트리뷰트 })
+})
+```
+
+`fireEvent` : 가상 DOM에서 요소와 상호 작용할 수 있도록 해줌   
+
+
+
+
 
 
 

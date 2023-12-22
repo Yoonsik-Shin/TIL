@@ -308,7 +308,7 @@ flex: flex-grow flex-shrink flex-basis;
 
 ## 5️⃣ Grid
 
-## <img src="CSS_3.assets/grid.jpg" alt="grid" style="zoom: 33%;" />
+<img src="CSS_3.assets/grid.jpg" alt="grid" style="zoom: 33%;" />
 
 ```css
 .container {
@@ -387,12 +387,32 @@ flex: flex-grow flex-shrink flex-basis;
 
 ## 6️⃣ Media Query
 
+```css
+@media 미디어타입 and (조건에 대한 물음) {
+    
+}
+```
+
 - viewport 기준
 
 ```css
-/* 800px이상에만 대괄호 내용 적용 */
-@media (min-width: 800px){
-  h1{
-    
-  }
+@media screen and (max-width: 768px){
+   /*
+   	화면(screen)의 너비가
+   	768px 이하일 경우에 스타일 적용
+    */
 }
+```
+
+​    
+
+---
+
+## 7️⃣ calc
+
+- css의 함수인 `calc()`를 이용하면 계산식의 결과를 속성값으로 지정할 수 있음
+
+```css
+width: calc(100% - 100px)
+```
+

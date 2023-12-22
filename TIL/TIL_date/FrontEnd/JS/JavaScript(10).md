@@ -25,3 +25,6 @@ user.age = 27
 console.log(user) // { id: 1, name: 'shin', age: 30 }
 ```
 
+![image-20231102160730410](JavaScript(10).assets/image-20231102160730410.png)
+
+![image-20231102161923332](JavaScript(10).assets/image-20231102161923332.png)

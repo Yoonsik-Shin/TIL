@@ -166,6 +166,14 @@
 | [DB (5)](./TIL_date/BackEnd/DB/DB(5).md) | 조인                                           |
 | [DB (6)](./TIL_date/BackEnd/DB/DB(6).md) | 데이터 모델링, ERD                             |
 
+
+
+### ✔️ Redis
+
+| Contents                                          | Ex                                                        |
+| ------------------------------------------------- | --------------------------------------------------------- |
+| [Redis (1)](./TIL_date/BackEnd/Redis/Redis(1).md) | 개요, 설치/실행, 데이터 타입, 특수명령어, 사용시 주의사항 |
+
 ​    
 
 ### ✔️ Linux
@@ -176,6 +184,7 @@
 | [Linux(2)](./TIL_date/BackEnd/Linux/Linux(2).md) | 경로, ls, pwd, cd, mkdir, touch, rm, rmdir                   |
 | [Linux(3)](./TIL_date/BackEnd/Linux/Linux(3).md) | 파일보기, 표준스트림/redirection, 파이프, 확장, 검색, grep   |
 | [Linux(4)](./TIL_date/BackEnd/Linux/Linux(4).md) | 권한(chmod, su, chown, addgroup, adduser), 환경(변수, 별칭), 스크립트, cron |
+| [Linux(5)](./TIL_date/BackEnd/Linux/Linux(5).md) | 성능분석                                                     |
 
 ​    
 
@@ -213,12 +222,12 @@
 
 ### ✔️ Nest.js
 
-| Contents                                          | Ex                                                 |
-| ------------------------------------------------- | -------------------------------------------------- |
-| [Nest (1)](./TIL_date/BackEnd/Nest.js/Nest(1).md) | [개념] Nest 기본개념, 환경변수 설정, 요청 생명주기 |
-| [Nest (2)](./TIL_date/BackEnd/Nest.js/Nest(2).md) | [개념] DB연동 (ORM, ODM), 트랜잭션, CQRS           |
-| [Nest (3)](./TIL_date/BackEnd/Nest.js/Nest(3).md) | [개념] 인증/인가, CORS, Swagger, GraphQL, 로깅     |
-| [Nest (4)](./TIL_date/BackEnd/Nest.js/Nest(4).md) | [구현]                                             |
+| Contents                                          | Ex                                                           |
+| ------------------------------------------------- | ------------------------------------------------------------ |
+| [Nest (1)](./TIL_date/BackEnd/Nest.js/Nest(1).md) | [개념] DI/IoC, Nest 기본개념, 환경변수 설정, 요청 생명주기, 데코레이터, 메타데이터 |
+| [Nest (2)](./TIL_date/BackEnd/Nest.js/Nest(2).md) | [개념] 인증/인가, CORS, Swagger, GraphQL, 로깅, 태스크 스케줄링, 헬스체크 |
+| [Nest (3)](./TIL_date/BackEnd/Nest.js/Nest(3).md) | [개념] DB연동 (ORM, ODM), Repository Pattern, CQRS           |
+| [Nest (4)](./TIL_date/BackEnd/Nest.js/Nest(4).md) | [구현] 로그인 (JWT, Session), 파일업로드, Socket 통신        |
 
 ​    
 

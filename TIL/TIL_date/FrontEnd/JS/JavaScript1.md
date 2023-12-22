@@ -1,7 +1,5 @@
 # JavaScript 정리 (1)
 
-   
-
 ## 0️⃣ JS 기본
 
 > Primitive Types (기본 원시 타입)

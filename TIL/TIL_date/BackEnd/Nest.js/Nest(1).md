@@ -1,6 +1,70 @@
 # Nest (1)
 
-> 설치
+## 0️⃣ DI / IoC
+
+### DI
+
+- 의존성 주입 (Dependency Injection)
+- Ioc 컨테이너가 직접 객체의 생명주기를 관리하는 방식
+- DI는 IoC 원칙을 실현하기 위한 여러 디자인패턴 중 하나
+
+
+
+### IoC
+
+- 제어의 역전 (Inversion Of Control)
+- 클래스 간의 결합을 느슨하게 해 테스트와 유지 관리를 더 쉽게 하는 설계원칙
+- 컨테이너나 프레임워크가 객체와 객체간의 의존성에 대한 제어를 넘겨받아 실행하는 것을 말함
+
+
+
+> 사용이유
+
+- A객체에서 B 객체가 필요할 때 (A는 B에 의존), A클래스에서 B클래스를 직접 new 인스턴스화하여 사용할 수 있음 (객체를 직접 생성)
+- 따라서 B가 인스턴스화 될 때, A가 의존하고 있어 A도 다시 컴파일이 됨 (강결합, 결합도 높음)
+- 이때, Ioc 컨테이너에서 이미 인스턴스화 되어있는 B인스턴스를 A인스턴스에 주입만 해주면, 다시 컴파일되지 않고 사용할 수 있음
+- 이렇게되면 결합도는 낮아지고 응집도는 높일 수 있음
+
+
+
+> 예시
+
+```ts
+// MyApp이 Person을 사용하기 위해 Person을 의존성 주입받음
+class MyApp {
+    constructor(@Inject('Person') private p: Person) {}
+}
+
+// 모듈에서 주입받아 사용
+@Module({
+    providers: [
+        {
+            provide: 'Person',
+            useClass: condition ? Yoonsik : Shin
+        }
+    ]
+})
+```
+
+​     
+
+> @Injectable()
+
+- 정의된 클래스의 생명주기를 IOC컨테이너에게 맡기게 하여 의존성을 주입받거나 주입할 수 있도록 해주는 데코레이터
+
+​    
+
+> @Inject()
+
+- 인스턴스에 직접 의존성을 주입하기 위해 사용하는 데코레이터
+
+​    
+
+---
+
+## 1️⃣ 기본개념
+
+### 0. 설치 및 CLI 
 
 ```bash
 # CLI 설치
@@ -25,8 +89,6 @@ $ nest g middleware 미들웨어명  # Middleware 파일 자동 생성
 ![image-20230810223804282](Nest(1).assets/image-20230810223804282.png)
 
 ​    
-
-## 1️⃣ 기본개념
 
 ### 1. Controller
 
@@ -82,17 +144,17 @@ export class UserController {
 
 >  request 객체
 
-| 종류                             | 설명                                                         |
-| -------------------------------- | ------------------------------------------------------------ |
-| `@Req()`                         | 요청(request) 객체에 대한 접근                               |
-| `@Res()`                         | 응답(response) 객체에 대한 접근                              |
-| `@Body(param?: string)`          | 요청(request)의 body 객체에 대한 접근, param 매개변수로 특정값 접근가능 |
-| `@Param(param?: string)`         | 경로(:id) 매개변수를 가져옴, param 매개변수로 특정 경로값 접근가능 |
-| `@Query(param?: string)`         | 쿼리(?) 매개변수를 가져옴, param 매개변수로 특정 쿼리 접근가능 |
-| `@Headers(name?: string)`        | HTTP 헤더 접근 가능, name 매개변소로 특정 헤더값 접근가능    |
-| `@Next()`                        | 다음 미들웨어 함수에 대한 접근                               |
-| `@UploadFile() / @UploadFiles()` | 업로드된 파일에 대한 접근                                    |
-| `@Session()`                     | 세션 객체에 접근                                             |
+| 종류                             | 설명                                                         | Express 객체                        |
+| -------------------------------- | ------------------------------------------------------------ | ----------------------------------- |
+| `@Req()`                         | 요청(request) 객체에 대한 접근                               | req                                 |
+| `@Res()`                         | 응답(response) 객체에 대한 접근                              | res                                 |
+| `@Body(param?: string)`          | 요청(request)의 body 객체에 대한 접근, param 매개변수로 특정값 접근가능 | req.body<br />req.body[param]       |
+| `@Param(param?: string)`         | 경로(:id) 매개변수를 가져옴, param 매개변수로 특정 경로값 접근가능 | req.params<br />req.params[param]   |
+| `@Query(param?: string)`         | 쿼리(?) 매개변수를 가져옴, param 매개변수로 특정 쿼리 접근가능 | req.query<br />req.query[param]     |
+| `@Headers(name?: string)`        | HTTP 헤더 접근 가능, name 매개변소로 특정 헤더값 접근가능    | req.headers<br />req.headers[param] |
+| `@Next()`                        | 다음 미들웨어 함수에 대한 접근                               | next                                |
+| `@UploadFile() / @UploadFiles()` | 업로드된 파일에 대한 접근                                    |                                     |
+| `@Session()`                     | 세션 객체에 접근                                             | req.session                         |
 
  ``` typescript
  // apps.controller.ts
@@ -783,7 +845,7 @@ export declare function Module(metadata: ModuleMetadata): ClassDecorator
 
 export interface ModuleMetadata {
     imports?: Array<Type<any> | DynamicModule | Promise<DynamicModule> | ForwardReference>
-    controllers: Type<any>[]
+    controllers?: Type<any>[]
     providers?: Provider[]
     exports?: 
     	Array<DynamicModule | Promise<DynamicModule> | string | symbol | Provider 
@@ -859,6 +921,56 @@ export class AAAModule {}
 })
 
 export class CommonModule {}
+```
+
+​    
+
+> 모듈 다시 내보내기
+
+- `CommonModule` : 서비스 전반에서 쓰이는 공통 기능을 모아 놓은 모듈
+- `CoreModule` : 앱을 구동시키는데 필요한 기능을 모아둔 모듈 (로깅, 인터셉터)
+- 모듈 다시 내보내기를 통해 `AppModule`에 `CoreModule`만을 import 하지만 `CommonModule`의 서비스를 사용가능
+
+```ts
+// CommonModule.ts
+@Module({
+    providers: [CommonSerivce], // CommonModule에서 CommonSerivce 내보내기
+    exports: [CommonSerivce]  
+})
+export class CommonModule {}
+```
+
+```ts
+// CoreModule.ts
+@Module({
+    imports: [CommonModule],
+    exports: [CommonModule]
+})
+export class CoreModule {}
+```
+
+```ts
+// AppModule.ts
+@Module({
+    imports: [CoreModule] // CoreModule만 불러와도 CommonModule에서 export 해준 것들을 사용할 수 있음
+})
+export class AppModule {}
+```
+
+- 모듈은 모듈간 순환 종속성이 발생하기 때문에 프로바이더처럼 주입해서 사용할 수 없음
+
+​    
+
+> 순환참조모듈
+
+- 모듈간 순환 종속성을 해결하기 위해 `forwardRef()`함수 사용
+
+```typescript
+@Module({
+  imports: [
+    forwardRef(() => TestModule)
+  ]
+})
 ```
 
 ​    
@@ -1294,7 +1406,8 @@ import { ValidationPipe } from '@nestjs/common'
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
     app.useGlobalPipes(new ValidationPipe({
-        transform: true  // class-transform을 적용하려면 true로 지정해줘야함
+    	transform: true  // class-transform을 적용하려면 true로 지정해줘야함
+    	whitelist: true  // class-validation 데코레이터가 적용되지 않은 필드는 제외함
     }))
     await app.listen(3000)
 }
@@ -1322,8 +1435,8 @@ export class ValidationPipe implements PipeTransfrom {
 // PipeTransform
 export interface PipeTransform<T = any, R = any> {
 	transform(
-    	value: T, // 현재 파이프에 전달된 인스
-         metadata: ArgumentMetadata  // 현재 파이프에 전달된 인수의 메타데이터
+    	value: T, // 현재 파이프에 전달된 인수
+     	metadata: ArgumentMetadata  // 현재 파이프에 전달된 인수의 메타데이터
      ): R
 }
 ```
@@ -1873,7 +1986,7 @@ export interface ConfigModuleOptions {
     validate?: (config: Record<string, any>) => Record<string, any>; // 환경변수 유효성 검증함수
     validationSchema?: any;  
     validationOptions?: Record<string, any>;
-    expandVariables?: boolean;
+    expandVariables?: boolean;  // 환경 변수 확장을 가능하게 하는 옵션
 }
 ```
 
@@ -2027,7 +2140,8 @@ import { validationSchema } from './envs/config/validationSchema'
   imports: [
     ConfigModule.forRoot({  
       isGlobal: true,
-      envFilePath: join(process.cwd(), '/envs/', `${process.env.NODE_ENV}.env`) // 오류날 경우 process.env.NODE_ENV에 trim() 메서드
+      // 오류날 경우 process.env.NODE_ENV에 trim() 메서드
+      envFilePath: join(process.cwd(), '/envs/', `${process.env.NODE_ENV}.env`) 
       load: [testConfig]  ✔️✔️
       validationSchema  // joi를 통해 유효성 검사
     })
@@ -2038,7 +2152,7 @@ import { validationSchema } from './envs/config/validationSchema'
 - 설정완료된 testConfig 주입받아 사용
 
 ```ts
-import { Config}
+import { ConfigType } from '@nestjs/config'
 
 @Injectable()
 export class TTService {
@@ -2127,3 +2241,251 @@ export class TTService {
 5. 예외필터
 
    - 라우터 > 컨트롤러 > 전역으로 바인딩된 순서대로 동작
+
+​    
+
+---
+
+## 4️⃣ 데코레이터
+
+### 커스텀 매개변수 데코레이터
+
+- `createParamDecorator` 팩터리 데코레이터를 이용하여 커스텀 데코레이터 선언
+- 첫번째 인수는 데코레이터를 선언할 때 인수로 넘기는 값
+- 두번째 인수로 실행 컨텍스트에서 요청 객체(`req`) 획득
+
+```ts
+// 커스텀 매개변수 데코레이터 작성
+import { createParamDecorator, ExecutionContext } from '@nestjs/common'
+
+export const CustomDeco = createParamDecorator(
+    (data: unknown, ctx: ExecutionContext) => {
+        const request = ctx.switchToHttp().getRequest()
+        const obj = request.customObj
+    
+        return data ? obj?.[data] : obj
+    }
+)
+```
+
+```ts
+// Controller
+@Get()
+ttt(
+    @CustomDeco() obj: CustomDeco,
+	@CustomDeco('test') test: string,
+) {}
+```
+
+> 유효성 검사 파이프 적용
+
+```ts
+@Get()
+qqq(
+	@CustomDeco(new ValidationPipe({ validationCustomDecorators: true })) obj: CustomDeco
+) {
+    console.log(obj)
+}
+```
+
+​    
+
+### 데코레이터 합성
+
+- `applyDecorators` 헬퍼 메서드를 활용하여 여러 데코레이터를 하나로 합성할 수 있음
+
+```ts
+import { applyDecorators } from '@nestjs/common'
+
+export function Auth(...roles: Role[]) {  // 합성 데코레이터 이름
+    return applyDecorators(
+    	// 합성할 데코레이터들
+        setMetadata('roles', roles),
+        UseGuards(AuthGuard, RolesGuard),
+        ApiBearerAuth(),
+        ApiUnauthorizedResponse({ description: '인가 실패' })
+    )
+}
+```
+
+​    
+
+---
+
+## 5️⃣ 메타데이터 (Reflection)
+
+- `@SetMetadata` 데코레이터를 통해 메타데이터를 지정할 수 있음
+- `@SetMetadata` 데코레이터는 메타데이터를 키와 값으로 받아 `CustomDecorator`타입으로 돌려줌
+
+```ts
+export declare const SetMetadata: <K = string, V = any>(
+    metadataKey: K, 
+    metadataValue: V
+) => CustomDecorator<K>
+```
+
+- 보통 직접 라우트 핸들러에 적용하지 않고 다시 커스텀 데코레이터를 정의하여 사용함
+
+```ts
+// roles.decorator.ts
+import { SetMetadata } from '@nestjs/common'
+
+export const Roles = (...roles: string[]) => SetMetadata('roles', roles)
+```
+
+- `create` 메서드에 admin 역할이라는 메타데이터를 부여
+
+```ts
+import { Roles } from './roles.decorator'
+
+@Post()
+@Roles('admin')  ✔️✔️
+create(@Body() createTestDto: CreateTestDto) {
+	return this.testService.test(createTestDto)
+}
+```
+
+- 메타데이터를 런타임에서 읽기
+- Nest는 메타데이터를 다루기 위한 헬퍼 클래스인 `Reflector` 클래스 제공
+
+```ts
+// handler-roles.guard.ts
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common' 
+import { Reflector } from '@nestjs/core'  ✔️✔️
+import { Observable } from 'rxjs'
+
+@Injectable()
+export class HandlerRolesGuard implements CanActivate {
+    constructor(private reflector: Reflector) {}  ✔️✔️
+    
+    canActivate(ctx: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
+    	const request = ctx.switchToHttp().getRequest()
+    	const userId = request.user.id
+    	const userRole =  this.getUserRole(userId) // testId로 DB에서 정보(역할) 가져옴
+        
+        // 가드에 주입받은 Reflector를 이용하여 메타데이터 리스트 획득
+    	const roles = this.reflector.get<string[]>('roles', ctx.getHandler())
+        
+        return roles?.includes(userRole) ?? true
+    }
+    
+    private getUserRole(userId: string) {
+        // DB에서 정보(역할) 가져옴
+    }
+}
+```
+
+- `HandlerRolesGuard`는 `Reflector`를 주입받아야 하므로 main.ts에서 전역으로는 설정불가
+- 컨트롤러에 `@UseGuard`데코레이터로 선언해주거나, 커스텀 프로바이더로 제공해줘야함
+
+```ts
+@Module({
+    providers: [
+        provider: APP_GUARD,
+        useClass: HandlerRolesGuard
+    ]
+})
+export class AppModule {}
+```
+
+
+
+>  `CustomDecorator`
+
+- 메서드 데코레이터 겸 클래스 데코레이터의 역할도 할 수 있음
+
+```ts
+export declare type CustomDecorator<TKey = string> = 
+	MethodDecorator 
+	& ClassDecorator
+	& { KEY: TKEY }
+```
+
+
+
+> 클래스 데코레이터로서의 활용
+
+```ts
+@Roles('admin')
+@Controller('test')
+export class TestController {}
+```
+
+- 클래스 데코레이터 사용시 주의해야 할 점은 `Reflector`를 사용할 때 `ctx.getHandler()`대신 `ctx.getClass()` 사용
+
+```ts
+// class-roles.guard.ts
+@Injectable()
+export class ClassRolesGuard implements CanActivate {
+    constructor(private reflector: Reflector) {}
+    
+    canActivate(ctx: ExecutionContext) {
+        const request = ctx.switchToHttp().getRequest()
+        const roles = this.reflector.get('roles', ctx.getClass()) ✔️✔️
+        return ...
+    }
+}
+```
+
+```ts
+@Module({
+    providers: [
+        {
+        	provide: APP_GUARD,
+       		useClass: ClassRolesGuard
+        }
+    ]
+})
+export class AppModule {}
+```
+
+​    
+
+> 메서드와 클래스 데코레이터 모두 적용
+
+```ts
+@Roles('test')
+@Controller('test')
+export class TestController {
+    constructor(private readonly testService: TestService) {}
+    
+ 	@Post()
+	@Roles('admin')
+    create(@Body() createTestDto: CreateTestDto) {
+        return this.testService.create(createTestDto)
+    }
+}
+```
+
+- `Reflector`가 제공하는 `getAllAndMerge`메서드를 이용하여 핸들러와 클래스에 정의된 메타데이터를 모두 리스트로 합쳐 가져올 수 있음
+
+```ts
+// roles.guard.ts
+@Injectable()
+export class ClassRolesGuard implements CanActivate {
+    constructor(private reflector: Reflector) {}
+    
+    canActivate(ctx: ExecutionContext) {
+        const request = ctx.switchToHttp().getRequest()
+        const roles = this.reflector.getAllAndMerge('roles', [
+            ctx.getHandler()
+            ctx.getClass()
+        ])
+        return ...
+    }
+}
+```
+
+- 모듈에 `RolesGuard` 하나만 적용
+
+```ts
+@Module({
+    providers: [
+        {
+        	provide: APP_GUARD,
+        	useClass: RolesGuard
+        }
+    ]
+})
+export class AppModule {}
+```
